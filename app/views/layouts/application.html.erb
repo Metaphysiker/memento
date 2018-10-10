@@ -10,10 +10,15 @@
   </head>
 
   <body>
+    <%= render "layouts/navigation" %>
+
     <div class="container">
       <%= flash_messages %>
     </div>
 
     <%= yield %>
+
+    <div class="m-5">
+    </div>
   </body>
 </html>
