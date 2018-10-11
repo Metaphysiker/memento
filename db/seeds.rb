@@ -8,23 +8,27 @@
 User.create(
     username: "Sandro",
     email: "sandro.raess@philosophie.ch",
+    role: "admin",
     password: 123456
 )
 
 User.create(
     username: "Anja",
     email: "anja.leser@philosophie.ch",
+    role: "admin",
     password: 123456
 )
 
 User.create(
     username: "Sahra",
     email: "sahra.styger@philosophie.ch",
+    role: "admin",
     password: 123456
 )
 
 User.create(
     username: "Benjamin",
     email: "benjamin.ilg@philosophie.ch",
+    role: "admin",
     password: 123456
 )

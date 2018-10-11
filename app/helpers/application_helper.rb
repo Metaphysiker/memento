@@ -14,4 +14,12 @@ module ApplicationHelper
     nil
   end
 
+  def is_admin?
+    current_user.role == "admin"
+  end
+
+  def is_current_user_admin?
+    !current_user.nil? && current_user.role == "admin"
+  end
+
 end

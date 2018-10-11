@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
+  before_action :is_user_allowed?, except: :login
   after_action :track_action
 
+  include ApplicationHelper
 
   protected
 
@@ -15,4 +17,16 @@ class ApplicationController < ActionController::Base
   def track_action
     ahoy.track "Ran action", request.path_parameters
   end
+
+  def is_user_allowed?
+    if !current_user.nil?
+      unless is_current_user_admin?
+        #raise "Unauthorized User"
+        sign_out current_user
+        flash[:notice] = "Sie sind nicht authorisiert!"
+        redirect_to new_user_session_path
+      end
+    end
+  end
+
 end
