@@ -3,7 +3,10 @@
     <div class="float-right mb-3">
 
       <div class="btn-group" role="group" aria-label="Toolbar for Person">
-        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#task"><%= fa_icon "edit" %></button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-light person-<%= person.id %>-edit" data-toggle="modal" data-target=".person-<%= person.id %>-edit-form">
+          <%= fa_icon "edit" %>
+        </button>
         <%= link_to person, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
           <button type="button" class="btn btn-light person-<%= person.id %>-delete"><%= fa_icon "times" %></button>
         <% end %>
@@ -25,5 +28,68 @@
 
     <hr />
     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade person-<%= person.id %>-edit-form" tabindex="-1" role="dialog" aria-labelledby="Edit Person" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Person bearbeiten</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render "people/form", person: person %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade person-<%= person.id %>-edit-form" tabindex="-1" role="dialog" aria-labelledby="Edit Person" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Person bearbeiten</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render "people/form", person: person %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade person-<%= person.id %>-edit-form" tabindex="-1" role="dialog" aria-labelledby="Edit Person" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Person bearbeiten</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render "people/form", person: person %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
