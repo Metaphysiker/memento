@@ -58,12 +58,36 @@ RSpec.describe "people", :type => :feature do
     )
 
     visit "/people/#{person.id}"
-    expect(page).to have_content(person.email)
-    expect(page).to have_content(person.firstname)
-    expect(page).to have_content(person.lastname)
-    expect(page).to have_content(person.description)
-    expect(page).to have_content(person.phone)
-    expect(page).to have_content(person.gender)
+
+    find(".person-#{person.id}-edit").click
+
+    firstname = Faker::Name.unique.first_name
+    lastname = Faker::Name.unique.last_name
+    description = Faker::Lorem.unique.paragraph
+    email = Faker::Internet.unique.email
+    phone = Faker::PhoneNumber.unique.cell_phone
+
+    fill_in "Vorname", :with => firstname
+    fill_in "Nachname", :with => lastname
+    fill_in "Beschreibung", :with => description
+    fill_in "e-Mail", :with => email
+    fill_in "Telefon", :with => phone
+
+    click_button "Person aktualisieren"
+
+    expect(page).to_not have_content(person.email)
+    expect(page).to_not have_content(person.firstname)
+    expect(page).to_not have_content(person.lastname)
+    expect(page).to_not have_content(person.description)
+    expect(page).to_not have_content(person.phone)
+
+    expect(page).to have_content(email)
+    expect(page).to have_content(firstname)
+    expect(page).to have_content(lastname)
+    expect(page).to have_content(description)
+    expect(page).to have_content(phone)
+
+
 
   end
 
