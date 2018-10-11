@@ -6,9 +6,10 @@
   <div class="form-inputs">
     <%= f.input :firstname %>
     <%= f.input :lastname %>
+    <%= f.input :description %>
     <%= f.input :email %>
     <%= f.input :phone %>
-    <%= f.input :gender %>
+    <%= f.input :gender, collection: Person.genders %>
   </div>
 
   <div class="form-actions">

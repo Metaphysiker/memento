@@ -1,7 +1,18 @@
 <div class="card">
   <div class="card-body">
-    <h3 class="card-title"><%= person.firstname %></h3>
-    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+    <h3 class="card-title"><%= person.firstname %> <%= person.lastname %></h3>
+    <p class="card-text"><%= person.description %></p>
+    <% if person.email %>
+      <p class="card-text"><strong>e-Mail: </strong><%= mail_to person.email %></p>
+    <% end %>
+    <% if person.phone && !person.phone.blank? %>
+      <p class="card-text"><strong>Telefon: </strong><%= person.phone %></p>
+    <% end %>
+
+    <% if person.gender %>
+      <p class="card-text"><strong>Geschlecht: </strong><%= person.gender %></p>
+    <% end %>
+
     <hr />
     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
   </div>

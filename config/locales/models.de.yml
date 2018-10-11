@@ -15,6 +15,7 @@ de:
         tag_list: "Tags"
         institutions: "Institutionen"
         gender: "Geschlecht"
+        description: "Beschreibung"
       address:
         form_of_address: "Anrede"
         firstname: "Vorname"

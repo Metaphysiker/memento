@@ -8,6 +8,7 @@ class CreatePeople < ActiveRecord::Migration[5.2]
       t.integer :philosophie_id
       t.string :login
       t.string :gender
+      t.text :description
 
       t.timestamps
     end

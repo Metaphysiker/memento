@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_111532) do
     t.integer "philosophie_id"
     t.string "login"
     t.string "gender"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
