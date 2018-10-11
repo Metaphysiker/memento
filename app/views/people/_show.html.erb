@@ -1,5 +1,15 @@
-<div class="card">
+<div class="card person-<%= person.id %>">
   <div class="card-body">
+    <div class="float-right mb-3">
+
+      <div class="btn-group" role="group" aria-label="Toolbar for Person">
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#task"><%= fa_icon "edit" %></button>
+        <%= link_to person, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
+          <button type="button" class="btn btn-light person-<%= person.id %>-delete"><%= fa_icon "times" %></button>
+        <% end %>
+      </div>
+    </div>
+
     <h3 class="card-title"><%= person.firstname %> <%= person.lastname %></h3>
     <p class="card-text"><%= person.description %></p>
     <% if person.email %>

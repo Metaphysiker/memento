@@ -7,7 +7,7 @@ RSpec.describe "people", :type => :feature do
     login_with(first_user)
   end
 
-  it "displays person's information" do
+  it "displays a person's information" do
     person = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
@@ -24,6 +24,26 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(person.description)
     expect(page).to have_content(person.phone)
     expect(page).to have_content(person.gender)
+
+  end
+
+  it "deletes a person" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    visit "/people/#{person.id}"
+    find(".person-#{person.id}-delete").click
+    page.save_screenshot('delete_person.png')
+    #page.evaluate_script('window.confirm = function() { return true; }')
+    #expect(person).to be_nil
+    #expect(Person.find(person.id)).to be_empty
+    expect { Person.find(person.id)}.to raise_error ActiveRecord::RecordNotFound
 
   end
 
