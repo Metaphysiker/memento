@@ -7,6 +7,7 @@ class CreatePeople < ActiveRecord::Migration[5.2]
       t.string :phone
       t.integer :philosophie_id
       t.string :login
+      t.string :gender
 
       t.timestamps
     end
