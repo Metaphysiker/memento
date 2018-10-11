@@ -1,0 +1,25 @@
+de:
+  activerecord:
+    models:
+      person: "Person"
+      task: "Aufgabe"
+      address: "Adresse"
+      note: "Notiz"
+    attributes:
+      person:
+        name: "Name"
+        firstname: "Vorname"
+        lastname: "Nachname"
+        email: "e-Mail"
+        phone: "Telefon"
+        tag_list: "Tags"
+        institutions: "Institutionen"
+      address:
+        form_of_address: "Anrede"
+        firstname: "Vorname"
+        lastname: "Nachname"
+        company: "Firma"
+        street: "Strasse"
+        plz: "PLZ"
+        location: "Ort"
+        country: "Land"
