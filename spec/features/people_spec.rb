@@ -86,8 +86,27 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(lastname)
     expect(page).to have_content(description)
     expect(page).to have_content(phone)
+  end
 
+  it "updates and leaves email blank which should re-render edit" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
 
+    visit "/people/#{person.id}"
+
+    find(".person-#{person.id}-edit").click
+
+    fill_in "e-Mail", :with => ""
+
+    click_button "Person aktualisieren"
+
+    expect(page).to have_content("e-Mail muss ausgefüllt werden")
 
   end
 
