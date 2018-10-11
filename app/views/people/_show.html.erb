@@ -24,7 +24,7 @@
         <p class="card-text"><strong>Telefon: </strong><%= person.phone %></p>
       <% end %>
 
-      <% if person.gender %>
+      <% if person.gender && !person.gender.blank? %>
         <p class="card-text"><strong>Geschlecht: </strong><%= person.gender %></p>
       <% end %>
 
