@@ -1,19 +1,19 @@
 <div class="person-<%= person.id %>-edit-form">
-<%= simple_form_for(person, remote: true ) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= simple_form_for(person, remote: true ) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :firstname %>
-    <%= f.input :lastname %>
-    <%= f.input :description %>
-    <%= f.input :email %>
-    <%= f.input :phone %>
-    <%= f.input :gender, collection: Person.genders %>
-  </div>
+    <div class="form-inputs">
+      <%= f.input :firstname %>
+      <%= f.input :lastname %>
+      <%= f.input :description %>
+      <%= f.input :email %>
+      <%= f.input :phone %>
+      <%= f.input :gender, collection: Person.genders %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
 </div>

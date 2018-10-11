@@ -24,14 +24,8 @@ if (jQuery.isEmptyObject(errors)) {
 } else {
   console.log("Fehler vorhanden");
 
-  $( person_id_edit_form ).modal('hide')
-
-  $( person_id ).fadeOut( "slow", function() {
-
-      content = $("<%= escape_javascript( render "people/show", person: @person ) %>")
-
-      $(person_id).empty().append(content).fadeIn("slow");
-      $( person_id_edit_form ).modal('show');
-  });
-
+  content = $("<%= escape_javascript( render "people/form", person: @person ) %>")
+    $(".person-<%= @person.id %>-edit-form").replaceWith(function(){
+      return $(content).hide().fadeIn("slow");
+    });
 }
