@@ -1,0 +1,14 @@
+var person_id = ".person-<%= @person.id %>";
+var person_id_edit_form = ".person-<%= @person.id %>-edit-form";
+
+alert(person_id_edit_form);
+
+$( person_id_edit_form ).modal('hide')
+
+$( person_id ).fadeOut( "slow", function() {
+
+    content = $("<%= escape_javascript( render "people/show", person: @person ) %>")
+
+    $(person_id).empty().append(content).fadeIn("slow");
+
+});
