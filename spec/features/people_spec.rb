@@ -27,6 +27,26 @@ RSpec.describe "people", :type => :feature do
 
   end
 
+  it "updates and displays person's information" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    visit "/people/#{person.id}"
+    expect(page).to have_content(person.email)
+    expect(page).to have_content(person.firstname)
+    expect(page).to have_content(person.lastname)
+    expect(page).to have_content(person.description)
+    expect(page).to have_content(person.phone)
+    expect(page).to have_content(person.gender)
+
+  end
+
 end
 
 def login_with(user)
