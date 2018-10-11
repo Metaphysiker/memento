@@ -1,5 +1,5 @@
 var person_id = ".person-<%= @person.id %>";
-var person_id_edit_form = ".person-<%= @person.id %>-edit-form";
+var person_id_edit_form = ".person-<%= @person.id %>-edit-modal";
 var person = "<%= @person.inspect %>";
 var errors = <%= raw @person.errors.full_messages %>;
 
@@ -15,11 +15,23 @@ if (jQuery.isEmptyObject(errors)) {
 
       content = $("<%= escape_javascript( render "people/show", person: @person ) %>")
 
-      $(person_id).empty().append(content).fadeIn("slow");
+      $(person_id).replaceWith(function(){
+        return $(content).hide().fadeIn("slow");
+      });
 
   });
 
 } else {
   console.log("Fehler vorhanden");
+
+  $( person_id_edit_form ).modal('hide')
+
+  $( person_id ).fadeOut( "slow", function() {
+
+      content = $("<%= escape_javascript( render "people/show", person: @person ) %>")
+
+      $(person_id).empty().append(content).fadeIn("slow");
+      $( person_id_edit_form ).modal('show');
+  });
 
 }

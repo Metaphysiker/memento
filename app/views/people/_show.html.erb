@@ -1,12 +1,12 @@
 <div class="person-<%= person.id %>">
 
-  <div class="card person-<%= person.id %>">
+  <div class="card">
     <div class="card-body">
       <div class="float-right mb-3">
 
         <div class="btn-group" role="group" aria-label="Toolbar for Person">
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-light person-<%= person.id %>-edit" data-toggle="modal" data-target=".person-<%= person.id %>-edit-form">
+          <button type="button" class="btn btn-light person-<%= person.id %>-edit" data-toggle="modal" data-target=".person-<%= person.id %>-edit-modal">
             <%= fa_icon "edit" %>
           </button>
           <%= link_to person, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
@@ -34,7 +34,7 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade person-<%= person.id %>-edit-form" tabindex="-1" role="dialog" aria-labelledby="Edit Person" aria-hidden="true">
+  <div class="modal fade person-<%= person.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit Person" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
