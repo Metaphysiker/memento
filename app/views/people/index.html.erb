@@ -16,7 +16,6 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">e-Mail</th>
               <th scope="col">Telefon</th>
@@ -25,7 +24,6 @@
           <tbody>
             <% @people.each do |person| %>
               <tr>
-                <th scope="row"><%= person.id %></th>
                 <td><%= person.name %></td>
                 <td><%= person.email %></td>
                 <td><%= person.phone %></td>

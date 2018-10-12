@@ -29,7 +29,12 @@
       <% end %>
 
       <hr />
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <p class="card-text"><small class="text-muted">
+        Erstellt: <%= person.created_at.strftime("%d.%m.%Y - %H:%M") %> - von <%= person.audits.where(action: "create").last.user.username %>
+        <% unless person.audits.where(action: "update").empty? %>
+          | Zuletzt bearbeitet: <%= person.audits.where(action: "update").order(:created_at).last.created_at.strftime("%d.%m.%Y - %H:%M") %> - von <%= person.audits.where(action: "update").order(:created_at).last.user.username %>
+        <% end %>
+    </small></p>
     </div>
   </div>
 
