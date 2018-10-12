@@ -30,7 +30,7 @@
 
       <hr />
       <p class="card-text"><small class="text-muted">
-        Erstellt: <%= person.created_at.strftime("%d.%m.%Y - %H:%M") %>
+        Erstellt: <%= person.created_at.strftime("%d.%m.%Y %H:%M") %>
         <% if person.audits.where(action: "create").last.user.nil? %>
             - von Sandros Skript
         <% else %>
@@ -38,7 +38,7 @@
         <% end %>
 
         <% unless person.audits.where(action: "update").empty? %>
-          | Zuletzt bearbeitet: <%= person.audits.where(action: "update").order(:created_at).last.created_at.strftime("%d.%m.%Y - %H:%M") %>
+          | Zuletzt bearbeitet: <%= person.audits.where(action: "update").order(:created_at).last.created_at.strftime("%d.%m.%Y %H:%M") %>
           <% if person.audits.where(action: "update").order(:created_at).last.user.nil? %>
               - von Sandros Skript
           <% else %>
