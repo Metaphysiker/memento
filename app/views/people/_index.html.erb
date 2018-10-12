@@ -1,26 +1,10 @@
 <div class="people">
-  <nav>
-    <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link list-view active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">
-        <%= fa_icon "th-list" %>
-      </a>
-      <a class="nav-item nav-link profiles-view" id="nav-profiles-tab" data-toggle="tab" href="#nav-profiles" role="tab" aria-controls="nav-profiles" aria-selected="false">
-        <%= fa_icon "id-card" %>
-      </a>
-    </div>
-  </nav>
+  <p>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
+  </p>
 
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
-
-      <%= render "people/list-view", people: @people %>
-      <%= render partial: "people/show-list", collection: @people, as: :person %>
-
-    </div>
-    <div class="tab-pane fade" id="nav-profiles" role="tabpanel" aria-labelledby="nav-profiles-tab">
-      <%= render partial: "people/show", collection: @people, as: :person %>
-    </div>
-  </div>
+    <%= render partial: "people/show", collection: @people, as: :person %>
 
     <%= render 'people/new', person: Person.new %>
+
 </div>
