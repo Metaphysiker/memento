@@ -20,10 +20,10 @@ RSpec.describe Person, type: :model do
     person3 = Person.create(email: Faker::Internet.email, firstname: Faker::Name.first_name)
     person4 = Person.create(email: Faker::Internet.email, lastname: Faker::Name.last_name)
 
-    expect(person1.name == person1.email.split("@").first)
-    expect(person2.name == "#{person2.firstname} #{person2.lastname}")
-    expect(person3.name == person3.email.split("@").first)
-    expect(person4.name == person4.email.split("@").first)
+    expect(person1.name == person1.email.split("@").first).to be_truthy
+    expect(person2.name == "#{person2.firstname} #{person2.lastname}").to be_truthy
+    expect(person3.name == person3.email.split("@").first).to be_truthy
+    expect(person4.name == person4.email.split("@").first).to be_truthy
 
   end
 

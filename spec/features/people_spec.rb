@@ -134,6 +134,64 @@ RSpec.describe "people", :type => :feature do
 
   end
 
+  it "updates and displays person's information in index" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    person2 = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+    person3 = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    visit "/people/"
+    find(".profiles-view").click
+    find(".person-#{person.id}-edit").click
+
+    firstname = Faker::Name.unique.first_name
+    lastname = Faker::Name.unique.last_name
+    description = Faker::Lorem.unique.paragraph
+    email = Faker::Internet.unique.email
+    phone = Faker::PhoneNumber.unique.cell_phone
+
+    fill_in "Vorname", :with => firstname
+    fill_in "Nachname", :with => lastname
+    fill_in "Beschreibung", :with => description
+    fill_in "e-Mail", :with => email
+    fill_in "Telefon", :with => phone
+
+    click_button "Person aktualisieren"
+
+    expect(page).to_not have_content(person.email)
+    expect(page).to_not have_content(person.firstname)
+    expect(page).to_not have_content(person.lastname)
+    expect(page).to_not have_content(person.description)
+    expect(page).to_not have_content(person.phone)
+
+    expect(page).to have_content(email)
+    expect(page).to have_content(firstname)
+    expect(page).to have_content(lastname)
+    expect(page).to have_content(description)
+    expect(page).to have_content(phone)
+  end
+
 end
 
 def login_with(user)
