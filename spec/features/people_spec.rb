@@ -192,6 +192,34 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(phone)
   end
 
+  it "creates a person" do
+    visit "/people/"
+    click_button "Person erstellen"
+
+    firstname = Faker::Name.first_name
+    lastname = Faker::Name.last_name
+    description = Faker::Lorem.paragraph
+    email = Faker::Internet.email
+    phone = Faker::PhoneNumber.cell_phone
+
+    fill_in "Vorname", :with => firstname
+    fill_in "Nachname", :with => lastname
+    fill_in "Beschreibung", :with => description
+    fill_in "e-Mail", :with => email
+    fill_in "Telefon", :with => phone
+
+    within(".form-actions") do
+      click_button "Person erstellen"
+    end
+
+    expect(page).to have_content(email)
+    expect(page).to have_content(firstname)
+    expect(page).to have_content(lastname)
+    expect(page).to have_content(description)
+    expect(page).to have_content(phone)
+    page.save_screenshot('create_person.png')
+  end
+
 end
 
 def login_with(user)
