@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "people", :type => :feature do
 
   before(:each) do
-    first_user = user = User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
+    first_user = User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
     login_with(first_user)
   end
 
