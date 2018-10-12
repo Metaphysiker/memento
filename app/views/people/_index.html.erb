@@ -1,7 +1,15 @@
 <div class="people">
-  <p>
-    <button class="btn btn-primary" id="person-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
-  </p>
+
+  <nav>
+  <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link list-view active" id="person-index-view-option" data-toggle="collapse" href="#nav-list" role="tab" data-target=".multi-collapse" aria-expanded="true" aria-controls="nav-list" aria-selected="true">
+      <button class="btn btn-light" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "th-list" %></button>
+    </a>
+    <a class="nav-item nav-link profiles-view" data-toggle="collapse" href="#nav-profiles" role="tab" data-target=".multi-collapse" aria-expanded="true" aria-controls="nav-profiles" aria-selected="false">
+      <button class="btn btn-light" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "id-card" %></button>
+    </a>
+  </div>
+</nav>
 
     <%= render partial: "people/show", collection: @people, as: :person %>
 
