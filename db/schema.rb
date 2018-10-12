@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_111532) do
   create_table "people", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
+    t.string "name"
     t.string "email"
     t.string "phone"
     t.integer "philosophie_id"

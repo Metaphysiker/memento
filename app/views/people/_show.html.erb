@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <h3 class="card-title"><%= person.firstname %> <%= person.lastname %></h3>
+      <h3 class="card-title person-name"><%= person.name %></h3>
       <p class="card-text"><%= person.description %></p>
       <% if person.email %>
         <p class="card-text"><strong>e-Mail: </strong><%= mail_to person.email %></p>

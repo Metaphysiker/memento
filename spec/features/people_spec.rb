@@ -19,12 +19,36 @@ RSpec.describe "people", :type => :feature do
 
     visit "/people/#{person.id}"
     expect(page).to have_content(person.email)
+    expect(page).to have_content("e-Mail:")
     expect(page).to have_content(person.firstname)
     expect(page).to have_content(person.lastname)
+    expect(page).to have_css(".person-name", text: person.firstname)
+    expect(page).to have_css(".person-name", text: person.lastname)
     expect(page).to have_content(person.description)
     expect(page).to have_content(person.phone)
+    expect(page).to have_content("Telefon:")
     expect(page).to have_content(person.gender)
+    expect(page).to have_content("Geschlecht:")
 
+  end
+
+  it "displays a person's information with no first and lastname" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    visit "/people/#{person.id}"
+    expect(page).to have_content(person.email)
+    expect(page).to have_content("e-Mail:")
+    expect(page).to have_css(".person-name", text: person.email.split("@").first)
+    expect(page).to have_content(person.description)
+    expect(page).to have_content(person.phone)
+    expect(page).to have_content("Telefon:")
+    expect(page).to have_content(person.gender)
+    expect(page).to have_content("Geschlecht:")
   end
 
   it "deletes a person" do

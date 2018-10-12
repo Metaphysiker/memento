@@ -14,4 +14,19 @@ RSpec.describe Person, type: :model do
     expect(person).to_not be_valid
   end
 
+  it "sets name after create or update" do
+    person1 = Person.create(email: Faker::Internet.email)
+    person2 = Person.create(email: Faker::Internet.email, firstname: Faker::Name.first_name, lastname: Faker::Name.last_name)
+    person3 = Person.create(email: Faker::Internet.email, firstname: Faker::Name.first_name)
+    person4 = Person.create(email: Faker::Internet.email, lastname: Faker::Name.last_name)
+
+    expect(person1.name == person1.email.split("@").first)
+    expect(person2.name == "#{person2.firstname} #{person2.lastname}")
+    expect(person3.name == person3.email.split("@").first)
+    expect(person4.name == person4.email.split("@").first)
+
+  end
+
+
+
 end
