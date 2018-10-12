@@ -1,6 +1,6 @@
 <div class="people">
   <p>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
+    <button class="btn btn-primary" id="person-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button>
   </p>
 
     <%= render partial: "people/show", collection: @people, as: :person %>

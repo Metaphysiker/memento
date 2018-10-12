@@ -186,7 +186,6 @@ RSpec.describe "people", :type => :feature do
     )
 
     visit "/people/"
-    find(".profiles-view").click
     find(".person-#{person.id}-edit").click
 
     firstname = Faker::Name.unique.first_name
