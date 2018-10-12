@@ -1,5 +1,4 @@
 <div class="people">
-  <%= render 'people/new', person: Person.new %>
   <nav>
     <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
       <a class="nav-item nav-link list-view active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">
@@ -36,4 +35,6 @@
       <%= render partial: "people/show", collection: @people, as: :person %>
     </div>
   </div>
+
+    <%= render 'people/new', person: Person.new %>
 </div>
