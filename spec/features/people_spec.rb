@@ -27,7 +27,7 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(person.description)
     expect(page).to have_content(person.phone)
     expect(page).to have_content("Telefon:")
-    expect(page).to have_content(person.gender)
+    expect(page).to have_content(I18n.t(person.gender))
     expect(page).to have_content("Geschlecht:")
 
   end
@@ -47,7 +47,7 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(person.description)
     expect(page).to have_content(person.phone)
     expect(page).to have_content("Telefon:")
-    expect(page).to have_content(person.gender)
+    expect(page).to have_content(I18n.t(person.gender))
     expect(page).to have_content("Geschlecht:")
   end
 
@@ -78,7 +78,7 @@ RSpec.describe "people", :type => :feature do
       lastname: Faker::Name.last_name,
       description: Faker::Lorem.paragraph,
       phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
+      gender: "male"
     )
 
     visit "/people/#{person.id}"
@@ -96,6 +96,7 @@ RSpec.describe "people", :type => :feature do
     fill_in "Beschreibung", :with => description
     fill_in "e-Mail", :with => email
     fill_in "Telefon", :with => phone
+    select(I18n.t("female"), :from => 'Geschlecht')
 
     click_button "Person aktualisieren"
 
@@ -104,12 +105,14 @@ RSpec.describe "people", :type => :feature do
     expect(page).to_not have_content(person.lastname)
     expect(page).to_not have_content(person.description)
     expect(page).to_not have_content(person.phone)
+    expect(page).to_not have_content(I18n.t("male"))
 
     expect(page).to have_content(email)
     expect(page).to have_content(firstname)
     expect(page).to have_content(lastname)
     expect(page).to have_content(description)
     expect(page).to have_content(phone)
+    expect(page).to have_content(I18n.t("female"))
   end
 
   it "updates and leaves email blank which should re-render edit" do
@@ -131,6 +134,27 @@ RSpec.describe "people", :type => :feature do
     click_button "Person aktualisieren"
 
     expect(page).to have_content("e-Mail muss ausgefüllt werden")
+
+  end
+
+  it "enters a used email-adress and updates which should re-render edit" do
+    person = Person.create(
+      email: Faker::Internet.email
+    )
+
+    person2 = Person.create(
+      email: Faker::Internet.email
+    )
+
+    visit "/people/#{person.id}"
+
+    find(".person-#{person.id}-edit").click
+
+    fill_in "e-Mail", :with => person2.email
+
+    click_button "Person aktualisieren"
+
+    expect(page).to have_content("e-Mail ist bereits vergeben")
 
   end
 
@@ -217,7 +241,6 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(lastname)
     expect(page).to have_content(description)
     expect(page).to have_content(phone)
-    page.save_screenshot('create_person.png')
   end
 
 end

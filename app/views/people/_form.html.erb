@@ -9,7 +9,7 @@
       <%= f.input :description %>
       <%= f.input :email %>
       <%= f.input :phone %>
-      <%= f.input :gender, collection: Person.genders %>
+      <%= f.input :gender, collection: Person.genders.map {|p| [t("#{p}"), p]} %>
     </div>
 
     <div class="form-actions">
