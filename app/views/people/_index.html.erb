@@ -18,10 +18,10 @@
 
 <div class="people">
     <%= render partial: "people/show", collection: @people, as: :person %>
+</div>
 
     <%= render 'people/new', person: Person.new %>
 
-</div>
 
 <script>
   $( document ).ready(function() {

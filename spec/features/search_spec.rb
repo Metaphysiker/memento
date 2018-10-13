@@ -36,7 +36,8 @@ RSpec.describe "search", :type => :feature do
     )
 
     visit "/people/"
-    fill_in "#search_people", :with => unique_lastname
+    #fill_in "#search_people", :with => unique_lastname
+    find('#search_people').set(unique_lastname)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -87,7 +88,8 @@ RSpec.describe "search", :type => :feature do
     )
 
     visit "/people/"
-    fill_in "#search_people", :with => unique_lastname
+    #fill_in "#search_people", :with => unique_lastname
+    find('#search_people').set(unique_lastname)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -138,7 +140,8 @@ RSpec.describe "search", :type => :feature do
     )
 
     visit "/people/"
-    fill_in "#search_people", :with => unique_lastname
+    #fill_in "#search_people", :with => unique_lastname
+    find('#search_people').set(unique_lastname)
 
     expect(page).to_not have_content(person.email)
     expect(page).to_not have_content(person.firstname)
@@ -172,7 +175,8 @@ RSpec.describe "search", :type => :feature do
     )
 
     visit "/people/"
-    fill_in "#search_people", :with => "#{person.firstname} #{person.lastname}"
+    #fill_in "#search_people", :with => "#{person.firstname} #{person.lastname}"
+    find('#search_people').set("#{person.firstname} #{person.lastname}")
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -192,7 +196,8 @@ RSpec.describe "search", :type => :feature do
     )
 
     visit "/people/"
-    fill_in "#search_people", :with => person.email
+    #fill_in "#search_people", :with => person.email
+    find('#search_people').set(person.email)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -212,7 +217,8 @@ RSpec.describe "search", :type => :feature do
     )
 
     visit "/people/"
-    fill_in "#search_people", :with => person.phone
+    #fill_in "#search_people", :with => person.phone
+    find('#search_people').set(person.phone)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -232,7 +238,8 @@ RSpec.describe "search", :type => :feature do
     )
 
     visit "/people/"
-    fill_in "#search_people", :with => person.description
+    #fill_in "#search_people", :with => person.description
+    find('#search_people').set(person.description)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)

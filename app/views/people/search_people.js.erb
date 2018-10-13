@@ -1,2 +1,9 @@
-var people = <%= raw @people.to_json %>;
-console.log(people);
+var people_div = ".people";
+
+$( people_div ).fadeOut( "slow", function() {
+
+    content = $("<%= escape_javascript( render partial: 'people/show', collection: @people, as: :person ) %>")
+
+    $(people_div).empty().append(content).fadeIn("slow");
+
+});
