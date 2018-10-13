@@ -1,5 +1,11 @@
-<div class="people">
+
+  <h1 class="text-center">
+    <%= link_to "Personen", people_path, class: "black_link" %>
+  </h1>
   <nav>
+    <p>
+      <%= render "people/search_people_form" %>
+    </p>
   <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
     <a class="nav-item nav-link list-view active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">
       <button class="btn btn-light" id="person-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "id-card" %></button>
@@ -10,6 +16,7 @@
   </div>
 </nav>
 
+<div class="people">
     <%= render partial: "people/show", collection: @people, as: :person %>
 
     <%= render 'people/new', person: Person.new %>

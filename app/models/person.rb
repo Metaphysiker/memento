@@ -4,6 +4,8 @@ class Person < ApplicationRecord
 
   validates :email, presence: :true, uniqueness: :true
 
+  scope :search_people_ilike, ->(search_term) { where("people.email ILIKE ? OR people.phone ILIKE ? OR people.name ILIKE ? OR people.description ILIKE ?", search_term, search_term, search_term, search_term) }
+
   def self.genders
     ['male', 'female', 'transgender']
   end

@@ -63,6 +63,21 @@ class PeopleController < ApplicationController
     end
   end
 
+  def search_people
+    search_term = params[:search_people]
+
+    if search_term.nil? || search_term.empty?
+      @people = Person.all
+    else
+      @people = Person.search_people_ilike("%#{search_term}%")
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
