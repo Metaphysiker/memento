@@ -1,12 +1,18 @@
 <div class="people">
-
+  <p>
+    <button class="btn btn-primary float-right" id="toggle-index-view" type="button">
+      Toggle both elements
+    </button>
+  </p>
+  <br />
+  <br />
   <nav>
   <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link list-view active" id="person-index-view-option" data-toggle="collapse" href="#nav-list" role="tab" data-target=".multi-collapse" aria-expanded="true" aria-controls="nav-list" aria-selected="true">
-      <button class="btn btn-light" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "th-list" %></button>
+    <a class="nav-item nav-link list-view active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">
+      <button class="btn btn-light" id="person-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "id-card" %></button>
     </a>
-    <a class="nav-item nav-link profiles-view" data-toggle="collapse" href="#nav-profiles" role="tab" data-target=".multi-collapse" aria-expanded="true" aria-controls="nav-profiles" aria-selected="false">
-      <button class="btn btn-light" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "id-card" %></button>
+    <a class="nav-item nav-link profiles-view" id="nav-profiles-tab" data-toggle="tab" href="#nav-profiles" role="tab" aria-controls="nav-profiles" aria-selected="false">
+      <button class="btn btn-light float-right" id="person-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "th-list" %></button>
     </a>
   </div>
 </nav>
@@ -16,3 +22,11 @@
     <%= render 'people/new', person: Person.new %>
 
 </div>
+
+<script>
+  $( document ).ready(function() {
+    $( ".list-view, .profiles-view" ).click(function() {
+      $(".multi-collapse").collapse('toggle');
+    });
+  });
+</script>
