@@ -7,7 +7,7 @@ RSpec.describe "search", :type => :feature do
     login_with(first_user)
   end
 
-  it "searches among 3 people and expects 1 as result" do
+  it "searches among 3 people and expects 1 result" do
     unique_lastname = Faker::Name.unique.last_name
     person = Person.create(
       email: Faker::Internet.email,
@@ -35,7 +35,150 @@ RSpec.describe "search", :type => :feature do
       gender: Person.genders.sample
     )
 
+    visit "/people/"
+    fill_in "#search_people", :with => unique_lastname
 
+    expect(page).to have_content(person.email)
+    expect(page).to have_content(person.firstname)
+    expect(page).to have_content(person.lastname)
+    expect(page).to have_content(person.description)
+    expect(page).to have_content(person.phone)
+
+    expect(page).to_not have_content(person2.email)
+    expect(page).to_not have_content(person2.firstname)
+    expect(page).to_not have_content(person2.lastname)
+    expect(page).to_not have_content(person2.description)
+    expect(page).to_not have_content(person2.phone)
+
+    expect(page).to_not have_content(person3.email)
+    expect(page).to_not have_content(person3.firstname)
+    expect(page).to_not have_content(person3.lastname)
+    expect(page).to_not have_content(person3.description)
+    expect(page).to_not have_content(person3.phone)
+
+  end
+
+  it "searches among 3 people and expects 3 results" do
+    unique_lastname = Faker::Name.unique.last_name
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: unique_lastname,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    person2 = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: unique_lastname,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+    person3 = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: unique_lastname,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    visit "/people/"
+    fill_in "#search_people", :with => unique_lastname
+
+    expect(page).to have_content(person.email)
+    expect(page).to have_content(person.firstname)
+    expect(page).to have_content(person.lastname)
+    expect(page).to have_content(person.description)
+    expect(page).to have_content(person.phone)
+
+    expect(page).to have_content(person2.email)
+    expect(page).to have_content(person2.firstname)
+    expect(page).to have_content(person2.lastname)
+    expect(page).to have_content(person2.description)
+    expect(page).to have_content(person2.phone)
+
+    expect(page).to have_content(person3.email)
+    expect(page).to have_content(person3.firstname)
+    expect(page).to have_content(person3.lastname)
+    expect(page).to have_content(person3.description)
+    expect(page).to have_content(person3.phone)
+
+  end
+
+  it "searches among 3 people and expects 0 results" do
+    unique_lastname = Faker::Name.unique.last_name
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    person2 = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+    person3 = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    visit "/people/"
+    fill_in "#search_people", :with => unique_lastname
+
+    expect(page).to_not have_content(person.email)
+    expect(page).to_not have_content(person.firstname)
+    expect(page).to_not have_content(person.lastname)
+    expect(page).to_not have_content(person.description)
+    expect(page).to_not have_content(person.phone)
+
+    expect(page).to_not have_content(person2.email)
+    expect(page).to_not have_content(person2.firstname)
+    expect(page).to_not have_content(person2.lastname)
+    expect(page).to_not have_content(person2.description)
+    expect(page).to_not have_content(person2.phone)
+
+    expect(page).to_not have_content(person3.email)
+    expect(page).to_not have_content(person3.firstname)
+    expect(page).to_not have_content(person3.lastname)
+    expect(page).to_not have_content(person3.description)
+    expect(page).to_not have_content(person3.phone)
+
+  end
+
+  it "searches with firstname and lastname and expect 1 result" do
+    unique_lastname = Faker::Name.unique.last_name
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: unique_lastname,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    visit "/people/"
+    fill_in "#search_people", :with => "#{person.firstname} #{person.lastname}"
+
+    expect(page).to have_content(person.email)
+    expect(page).to have_content(person.firstname)
+    expect(page).to have_content(person.lastname)
+    expect(page).to have_content(person.description)
+    expect(page).to have_content(person.phone)
   end
 
 end

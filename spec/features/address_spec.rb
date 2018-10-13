@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+=begin
 RSpec.describe "address", :type => :feature do
 
   before(:each) do
@@ -79,3 +80,4 @@ def login_with(user)
 
   expect(page).to have_selector(".navbar-brand", :text => user.username)
 end
+=end
