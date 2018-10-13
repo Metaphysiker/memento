@@ -21,6 +21,52 @@ RSpec.describe "address", :type => :feature do
 
     expect(page).to have_content("Adresse anzeigen")
 
+    click_button "Adresse anzeigen"
+
+    within ".address-#{person.address.id}" do
+      expect(page).to have_content(person.firstname)
+      expect(page).to have_content(person.lastname)
+    end
+
+  end
+
+  it "views a person, adds an address and expects address" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: "male"
+    )
+
+    visit "/people/#{person.id}"
+
+    expect(page).to have_content("Adresse anzeigen")
+
+
+
+    click_button "Adresse anzeigen"
+
+
+    company = Faker::Address.community
+    street = Faker::Address.street_address
+    plz = Faker::Address.zip_code
+    location = Faker::Address.city
+    country = Faker::Address.country
+
+    address = Address.create(
+      form_of_address: "Herr",
+      firstname: person.firstname,
+      lastname: person.lastname,
+      company: company,
+      street: street,
+      plz: plz,
+      location: country
+    )
+
+
+
   end
 
 end
