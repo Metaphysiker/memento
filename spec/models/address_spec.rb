@@ -1,5 +1,5 @@
 require 'rails_helper'
-=begin
+
 RSpec.describe Address, type: :model do
 
   it "is valid with email" do
@@ -36,14 +36,11 @@ RSpec.describe Address, type: :model do
     person3 = Person.create(email: Faker::Internet.email, firstname: Faker::Name.first_name)
     person4 = Person.create(email: Faker::Internet.email, lastname: Faker::Name.last_name)
 
-    expect(person1.name == person1.email.split("@").first).to be_truthy
-    expect(person2.name == "#{person2.firstname} #{person2.lastname}").to be_truthy
-    expect(person3.name == person3.email.split("@").first).to be_truthy
-    expect(person4.name == person4.email.split("@").first).to be_truthy
+    expect(person1.name == person1.email.split("@").first).to be_true
+    expect(person2.name == "#{person2.firstname} #{person2.lastname}").to be_true
+    expect(person3.name == person3.email.split("@").first).to be_true
+    expect(person4.name == person4.email.split("@").first).to be_true
 
   end
 
-
-
 end
-=end
