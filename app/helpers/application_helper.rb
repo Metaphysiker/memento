@@ -22,4 +22,8 @@ module ApplicationHelper
     !current_user.nil? && current_user.role == "admin"
   end
 
+  def is_nil_or_empty? value
+    value.nil? || value.empty?
+  end
+
 end

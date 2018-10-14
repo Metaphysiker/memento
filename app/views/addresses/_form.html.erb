@@ -1,5 +1,5 @@
 
-<%= simple_form_for(@address) do |f| %>
+<%= simple_form_for(address) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -11,7 +11,7 @@
     <%= f.input :street %>
     <%= f.input :plz %>
     <%= f.input :location %>
-    <%= f.input :country %>
+    <%= f.input :country, only: ["CH", "DE", "AT"], selected: "CH" %>
   </div>
 
   <div class="form-actions">
