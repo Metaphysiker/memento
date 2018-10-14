@@ -7,4 +7,7 @@ Rails.application.routes.draw do
 
   #search
   get '/search_people_form', to: 'people#search_people', as: 'search_people_form'
+
+  #activities
+  get '/activities', to: 'static_pages#activities', as: 'activities'
 end

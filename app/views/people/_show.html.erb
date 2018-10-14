@@ -49,11 +49,11 @@
           <% if person.email %>
             <p class="card-text"><strong>e-Mail: </strong><%= mail_to person.email %></p>
           <% end %>
-          <% if person.phone && !person.phone.blank? %>
+          <% if !person.phone.blank? %>
             <p class="card-text"><strong>Telefon: </strong><%= person.phone %></p>
           <% end %>
 
-          <% if person.gender && !person.gender.blank? %>
+          <% if !person.gender.blank? %>
             <p class="card-text"><strong>Geschlecht: </strong><%= t(person.gender) %></p>
           <% end %>
 

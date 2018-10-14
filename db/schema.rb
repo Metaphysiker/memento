@@ -16,14 +16,14 @@ ActiveRecord::Schema.define(version: 2018_10_14_072315) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string "form_of_address"
-    t.string "firstname"
-    t.string "lastname"
-    t.string "company"
-    t.string "street"
-    t.string "plz"
-    t.string "location"
-    t.string "country"
+    t.string "form_of_address", default: ""
+    t.string "firstname", default: ""
+    t.string "lastname", default: ""
+    t.string "company", default: ""
+    t.string "street", default: ""
+    t.string "plz", default: ""
+    t.string "location", default: ""
+    t.string "country", default: ""
     t.string "addressable_type"
     t.bigint "addressable_id"
     t.datetime "created_at", null: false
@@ -91,14 +91,14 @@ ActiveRecord::Schema.define(version: 2018_10_14_072315) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "name"
-    t.string "email"
-    t.string "phone"
+    t.string "firstname", default: ""
+    t.string "lastname", default: ""
+    t.string "name", default: ""
+    t.string "email", default: ""
+    t.string "phone", default: ""
     t.integer "philosophie_id"
-    t.string "gender"
-    t.text "description"
+    t.string "gender", default: ""
+    t.text "description", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

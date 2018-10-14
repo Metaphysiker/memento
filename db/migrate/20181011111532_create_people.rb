@@ -1,14 +1,14 @@
 class CreatePeople < ActiveRecord::Migration[5.2]
   def change
     create_table :people do |t|
-      t.string :firstname
-      t.string :lastname
-      t.string :name
-      t.string :email
-      t.string :phone
+      t.string :firstname, default: ""
+      t.string :lastname, default: ""
+      t.string :name, default: ""
+      t.string :email, default: ""
+      t.string :phone, default: ""
       t.integer :philosophie_id
-      t.string :gender
-      t.text :description
+      t.string :gender, default: ""
+      t.text :description, default: ""
 
       t.timestamps
     end

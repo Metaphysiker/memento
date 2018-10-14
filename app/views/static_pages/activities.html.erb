@@ -1,0 +1,8 @@
+<div class="container">
+  <%= Audited::Audit.all.each do |audit| %>
+  <h2>Änderung von <%= audit.user.username %></h2>
+    <%= audit.audited_changes.each do |change| %>
+      <%= change.inspect %>
+    <% end %>
+  <% end %>
+</div>
