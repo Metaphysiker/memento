@@ -4,8 +4,8 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    #@people = Person.all
-    @people = Person.all.order(:name).page(params[:page])
+    @people = Person.all
+    #@people = Person.all.order(:name).page(params[:page])
   end
 
   # GET /people/1
@@ -72,6 +72,8 @@ class PeopleController < ApplicationController
     else
       @people = Person.search_people_ilike("%#{search_term}%")
     end
+
+    #@people = @people.order(:name).page(params[:page])
 
     respond_to do |format|
       format.js

@@ -16,11 +16,7 @@
   </div>
 </nav>
 
-<div class="people">
-    <%= paginate people %>
-    <%= people.count %>
-    <%= render partial: "people/show", collection: people, as: :person %>
-</div>
+    <%= render 'people/people', people: people %>
 
     <%= render 'people/new', person: Person.new %>
 
