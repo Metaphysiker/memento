@@ -63,8 +63,8 @@ RSpec.describe "people", :type => :feature do
 
     visit "/people/#{person.id}"
     find(".person-#{person.id}-delete").click
-    page.save_screenshot('delete_person.png')
-    #page.evaluate_script('window.confirm = function() { return true; }')
+    #page.save_screenshot('delete_person.png')
+    page.evaluate_script('window.confirm = function() { return true; }')
     #expect(person).to be_nil
     #expect(Person.find(person.id)).to be_empty
     expect { Person.find(person.id)}.to raise_error ActiveRecord::RecordNotFound
