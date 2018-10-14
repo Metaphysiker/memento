@@ -257,9 +257,7 @@ RSpec.describe "people", :type => :feature do
     fill_in "e-Mail", :with => email
     fill_in "Telefon", :with => phone
 
-    page.save_screenshot('list-view1.png')
     click_button "Person aktualisieren"
-    page.save_screenshot('list-view2.png')
 
     expect(page).to_not have_content(person.email)
     expect(page).to_not have_content(person.firstname)

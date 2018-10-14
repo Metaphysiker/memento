@@ -248,6 +248,61 @@ RSpec.describe "search", :type => :feature do
     expect(page).to have_content(person.phone)
   end
 
+  it "searches among 3 people and expects 1 result in list-view" do
+    unique_lastname = Faker::Name.unique.last_name
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: unique_lastname,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    person2 = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+    person3 = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    visit "/people/"
+    find(".list-view").click
+    #fill_in "#search_people", :with => unique_lastname
+    find('#search_people').set(unique_lastname)
+
+    expect(page).to have_content(person.email)
+    expect(page).to have_content(person.firstname)
+    expect(page).to have_content(person.lastname)
+    expect(page).to_not have_content(person.description)
+    expect(page).to have_content(person.phone)
+
+    expect(page).to_not have_content(person2.email)
+    expect(page).to_not have_content(person2.firstname)
+    expect(page).to_not have_content(person2.lastname)
+    expect(page).to_not have_content(person2.description)
+    expect(page).to_not have_content(person2.phone)
+
+    expect(page).to_not have_content(person3.email)
+    expect(page).to_not have_content(person3.firstname)
+    expect(page).to_not have_content(person3.lastname)
+    expect(page).to_not have_content(person3.description)
+    expect(page).to_not have_content(person3.phone)
+
+  end
+
+
+
 end
 
 def login_with(user)
