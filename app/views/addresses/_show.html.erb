@@ -34,7 +34,7 @@
         <% unless address.plz.blank? && address.location.blank? %>
           <%= address.plz %>  <%= address.location %><br />
         <% end %>
-        <% unless address.country.blank? && address.country_name == "Schweiz" %>
+        <% unless address.country.blank? || address.country_name == "Schweiz" %>
           <%= address.country_name %> <br />
         <% end %>
       </p>

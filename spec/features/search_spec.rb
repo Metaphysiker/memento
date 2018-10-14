@@ -10,28 +10,28 @@ RSpec.describe "search", :type => :feature do
   it "searches among 3 people and expects 1 result" do
     unique_lastname = Faker::Name.unique.last_name
     person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
+      email: Faker::Internet.unique.email,
+      firstname: Faker::Name.unique.first_name,
       lastname: unique_lastname,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
+      description: Faker::Lorem.unique.paragraph,
+      phone: Faker::PhoneNumber.unique.cell_phone,
       gender: Person.genders.sample
     )
 
     person2 = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
+      email: Faker::Internet.unique.email,
+      firstname: Faker::Name.unique.first_name,
+      lastname: Faker::Name.unique.last_name,
+      description: Faker::Lorem.unique.paragraph,
+      phone: Faker::PhoneNumber.unique.cell_phone,
       gender: Person.genders.sample
     )
     person3 = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
+      email: Faker::Internet.unique.email,
+      firstname: Faker::Name.unique.first_name,
+      lastname: Faker::Name.unique.last_name,
+      description: Faker::Lorem.unique.paragraph,
+      phone: Faker::PhoneNumber.unique.cell_phone,
       gender: Person.genders.sample
     )
 
