@@ -1,0 +1,11 @@
+console.log("pagination!");
+
+var people_div = ".people";
+
+$( people_div ).fadeOut( "slow", function() {
+
+    content = $("<%= escape_javascript( render 'people/people', people: @people ) %>")
+
+    $(people_div).empty().append(content).fadeIn("slow");
+
+});

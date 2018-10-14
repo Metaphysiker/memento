@@ -4,8 +4,8 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
-    #@people = Person.all.order(:name).page(params[:page])
+    #@people = Person.all
+    @people = Person.all.order(:name).page(params[:page])
   end
 
   # GET /people/1
@@ -73,7 +73,21 @@ class PeopleController < ApplicationController
       @people = Person.search_people_ilike("%#{search_term}%")
     end
 
-    #@people = @people.order(:name).page(params[:page])
+    @people = @people.order(:name).page(params[:page])
+
+    #byebug
+    puts "COUNT"
+    puts @people.count
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def people_pagination
+    @offset = params[:offset].to_i
+    @limit = params[:limit].to_i
+    @count = params[:count].to_i
+
 
     respond_to do |format|
       format.js

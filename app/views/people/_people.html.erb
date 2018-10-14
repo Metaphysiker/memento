@@ -1,18 +1,4 @@
 <div class="people">
-    <%#= render partial: "people/show", collection: people, as: :person %>
-    <span>
-      <b>Anzahl Personen:</b> <%= people.count %> - <b>Auswahl: </b>
-    </span>
-    <span class="people-offset">
-      0
-    </span>
-     -
-    <span class="people-limit">
-      25
-    </span>
-    <%= render partial: "people/show", collection: people.offset(0).limit(25), as: :person %>
+  <%= paginate people, remote: true %>
+  <%= render partial: "people/show", collection: people, as: :person %>
 </div>
-
-<script>
-  
-</script>

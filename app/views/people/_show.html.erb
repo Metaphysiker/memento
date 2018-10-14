@@ -110,7 +110,9 @@
 <script>
 
   var isExpanded = $("#person-index-view-option").attr("aria-expanded");
-
+  console.log("isExpaned: ")
+  console.log($("#person-index-view-option").attr("aria-expanded"));
+  console.log(isExpanded);
   if( isExpanded ) {
       if(isExpanded == "true"){
         $(".person-profile-view").addClass("show");
