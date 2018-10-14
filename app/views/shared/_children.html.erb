@@ -1,0 +1,9 @@
+<p>
+  <a class="btn btn-link btn-sm" data-toggle="collapse" href=".address-<%= parent.id %>-<%= parent.class.to_s.downcase %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <%= fa_icon "address-card" %> Adresse anzeigen
+  </a>
+</p>
+
+<div class="collapse mb-2 address-<%= parent.id %>-<%= parent.class.to_s.downcase %>" >
+  <%= render "addresses/show", address: parent.address %>
+</div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :addresses
   resources :people
   devise_for :users
   root 'static_pages#welcome'

@@ -1,0 +1,26 @@
+<div class="address-<%= address.id %>" >
+  <div class="card my-3">
+    <div class="card-body">
+      <h5 class="card-title">Adresse</h5>
+      <p class="card-text">
+        <% unless address.company.nil? || address.company.blank? %>
+          <%= address.company %> <br />
+        <% end %>
+        <% if address.form_of_address %>
+          <%= address.form_of_address %> <br />
+        <% end %>
+        <% if address.firstname && address.lastname %>
+          <%= address.firstname %> <%= address.lastname %> <br />
+        <% end %>
+        <% if address.street %>
+          <%= address.street %> <br />
+        <% end %>
+        <% if address.plz && address.location %>
+          <%= address.plz %>  <%= address.location %><br />
+        <% end %>
+
+      </p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+</div>

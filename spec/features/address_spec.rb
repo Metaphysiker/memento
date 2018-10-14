@@ -21,7 +21,7 @@ RSpec.describe "address", :type => :feature do
 
     expect(page).to have_content("Adresse anzeigen")
 
-    click_button "Adresse anzeigen"
+    click_link "Adresse anzeigen"
 
     within ".address-#{person.address.id}" do
       expect(page).to have_content("Herr")
@@ -45,7 +45,7 @@ RSpec.describe "address", :type => :feature do
 
     expect(page).to have_content("Adresse anzeigen")
 
-    click_button "Adresse anzeigen"
+    click_link "Adresse anzeigen"
 
     within ".address-#{person.address.id}" do
       expect(page).to have_content("Frau")
@@ -69,7 +69,7 @@ RSpec.describe "address", :type => :feature do
 
     expect(page).to have_content("Adresse anzeigen")
 
-    click_button "Adresse anzeigen"
+    click_link "Adresse anzeigen"
 
     find(".address-#{person.address.id}-edit").click
 
