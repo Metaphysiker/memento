@@ -1,0 +1,31 @@
+var address_id = ".address-<%= @address.id %>";
+var address_id_edit_form = ".address-<%= @address.id %>-edit-modal";
+var address = "<%= @address.inspect %>";
+var errors = <%= raw @address.errors.full_messages %>;
+
+console.log(address);
+console.log(errors);
+
+if (jQuery.isEmptyObject(errors)) {
+  console.log("keine Fehler");
+
+  $( address_id_edit_form ).modal('hide')
+
+  $( address_id ).fadeOut( "slow", function() {
+
+      content = $("<%= escape_javascript( render "addresses/show", address: @address ) %>")
+
+      $(address_id).replaceWith(function(){
+        return $(content).hide().fadeIn("slow");
+      });
+
+  });
+
+} else {
+  console.log("Fehler vorhanden");
+
+  content = $("<%= escape_javascript( render "addresses/form", address: @address ) %>")
+    $(".address-<%= @address.id %>-edit-form").replaceWith(function(){
+      return $(content).hide().fadeIn("slow");
+    });
+}

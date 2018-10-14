@@ -57,6 +57,9 @@ RSpec.describe "search", :type => :feature do
     expect(page).to_not have_content(person3.description)
     expect(page).to_not have_content(person3.phone)
 
+    sleep 2
+    page.save_screenshot('search3-expect1.png')
+
   end
 
   it "searches among 3 people and expects 3 results" do
