@@ -1,3 +1,23 @@
 <div class="people">
-    <%= render partial: "people/show", collection: people, as: :person %>
+
+    <% people_ids = @people_ids || people.pluck(:id) %>
+    <%# people = @people || people %>
+    <% limit = @limit || 25 %>
+    <% offset = @offset || 0 %>
+    <% people_ids = @people_ids unless @people_ids.blank? %>
+    <% unless people.blank? %>
+      <%= render partial: "people/show", collection: people.offset(offset).limit(limit), as: :person %>
+    <% else %>
+      <%= render partial: "people/show", collection: Person.where(id: people_ids).offset(offset).limit(limit), as: :person %>
+    <% end %>
+
+
+    <%#= link_to "Weiter", people_navigation_path(people_ids: people_ids, limit: limit + 25, offset: offset + 25), :method => :post, remote: true %>
+    <%#= render partial: "people/show", collection: people, as: :person %>
+    <%= form_tag(people_navigation_path, method: "post", remote: true, class: "form-group") do %>
+        <%= hidden_field_tag "people_ids", people_ids %>
+        <%= hidden_field_tag "limit", limit %>
+        <%= hidden_field_tag "offset", offset %>
+        <%= submit_tag("Weiter") %>
+    <% end %>
 </div>

@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :addresses
+
+  #people
   resources :people
+  post '/people_navigation', to: 'people#people_navigation', as: 'people_navigation'
+
   devise_for :users
   root 'static_pages#welcome'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

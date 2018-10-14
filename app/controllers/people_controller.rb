@@ -4,8 +4,8 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all.limit(25)
-    #@people = Person.all
+    #@people = Person.all.limit(25)
+    @people = Person.all
     #@people = Person.all.order(:name).page(params[:page])
   end
 
@@ -75,6 +75,16 @@ class PeopleController < ApplicationController
     end
 
     #@people = @people.order(:name).page(params[:page])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def people_navigation
+    @offset = params[:offset].to_i
+    @limit = params[:limit].to_i
+    @people_ids = params[:people_ids].split(' ').map(&:to_i)
 
     respond_to do |format|
       format.js
