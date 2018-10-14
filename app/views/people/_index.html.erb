@@ -17,7 +17,9 @@
 </nav>
 
 <div class="people">
-    <%= render partial: "people/show", collection: @people, as: :person %>
+    <%= paginate people %>
+    <%= people.count %>
+    <%= render partial: "people/show", collection: people, as: :person %>
 </div>
 
     <%= render 'people/new', person: Person.new %>
