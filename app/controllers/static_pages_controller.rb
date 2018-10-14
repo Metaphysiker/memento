@@ -3,6 +3,10 @@ class StaticPagesController < ApplicationController
   end
 
   def activities
-    
+
+  end
+
+  def playfield
+    @people = Person.all.order(:name).page(params[:page])
   end
 end

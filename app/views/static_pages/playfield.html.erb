@@ -1,3 +1,7 @@
 <div class="container">
+  <%= paginate @people %>
+  <%= @people.count %>
+
   <%= render "people/index", people: @people %>
+  <%= paginate @people %>
 </div>

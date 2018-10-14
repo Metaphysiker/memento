@@ -10,4 +10,7 @@ Rails.application.routes.draw do
 
   #activities
   get '/activities', to: 'static_pages#activities', as: 'activities'
+
+  #playfield
+  get '/playfield', to: 'static_pages#playfield', as: 'playfield'
 end
