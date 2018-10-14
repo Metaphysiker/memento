@@ -15,9 +15,9 @@
     <%#= link_to "Weiter", people_navigation_path(people_ids: people_ids, limit: limit + 25, offset: offset + 25), :method => :post, remote: true %>
     <%#= render partial: "people/show", collection: people, as: :person %>
     <%= form_tag(people_navigation_path, method: "post", remote: true, class: "form-group") do %>
-        <%= hidden_field_tag "people_ids", people_ids %>
+        <%= hidden_field_tag "people_ids", people_ids, :multiple => true %>
         <%= hidden_field_tag "limit", limit %>
-        <%= hidden_field_tag "offset", offset %>
+        <%= hidden_field_tag "offset", offset + 25 %>
         <%= submit_tag("Weiter") %>
     <% end %>
 </div>

@@ -28,7 +28,7 @@
       </div>
   </div>
 
-  <div class="collapse multi-collapse person-profile-view">
+  <div class="collapse multi-collapse person-profile-view show">
       <div class="card my-3">
         <div class="card-body">
           <div class="float-right mb-3">
@@ -113,11 +113,12 @@
 
   if( isExpanded ) {
       if(isExpanded == "true"){
-        $(".person-profile-view").addClass("show");
+        //$(".person-profile-view").addClass("show");
       } else {
+        $(".person-profile-view").removeClass("show");
         $(".person-list-view").addClass("show");
       }
   } else {
-    $(".person-profile-view").addClass("show");
+    //$(".person-profile-view").addClass("show");
   }
 </script>

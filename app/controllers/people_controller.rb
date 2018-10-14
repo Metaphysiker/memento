@@ -85,6 +85,7 @@ class PeopleController < ApplicationController
     @offset = params[:offset].to_i
     @limit = params[:limit].to_i
     @people_ids = params[:people_ids].split(' ').map(&:to_i)
+    #@people_ids = params[:people_ids]
 
     respond_to do |format|
       format.js
