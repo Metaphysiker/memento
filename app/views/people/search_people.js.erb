@@ -4,6 +4,8 @@ $( people_div ).fadeOut( "slow", function() {
 
     content = $("<%= escape_javascript( render 'people/people', people: @people ) %>")
 
-    $(people_div).empty().append(content).fadeIn("slow");
+    $(people_div).replaceWith(function(){
+      return $(content).hide().fadeIn("slow");
+    });
 
 });

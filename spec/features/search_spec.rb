@@ -38,6 +38,7 @@ RSpec.describe "search", :type => :feature do
     visit "/people/"
     #fill_in "#search_people", :with => unique_lastname
     find('#search_people').set(unique_lastname)
+    sleep 2
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -56,8 +57,6 @@ RSpec.describe "search", :type => :feature do
     expect(page).to_not have_content(person3.lastname)
     expect(page).to_not have_content(person3.description)
     expect(page).to_not have_content(person3.phone)
-
-    sleep 3
 
     page.save_screenshot('search3expect1.png')
   end

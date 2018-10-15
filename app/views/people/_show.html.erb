@@ -108,17 +108,13 @@
 </div>
 
 <script>
+  $( document ).ready(function() {
 
-  var isExpanded = $("#person-index-view-option").attr("aria-expanded");
+      var isExpanded = $("#person-index-view-option").attr("aria-expanded");
 
-  if( isExpanded ) {
-      if(isExpanded == "true"){
-        //$(".person-profile-view").addClass("show");
-      } else {
+      if(isExpanded == "false"){
         $(".person-profile-view").removeClass("show");
         $(".person-list-view").addClass("show");
       }
-  } else {
-    //$(".person-profile-view").addClass("show");
-  }
+  });
 </script>
