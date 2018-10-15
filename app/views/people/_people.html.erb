@@ -5,30 +5,68 @@
     <% offset = @offset || 0 %>
     <% people_ids = @people_ids unless @people_ids.blank? %>
     <% unless people.blank? %>
-      <% query = people.offset(offset).limit(limit) %>
+      <% full_query = people.order(:name) %>
+      <% query = people.order(:name).offset(offset).limit(limit) %>
     <% else %>
-      <% query = Person.where(id: people_ids).offset(offset).limit(limit) %>
+      <% full_query = Person.where(id: people_ids).order(:name) %>
+      <% query = Person.where(id: people_ids).order(:name).offset(offset).limit(limit) %>
     <% end %>
 
     <%= render partial: "people/show", collection: query, as: :person %>
 
-    <% if offset > 0 %>
-      <%= form_tag(people_navigation_path, method: "post", remote: true, class: "form-group") do %>
-          <%= hidden_field_tag "people_ids", people_ids, :multiple => true %>
-          <%= hidden_field_tag "limit", limit %>
-          <%= hidden_field_tag "offset", offset - 25 %>
-          <%= submit_tag("Zurück") %>
-      <% end %>
-    <% end %>
+    <div class="d-flex justify-content-center">
+      <nav aria-label="Page navigation people">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link">Personen: <%= full_query.count %></a>
+          </li>
+          <li class="page-item">
+            <a class="page-link">Ansicht: <%= offset %> - <%= offset + query.count %></a>
+          </li>
+          <li class="page-item">
+            <% if offset > 0 %>
+              <%= form_tag(people_navigation_path, method: "post", remote: true, class: "inline") do %>
+                  <%= hidden_field_tag "people_ids", people_ids, :multiple => true %>
+                  <%= hidden_field_tag "limit", limit %>
+                  <%= hidden_field_tag "offset", offset - 25 %>
+                  <%= button_tag :submit, class: "page-link" do %>
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                  <% end %>
+              <% end %>
+            <% end %>
 
-    <% if query.count == limit %>
-      <%= form_tag(people_navigation_path, method: "post", remote: true, class: "form-group") do %>
-          <%= hidden_field_tag "people_ids", people_ids, :multiple => true %>
-          <%= hidden_field_tag "limit", limit %>
-          <%= hidden_field_tag "offset", offset + 25 %>
-          <%= submit_tag("Weiter") %>
-      <% end %>
-    <% end %>
+          </li>
+          <% ((full_query.count / 25) + 1).times do |i| %>
+            <li class="page-item <%= "active" if (i * 25 == offset) %>">
+              <% if (query.count == limit) && (query.last != full_query.last) %>
+                <%= form_tag(people_navigation_path, method: "post", remote: true, class: "inline") do %>
+                    <%= hidden_field_tag "people_ids", people_ids, :multiple => true %>
+                    <%= hidden_field_tag "limit", limit %>
+                    <%= hidden_field_tag "offset", i * 25 %>
+                    <%= button_tag :submit, class: "page-link" do %>
+                        <span aria-hidden="true"><%= i + 1 %></span>
+                        <span class="sr-only">Next</span>
+                    <% end %>
+                  <% end %>
+                <% end %>
+            </li>
+          <% end %>
+          <li class="page-item">
+            <% if (query.count == limit) && (query.last != full_query.last) %>
+              <%= form_tag(people_navigation_path, method: "post", remote: true, class: "inline") do %>
+                  <%= hidden_field_tag "people_ids", people_ids, :multiple => true %>
+                  <%= hidden_field_tag "limit", limit %>
+                  <%= hidden_field_tag "offset", offset + 25 %>
+                  <%= button_tag :submit, class: "page-link" do %>
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                  <% end %>
+              <% end %>
+            <% end %>
 
-
+          </li>
+        </ul>
+      </nav>
+    </div>
 </div>
