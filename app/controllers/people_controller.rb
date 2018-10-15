@@ -4,9 +4,14 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all.limit(25)
+    @people = Person.order(:name).page(params[:page]).per(20)
+    #@people = Person.all.limit(25)
     #@people = Person.all
     #@people = Person.all.order(:name).page(params[:page])
+    respond_to do |format|
+        format.html
+        format.js { render :file => "/people/search_people.js.erb" }
+    end
   end
 
   # GET /people/1
@@ -74,7 +79,7 @@ class PeopleController < ApplicationController
       @people = Person.search_people_ilike("%#{search_term}%")
     end
 
-    #@people = @people.order(:name).page(params[:page])
+    @people = @people.order(:name).page(params[:page]).per(20)
 
     respond_to do |format|
       format.js
