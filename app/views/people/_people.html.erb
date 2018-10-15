@@ -37,7 +37,10 @@
             <% end %>
 
           </li>
-          <% ((full_query.count / 25) + 1).times do |i| %>
+          <% page_elements = ((offset / 25)-2..(offset / 25)+2).to_a %>
+          <% page_elements.reject! {|x| (x < 0) || (x > (full_query.count / 25) + 1)} %>
+          <%# ((full_query.count / 25) + 1).times do |i| %>
+          <% page_elements.each do |i| %>
             <li class="page-item <%= "active" if (i * 25 == offset) %>">
               <% if true %>
                 <%= form_tag(people_navigation_path, method: "post", remote: true, class: "inline") do %>
