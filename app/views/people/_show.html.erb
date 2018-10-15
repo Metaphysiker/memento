@@ -58,7 +58,12 @@
           <% end %>
 
           <p>
-              <%= render "shared/children", parent: person %>
+            <%#= render "shared/children", parent: person %>
+            <div class="shared-person-<%=person.id%>">
+              <%= link_to render_shared_path(parent_type: "Person", parent_id: person.id), method: :get, remote: true do %>
+                <button type="button" class="btn btn-light shared-person-<%=person.id%>-get-button">Shared holen!</button>
+              <% end %>
+            </div>
           </p>
 
           <hr />
@@ -120,4 +125,17 @@
   } else {
     $(".person-profile-view").addClass("show");
   }
+  $( document ).ready(function() {
+      $('.shared-person-<%=person.id%>-get"').Lazy();
+    //$( ".shared-person-<%=person.id%>-get-button" ).click();
+    $( ".shared-person-<%=person.id%>-get" ).Lazy({
+      afterLoad: function(element) {
+          // called after an element was successfully handled
+          alert("echo!");
+          $( ".shared-person-<%=person.id%>-get-button" ).click();
+      }
+    });
+  });
+
+
 </script>

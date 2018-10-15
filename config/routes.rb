@@ -13,4 +13,7 @@ Rails.application.routes.draw do
 
   #playfield
   get '/playfield', to: 'static_pages#playfield', as: 'playfield'
+
+  #render
+  get '/render_shared', to: 'render#render_shared', as: 'render_shared'
 end

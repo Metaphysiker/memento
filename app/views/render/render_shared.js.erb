@@ -1,0 +1,11 @@
+var shared_div = ".shared-<%=@parent.class.name.downcase%>-<%=@parent.id%>"
+
+$( shared_div ).fadeOut( "fast", function() {
+
+    content = $("<%= escape_javascript( render "shared/children", parent: @parent ) %>")
+
+    $(shared_div).replaceWith(function(){
+      return $(content).hide().fadeIn("fast");
+    });
+
+});
