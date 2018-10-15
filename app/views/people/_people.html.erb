@@ -39,14 +39,14 @@
           </li>
           <% ((full_query.count / 25) + 1).times do |i| %>
             <li class="page-item <%= "active" if (i * 25 == offset) %>">
-              <% if (query.count == limit) && (query.last != full_query.last) %>
+              <% if true %>
                 <%= form_tag(people_navigation_path, method: "post", remote: true, class: "inline") do %>
                     <%= hidden_field_tag "people_ids", people_ids, :multiple => true %>
                     <%= hidden_field_tag "limit", limit %>
                     <%= hidden_field_tag "offset", i * 25 %>
                     <%= button_tag :submit, class: "page-link" do %>
                         <span aria-hidden="true"><%= i + 1 %></span>
-                        <span class="sr-only">Next</span>
+                        <span class="sr-only"><%= i + 1 %></span>
                     <% end %>
                   <% end %>
                 <% end %>
