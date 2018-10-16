@@ -64,9 +64,9 @@
             <%#= render "shared/children", parent: person %>
             <!--
             <div class="shared-person-<%=person.id%>">
-              <%#= link_to render_shared_path(parent_type: "Person", parent_id: person.id), method: :get, remote: true do %>
+              <%= link_to render_shared_path(parent_type: "Person", parent_id: person.id), method: :get, remote: true do %>
                 <button type="button" class="btn btn-light shared-person-<%=person.id%>-get-button">Shared holen!</button>
-              <%# end %>
+              <% end %>
             </div>
             //-->
           </p>
@@ -114,24 +114,25 @@
       </div>
     </div>
   </div>
+
+  <script>
+
+
+    var isExpanded = $("#person-index-view-option").attr("aria-expanded");
+
+    if( isExpanded ) {
+        if(isExpanded == "true"){
+          $(".person-profile-view").addClass("show");
+        } else {
+          $(".person-list-view").addClass("show");
+        }
+    } else {
+      $(".person-profile-view").addClass("show");
+    }
+    //$( document ).ready(function() {
+    //  $( ".shared-person-<%=person.id%>-get-button" ).click();
+    //});
+
+
+  </script>
 </div>
-<script>
-
-
-  var isExpanded = $("#person-index-view-option").attr("aria-expanded");
-
-  if( isExpanded ) {
-      if(isExpanded == "true"){
-        $(".person-profile-view").addClass("show");
-      } else {
-        $(".person-list-view").addClass("show");
-      }
-  } else {
-    $(".person-profile-view").addClass("show");
-  }
-  //$( document ).ready(function() {
-  //  $( ".shared-person-<%=person.id%>-get-button" ).click();
-  //});
-
-
-</script>
