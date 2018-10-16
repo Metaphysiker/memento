@@ -38,23 +38,8 @@
           <%= address.country_name %> <br />
         <% end %>
       </p>
-      <p class="card-text"><small class="text-muted">
-        Erstellt: <%= address.created_at.strftime("%d.%m.%Y %H:%M") %>
-        <% if address.audits.where(action: "create").last.user.nil? %>
-            - von Sandros Skript
-        <% else %>
-            - von <%= address.audits.where(action: "create").last.user.username %>
-        <% end %>
-
-        <% unless address.audits.where(action: "update").empty? %>
-          | Zuletzt bearbeitet: <%= address.audits.where(action: "update").order(:created_at).last.created_at.strftime("%d.%m.%Y %H:%M") %>
-          <% if address.audits.where(action: "update").order(:created_at).last.user.nil? %>
-              - von Sandros Skript
-          <% else %>
-            - von <%= address.audits.where(action: "update").order(:created_at).last.user.username %>
-          <% end %>
-        <% end %>
-    </small></p>
+      <hr />
+        <%= render "shared/created_and_updated", parent: address %>
     </div>
   </div>
 
