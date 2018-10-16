@@ -4,7 +4,7 @@
   </div>
 
     <%= render partial: "people/show", collection: people, as: :person %>
-    
+
     <div class="d-flex justify-content-center">
           <%= paginate people, window: 2, outer_window: 1, remote: true %>
     </div>
