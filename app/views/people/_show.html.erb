@@ -58,9 +58,9 @@
           <% end %>
 
           <p>
-            <%= render_async render_shared_path(parent_type: "Person", parent_id: person.id), 'data-turbolinks-track': 'reload', error_message: '<p>Sorry, users loading went wrong :(</p>' do %>
-              Shared lädt!
-            <% end %>
+            <div class="shared-person-<%=person.id%>">
+              Adresse anzeigen
+            </div>
             <%#= render "shared/children", parent: person %>
             <!--
             <div class="shared-person-<%=person.id%>">
@@ -129,9 +129,17 @@
     } else {
       $(".person-profile-view").addClass("show");
     }
-    //$( document ).ready(function() {
+    $( document ).ready(function() {
+
+      $.ajax({
+        url: "/render_shared",
+        method: 'GET',
+        data: { parent_type: "Person", parent_id: "<%= person.id %>"}
+      }).done(function(response) {
+      $(".shared-person-<%=person.id%>").replaceWith(response);
+    })
     //  $( ".shared-person-<%=person.id%>-get-button" ).click();
-    //});
+    });
 
 
   </script>
