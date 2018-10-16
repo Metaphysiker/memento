@@ -3,7 +3,12 @@ class RenderController < ApplicationController
     parent_type = params[:parent_type]
     parent_id = params[:parent_id]
 
-    @parent = parent_type.singularize.classify.constantize.find(parent_id)
+    allowed_models = ["Person"]
+
+    if allowed_models.include?(parent_type)
+      klass = allowed_models[allowed_models.index(parent_type)]
+      @parent = klass.singularize.classify.constantize.find(parent_id)
+    end
 
     render partial: "shared/children"
 =begin
