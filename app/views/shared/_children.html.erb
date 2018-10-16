@@ -1,3 +1,5 @@
+<% parent = parent || @parent %>
+
 <div class="shared-<%=parent.class.name.downcase%>-<%=parent.id%>">
   <p>
     <a class="btn btn-link btn-sm" data-toggle="collapse" href=".address-<%= parent.id %>-<%= parent.class.to_s.downcase %>" role="button" aria-expanded="false" aria-controls="collapseExample">

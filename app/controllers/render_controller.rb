@@ -5,8 +5,11 @@ class RenderController < ApplicationController
 
     @parent = parent_type.singularize.classify.constantize.find(parent_id)
 
-    respond_to do |format|
-        format.js
-    end
+    render partial: "shared/children"
+=begin
+      respond_to do |format|
+          format.js
+      end
+=end
   end
 end

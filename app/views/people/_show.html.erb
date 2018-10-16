@@ -58,7 +58,10 @@
           <% end %>
 
           <p>
-            <%= render "shared/children", parent: person %>
+            <%= render_async render_shared_path(parent_type: "Person", parent_id: person.id), 'data-turbolinks-track': 'reload', error_message: '<p>Sorry, users loading went wrong :(</p>' do %>
+              Shared lädt!
+            <% end %>
+            <%#= render "shared/children", parent: person %>
             <!--
             <div class="shared-person-<%=person.id%>">
               <%#= link_to render_shared_path(parent_type: "Person", parent_id: person.id), method: :get, remote: true do %>
@@ -111,10 +114,9 @@
       </div>
     </div>
   </div>
-
 </div>
-
 <script>
+
 
   var isExpanded = $("#person-index-view-option").attr("aria-expanded");
 
