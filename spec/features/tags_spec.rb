@@ -7,7 +7,7 @@ RSpec.describe "tags", :type => :feature do
     login_with(first_user)
   end
 
-  it "views a male person and expects an address" do
+  it "views a person and expects tags" do
     person = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
@@ -16,18 +16,39 @@ RSpec.describe "tags", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
+    tag1 = Faker::Lorem.word
+    person.tag_list.add(tag1)
+
+    tag2 = Faker::Lorem.word
+    person.tag_list.add(tag2)
 
     visit "/people/#{person.id}"
 
-    expect(page).to have_content("Adresse anzeigen")
+    expect(page).to have_content(tag1)
+    expect(page).to have_content(tag2)
 
-    click_link "Adresse anzeigen"
+  end
 
-    within ".address-#{person.address.id}" do
-      expect(page).to have_content("Herr")
-      expect(page).to have_content(person.firstname)
-      expect(page).to have_content(person.lastname)
-    end
+  it "views a person, adds tags and expects tags" do
+    pending
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: "male"
+    )
+    tag1 = Faker::Lorem.word
+    person.tag_list.add(tag1)
+
+    tag2 = Faker::Lorem.word
+    person.tag_list.add(tag2)
+
+    visit "/people/#{person.id}"
+
+    expect(page).to have_content(tag1)
+    expect(page).to have_content(tag2)
 
   end
 
