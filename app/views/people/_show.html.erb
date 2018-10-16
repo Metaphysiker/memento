@@ -106,7 +106,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <%= render "people/form", person: person %>
+          <div class="person-<%= person.id %>-edit-placeholder">
+          </div>
+          <%#= render "people/form", person: person %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
@@ -138,6 +140,16 @@
       }).done(function(response) {
       $(".shared-person-<%=person.id%>").replaceWith(response);
     })
+
+    $( ".person-<%= person.id %>-edit" ).click(function() {
+        $.ajax({
+          url: "/people/<%= person.id %>/edit.js",
+          method: 'GET'
+        }).done(function(response) {
+        $(".person-<%= person.id %>-edit-placeholder").replaceWith(response);
+      })
+    });
+
     //  $( ".shared-person-<%=person.id%>-get-button" ).click();
     });
 
