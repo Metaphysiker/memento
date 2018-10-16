@@ -54,7 +54,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <%= render "addresses/form", address: address %>
+          <div class="address-<%= address.id %>-edit-placeholder">
+          </div>
+          <%#= render "addresses/form", address: address %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
@@ -62,5 +64,23 @@
       </div>
     </div>
   </div>
+
+  <script>
+
+    $( document ).ready(function() {
+
+    $( ".address-<%= address.id %>-edit" ).click(function() {
+        $.ajax({
+          url: "/addresses/<%= address.id %>/edit.js",
+          method: 'GET'
+        }).done(function(response) {
+        $(".address-<%= address.id %>-edit-placeholder").replaceWith(response);
+      })
+    });
+
+    });
+
+
+  </script>
 
 </div>
