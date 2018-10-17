@@ -5,6 +5,7 @@ de:
       task: "Aufgabe"
       address: "Adresse"
       note: "Notiz"
+      tag_list: "Tag"
     attributes:
       person:
         name: "Name"

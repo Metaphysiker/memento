@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Tags</h1>
+
+  <% tag_lists.each do |tag_list| %>
+    <p>
+      <button type="button" class="btn btn-outline-dark"><%= tag_list.name %></button>
+      -
+      Personen mit diesem Tag: <%= Person.tagged_with(tag_list.name).count %>
+    </p>
+    <hr>
+  <% end %>
+
+  <br>
+
+    <%= render 'tag_lists/new', tag_list: TagList.new %>
+</div>

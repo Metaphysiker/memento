@@ -109,6 +109,22 @@ RSpec.describe "tags", :type => :feature do
       expect(page).to_not have_content(tag2)
     end
   end
+
+  it "creates a tag" do
+    visit "/tag_lists/"
+    click_button "Tag erstellen"
+
+    name = Faker::Lorem.word
+
+    fill_in "Name", :with => name
+
+    within(".form-actions") do
+      click_button "Tag erstellen"
+    end
+
+    expect(page).to have_content(name)
+  end
+
 end
 
 def login_with(user)
