@@ -61,12 +61,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  config.generators do |g|
-    g.test_framework :rspec,
-      :view_specs    => false,
-      :request_specs => false,
-      :routing_specs => false
-  end
 
 end
 
