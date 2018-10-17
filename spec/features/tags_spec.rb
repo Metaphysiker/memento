@@ -111,10 +111,13 @@ RSpec.describe "tags", :type => :feature do
   end
 
   it "creates a tag" do
+    name = Faker::Lorem.word
+    tag_count = TagList.count
+
     visit "/tag_lists/"
     click_button "Tag erstellen"
 
-    name = Faker::Lorem.word
+
 
     fill_in "Name", :with => name
 
@@ -123,6 +126,7 @@ RSpec.describe "tags", :type => :feature do
     end
 
     expect(page).to have_content(name)
+    expect(TagList.count == tag_count + 1).to be(true)
   end
 
 end
