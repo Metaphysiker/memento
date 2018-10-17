@@ -10,9 +10,9 @@ class Institution < ApplicationRecord
 
   validates :name, presence: :true, uniqueness: :true
 
+  acts_as_taggable
 
   def create_address
-
     Address.create(
       addressable_id: self.id,
       addressable_type: Institution,

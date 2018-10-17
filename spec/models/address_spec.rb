@@ -26,7 +26,7 @@ RSpec.describe Address, type: :model do
   end
 =end
 
-  it "sets form of address, firstname and lastname in address after create" do
+  it "sets form of address, gender, firstname and lastname in address after create of person" do
   person = Person.create(
     email: Faker::Internet.email,
     firstname: Faker::Name.first_name,
@@ -69,6 +69,12 @@ RSpec.describe Address, type: :model do
   expect(person3.address.lastname == person3.lastname).to be true
   expect(person3.address.form_of_address.blank?).to be true
 
+  end
+
+  it "it sets company of address after institution-create" do
+    institution = Institution.create(name: Faker::Address.community)
+    expect(institution.address.nil?).to be false
+    expect(institution.address.company == institution.name).to be true
   end
 
 end

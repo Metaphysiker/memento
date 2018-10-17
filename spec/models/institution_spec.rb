@@ -1,7 +1,18 @@
 require 'rails_helper'
 
-=begin
+
 RSpec.describe Institution, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "is valid with name" do
+    institution = Institution.new(name: Faker::Address.community)
+
+    expect(institution).to be_valid
+  end
+
+  it "is not valid without name" do
+    institution = Institution.new()
+
+    expect(institution).to_not be_valid
+  end
+
 end
-=end
