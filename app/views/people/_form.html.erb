@@ -10,8 +10,8 @@
       <%= f.input :email %>
       <%= f.input :phone %>
       <%= f.input :gender, collection: Person.genders.map {|p| [t("#{p}"), p]} %>
-      <%= f.association :institutions, as: :select, collection: Institution.all, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', multiple: true} %>
-      <%= f.input :tag_list, as: :select, collection: TagList.all, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', multiple: true} %>
+      <%= f.association :institutions, as: :select, collection: Institution.all, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', placeholder: "Institutionen auswählen", multiple: true} %>
+      <%= f.input :tag_list, as: :select, collection: TagList.all, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', placeholder: "Tags auswählen", multiple: true} %>
     </div>
 
     <div class="form-actions">
