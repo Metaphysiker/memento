@@ -1,11 +1,14 @@
 class Person < ApplicationRecord
   after_create :create_address
   after_save :set_name
+
   audited
 
   has_one :address, as: :addressable
 
   validates :email, presence: :true, uniqueness: :true
+
+  acts_as_taggable
 
   scope :search_people_ilike, ->(search_term) { where("people.email ILIKE ? OR people.phone ILIKE ? OR people.name ILIKE ? OR people.description ILIKE ?", search_term, search_term, search_term, search_term) }
 
