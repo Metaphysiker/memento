@@ -3,10 +3,10 @@
   <div class="collapse multi-collapse institution-list-view">
       <div class="list">
         <div class="row mt-3">
-          <div class="col-4">
+          <div class="col-6">
             <%= link_to institution.name, institutions_path(institution), class: "black_link" %>
           </div>
-          <div class="col-3">
+          <div class="col-4">
             <%= mail_to institution.email %>
           </div>
           <div class="col-2">
@@ -43,7 +43,7 @@
 
           <h3 class="card-title institution-name"><%= link_to institution.name, institution_path(institution), class: "black_link" %></h3>
           <p class="card-text"><%= institution.description %></p>
-          <% if institution.email %>
+          <% unless institution.email.blank? %>
             <p class="card-text"><strong>e-Mail: </strong><%= mail_to institution.email %></p>
           <% end %>
 

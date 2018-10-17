@@ -161,8 +161,6 @@ RSpec.describe "search_institutions", :type => :feature do
     expect(page).to_not have_content(institution3.description)
   end
 
-
-
 end
 
 def login_with(user)

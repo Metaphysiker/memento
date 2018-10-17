@@ -50,9 +50,11 @@ class InstitutionsController < ApplicationController
       if @institution.update(institution_params)
         format.html { redirect_to @institution, notice: 'Institution was successfully updated.' }
         format.json { render :show, status: :ok, location: @institution }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @institution.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
