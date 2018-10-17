@@ -63,14 +63,10 @@ RSpec.describe "tags", :type => :feature do
     find(".person-#{person.id}-edit").click
 
     select_from_chosen(tag1, from: 'person_tag_list')
-
     select_from_chosen(tag2, from: 'person_tag_list')
-    sleep 2
-    page.save_screenshot('tag-select.png')
 
     click_button "Person aktualisieren"
-    sleep 2
-    page.save_screenshot('result-tag.png')
+
     within ".person-#{person.id}-tags" do
       expect(page).to have_content(tag1)
       expect(page).to have_content(tag2)
@@ -104,7 +100,6 @@ RSpec.describe "tags", :type => :feature do
     find(".person-#{person.id}-edit").click
 
     remove_from_chosen(tag1, from: 'person_tag_list')
-    sleep 1
     remove_from_chosen(tag2, from: 'person_tag_list')
 
     click_button "Person aktualisieren"
