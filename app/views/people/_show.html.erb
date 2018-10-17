@@ -69,8 +69,13 @@
 
           <p>
             <div class="shared-person-<%=person.id%>">
-              Adresse anzeigen
+              <p>
+                <a class="btn btn-link btn-sm">
+                  <%= fa_icon "address-card" %> Adresse anzeigen
+                </a>
+              </p>
             </div>
+
             <%#= render "shared/children", parent: person %>
             <!--
             <div class="shared-person-<%=person.id%>">
