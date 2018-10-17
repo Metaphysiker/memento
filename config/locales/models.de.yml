@@ -6,6 +6,7 @@ de:
       address: "Adresse"
       note: "Notiz"
       tag_list: "Tag"
+      institution: "Institution"
     attributes:
       person:
         name: "Name"
@@ -26,3 +27,6 @@ de:
         plz: "PLZ"
         location: "Ort"
         country: "Land"
+      institution:
+        description: "Beschreibung"
+        email: "e-Mail"

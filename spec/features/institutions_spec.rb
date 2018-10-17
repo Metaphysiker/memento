@@ -224,13 +224,14 @@ RSpec.describe "institutions", :type => :feature do
 
     click_button "Institution erstellen"
 
-    fill_in "Name", :with => firstname
+    fill_in "Name", :with => name
     fill_in "Beschreibung", :with => description
 
     within(".form-actions") do
       click_button "Institution erstellen"
     end
 
+    #page.save_screenshot('create-institution.png')
     expect(page).to have_content(name)
     expect(page).to have_content(description)
   end
@@ -240,7 +241,7 @@ RSpec.describe "institutions", :type => :feature do
     name = Faker::Address.community
     description = Faker::Lorem.paragraph
 
-    institution1 = Institution.create(name: name, description: description)
+    institution = Institution.create(name: Faker::Address.community, description: Faker::Lorem.paragraph)
 
       visit "/institutions/#{institution.id}"
 
@@ -262,7 +263,7 @@ RSpec.describe "institutions", :type => :feature do
 
     name = Faker::Address.community
     description = Faker::Lorem.paragraph
-    institution1 = Institution.create(name: name, description: description)
+    institution = Institution.create(name: name, description: description)
 
     visit "/institutions/#{institution.id}"
     find(".institution-#{institution.id}-delete").click

@@ -215,7 +215,7 @@ RSpec.describe "address", :type => :feature do
     end
   end
 
-  it "views a institution, adds an address and expects address" do
+  it "views an institution, adds an address and expects address" do
 
     person = Person.create(
       email: Faker::Internet.email,
@@ -228,7 +228,7 @@ RSpec.describe "address", :type => :feature do
 
     name = Faker::Address.community
     description = Faker::Lorem.paragraph
-    institution1 = Institution.create(name: name, description: description)
+    institution = Institution.create(name: name, description: description)
 
     visit "/institutions/#{institution.id}"
 
@@ -256,7 +256,7 @@ RSpec.describe "address", :type => :feature do
     click_button "Adresse aktualisieren"
 
     within ".address-#{institution.address.id}" do
-      expect(page).to have_content("Herr Dr.")
+      expect(page).to have_content("Herr")
       expect(page).to have_content(person.firstname)
       expect(page).to have_content(person.lastname)
       expect(page).to have_content(company)

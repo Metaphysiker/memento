@@ -8,233 +8,157 @@ RSpec.describe "search_institutions", :type => :feature do
   end
 
   it "searches among 3 institutions and expects 1 result" do
-    unique_lastname = Faker::Name.unique.last_name
-    person = Person.create(
-      email: Faker::Internet.unique.email,
-      firstname: Faker::Name.unique.first_name,
-      lastname: unique_lastname,
-      description: Faker::Lorem.unique.paragraph,
-      phone: Faker::PhoneNumber.unique.cell_phone,
-      gender: Person.genders.sample
+
+    institution1 = Institution.create(
+      name: Faker::Name.unique.name,
+      description: Faker::Lorem.paragraph,
+      email:Faker::Internet.unique.email
     )
 
-    person2 = Person.create(
-      email: Faker::Internet.unique.email,
-      firstname: Faker::Name.unique.first_name,
-      lastname: Faker::Name.unique.last_name,
-      description: Faker::Lorem.unique.paragraph,
-      phone: Faker::PhoneNumber.unique.cell_phone,
-      gender: Person.genders.sample
+    institution2 = Institution.create(
+      name: Faker::Name.unique.name,
+      description: Faker::Lorem.paragraph,
+      email:Faker::Internet.unique.email
     )
-    person3 = Person.create(
-      email: Faker::Internet.unique.email,
-      firstname: Faker::Name.unique.first_name,
-      lastname: Faker::Name.unique.last_name,
-      description: Faker::Lorem.unique.paragraph,
-      phone: Faker::PhoneNumber.unique.cell_phone,
-      gender: Person.genders.sample
+
+    institution3 = Institution.create(
+      name: Faker::Name.unique.name,
+      description: Faker::Lorem.paragraph,
+      email:Faker::Internet.unique.email
     )
 
     visit "/institutions/"
     #fill_in "#search_institutions", :with => unique_lastname
-    find('#search_institutions').set(unique_lastname)
+    find('#search_institutions').set(institution1.name)
 
-    expect(page).to have_content(person.email)
-    expect(page).to have_content(person.firstname)
-    expect(page).to have_content(person.lastname)
-    expect(page).to have_content(person.description)
-    expect(page).to have_content(person.phone)
+    expect(page).to have_content(institution1.name)
+    expect(page).to have_content(institution1.email)
+    expect(page).to have_content(institution1.description)
 
-    expect(page).to_not have_content(person2.email)
-    expect(page).to_not have_content(person2.firstname)
-    expect(page).to_not have_content(person2.lastname)
-    expect(page).to_not have_content(person2.description)
-    expect(page).to_not have_content(person2.phone)
+    expect(page).to_not have_content(institution2.name)
+    expect(page).to_not have_content(institution2.email)
+    expect(page).to_not have_content(institution2.description)
 
-    expect(page).to_not have_content(person3.email)
-    expect(page).to_not have_content(person3.firstname)
-    expect(page).to_not have_content(person3.lastname)
-    expect(page).to_not have_content(person3.description)
-    expect(page).to_not have_content(person3.phone)
+    expect(page).to_not have_content(institution3.name)
+    expect(page).to_not have_content(institution3.email)
+    expect(page).to_not have_content(institution3.description)
   end
 
   it "searches among 3 institutions and expects 3 results" do
-    unique_lastname = Faker::Name.unique.last_name
-    person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: unique_lastname,
+    name = Faker::Name.unique.name
+
+    institution1 = Institution.create(
+      name: name + "a",
       description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
+      email:Faker::Internet.unique.email
     )
 
-    person2 = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: unique_lastname,
+    institution2 = Institution.create(
+      name: name + "b",
       description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
+      email:Faker::Internet.unique.email
     )
-    person3 = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: unique_lastname,
+
+    institution3 = Institution.create(
+      name: name + "c",
       description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
+      email:Faker::Internet.unique.email
     )
 
     visit "/institutions/"
     #fill_in "#search_institutions", :with => unique_lastname
-    find('#search_institutions').set(unique_lastname)
+    find('#search_institutions').set(name)
 
-    expect(page).to have_content(person.email)
-    expect(page).to have_content(person.firstname)
-    expect(page).to have_content(person.lastname)
-    expect(page).to have_content(person.description)
-    expect(page).to have_content(person.phone)
+    expect(page).to have_content(institution1.name)
+    expect(page).to have_content(institution1.email)
+    expect(page).to have_content(institution1.description)
 
-    expect(page).to have_content(person2.email)
-    expect(page).to have_content(person2.firstname)
-    expect(page).to have_content(person2.lastname)
-    expect(page).to have_content(person2.description)
-    expect(page).to have_content(person2.phone)
+    expect(page).to have_content(institution2.name)
+    expect(page).to have_content(institution2.email)
+    expect(page).to have_content(institution2.description)
 
-    expect(page).to have_content(person3.email)
-    expect(page).to have_content(person3.firstname)
-    expect(page).to have_content(person3.lastname)
-    expect(page).to have_content(person3.description)
-    expect(page).to have_content(person3.phone)
+    expect(page).to have_content(institution3.name)
+    expect(page).to have_content(institution3.email)
+    expect(page).to have_content(institution3.description)
+
+
 
   end
 
   it "searches among 3 institutions and expects 0 results" do
-    unique_lastname = Faker::Name.unique.last_name
-    person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
+    unique_name = Faker::Name.unique.name
+
+    institution1 = Institution.create(
+      name: Faker::Name.unique.name,
       description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
+      email:Faker::Internet.unique.email
     )
 
-    person2 = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
+    institution2 = Institution.create(
+      name: Faker::Name.unique.name,
       description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
+      email:Faker::Internet.unique.email
     )
-    person3 = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
+
+    institution3 = Institution.create(
+      name: Faker::Name.unique.name,
       description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
+      email:Faker::Internet.unique.email
     )
 
     visit "/institutions/"
     #fill_in "#search_institutions", :with => unique_lastname
-    find('#search_institutions').set(unique_lastname)
+    find('#search_institutions').set(unique_name)
 
-    expect(page).to_not have_content(person.email)
-    expect(page).to_not have_content(person.firstname)
-    expect(page).to_not have_content(person.lastname)
-    expect(page).to_not have_content(person.description)
-    expect(page).to_not have_content(person.phone)
+    expect(page).to_not have_content(institution1.name)
+    expect(page).to_not have_content(institution1.email)
+    expect(page).to_not have_content(institution1.description)
 
-    expect(page).to_not have_content(person2.email)
-    expect(page).to_not have_content(person2.firstname)
-    expect(page).to_not have_content(person2.lastname)
-    expect(page).to_not have_content(person2.description)
-    expect(page).to_not have_content(person2.phone)
+    expect(page).to_not have_content(institution2.name)
+    expect(page).to_not have_content(institution2.email)
+    expect(page).to_not have_content(institution2.description)
 
-    expect(page).to_not have_content(person3.email)
-    expect(page).to_not have_content(person3.firstname)
-    expect(page).to_not have_content(person3.lastname)
-    expect(page).to_not have_content(person3.description)
-    expect(page).to_not have_content(person3.phone)
+    expect(page).to_not have_content(institution3.name)
+    expect(page).to_not have_content(institution3.email)
+    expect(page).to_not have_content(institution3.description)
 
   end
 
 
   it "searches with description and expect 1 result" do
-    person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
+    institution1 = Institution.create(
+      name: Faker::Name.unique.name,
+      description: Faker::Lorem.unique.paragraph,
+      email:Faker::Internet.unique.email
+    )
+
+    institution2 = Institution.create(
+      name: Faker::Name.unique.name,
       description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
+      email:Faker::Internet.unique.email
+    )
+
+    institution3 = Institution.create(
+      name: Faker::Name.unique.name,
+      description: Faker::Lorem.paragraph,
+      email:Faker::Internet.unique.email
     )
 
     visit "/institutions/"
-    #fill_in "#search_institutions", :with => person.description
-    find('#search_institutions').set(person.description)
-
-    expect(page).to have_content(person.email)
-    expect(page).to have_content(person.firstname)
-    expect(page).to have_content(person.lastname)
-    expect(page).to have_content(person.description)
-    expect(page).to have_content(person.phone)
-  end
-
-  it "searches among 3 institutions and expects 1 result in list-view" do
-    unique_lastname = Faker::Name.unique.last_name
-    person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: unique_lastname,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
-    )
-
-    person2 = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
-    )
-    person3 = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
-    )
-
-    visit "/institutions/"
-    find(".list-view").click
     #fill_in "#search_institutions", :with => unique_lastname
-    find('#search_institutions').set(unique_lastname)
+    find('#search_institutions').set(institution1.description)
 
-    expect(page).to have_content(person.email)
-    expect(page).to have_content(person.firstname)
-    expect(page).to have_content(person.lastname)
-    expect(page).to_not have_content(person.description)
-    expect(page).to have_content(person.phone)
+    expect(page).to have_content(institution1.name)
+    expect(page).to have_content(institution1.email)
+    expect(page).to have_content(institution1.description)
 
-    expect(page).to_not have_content(person2.email)
-    expect(page).to_not have_content(person2.firstname)
-    expect(page).to_not have_content(person2.lastname)
-    expect(page).to_not have_content(person2.description)
-    expect(page).to_not have_content(person2.phone)
+    expect(page).to_not have_content(institution2.name)
+    expect(page).to_not have_content(institution2.email)
+    expect(page).to_not have_content(institution2.description)
 
-    expect(page).to_not have_content(person3.email)
-    expect(page).to_not have_content(person3.firstname)
-    expect(page).to_not have_content(person3.lastname)
-    expect(page).to_not have_content(person3.description)
-    expect(page).to_not have_content(person3.phone)
-
+    expect(page).to_not have_content(institution3.name)
+    expect(page).to_not have_content(institution3.email)
+    expect(page).to_not have_content(institution3.description)
   end
 
 
