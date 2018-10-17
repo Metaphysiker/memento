@@ -13,7 +13,7 @@ class Person < ApplicationRecord
 
   acts_as_taggable
 
-  scope :search_people_ilike, ->(search_term) { where("people.email ILIKE ? OR people.phone ILIKE ? OR people.name ILIKE ? OR people.description ILIKE ?", search_term, search_term, search_term, search_term) }
+  scope :search_people_ilike, ->(search_term) { joins(:institutions).where("people.email ILIKE ? OR people.phone ILIKE ? OR people.name ILIKE ? OR people.description ILIKE ? OR institutions.name ILIKE ?", search_term, search_term, search_term, search_term, search_term) }
 
   def create_address
 
