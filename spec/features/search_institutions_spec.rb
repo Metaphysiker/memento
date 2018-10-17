@@ -162,69 +162,6 @@ RSpec.describe "search_institutions", :type => :feature do
 
   end
 
-  it "searches with firstname and lastname and expect 1 result" do
-
-    person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
-    )
-
-    visit "/institutions/"
-    #fill_in "#search_institutions", :with => "#{person.firstname} #{person.lastname}"
-    find('#search_institutions').set("#{person.firstname} #{person.lastname}")
-
-    expect(page).to have_content(person.email)
-    expect(page).to have_content(person.firstname)
-    expect(page).to have_content(person.lastname)
-    expect(page).to have_content(person.description)
-    expect(page).to have_content(person.phone)
-  end
-
-  it "searches with email and expect 1 result" do
-    person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
-    )
-
-    visit "/institutions/"
-    #fill_in "#search_institutions", :with => person.email
-    find('#search_institutions').set(person.email)
-
-    expect(page).to have_content(person.email)
-    expect(page).to have_content(person.firstname)
-    expect(page).to have_content(person.lastname)
-    expect(page).to have_content(person.description)
-    expect(page).to have_content(person.phone)
-  end
-
-  it "searches with phone and expect 1 result" do
-    person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
-    )
-
-    visit "/institutions/"
-    #fill_in "#search_institutions", :with => person.phone
-    find('#search_institutions').set(person.phone)
-
-    expect(page).to have_content(person.email)
-    expect(page).to have_content(person.firstname)
-    expect(page).to have_content(person.lastname)
-    expect(page).to have_content(person.description)
-    expect(page).to have_content(person.phone)
-  end
 
   it "searches with description and expect 1 result" do
     person = Person.create(
