@@ -6,6 +6,9 @@ class Person < ApplicationRecord
 
   has_one :address, as: :addressable
 
+  has_many :affiliations
+  has_many :institutions, :through => :affiliations
+
   validates :email, presence: :true, uniqueness: :true
 
   acts_as_taggable

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :institutions
   resources :tag_lists
   resources :addresses
   resources :people

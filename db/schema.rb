@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_17_053351) do
+ActiveRecord::Schema.define(version: 2018_10_17_104149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 2018_10_17_053351) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
+  end
+
+  create_table "affiliations", force: :cascade do |t|
+    t.bigint "institution_id"
+    t.bigint "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["institution_id"], name: "index_affiliations_on_institution_id"
+    t.index ["person_id"], name: "index_affiliations_on_person_id"
   end
 
   create_table "ahoy_events", force: :cascade do |t|
@@ -88,6 +97,13 @@ ActiveRecord::Schema.define(version: 2018_10_17_053351) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "institutions", force: :cascade do |t|
+    t.string "name"
+    t.integer "philosophie_society_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "people", force: :cascade do |t|
