@@ -118,7 +118,7 @@ RSpec.describe "institutions", :type => :feature do
     end
   end
 
-  it "adds an 2 institution to a person" do
+  it "adds 2 institutions to a person" do
     person = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
@@ -142,6 +142,75 @@ RSpec.describe "institutions", :type => :feature do
     within ".person-#{person.id}-institutions" do
       expect(page).to have_content(institution1.name)
       expect(page).to have_content(institution2.name)
+    end
+  end
+
+  it "removes 1 institutions from a person" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: "male"
+    )
+    institution1 = Institution.create(name: Faker::Address.unique.community)
+    institution2 = Institution.create(name: Faker::Address.unique.community)
+
+    person << institution1
+    person << institution2
+
+    visit "/people/#{person.id}"
+
+    within ".person-#{person.id}-institutions" do
+      expect(page).to have_content(institution1.name)
+      expect(page).to have_content(institution2.name)
+    end
+
+    find(".person-#{person.id}-edit").click
+
+    remove_from_chosen(institution1.name, from: 'person_institutions_ids_list')
+
+    click_button "Person aktualisieren"
+
+    within ".person-#{person.id}-institutions" do
+      expect(page).to_not have_content(institution1.name)
+      expect(page).to have_content(institution2.name)
+    end
+  end
+
+  it "removes 2 institutions from a person" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: "male"
+    )
+    institution1 = Institution.create(name: Faker::Address.unique.community)
+    institution2 = Institution.create(name: Faker::Address.unique.community)
+
+    person << institution1
+    person << institution2
+
+    visit "/people/#{person.id}"
+
+    within ".person-#{person.id}-institutions" do
+      expect(page).to have_content(institution1.name)
+      expect(page).to have_content(institution2.name)
+    end
+
+    find(".person-#{person.id}-edit").click
+
+    remove_from_chosen(institution1.name, from: 'person_institutions_ids_list')
+    remove_from_chosen(institution2.name, from: 'person_institutions_ids_list')
+
+    click_button "Person aktualisieren"
+
+    within ".person-#{person.id}-institutions" do
+      expect(page).to_not have_content(institution1.name)
+      expect(page).to_not have_content(institution2.name)
     end
   end
 
