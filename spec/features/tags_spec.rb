@@ -74,6 +74,44 @@ RSpec.describe "tags", :type => :feature do
 
   end
 
+  it "views a person, adds 5 tags and expects tags" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: "male"
+    )
+    tag1 = TagList.first.name
+    tag2 = TagList.second.name
+    tag3 = TagList.third.name
+    tag4 = TagList.fourth.name
+    tag5 = TagList.fifth.name
+
+    visit "/people/#{person.id}"
+
+    find(".person-#{person.id}-edit").click
+
+    select_from_chosen(tag1, from: 'person_tag_list')
+    select_from_chosen(tag2, from: 'person_tag_list')
+    select_from_chosen(tag3, from: 'person_tag_list')
+    select_from_chosen(tag4, from: 'person_tag_list')
+    select_from_chosen(tag5, from: 'person_tag_list')
+
+    click_button "Person aktualisieren"
+
+    within ".person-#{person.id}-tags" do
+      expect(page).to have_content(tag1)
+      expect(page).to have_content(tag2)
+      expect(page).to have_content(tag3)
+      expect(page).to have_content(tag4)
+      expect(page).to have_content(tag5)
+      expect(page).to_not have_content(TagList.last.name)
+    end
+
+  end
+
   it "views a person, remove tags and expects no tags" do
     person = Person.create(
       email: Faker::Internet.email,

@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+=begin
 RSpec.describe "Institutions", type: :request do
   describe "GET /institutions" do
     it "works! (now write some real specs)" do
@@ -8,3 +9,4 @@ RSpec.describe "Institutions", type: :request do
     end
   end
 end
+=end
