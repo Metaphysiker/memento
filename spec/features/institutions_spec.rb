@@ -4,7 +4,7 @@ RSpec.describe "institutions", :type => :feature do
 
   before(:each) do
     30.times do |tag|
-      Institution.create(name: Faker::Address.unique.community)
+      Institution.create(name: Faker::Name.unique.last_name)
     end
   end
 
@@ -23,10 +23,10 @@ RSpec.describe "institutions", :type => :feature do
       gender: Person.genders.sample
     )
 
-    institution1 = Institution.create(name: Faker::Address.unique.community)
-    institution2 = Institution.create(name: Faker::Address.unique.community)
-    institution3 = Institution.create(name: Faker::Address.unique.community)
-    institution4 = Institution.create(name: Faker::Address.unique.community)
+    institution1 = Institution.create(name: Faker::Address.community)
+    institution2 = Institution.create(name: Faker::Address.community)
+    institution3 = Institution.create(name: Faker::Address.community)
+    institution4 = Institution.create(name: Faker::Address.community)
 
     visit "/people/#{person.id}"
 
@@ -38,7 +38,7 @@ RSpec.describe "institutions", :type => :feature do
     end
   end
 
-  it "views a person and expects to see 1 institutions" do
+  it "views a person and expects to see 1 institution" do
     person = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
@@ -48,12 +48,12 @@ RSpec.describe "institutions", :type => :feature do
       gender: Person.genders.sample
     )
 
-    institution1 = Institution.create(name: Faker::Address.unique.community)
-    institution2 = Institution.create(name: Faker::Address.unique.community)
-    institution3 = Institution.create(name: Faker::Address.unique.community)
-    institution4 = Institution.create(name: Faker::Address.unique.community)
+    institution1 = Institution.create(name: Faker::Address.community)
+    institution2 = Institution.create(name: Faker::Address.community)
+    institution3 = Institution.create(name: Faker::Address.community)
+    institution4 = Institution.create(name: Faker::Address.community)
 
-    person << institution1
+    person.institutions << institution1
 
     visit "/people/#{person.id}"
 
@@ -75,14 +75,14 @@ RSpec.describe "institutions", :type => :feature do
       gender: Person.genders.sample
     )
 
-    institution1 = Institution.create(name: Faker::Address.unique.community)
-    institution2 = Institution.create(name: Faker::Address.unique.community)
-    institution3 = Institution.create(name: Faker::Address.unique.community)
-    institution4 = Institution.create(name: Faker::Address.unique.community)
+    institution1 = Institution.create(name: Faker::Address.community)
+    institution2 = Institution.create(name: Faker::Address.community)
+    institution3 = Institution.create(name: Faker::Address.community)
+    institution4 = Institution.create(name: Faker::Address.community)
 
-    person << institution1
-    person << institution2
-    person << institution3
+    person.institutions << institution1
+    person.institutions << institution2
+    person.institutions << institution3
 
     visit "/people/#{person.id}"
 
@@ -103,13 +103,13 @@ RSpec.describe "institutions", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
-    institution1 = Institution.create(name: Faker::Address.unique.community)
+    institution1 = Institution.create(name: Faker::Address.community)
 
     visit "/people/#{person.id}"
 
     find(".person-#{person.id}-edit").click
 
-    select_from_chosen(institution1.name, from: 'person_institutions_ids_list')
+    select_from_chosen(institution1.name, from: 'person_institution_ids')
 
     click_button "Person aktualisieren"
 
@@ -127,15 +127,15 @@ RSpec.describe "institutions", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
-    institution1 = Institution.create(name: Faker::Address.unique.community)
-    institution2 = Institution.create(name: Faker::Address.unique.community)
+    institution1 = Institution.create(name: Faker::Address.community)
+    institution2 = Institution.create(name: Faker::Address.community)
 
     visit "/people/#{person.id}"
 
     find(".person-#{person.id}-edit").click
 
-    select_from_chosen(institution1.name, from: 'person_institutions_ids_list')
-    select_from_chosen(institution2.name, from: 'person_institutions_ids_list')
+    select_from_chosen(institution1.name, from: 'person_institution_ids')
+    select_from_chosen(institution2.name, from: 'person_institution_ids')
 
     click_button "Person aktualisieren"
 
@@ -154,11 +154,11 @@ RSpec.describe "institutions", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
-    institution1 = Institution.create(name: Faker::Address.unique.community)
-    institution2 = Institution.create(name: Faker::Address.unique.community)
+    institution1 = Institution.create(name: Faker::Address.community)
+    institution2 = Institution.create(name: Faker::Address.community)
 
-    person << institution1
-    person << institution2
+    person.institutions << institution1
+    person.institutions << institution2
 
     visit "/people/#{person.id}"
 
@@ -169,7 +169,7 @@ RSpec.describe "institutions", :type => :feature do
 
     find(".person-#{person.id}-edit").click
 
-    remove_from_chosen(institution1.name, from: 'person_institutions_ids_list')
+    remove_from_chosen(institution1.name, from: 'person_institution_ids')
 
     click_button "Person aktualisieren"
 
@@ -188,11 +188,11 @@ RSpec.describe "institutions", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
-    institution1 = Institution.create(name: Faker::Address.unique.community)
-    institution2 = Institution.create(name: Faker::Address.unique.community)
+    institution1 = Institution.create(name: Faker::Address.community)
+    institution2 = Institution.create(name: Faker::Address.community)
 
-    person << institution1
-    person << institution2
+    person.institutions << institution1
+    person.institutions << institution2
 
     visit "/people/#{person.id}"
 
@@ -203,8 +203,8 @@ RSpec.describe "institutions", :type => :feature do
 
     find(".person-#{person.id}-edit").click
 
-    remove_from_chosen(institution1.name, from: 'person_institutions_ids_list')
-    remove_from_chosen(institution2.name, from: 'person_institutions_ids_list')
+    remove_from_chosen(institution1.name, from: 'person_institution_ids')
+    remove_from_chosen(institution2.name, from: 'person_institution_ids')
 
     click_button "Person aktualisieren"
 
