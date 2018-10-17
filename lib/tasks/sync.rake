@@ -6,6 +6,15 @@ namespace :sync do
     getusers
   end
 
+  task societies: :environment do
+    getsocieties
+  end
+
+  task totalsync: :environment do
+    getusers
+    getsocieties
+  end
+
   def getusers
     url      = 'http://localhost:3000/getusers'
     uri      = URI(url)
@@ -49,5 +58,28 @@ namespace :sync do
     end
 
   end
+
+  def getsocieties
+  url      = 'http://localhost:3000/getsocieties'
+  uri      = URI(url)
+  response = Net::HTTP.get(uri)
+  response2 = JSON.parse(response)
+  response3 = response2.first
+  societies = response3.second
+
+  societies.each do |s|
+    society = OpenStruct.new(s)
+
+    Institution.create(
+      name: society.name,
+      philosophie_society_id: society.id
+    )
+    society.profiles.each do |p|
+      puts p["id"]
+      Person.find_by_philosophie_id(p["id"]).institutions << Institution.find_by_philosophie_society_id(society.id) unless Person.find_by_philosophie_id(p["id"]).nil?
+    end
+  end
+
+end
 
 end
