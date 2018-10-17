@@ -103,6 +103,7 @@ RSpec.describe "institutions", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
+
     institution1 = Institution.create(name: Faker::Address.community)
 
     visit "/people/#{person.id}"
@@ -212,6 +213,64 @@ RSpec.describe "institutions", :type => :feature do
       expect(page).to_not have_content(institution1.name)
       expect(page).to_not have_content(institution2.name)
     end
+  end
+
+  it "creates an institution" do
+
+    name = Faker::Address.community
+    description = Faker::Lorem.paragraph
+
+    visit "/institutions/"
+
+    click_button "Institution erstellen"
+
+    fill_in "Name", :with => firstname
+    fill_in "Beschreibung", :with => description
+
+    within(".form-actions") do
+      click_button "Institution erstellen"
+    end
+
+    expect(page).to have_content(name)
+    expect(page).to have_content(description)
+  end
+
+  it "updates an institution" do
+
+    name = Faker::Address.community
+    description = Faker::Lorem.paragraph
+
+    institution1 = Institution.create(name: name, description: description)
+
+      visit "/institutions/#{institution.id}"
+
+      find(".institution-#{institution.id}-edit").click
+
+      fill_in "Name", :with => name
+      fill_in "Beschreibung", :with => description
+
+      click_button "Institution aktualisieren"
+
+      expect(page).to_not have_content(institution.name)
+      expect(page).to_not have_content(institution.description)
+
+      expect(page).to have_content(name)
+      expect(page).to have_content(description)
+  end
+
+  it "deletes an institution" do
+
+    name = Faker::Address.community
+    description = Faker::Lorem.paragraph
+    institution1 = Institution.create(name: name, description: description)
+
+    visit "/institutions/#{institution.id}"
+    find(".institution-#{institution.id}-delete").click
+    #page.save_screenshot('delete_institution.png')
+    page.evaluate_script('window.confirm = function() { return true; }')
+    #expect(institution).to be_nil
+    #expect(institution.find(institution.id)).to be_empty
+    expect { Institution.find(institution.id)}.to raise_error ActiveRecord::RecordNotFound
   end
 
 end

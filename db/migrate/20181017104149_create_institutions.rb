@@ -1,7 +1,8 @@
 class CreateInstitutions < ActiveRecord::Migration[5.2]
   def change
     create_table :institutions do |t|
-      t.string :name
+      t.string :name, default: ""
+      t.string :description, default: ""
       t.integer :philosophie_society_id
 
       t.timestamps

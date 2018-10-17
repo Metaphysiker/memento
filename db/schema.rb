@@ -100,7 +100,8 @@ ActiveRecord::Schema.define(version: 2018_10_17_104149) do
   end
 
   create_table "institutions", force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: ""
+    t.string "description", default: ""
     t.integer "philosophie_society_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
