@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   #search
   get '/search_people_form', to: 'people#search_people', as: 'search_people_form'
+  get '/search_institutions_form', to: 'institutions#search_institutions', as: 'search_institutions_form'
 
   #activities
   get '/activities', to: 'static_pages#activities', as: 'activities'

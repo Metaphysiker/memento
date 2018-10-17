@@ -1,0 +1,31 @@
+var institution_id = ".institution-<%= @institution.id %>";
+var institution_id_edit_form = ".institution-<%= @institution.id %>-edit-modal";
+var institution = "<%= @institution.inspect %>";
+var errors = <%= raw @institution.errors.full_messages %>;
+
+console.log(institution);
+console.log(errors);
+
+if (jQuery.isEmptyObject(errors)) {
+  console.log("keine Fehler");
+
+  $( institution_id_edit_form ).modal('hide')
+
+  $( institution_id ).fadeOut( "slow", function() {
+
+      content = $("<%= escape_javascript( render "institutions/show", institution: @institution ) %>")
+
+      $(institution_id).replaceWith(function(){
+        return $(content).hide().fadeIn("slow");
+      });
+
+  });
+
+} else {
+  console.log("Fehler vorhanden");
+
+  content = $("<%= escape_javascript( render "institutions/form", institution: @institution ) %>")
+    $(".institution-<%= @institution.id %>-edit-form").replaceWith(function(){
+      return $(content).hide().fadeIn("slow");
+    });
+}

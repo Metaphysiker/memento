@@ -4,7 +4,13 @@ class InstitutionsController < ApplicationController
   # GET /institutions
   # GET /institutions.json
   def index
-    @institutions = Institution.all
+    #@institutions = Institution.all
+    @institutions = Institution.order(:name).page(params[:page]).per(20)
+
+    respond_to do |format|
+        format.html
+        format.js { render :file => "/institutions/search_institutions.js.erb" }
+    end
   end
 
   # GET /institutions/1
@@ -58,6 +64,22 @@ class InstitutionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to institutions_url, notice: 'Institution was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def search_institutions
+    search_term = params[:search_institutions]
+
+    if search_term.nil? || search_term.empty?
+      @institutions = Institution.all
+    else
+      @institutions = Institution.search_institutions_ilike("%#{search_term}%")
+    end
+
+    @institutions = @institutions.order(:name).page(params[:page]).per(20)
+
+    respond_to do |format|
+      format.js
     end
   end
 

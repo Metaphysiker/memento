@@ -1,0 +1,18 @@
+<%= form_tag(search_institutions_form_path, method: "get", remote: true, class: "form-group") do %>
+    <%= text_field_tag(:search_institutions, nil, placeholder: "Nach Personen suchen", autocomplete: :off, class: "form-control") %>
+    <%= submit_tag("Search", id: "trigger_search_institutions", class: "invisible") %>
+<% end %>
+
+<script>
+    $(document).ready(function(){
+
+        $( "#search_institutions" ).keyup(function() {
+          if ($( "#search_institutions" ).val().length > 3){
+            if ($( ".institutions" ).html() != "<div class=\"mx-auto loader\"></div>"){
+              $( ".institutions" ).html( "<div class=\"mx-auto loader\"></div>" );
+            }
+            $('#trigger_search_institutions').click();
+          }
+        });
+    });
+</script>

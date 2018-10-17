@@ -3,7 +3,7 @@ class RenderController < ApplicationController
     parent_type = params[:parent_type]
     parent_id = params[:parent_id]
 
-    allowed_models = ["Person"]
+    allowed_models = ["Person", "Institution"]
 
     if allowed_models.include?(parent_type)
       klass = allowed_models[allowed_models.index(parent_type)]

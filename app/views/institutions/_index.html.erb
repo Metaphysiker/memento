@@ -1,0 +1,30 @@
+
+  <h1 class="text-center">
+    <%= link_to "Institutionen", institutions_path, class: "black_link" %>
+  </h1>
+  <nav>
+    <p>
+      <%= render "institutions/search_institutions_form" %>
+    </p>
+  <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link list-view active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">
+      <button class="btn btn-light" id="institution-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "id-card" %></button>
+    </a>
+    <a class="nav-item nav-link profiles-view" id="nav-profiles-tab" data-toggle="tab" href="#nav-profiles" role="tab" aria-controls="nav-profiles" aria-selected="false">
+      <button class="btn btn-light float-right" id="institution-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "th-list" %></button>
+    </a>
+  </div>
+</nav>
+
+    <%= render 'institutions/institutions', institutions: institutions %>
+
+    <%= render 'institutions/new', institution: Institution.new %>
+
+
+<script>
+  $( document ).ready(function() {
+    $( ".list-view, .profiles-view" ).click(function() {
+      $(".multi-collapse").collapse('toggle');
+    });
+  });
+</script>

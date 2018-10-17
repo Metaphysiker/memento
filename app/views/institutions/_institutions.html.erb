@@ -1,0 +1,11 @@
+<div class="institutions">
+  <div class="d-flex justify-content-center">
+        <%= paginate institutions, window: 2, outer_window: 1, remote: true %>
+  </div>
+
+    <%= render partial: "institutions/show", collection: institutions, as: :institution %>
+
+    <div class="d-flex justify-content-center">
+          <%= paginate institutions, window: 2, outer_window: 1, remote: true %>
+    </div>
+</div>

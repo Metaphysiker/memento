@@ -1,0 +1,11 @@
+var institutions_div = ".institutions";
+
+$( institutions_div ).fadeOut( "fast", function() {
+
+    content = $("<%= escape_javascript( render 'institutions/institutions', institutions: @institutions ) %>")
+
+    $(institutions_div).replaceWith(function(){
+      return $(content).hide().fadeIn("fast");
+    });
+
+});

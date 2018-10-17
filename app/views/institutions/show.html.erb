@@ -1,9 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @institution.name %>
-</p>
-
-<%= link_to 'Edit', edit_institution_path(@institution) %> |
-<%= link_to 'Back', institutions_path %>
+<div class="container">
+  <%= render "institutions/show", institution: @institution %>
+</div>
