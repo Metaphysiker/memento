@@ -32,3 +32,13 @@ User.create(
     role: "admin",
     password: 123456
 )
+
+tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
+        "Portalmitglied", "Veranstalter", "Lehrperson", "Öffentliche Institution",
+      "Blogger", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
+
+tags.each do |tag|
+  TagList.create(
+    name: tag
+  )
+end

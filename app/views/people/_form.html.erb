@@ -10,7 +10,7 @@
       <%= f.input :email %>
       <%= f.input :phone %>
       <%= f.input :gender, collection: Person.genders.map {|p| [t("#{p}"), p]} %>
-      <%#= f.input :tag_list, as: :select, collection: Tag.all, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', multiple: true} %>
+      <%= f.input :tag_list, as: :select, collection: TagList.all, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', multiple: true} %>
     </div>
 
     <div class="form-actions">
@@ -18,3 +18,17 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  $( document ).ready(function() {
+
+    $('.chosen-select').chosen({
+      allow_single_deselect: true,
+      no_results_text: 'Nichts gefunden',
+      inherit_select_classes: false,
+      search_contains: true,
+      width: '100%'
+    });
+
+  });
+</script>

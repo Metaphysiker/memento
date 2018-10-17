@@ -2,9 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "tags", :type => :feature do
 
-  before(:all) do
-    10.times do
-      Tag.create(name: Faker::Lorem.word)
+  before(:each) do
+    tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
+            "Portalmitglied", "Veranstalter", "Lehrperson", "Öffentliche Institution",
+          "Blogger", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
+
+    tags.each do |tag|
+      TagList.create(
+        name: tag
+      )
     end
   end
 
@@ -23,11 +29,12 @@ RSpec.describe "tags", :type => :feature do
       gender: "male"
     )
 
-    tag1 = Tag.first
+    tag1 = TagList.first.name
     person.tag_list.add(tag1)
 
-    tag2 = Tag.second
+    tag2 = TagList.second.name
     person.tag_list.add(tag2)
+    person.save
 
     visit "/people/#{person.id}"
 
@@ -47,23 +54,23 @@ RSpec.describe "tags", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
-    tag1 = Tag.first
+    tag1 = TagList.first.name
 
-    tag2 = Tag.second
+    tag2 = TagList.second.name
 
     visit "/people/#{person.id}"
 
     find(".person-#{person.id}-edit").click
 
-    page.save_screenshot('tag-add-1')
+    select_from_chosen(tag1, from: 'person_tag_list')
 
-    select(tag1, :from => 'Tags')
-    select(tag2, :from => 'Tags')
-
-    page.save_screenshot('tag-add-2')
+    select_from_chosen(tag2, from: 'person_tag_list')
+    sleep 2
+    page.save_screenshot('tag-select.png')
 
     click_button "Person aktualisieren"
-
+    sleep 2
+    page.save_screenshot('result-tag.png')
     within ".person-#{person.id}-tags" do
       expect(page).to have_content(tag1)
       expect(page).to have_content(tag2)
@@ -80,11 +87,12 @@ RSpec.describe "tags", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
-    tag1 = Tag.first
+    tag1 = TagList.first.name
     person.tag_list.add(tag1)
 
-    tag2 = Tag.second
+    tag2 = TagList.second.name
     person.tag_list.add(tag2)
+    person.save
 
     visit "/people/#{person.id}"
 
@@ -95,7 +103,9 @@ RSpec.describe "tags", :type => :feature do
 
     find(".person-#{person.id}-edit").click
 
-    fill_in "Tags", with: ""
+    remove_from_chosen(tag1, from: 'person_tag_list')
+    sleep 1
+    remove_from_chosen(tag2, from: 'person_tag_list')
 
     click_button "Person aktualisieren"
 
@@ -103,9 +113,7 @@ RSpec.describe "tags", :type => :feature do
       expect(page).to_not have_content(tag1)
       expect(page).to_not have_content(tag2)
     end
-
   end
-
 end
 
 def login_with(user)

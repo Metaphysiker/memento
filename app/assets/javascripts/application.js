@@ -20,4 +20,5 @@
 //= require activestorage
 //= require turbolinks
 //= require lazyload
+//= require scaffold
 //= require_tree .

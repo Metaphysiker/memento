@@ -57,6 +57,16 @@
             <p class="card-text"><strong>Geschlecht: </strong><%= t(person.gender) %></p>
           <% end %>
 
+          <div class="person-<%= person.id %>-tags">
+            <% unless person.tag_list.empty? %>
+              <p class="mt-2">
+                <% person.tag_list.each do |tag| %>
+                  <button type="button" class="btn btn-outline-dark m-1"><%= tag %></button>
+                <% end %>
+              </p>
+            <% end %>
+          </div>
+
           <p>
             <div class="shared-person-<%=person.id%>">
               Adresse anzeigen
