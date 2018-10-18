@@ -1,4 +1,4 @@
-<div class="#{records.klass.to_s.pluralize.downcase}">
+<div class="<%=records.klass.to_s.pluralize.downcase%>">
   <div class="d-flex justify-content-center">
         <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic'}, remote: true %>
   </div>

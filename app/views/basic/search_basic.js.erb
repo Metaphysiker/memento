@@ -1,10 +1,10 @@
-var people_div = ".people";
+var records_div = ".<%= @records.klass.to_s.pluralize.downcase%>";
 
-$( people_div ).fadeOut( "fast", function() {
+$( records_div ).fadeOut( "fast", function() {
 
-    content = $("<%= escape_javascript( render 'people/people', people: @people ) %>")
+    content = $("<%= escape_javascript( render 'basic/records', records: @records ) %>")
 
-    $(people_div).replaceWith(function(){
+    $(records_div).replaceWith(function(){
       return $(content).hide().fadeIn("fast");
     });
 

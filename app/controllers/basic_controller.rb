@@ -10,7 +10,7 @@ class BasicController < ApplicationController
     #@people = Person.all.order(:name).page(params[:page])
     respond_to do |format|
         format.html
-        format.js { render :file => "/people/search_people.js.erb" }
+        format.js { render :file => "/basic/search_basic.js.erb" }
     end
   end
 
@@ -79,7 +79,7 @@ class BasicController < ApplicationController
       @people = Person.search_people_ilike("%#{search_term}%")
     end
 
-    @people = @people.order(:name).page(params[:page]).per(20)
+    @records = @people.order(:name).page(params[:page]).per(20)
 
     respond_to do |format|
       format.js
