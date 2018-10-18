@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   root 'static_pages#welcome'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  #static_pages
+  get '/overview', to: 'static_pages#overview', as: 'overview'
+
   #search
   get '/search_people_form', to: 'people#search_people', as: 'search_people_form'
   get '/search_institutions_form', to: 'institutions#search_institutions', as: 'search_institutions_form'

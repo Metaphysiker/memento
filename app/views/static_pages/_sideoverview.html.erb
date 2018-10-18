@@ -1,0 +1,134 @@
+<a name="top"/>
+
+<div class="list-group" id="list-tab" role="tablist">
+  <a class="list-group-item text-center">
+    <h3>Übersicht</h3>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start active" data-toggle="list" href="#list-people" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "user" %> Personen</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          Anna Goppel
+        </li>
+        <li>
+          Michael Schibler
+        </li>
+        <li>
+          Stefan Müller
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-institutions" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "university" %> Institutionen</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          Universität Zürich
+        </li>
+        <li>
+          Philosophische Gesellschaft Basel
+        </li>
+        <li>
+          Neue Akropolis Zürich
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-notes" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "sticky-note" %> Notizen</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          "Herr Müller ist interessiert an eine Kooperation."
+        </li>
+        <li>
+          "Frau Schlatter hatte uns bezüglich des Newsletters angerufen."
+        </li>
+        <li>
+          "Die Stiftung ist grundsätzlich interessiert, möchte aber nicht alleine finanzieren."
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-tasks" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "tasks" %> Aufgaben</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          "Stefan Müller anrufen."
+        </li>
+        <li>
+          "Susanna Schlatter eine Erinnerung schreiben."
+        </li>
+        <li>
+          "Antrag bei der Wagener Stiftung einreichen."
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-tags" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "tags" %> Tags</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          Sponsor
+        </li>
+        <li>
+          Medienkontakt
+        </li>
+        <li>
+          Kooperationspartner
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-team" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "users" %> Team</h5>
+      <hr>
+    </div>
+    <p>
+      Das Team von Philosophie.ch
+    </p>
+  </a>
+
+</div>
+
+<script>
+  function scrollToAnchor(aid){
+    var aTag = $("a[name='"+ aid +"']");
+    $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+  }
+
+  $(".list-group-item").click(function() {
+   scrollToAnchor('top');
+  });
+</script>
