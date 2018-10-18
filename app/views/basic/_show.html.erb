@@ -1,27 +1,22 @@
-<% person = person || record %>
+<div class="<%=record.class.to_s.downcase%>-<%= record.id %>">
 
-<div class="person-<%= person.id %>">
-
-  <div class="collapse multi-collapse person-list-view">
+  <div class="collapse multi-collapse <%=record.class.to_s.downcase%>-list-view">
       <div class="list">
         <div class="row mt-3">
           <div class="col-4">
-            <%= link_to person.name, person_path(person), class: "black_link" %>
+            <%= link_to record.name, polymorphic_url(record), class: "black_link" %>
           </div>
           <div class="col-3">
-            <%= mail_to person.email %>
-          </div>
-          <div class="col-3">
-            <%= person.phone %>
+            <%= mail_to record.email %>
           </div>
           <div class="col-2">
-            <div class="btn-group float-right" role="group" aria-label="Toolbar for Person">
+            <div class="btn-group float-right" role="group" aria-label="Toolbar for <%=record.class.to_s%>">
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-light person-<%= person.id %>-edit" data-toggle="modal" data-target=".person-<%= person.id %>-edit-modal">
+              <button type="button" class="btn btn-light <%=record.class.to_s.downcase%>-<%= record.id %>-edit" data-toggle="modal" data-target=".<%=record.class.to_s.downcase%>-<%= record.id %>-edit-modal">
                 <%= fa_icon "edit" %>
               </button>
-              <%= link_to person, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
-                <button type="button" class="btn btn-light person-<%= person.id %>-delete"><%= fa_icon "times" %></button>
+              <%= link_to record, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
+                <button type="button" class="btn btn-light <%=record.class.to_s.downcase%>-<%= record.id %>-delete"><%= fa_icon "times" %></button>
               <% end %>
             </div>
           </div>
@@ -30,36 +25,26 @@
       </div>
   </div>
 
-  <div class="collapse multi-collapse person-profile-view">
+  <div class="collapse multi-collapse <%=record.class.to_s.downcase%>-profile-view">
       <div class="card my-3">
         <div class="card-body">
           <div class="float-right mb-3">
 
-            <div class="btn-group" role="group" aria-label="Toolbar for Person">
+            <div class="btn-group" role="group" aria-label="Toolbar for <%=record.class.to_s%>">
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-light person-<%= person.id %>-edit" data-toggle="modal" data-target=".person-<%= person.id %>-edit-modal">
+              <button type="button" class="btn btn-light <%=record.class.to_s.downcase%>-<%= record.id %>-edit" data-toggle="modal" data-target=".<%=record.class.to_s.downcase%>-<%= record.id %>-edit-modal">
                 <%= fa_icon "edit" %>
               </button>
-              <%= link_to person, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
-                <button type="button" class="btn btn-light person-<%= person.id %>-delete"><%= fa_icon "times" %></button>
+              <%= link_to record, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
+                <button type="button" class="btn btn-light <%=record.class.to_s.downcase%>-<%= record.id %>-delete"><%= fa_icon "times" %></button>
               <% end %>
             </div>
           </div>
 
-          <h3 class="card-title person-name"><%= link_to person.name, person_path(person), class: "black_link" %></h3>
+          <h3 class="card-title <%=record.class.to_s.downcase%>-name"><%= link_to record.name, polymorphic_url(record), class: "black_link" %></h3>
           <p class="card-text"><%= person.description %></p>
-          <% if person.email %>
-            <p class="card-text"><strong>e-Mail: </strong><%= mail_to person.email %></p>
-          <% end %>
-          <% if !person.phone.blank? %>
-            <p class="card-text"><strong>Telefon: </strong><%= person.phone %></p>
-          <% end %>
 
-          <% if !person.gender.blank? %>
-            <p class="card-text"><strong>Geschlecht: </strong><%= t(person.gender) %></p>
-          <% end %>
-
-          <div class="person-<%=person.id%>-institutions">
+          <div class="<%=record.class.to_s.downcase%>-<%=record.id%>-institutions">
             <% unless person.institutions.empty? %>
             <p> <b>Ist Mitglied bei:</b>
               <ul>

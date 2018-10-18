@@ -1,0 +1,29 @@
+
+  <h1 class="text-center">
+    <%= link_to "#{records.klass.to_s.pluralize}", polymorphic_url(records.klass), class: "black_link" %>
+  </h1>
+  <nav>
+    <p>
+      <%= render "basic/search_basic_form" %>
+    </p>
+  <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link list-view active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">
+      <button class="btn btn-light" id="<%=records.klass.to_s.downcase%>-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "id-card" %></button>
+    </a>
+    <a class="nav-item nav-link profiles-view" id="nav-profiles-tab" data-toggle="tab" href="#nav-profiles" role="tab" aria-controls="nav-profiles" aria-selected="false">
+      <button class="btn btn-light float-right" id="<%=records.klass.to_s.downcase%>-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "th-list" %></button>
+    </a>
+  </div>
+</nav>
+
+    <%= render 'basic/records', records: records %>
+
+    <%= render "#{records.klass.to_s.pluralize.downcase}/new", record: records.klass.new %>
+
+<script>
+  $( document ).ready(function() {
+    $( ".list-view, .profiles-view" ).click(function() {
+      $(".multi-collapse").collapse('toggle');
+    });
+  });
+</script>

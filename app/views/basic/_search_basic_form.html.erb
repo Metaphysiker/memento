@@ -1,0 +1,18 @@
+<%= form_tag(search_people_form_path, method: "get", remote: true, class: "form-group") do %>
+    <%= text_field_tag(:search_people, nil, placeholder: "Nach Personen suchen", autocomplete: :off, class: "form-control") %>
+    <%= submit_tag("Search", id: "trigger", class: "invisible d-none") %>
+<% end %>
+
+<script>
+    $(document).ready(function(){
+
+        $( "#search_people" ).keyup(function() {
+          if ($( "#search_people" ).val().length > 3){
+            if ($( ".people" ).html() != "<div class=\"mx-auto loader\"></div>"){
+              $( ".people" ).html( "<div class=\"mx-auto loader\"></div>" );
+            }
+            $('#trigger').click();
+          }
+        });
+    });
+</script>

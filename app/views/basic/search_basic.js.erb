@@ -1,0 +1,11 @@
+var people_div = ".people";
+
+$( people_div ).fadeOut( "fast", function() {
+
+    content = $("<%= escape_javascript( render 'people/people', people: @people ) %>")
+
+    $(people_div).replaceWith(function(){
+      return $(content).hide().fadeIn("fast");
+    });
+
+});
