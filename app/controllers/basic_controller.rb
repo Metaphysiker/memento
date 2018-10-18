@@ -72,14 +72,15 @@ class BasicController < ApplicationController
 
   def search_basic
     search_term = params[:search_basic]
+    model = params[:model]
 
     if search_term.nil? || search_term.empty?
-      @people = Person.all
+      @records = model.safe_constantize.all
     else
-      @people = Person.search_people_ilike("%#{search_term}%")
+      @records = model.safe_constantize.search_people_ilike("%#{search_term}%")
     end
 
-    @records = @people.order(:name).page(params[:page]).per(20)
+    @records = @records.order(:name).page(params[:page]).per(20)
 
     respond_to do |format|
       format.js

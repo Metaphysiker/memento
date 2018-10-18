@@ -1,11 +1,11 @@
 <div class="<%=records.klass.to_s.pluralize.downcase%>">
   <div class="d-flex justify-content-center">
-        <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic'}, remote: true %>
+        <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic', model: records.klass}, remote: true %>
   </div>
 
     <%= render partial: "#{records.klass.to_s.pluralize.downcase}/show", collection: records, as: :record %>
 
     <div class="d-flex justify-content-center">
-          <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic'}, remote: true %>
+        <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic', model: records.klass}, remote: true %>
     </div>
 </div>
