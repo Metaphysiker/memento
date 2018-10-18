@@ -1,6 +1,10 @@
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="list-people" role="tabpanel">
-      <%= render "people/index", people: people %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <%= render "people/index", people: people %>
+        </div>
+      </div>
     </div>
 
     <div class="tab-pane fade" id="list-notes" role="tabpanel">
@@ -26,7 +30,11 @@
     </div>
 
     <div class="tab-pane fade" id="list-tags" role="tabpanel">
-      <%= render "tag_lists/index", tag_lists: tag_lists %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <%= render "tag_lists/index", tag_lists: tag_lists %>
+        </div>
+      </div>
     </div>
 
     <div class="tab-pane fade" id="list-team" role="tabpanel">
@@ -43,7 +51,11 @@
     </div>
 
     <div class="tab-pane fade" id="list-institutions" role="tabpanel">
-        <%= render "institutions/index", institutions: institutions %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <%= render "institutions/index", institutions: institutions %>
+          </div>
+        </div>
     </div>
 
 </div>
