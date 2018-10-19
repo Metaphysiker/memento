@@ -75,10 +75,14 @@ class BasicController < ApplicationController
     model = params[:model]
     search_term = params[:"search_#{model.pluralize.downcase}"]
 
+    klass = class_for(model)
+
     if search_term.nil? || search_term.empty?
-      @records = model.safe_constantize.all
+      @records = klass.all
     else
-      @records = model.singularize.classify.safe_constantize.search_people_ilike("%#{search_term}%")
+      @records = klass.search_records_ilike("%#{search_term}%")
+      #search_scope = "search_#{model.pluralize.downcase}_ilike()"
+      #@records = model.singularize.classify.safe_constantize.public_send(search_scope, "%#{search_term}%")
     end
 
     @records = @records.order(:name).page(params[:page]).per(20)

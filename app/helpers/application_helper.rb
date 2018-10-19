@@ -26,4 +26,22 @@ module ApplicationHelper
     value.nil? || value.empty?
   end
 
+  def is_model_allowed?(name_of_model)
+
+    allowed_models = ["Person", "Institution", "Note", "Task"]
+
+    allowed_models.include?(name_of_model)
+
+  end
+
+  def class_for(name_of_model)
+    allowed_models = ["Person", "Institution", "Note", "Task"]
+    if allowed_models.include?(name_of_model)
+      klass = allowed_models[allowed_models.index(name_of_model)]
+      return klass.singularize.classify.constantize
+    else
+      raise "ModelNotAllowed"
+    end
+  end
+
 end
