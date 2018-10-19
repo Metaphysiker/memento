@@ -5,6 +5,7 @@ class Person < ApplicationRecord
   audited
 
   has_one :address, as: :addressable
+  has_many :notes, as: :noteable
 
   has_many :affiliations
   has_many :institutions, :through => :affiliations

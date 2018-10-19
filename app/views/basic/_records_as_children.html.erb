@@ -1,0 +1,3 @@
+<div class="<%=records.klass.to_s.pluralize.downcase%>">
+    <%= render partial: "#{records.klass.to_s.pluralize.downcase}/show", collection: records, as: :record, locals: {parent: parent} %>
+</div>

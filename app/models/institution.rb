@@ -4,6 +4,7 @@ class Institution < ApplicationRecord
   audited
 
   has_one :address, as: :addressable
+  has_many :notes, as: :noteable
 
   has_many :affiliations
   has_many :people, :through => :affiliations

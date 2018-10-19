@@ -10,7 +10,7 @@
       <%= fa_icon "sticky-note" %> Notizen anzeigen
     </a>
 
-    <a class="btn btn-link btn-sm" data-toggle="collapse" href=".tasks-<%= parent.id %>-<%= parent.class.to_s.downcase %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="btn btn-link btn-sm" data-toggle="collapse" href=".<%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks" role="button" aria-expanded="false" aria-controls="collapseExample">
       <%= fa_icon "tasks" %>  Aufgaben anzeigen
     </a>
   </p>
@@ -20,7 +20,7 @@
   </div>
 
   <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-notes" >
-    <%= render "notes/show", note: Note.last %>
+    <%= render 'basic/records_as_children', records: parent.notes,  parent: parent %>
   </div>
 
   <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks" >
