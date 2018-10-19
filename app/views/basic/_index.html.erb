@@ -1,6 +1,6 @@
 
   <h1 class="text-center">
-    <%= link_to "#{records.klass.to_s.pluralize}", polymorphic_url(records.klass), class: "black_link" %>
+    <%= link_to "#{records.klass.model_name.human(count: 2)}", polymorphic_url(records.klass), class: "black_link" %>
   </h1>
   <nav>
     <p>

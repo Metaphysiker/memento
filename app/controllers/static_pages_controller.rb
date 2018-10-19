@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   def welcome
     @people = Person.order(:name).page(params[:page]).per(20)
-    @tag_lists = TagList.all
+    @tag_lists = TagList.all.order(:name)
     @institutions = Institution.order(:name).page(params[:page]).per(20)
   end
 

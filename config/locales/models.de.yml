@@ -1,12 +1,24 @@
 de:
   activerecord:
     models:
-      person: "Person"
-      task: "Aufgabe"
-      address: "Adresse"
-      note: "Notiz"
-      tag_list: "Tag"
-      institution: "Institution"
+      person:
+        one: "Person"
+        other: "Personen"
+      task:
+        one: "Aufgabe"
+        other: "Aufgaben"
+      address:
+        one: "Adresse"
+        other: "Adressen"
+      note:
+        one: "Notiz"
+        other: "Notizen"
+      tag_list:
+        one: "Tag"
+        other: "Tags"
+      institution:
+        one: "Institution"
+        other: "Institutionen"
     attributes:
       person:
         name: "Name"
