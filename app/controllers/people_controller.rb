@@ -47,15 +47,16 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
+    @record = @person
     respond_to do |format|
       if @person.update(person_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
-        format.js
+        format.js { render :file => "/basic/update.js.erb" }
       else
         format.html { render :edit }
         format.json { render json: @person.errors, status: :unprocessable_entity }
-        format.js
+        format.js { render :file => "/basic/update.js.erb" }
       end
     end
   end

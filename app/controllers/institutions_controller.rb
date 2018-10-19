@@ -46,15 +46,16 @@ class InstitutionsController < ApplicationController
   # PATCH/PUT /institutions/1
   # PATCH/PUT /institutions/1.json
   def update
+    @record = @institution
     respond_to do |format|
       if @institution.update(institution_params)
         format.html { redirect_to @institution, notice: 'Institution was successfully updated.' }
         format.json { render :show, status: :ok, location: @institution }
-        format.js
+        format.js { render :file => "/basic/update.js.erb" }
       else
         format.html { render :edit }
         format.json { render json: @institution.errors, status: :unprocessable_entity }
-        format.js
+        format.js { render :file => "/basic/update.js.erb" }
       end
     end
   end

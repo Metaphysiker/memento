@@ -1,10 +1,5 @@
 <% note = note || record %>
 
-<p>
-  <strong>Description:</strong>
-  <%= note.description %>
-</p>
-
 <div class="note-<%= note.id %>">
 
   <div class="collapse multi-collapse note-list-view">
@@ -93,14 +88,6 @@
       $(".note-profile-view").addClass("show");
     }
     $( document ).ready(function() {
-
-      $.ajax({
-        url: "/render_shared",
-        method: 'GET',
-        data: { parent_type: "Note", parent_id: "<%= note.id %>"}
-      }).done(function(response) {
-      $(".shared-note-<%=note.id%>").replaceWith(response);
-    })
 
     $( ".note-<%= note.id %>-edit" ).click(function() {
         $.ajax({

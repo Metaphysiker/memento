@@ -1,0 +1,32 @@
+var record_id = ".<%= @record.class.to_s.downcase%>-<%= @record.id %>";
+var record_id_edit_form = ".<%= @record.class.to_s.downcase%>-<%= @record.id %>-edit-modal";
+var record = "<%= @record.inspect %>";
+var record_hash = "<%= Hash[@record.class.to_s.downcase.to_sym, @record] %>"
+var errors = <%= raw @record.errors.full_messages %>;
+
+console.log(record_id);
+console.log(record_id_edit_form);
+
+if (jQuery.isEmptyObject(errors)) {
+  console.log("keine Fehler");
+
+  $( record_id_edit_form ).modal('hide')
+
+  $( record_id ).fadeOut( "slow", function() {
+
+      content = $("<%= escape_javascript( render "#{@record.class.to_s.pluralize.downcase}/show", Hash[@record.class.to_s.downcase.to_sym, @record] ) %>")
+
+      $(record_id).replaceWith(function(){
+        return $(content).hide().fadeIn("slow");
+      });
+
+  });
+
+} else {
+  console.log("Fehler vorhanden");
+
+  content = $("<%= escape_javascript( render "#{@record.class.to_s.pluralize.downcase}/form", Hash[@record.class.to_s.downcase.to_sym, @record] ) %>")
+    $(".<%= @record.class.to_s.downcase%>-<%= @record.id %>-edit-form").replaceWith(function(){
+      return $(content).hide().fadeIn("slow");
+    });
+}
