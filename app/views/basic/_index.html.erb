@@ -4,7 +4,8 @@
   </h1>
   <nav>
     <p>
-      <%= render "basic/search_basic_form" %>
+      <%#= render "#{records.klass.to_s.pluralize.downcase}/search_#{records.klass.to_s.pluralize.downcase}_form" %>
+      <%= render "basic/search_basic_form", records: records %>
     </p>
   <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
     <a class="nav-item nav-link list-view active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">

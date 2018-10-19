@@ -2,7 +2,8 @@
     <div class="tab-pane fade show active" id="list-people" role="tabpanel">
       <div class="card mb-3">
         <div class="card-body">
-          <%= render "people/index", people: people %>
+          <%#= render "people/index", people: people %>
+          <%= render "basic/index", records: people %>
         </div>
       </div>
     </div>
@@ -53,7 +54,8 @@
     <div class="tab-pane fade" id="list-institutions" role="tabpanel">
         <div class="card mb-3">
           <div class="card-body">
-            <%= render "institutions/index", institutions: institutions %>
+            <%#= render "institutions/index", institutions: institutions %>
+            <%= render "basic/index", records: institutions %>
           </div>
         </div>
     </div>

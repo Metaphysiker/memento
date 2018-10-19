@@ -5,6 +5,7 @@ class BasicController < ApplicationController
   # GET /people.json
   def index
     @people = Person.order(:name).page(params[:page]).per(20)
+    @institutions = Institution.order(:name).page(params[:page]).per(20)
     #@people = Person.all.limit(25)
     #@people = Person.all
     #@people = Person.all.order(:name).page(params[:page])
@@ -71,13 +72,13 @@ class BasicController < ApplicationController
   end
 
   def search_basic
-    search_term = params[:search_basic]
     model = params[:model]
+    search_term = params[:"search_#{model.pluralize.downcase}"]
 
     if search_term.nil? || search_term.empty?
       @records = model.safe_constantize.all
     else
-      @records = model.safe_constantize.search_people_ilike("%#{search_term}%")
+      @records = model.singularize.classify.safe_constantize.search_people_ilike("%#{search_term}%")
     end
 
     @records = @records.order(:name).page(params[:page]).per(20)

@@ -1,17 +1,22 @@
-<%= form_tag(search_people_form_path, method: "get", remote: true, class: "form-group") do %>
-    <%= text_field_tag(:search_people, nil, placeholder: "Nach Personen suchen", autocomplete: :off, class: "form-control") %>
-    <%= submit_tag("Search", id: "trigger", class: "invisible d-none") %>
+<%= form_tag(search_basic_form_path, method: "get", remote: true, class: "form-group") do %>
+    <%= text_field_tag(:"search_#{records.klass.to_s.pluralize.downcase}", nil, placeholder: "Nach #{records.klass.to_s.pluralize} suchen", autocomplete: :off, class: "form-control") %>
+    <%= hidden_field_tag(:model, records.klass.to_s) %>
+    <%= submit_tag("Search", id: "trigger_#{records.klass.to_s.pluralize.downcase}", class: "invisible d-none") %>
 <% end %>
 
 <script>
     $(document).ready(function(){
+      var records = <%= raw records.klass.to_s.pluralize.downcase.inspect %>;
+      var records_div = "." + records;
+      var search_records = "#search_" + records;
+      var trigger_records = "#trigger_" + records;
 
-        $( "#search_people" ).keyup(function() {
-          if ($( "#search_people" ).val().length > 3){
-            if ($( ".people" ).html() != "<div class=\"mx-auto loader\"></div>"){
-              $( ".people" ).html( "<div class=\"mx-auto loader\"></div>" );
+        $( search_records ).keyup(function() {
+          if ($( search_records ).val().length > 3){
+            if ($( records_div ).html() != "<div class=\"mx-auto loader\"></div>"){
+              $( records_div ).html( "<div class=\"mx-auto loader\"></div>" );
             }
-            $('#trigger').click();
+            $(trigger_records).click();
           }
         });
     });
