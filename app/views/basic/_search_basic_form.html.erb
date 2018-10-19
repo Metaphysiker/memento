@@ -6,7 +6,7 @@
 
 <script>
     $(document).ready(function(){
-      var records = <%= raw records.klass.to_s.pluralize.downcase.inspect %>;
+      var records = <%= records.klass.to_s.pluralize.downcase.inspect %>;
       var records_div = "." + records;
       var search_records = "#search_" + records;
       var trigger_records = "#trigger_" + records;
