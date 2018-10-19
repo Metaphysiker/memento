@@ -20,11 +20,13 @@
   </div>
 
   <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-notes" >
-    <%= render 'basic/records_as_children', records: parent.notes,  parent: parent %>
+    <%= "Keine Notizen vorhanden" if parent.notes.empty? %>
+    <%= render 'basic/records_as_children', records: parent.notes unless parent.notes.empty? %>
   </div>
 
   <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks" >
-    <%= render "notes/show", note: Note.last %>
+    AUFGABEN CHILDREN:HTML:ERB
+    <%#= render "notes/show", note: Note.last %>
   </div>
 
 </div>

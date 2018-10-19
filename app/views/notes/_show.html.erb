@@ -74,7 +74,6 @@
 
   <script>
 
-
     var isExpanded = $("#note-index-view-option").attr("aria-expanded");
 
     if( isExpanded ) {
@@ -86,6 +85,7 @@
     } else {
       $(".note-profile-view").addClass("show");
     }
+
     $( document ).ready(function() {
 
     $( ".note-<%= note.id %>-edit" ).click(function() {

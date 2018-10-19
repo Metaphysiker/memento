@@ -7,8 +7,8 @@
     <%= f.input :description %>
   </div>
 
-  <%#= f.hidden_field :noteable_id, value: parent.id %>
-  <%#= f.hidden_field :noteable_type, value: parent.class.to_s %>
+  <%= f.hidden_field :noteable_id, value: note.noteable.id %>
+  <%= f.hidden_field :noteable_type, value: note.noteable.class %>
 
   <div class="form-actions">
     <%= f.button :submit %>
