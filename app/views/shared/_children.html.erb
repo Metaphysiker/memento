@@ -5,9 +5,26 @@
     <a class="btn btn-link btn-sm" data-toggle="collapse" href=".address-<%= parent.id %>-<%= parent.class.to_s.downcase %>" role="button" aria-expanded="false" aria-controls="collapseExample">
       <%= fa_icon "address-card" %> Adresse anzeigen
     </a>
+
+    <a class="btn btn-link btn-sm" data-toggle="collapse" href=".<%= parent.class.to_s.downcase %>-<%= parent.id %>-notes" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "sticky-note" %> Notizen anzeigen
+    </a>
+
+    <a class="btn btn-link btn-sm" data-toggle="collapse" href=".tasks-<%= parent.id %>-<%= parent.class.to_s.downcase %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "tasks" %>  Aufgaben anzeigen
+    </a>
   </p>
 
   <div class="collapse mb-2 address-<%= parent.id %>-<%= parent.class.to_s.downcase %>" >
     <%= render "addresses/show", address: parent.address %>
   </div>
+
+  <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-notes" >
+    <%= render "notes/show", note: Note.last %>
+  </div>
+
+  <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks" >
+    <%= render "notes/show", note: Note.last %>
+  </div>
+
 </div>
