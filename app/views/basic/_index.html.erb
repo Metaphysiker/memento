@@ -19,7 +19,8 @@
 
     <%= render 'basic/records', records: records %>
 
-    <%= render "#{records.klass.to_s.pluralize.downcase}/new", record: records.klass.new %>
+    <%#= render "#{records.klass.to_s.pluralize.downcase}/new", record: records.klass.new %>
+    <%= render "basic/new", record: records.klass.new %>
 
 <script>
   $( document ).ready(function() {
