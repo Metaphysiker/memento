@@ -21,7 +21,9 @@
 
   <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-notes" >
     <%= "Keine Notizen vorhanden" if parent.notes.empty? %>
-    <%= render "notes/form", note: Note.new, parent: parent  %>
+    <div class="#{parent.class.to_s.downcase}-#{parent.id}-notes-new"
+      <%= render "notes/form", note: Note.new, parent: parent  %>
+    </div>
     <%= render 'basic/records_as_children', records: parent.notes unless parent.notes.empty? %>
   </div>
 
