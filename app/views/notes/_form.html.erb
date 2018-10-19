@@ -1,3 +1,5 @@
+<% parent_id = parent.id || note.noteablie.id %>
+<% parent_type = parent.class.to_s %>
 
 <%= simple_form_for(note, remote: true) do |f| %>
   <%= f.error_notification %>
@@ -7,8 +9,8 @@
     <%= f.input :description %>
   </div>
 
-  <%= f.hidden_field :noteable_id, value: note.noteable.id %>
-  <%= f.hidden_field :noteable_type, value: note.noteable.class %>
+  <%= f.hidden_field :noteable_id, value: parent_id %>
+  <%= f.hidden_field :noteable_type, value: parent_type %>
 
   <div class="form-actions">
     <%= f.button :submit %>

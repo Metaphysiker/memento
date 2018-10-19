@@ -42,3 +42,5 @@ de:
       institution:
         description: "Beschreibung"
         email: "e-Mail"
+      note:
+        description: "Beschreibung"
