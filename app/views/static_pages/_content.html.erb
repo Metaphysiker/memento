@@ -11,9 +11,9 @@
     <div class="tab-pane fade" id="list-notes" role="tabpanel">
       <div class="card mb-3">
         <div class="card-body">
-          <h3 class="card-title text-center">Notizen</h3>
           <div id="notes">
             <%#= render partial: "notes/note", collection: notes, as: :note, locals: {show_headers: true} %>
+            <%= render "basic/index", records: notes %>
           </div>
         </div>
       </div>

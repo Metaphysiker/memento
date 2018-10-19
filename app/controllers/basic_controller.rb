@@ -85,7 +85,16 @@ class BasicController < ApplicationController
       #@records = model.singularize.classify.safe_constantize.public_send(search_scope, "%#{search_term}%")
     end
 
-    @records = @records.order(:name).page(params[:page]).per(20)
+    if klass == Person
+      @records = @records.order(:name).page(params[:page]).per(20)
+    elsif klass == Institution
+      @records = @records.order(:name).page(params[:page]).per(20)
+    elsif klass == Note
+      @records = @records.order(:created_at).page(params[:page]).per(20)
+    else
+      @records = @records.order(:created_at).page(params[:page]).per(20)
+    end
+
 
     respond_to do |format|
       format.js
