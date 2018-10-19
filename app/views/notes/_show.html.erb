@@ -1,0 +1,119 @@
+<% note = note || record %>
+
+<p>
+  <strong>Description:</strong>
+  <%= note.description %>
+</p>
+
+<div class="note-<%= note.id %>">
+
+  <div class="collapse multi-collapse note-list-view">
+      <div class="list">
+        <div class="row mt-3">
+          <div class="col-4">
+            <%= link_to truncate(note.description), note_path(note), class: "black_link" %>
+          </div>
+          <div class="col-2">
+            <div class="btn-group float-right" role="group" aria-label="Toolbar for note">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-light note-<%= note.id %>-edit" data-toggle="modal" data-target=".note-<%= note.id %>-edit-modal">
+                <%= fa_icon "edit" %>
+              </button>
+              <%= link_to note, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
+                <button type="button" class="btn btn-light note-<%= note.id %>-delete"><%= fa_icon "times" %></button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+  </div>
+
+  <div class="collapse multi-collapse note-profile-view">
+      <div class="card my-3">
+        <div class="card-body">
+          <div class="float-right mb-3">
+
+            <div class="btn-group" role="group" aria-label="Toolbar for note">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-light note-<%= note.id %>-edit" data-toggle="modal" data-target=".note-<%= note.id %>-edit-modal">
+                <%= fa_icon "edit" %>
+              </button>
+              <%= link_to note, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
+                <button type="button" class="btn btn-light note-<%= note.id %>-delete"><%= fa_icon "times" %></button>
+              <% end %>
+            </div>
+          </div>
+
+          <h3 class="card-title note-name"><%= link_to truncate(note.description), note_path(note), class: "black_link" %></h3>
+          <p class="card-text"><%= note.description %></p>
+
+          <hr />
+            <%= render "shared/created_and_updated", parent: note %>
+        </div>
+      </div>
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade note-<%= note.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit note" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t("helpers.submit.edit", model: Note.model_name.human) %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="note-<%= note.id %>-edit-placeholder">
+          </div>
+          <%#= render "notes/form", note: note %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+
+    var isExpanded = $("#note-index-view-option").attr("aria-expanded");
+
+    if( isExpanded ) {
+        if(isExpanded == "true"){
+          $(".note-profile-view").addClass("show");
+        } else {
+          $(".note-list-view").addClass("show");
+        }
+    } else {
+      $(".note-profile-view").addClass("show");
+    }
+    $( document ).ready(function() {
+
+      $.ajax({
+        url: "/render_shared",
+        method: 'GET',
+        data: { parent_type: "Note", parent_id: "<%= note.id %>"}
+      }).done(function(response) {
+      $(".shared-note-<%=note.id%>").replaceWith(response);
+    })
+
+    $( ".note-<%= note.id %>-edit" ).click(function() {
+        $.ajax({
+          url: "/notes/<%= note.id %>/edit.js",
+          method: 'GET'
+        }).done(function(response) {
+        $(".note-<%= note.id %>-edit-placeholder").replaceWith(response);
+      })
+    });
+
+    //  $( ".shared-note-<%=note.id%>-get-button" ).click();
+    });
+
+
+  </script>
+</div>
