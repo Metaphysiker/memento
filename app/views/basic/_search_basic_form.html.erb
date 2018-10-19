@@ -1,5 +1,5 @@
 <%= form_tag(search_basic_form_path, method: "get", remote: true, class: "form-group") do %>
-    <%= text_field_tag(:"search_#{records.klass.to_s.pluralize.downcase}", nil, placeholder: "Nach #{records.klass.to_s.pluralize} suchen", autocomplete: :off, class: "form-control") %>
+    <%= text_field_tag(:"search_#{records.klass.to_s.pluralize.downcase}", nil, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control") %>
     <%= hidden_field_tag(:model, records.klass.to_s) %>
     <%= submit_tag("Search", id: "trigger_#{records.klass.to_s.pluralize.downcase}", class: "invisible d-none") %>
 <% end %>
