@@ -9,9 +9,12 @@
   <div class="form-inputs">
     <%= f.input :description %>
     <%= f.input :deadline %>
-    <%= f.input :priority %>
-    <%= f.input :assigned_to_user_id %>
-    <%= f.input :status %>
+    <%#= f.input :priority %>
+    <%= f.input :priority, collection: [[1, "1 - Niedrig"], [2, "2 - Normal"], [3, "3 - Hoch"]], label_method: :second, value_method: :first %>
+    <%#= f.input :assigned_to_user_id %>
+    <%= f.input :assigned_to_user_id, collection: User.all, label_method: :username, value_method: :id, include_blank: true %>
+    <%#= f.input :status %>
+    <%= f.input :status, collection: Task.statuses.map {|p| [t("#{p}"), p]} %>
     <%= f.hidden_field :taskable_id, value: parent_id %>
     <%= f.hidden_field :taskable_type, value: parent_type %>
   </div>
