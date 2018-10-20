@@ -19,13 +19,10 @@
     <%= render "addresses/show", address: parent.address %>
   </div>
 
-  <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-notes" >
-    <%= "Keine Notizen vorhanden" if parent.notes.empty? %>
-    <div class="<%= parent.class.to_s.downcase%>-<%= parent.id%>-notes-new">
-      <%= render "notes/form", note: Note.new, parent: parent  %>
-    </div>
-    <%= render 'basic/records_as_children', records: parent.notes unless parent.notes.empty? %>
-  </div>
+<div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-notes" >
+    <%= render "notes/notes_of_a_thing", parent: parent %>
+</div>
+
 
   <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks" >
     AUFGABEN CHILDREN:HTML:ERB
