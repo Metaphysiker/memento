@@ -32,11 +32,11 @@ class NotesController < ApplicationController
       if @note.save
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
-        format.js { render :file => "/basic/create_child.js.erb" }
+        format.js { render :file => "/basic/reload_children.js.erb" }
       else
         format.html { render :new }
         format.json { render json: @note.errors, status: :unprocessable_entity }
-        format.js { render :file => "/basic/create_child.js.erb" }
+        format.js { render :file => "/basic/reload_children.js.erb" }
       end
     end
   end
@@ -68,7 +68,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
       format.json { head :no_content }
-      format.js { render :file => "/basic/create_child.js.erb" }
+      format.js { render :file => "/basic/reload_children.js.erb" }
     end
   end
 
