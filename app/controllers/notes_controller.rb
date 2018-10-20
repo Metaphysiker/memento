@@ -68,7 +68,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
       format.json { head :no_content }
-      format.js { render :file => "/basic/delete_child.js.erb" }
+      format.js { render :file => "/basic/create_child.js.erb" }
     end
   end
 
