@@ -31,9 +31,11 @@ class TasksController < ApplicationController
       if @task.save
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
+        format.js { render :file => "/basic/reload_children.js.erb" }
       else
         format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/reload_children.js.erb" }
       end
     end
   end
@@ -46,9 +48,11 @@ class TasksController < ApplicationController
       if @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
+        format.js { render :file => "/basic/reload_children.js.erb" }
       else
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/reload_children.js.erb" }
       end
     end
   end
@@ -61,6 +65,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
+      format.js { render :file => "/basic/reload_children.js.erb" }
     end
   end
 
@@ -72,6 +77,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:description, :deadline, :priority, :assigned_to_user_id, :done)
+      params.require(:task).permit(:description, :deadline, :priority, :assigned_to_user_id, :done, :status, :taskable_id, :taskable_type)
     end
 end

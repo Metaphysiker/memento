@@ -1,4 +1,4 @@
-var parent_id = ".<%= @record.noteable.class.to_s.downcase %>-<%= @record.noteable.id%>-<%= @record.class.to_s.pluralize.downcase %>";
+var parent_id = ".<%= @record.public_send(@record.class.to_s.downcase + "able").class.to_s.downcase %>-<%= @record.public_send(@record.class.to_s.downcase + "able").id%>-<%= @record.class.to_s.pluralize.downcase %>";
 var record_id_edit_form = ".<%= @record.class.to_s.downcase%>-<%= @record.id %>-edit-modal";
 var record = "<%= @record.inspect %>";
 var record_hash = "<%= Hash[@record.class.to_s.downcase.to_sym, @record] %>"
