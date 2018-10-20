@@ -14,7 +14,7 @@
               <button type="button" class="btn btn-light note-<%= note.id %>-edit" data-toggle="modal" data-target=".note-<%= note.id %>-edit-modal">
                 <%= fa_icon "edit" %>
               </button>
-              <%= link_to note, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
+              <%= link_to note, method: :delete, data: { confirm: 'Bist du sicher?' }, remote: true do %>
                 <button type="button" class="btn btn-light note-<%= note.id %>-delete"><%= fa_icon "times" %></button>
               <% end %>
             </div>
@@ -34,7 +34,7 @@
               <button type="button" class="btn btn-light note-<%= note.id %>-edit" data-toggle="modal" data-target=".note-<%= note.id %>-edit-modal">
                 <%= fa_icon "edit" %>
               </button>
-              <%= link_to note, method: :delete, data: { confirm: 'Bist du sicher?' } do %>
+              <%= link_to note, method: :delete, data: { confirm: 'Bist du sicher?' }, remote: true do %>
                 <button type="button" class="btn btn-light note-<%= note.id %>-delete"><%= fa_icon "times" %></button>
               <% end %>
             </div>

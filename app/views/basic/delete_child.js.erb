@@ -1,0 +1,25 @@
+var parent_id = ".<%= @record.noteable.class.to_s.downcase %>-<%= @record.noteable.id%>-<%= @record.class.to_s.pluralize.downcase %>";
+var record_id = ".<%= @record.class.to_s.downcase %>-<%= @record.id %>";
+var record_id_edit_form = ".<%= @record.class.to_s.downcase%>-<%= @record.id %>-edit-modal";
+var record = "<%= @record.inspect %>";
+var record_hash = "<%= Hash[@record.class.to_s.downcase.to_sym, @record] %>"
+var errors = <%= raw @record.errors.full_messages %>;
+
+console.log(parent_id);
+console.log(record_id_edit_form);
+
+if (jQuery.isEmptyObject(errors)) {
+  console.log("keine Fehler");
+
+  $( record_id ).fadeOut( "slow", function() {
+    console.log("Record deleted!");
+  });
+
+} else {
+  console.log("Fehler vorhanden");
+
+  content = $("<%= escape_javascript( render "#{@record.class.to_s.pluralize.downcase}/form", Hash[@record.class.to_s.downcase.to_sym, @record] ) %>")
+    $(".<%= @record.class.to_s.downcase%>-<%= @record.id %>-edit-form").replaceWith(function(){
+      return $(content).hide().fadeIn("slow");
+    });
+}

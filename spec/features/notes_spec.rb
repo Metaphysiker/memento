@@ -112,7 +112,7 @@ RSpec.describe "notes", :type => :feature do
     end
 
     within ".person-#{person.id}-notes" do
-      expect(page).to have_content(notes1.description)
+      expect(page).to have_content(note1.description)
       expect(page).to have_content(description)
     end
 
@@ -152,7 +152,7 @@ RSpec.describe "notes", :type => :feature do
     expect { Note.find(note1.id)}.to raise_error ActiveRecord::RecordNotFound
 
     within ".person-#{person.id}-notes" do
-      expect(page).to_not have_content(notes1.description)
+      expect(page).to_not have_content(note1.description)
     end
 
   end
@@ -234,7 +234,7 @@ RSpec.describe "notes", :type => :feature do
     end
 
     within ".institution-#{institution.id}-notes" do
-      expect(page).to have_content(notes1.description)
+      expect(page).to have_content(note1.description)
       expect(page).to have_content(description)
     end
 
@@ -266,7 +266,7 @@ RSpec.describe "notes", :type => :feature do
     expect { Note.find(note1.id)}.to raise_error ActiveRecord::RecordNotFound
 
     within ".institution-#{institution.id}-notes" do
-      expect(page).to_not have_content(notes1.description)
+      expect(page).to_not have_content(note1.description)
     end
 
   end
