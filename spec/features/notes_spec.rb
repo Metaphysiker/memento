@@ -263,11 +263,11 @@ RSpec.describe "notes", :type => :feature do
 
     page.evaluate_script('window.confirm = function() { return true; }')
 
-    expect { Note.find(note1.id)}.to raise_error ActiveRecord::RecordNotFound
-
     within ".institution-#{institution.id}-notes" do
       expect(page).to_not have_content(note1.description)
     end
+
+    expect { Note.find(note1.id)}.to raise_error ActiveRecord::RecordNotFound
 
   end
 

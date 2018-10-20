@@ -40,7 +40,7 @@
             </div>
           </div>
 
-          <p class="card-text"><%= note.description %></p>
+          <p class="card-text"><%= simple_format(note.description) %></p>
 
           <hr />
             <%= render "shared/created_and_updated", parent: note %>
