@@ -1,4 +1,5 @@
-<% parent_id = parent.id || note.noteablie.id %>
+<% parent = parent || note.noteable %>
+<% parent_id = parent.id %>
 <% parent_type = parent.class.to_s %>
 
 <%= simple_form_for(note, remote: true) do |f| %>
