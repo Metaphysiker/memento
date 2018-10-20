@@ -12,6 +12,8 @@
     <%= f.input :priority %>
     <%= f.input :assigned_to_user_id %>
     <%= f.input :status %>
+    <%= f.hidden_field :taskable_id, value: parent_id %>
+    <%= f.hidden_field :taskable_type, value: parent_type %>
   </div>
 
   <div class="form-actions">

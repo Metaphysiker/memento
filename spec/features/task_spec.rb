@@ -66,7 +66,7 @@ RSpec.describe "tasks", :type => :feature do
 
     within ".person-#{person.id}-tasks-new" do
       fill_in "Beschreibung", :with => description
-      click_button "Notiz erstellen"
+      click_button "Aufgabe erstellen"
     end
 
     within ".person-#{person.id}-tasks" do
@@ -108,7 +108,7 @@ RSpec.describe "tasks", :type => :feature do
 
     within ".person-#{person.id}-tasks-new" do
       fill_in "Beschreibung", :with => description
-      click_button "Notiz erstellen"
+      click_button "Aufgabe erstellen"
     end
 
     within ".person-#{person.id}-tasks" do
@@ -196,7 +196,7 @@ RSpec.describe "tasks", :type => :feature do
 
     within ".institution-#{institution.id}-tasks-new" do
       fill_in "Beschreibung", :with => description
-      click_button "Notiz erstellen"
+      click_button "Aufgabe erstellen"
     end
 
     within ".institution-#{institution.id}-tasks" do
@@ -230,7 +230,7 @@ RSpec.describe "tasks", :type => :feature do
 
     within ".institution-#{institution.id}-tasks-new" do
       fill_in "Beschreibung", :with => description
-      click_button "Notiz erstellen"
+      click_button "Aufgabe erstellen"
     end
 
     within ".institution-#{institution.id}-tasks" do

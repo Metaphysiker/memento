@@ -25,6 +25,7 @@
           <h3 class="card-title text-center">Aufgaben</h3>
           <div id="tasks">
             <%#= render partial: "tasks/task_with_parent", collection: @tasks, as: :task %>
+            <%= render "basic/index", records: @tasks %>
           </div>
         </div>
       </div>

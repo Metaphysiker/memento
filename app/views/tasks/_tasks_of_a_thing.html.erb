@@ -8,7 +8,8 @@
       <% end %>
 
       <div class="<%= parent.class.to_s.downcase%>-<%= parent.id%>-tasks-new">
-        <%= render "tasks/form", task: Task.new, parent: parent  %>
+        <%#= render "tasks/form", task: Task.new, parent: parent  %>
+        <%= render "tasks/form", task: Task.first, parent: Person.first  %>
       </div>
       <%= render 'basic/records_as_children', records: parent.tasks.order(:created_at).reverse_order unless parent.tasks.empty? %>
 

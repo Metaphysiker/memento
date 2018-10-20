@@ -44,3 +44,9 @@ de:
         email: "e-Mail"
       note:
         description: "Beschreibung"
+      task:
+        description: "Beschreibung"
+        deadline: "Deadline"
+        priority: "Priorität"
+        assigned_to_user_id: "Zuständig:"
+        status: "Status"
