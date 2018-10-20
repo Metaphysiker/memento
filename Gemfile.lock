@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/stympy/faker.git
-  revision: 4e264df2eb8b682ee94e8b0e0e045dbff96ad250
+  revision: 32891c4b818848d6a5fc5e586f60c3ca7b1d757a
   branch: master
   specs:
     faker (1.9.1)
@@ -70,7 +70,7 @@ GEM
     ast (2.4.0)
     audited (4.8.0)
       activerecord (>= 4.0, < 5.3)
-    autoprefixer-rails (9.2.0)
+    autoprefixer-rails (9.2.1)
       execjs
     bcrypt (3.1.12)
     better_errors (2.5.0)

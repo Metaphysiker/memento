@@ -7,7 +7,9 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.input :description %>
+    <%#= f.input :description %>
+    <%#= f.text_area :description, :class => "tinymce", :rows => 20, :cols => 20 %>
+    <%= f.text_area :description, class: "tinymce", :rows => 10, :cols => 30 %>
   </div>
 
   <%= f.hidden_field :noteable_id, value: parent_id %>
@@ -17,3 +19,4 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+<%= tinymce %>
