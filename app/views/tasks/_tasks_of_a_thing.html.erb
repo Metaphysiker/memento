@@ -1,0 +1,18 @@
+<% parent = parent || @record.taskable %>
+<div class="<%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks">
+  <div class="card my-3">
+    <div class="card-body">
+      <% if parent.tasks.empty? %>
+        Keine Aufgaben vorhanden.
+        <hr />
+      <% end %>
+
+      <div class="<%= parent.class.to_s.downcase%>-<%= parent.id%>-tasks-new">
+        <%= render "tasks/form", task: Task.new, parent: parent  %>
+      </div>
+      <%= render 'basic/records_as_children', records: parent.tasks.order(:created_at).reverse_order unless parent.tasks.empty? %>
+
+
+    </div>
+  </div>
+</div>

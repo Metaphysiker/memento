@@ -16,6 +16,7 @@ class StaticPagesController < ApplicationController
     #@tasks = Task.all
     @institutions = Institution.order(:name).page(params[:page]).per(20)
     @notes = Note.order(:created_at).page(params[:page]).per(20)
+    @tasks = Task.order(:created_at).page(params[:page]).per(20)
   end
 
   def playfield

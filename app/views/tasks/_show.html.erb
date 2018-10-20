@@ -1,0 +1,105 @@
+<% task = task || record %>
+
+<div class="task-<%= task.id %>">
+
+  <div class="collapse multi-collapse task-list-view">
+      <div class="list">
+        <div class="row mt-3">
+          <div class="col-10">
+            <%= link_to truncate(task.description), task_path(task), class: "black_link" %>
+          </div>
+          <div class="col-2">
+            <div class="btn-group float-right" role="group" aria-label="Toolbar for task">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-light task-<%= task.id %>-edit" data-toggle="modal" data-target=".task-<%= task.id %>-edit-modal">
+                <%= fa_icon "edit" %>
+              </button>
+              <%= link_to task, method: :delete, data: { confirm: 'Bist du sicher?' }, remote: true do %>
+                <button type="button" class="btn btn-light task-<%= task.id %>-delete"><%= fa_icon "times" %></button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+  </div>
+
+  <div class="collapse multi-collapse task-profile-view">
+      <div class="card my-3">
+        <div class="card-body">
+          <div class="float-right mb-3">
+
+            <div class="btn-group" role="group" aria-label="Toolbar for task">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-light task-<%= task.id %>-edit" data-toggle="modal" data-target=".task-<%= task.id %>-edit-modal">
+                <%= fa_icon "edit" %>
+              </button>
+              <%= link_to task, method: :delete, data: { confirm: 'Bist du sicher?' }, remote: true do %>
+                <button type="button" class="btn btn-light task-<%= task.id %>-delete"><%= fa_icon "times" %></button>
+              <% end %>
+            </div>
+          </div>
+
+          <p class="card-text"><%= simple_format(task.description) %></p>
+
+          <hr />
+            <%= render "shared/created_and_updated", parent: task %>
+        </div>
+      </div>
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade task-<%= task.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit task" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t("helpers.submit.update", model: Task.model_name.human) %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="task-<%= task.id %>-edit-placeholder">
+          </div>
+          <%#= render "tasks/form", task: task %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var isExpanded = $("#task-index-view-option").attr("aria-expanded");
+
+    if( isExpanded ) {
+        if(isExpanded == "true"){
+          $(".task-profile-view").addClass("show");
+        } else {
+          $(".task-list-view").addClass("show");
+        }
+    } else {
+      $(".task-profile-view").addClass("show");
+    }
+
+    $( document ).ready(function() {
+
+    $( ".task-<%= task.id %>-edit" ).click(function() {
+        $.ajax({
+          url: "/tasks/<%= task.id %>/edit.js",
+          method: 'GET'
+        }).done(function(response) {
+        $(".task-<%= task.id %>-edit-placeholder").replaceWith(response);
+      })
+    });
+
+    //  $( ".shared-task-<%=task.id%>-get-button" ).click();
+    });
+
+
+  </script>
+</div>
