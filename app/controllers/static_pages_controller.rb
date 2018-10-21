@@ -26,4 +26,8 @@ class StaticPagesController < ApplicationController
   def playfield
     @people = Person.all.order(:name).page(params[:page])
   end
+
+  def team
+  
+  end
 end

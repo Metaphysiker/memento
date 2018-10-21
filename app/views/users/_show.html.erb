@@ -1,0 +1,12 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <%= user.username %>
+  </div>
+
+  <div class="card-body">
+    <b>Aufgaben von <%= user.username %></b>
+    </p>
+    <%= render "basic/records", records: Task.order(:deadline).where(assigned_to_user_id: user.id).page(params[:page]).per(20) %>
+
+  </div>
+</div>
