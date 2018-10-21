@@ -22,7 +22,6 @@
     <div class="tab-pane fade" id="list-tasks" role="tabpanel">
       <div class="card mb-3">
         <div class="card-body">
-          <h3 class="card-title text-center">Aufgaben</h3>
           <div id="tasks">
             <%#= render partial: "tasks/task_with_parent", collection: @tasks, as: :task %>
             <%= render "basic/index", records: @tasks %>
@@ -45,6 +44,7 @@
           <h3 class="card-title text-center">Team</h3>
           <hr>
           <% User.all.each do |user| %>
+            <%= user.username %>
             <%#= link_to "#{user.username} - #{user.email}", user_path(user) %>
             <hr>
           <% end %>
