@@ -41,8 +41,14 @@
           </div>
 
           <p class="card-text"><%= simple_format(task.description) %></p>
-
           <hr />
+          <% unless task.deadline.blank? %>
+            <p class="card-text"><strong>Deadline: </strong><%= task.deadline.strftime("%d.%m.%Y %H:%M") %></p>
+          <% end %>
+          <p class="card-text"><strong>Priorität: </strong><%= task.priority %></p>
+          <p class="card-text"><strong>Zuständig: </strong><%= User.find(task.assigned_to_user_id).username unless task.assigned_to_user_id.blank? %></p>
+          <p class="card-text"><strong>Status: </strong><%= task.status %></p>
+
             <%= render "shared/created_and_updated", parent: task %>
         </div>
       </div>

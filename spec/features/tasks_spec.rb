@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe "tasks", :type => :feature do
 
   before(:each) do
+    User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
+    User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
+    User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
     first_user = User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
     login_with(first_user)
   end
@@ -10,6 +13,17 @@ RSpec.describe "tasks", :type => :feature do
   let(:institution) do
      Institution.create(name: Faker::Address.community, description: Faker::Lorem.paragraph)
   end
+
+  let(:task1) do
+    {
+      description: Faker::Lorem.paragraph,
+      deadline: Faker::Time.between(DateTime.now, DateTime.now + 3.month),
+      priority: [1,2,3].sample,
+      assigned_to_user_id: User.all.pluck(:id).sample,
+      status: Task.statuses.sample
+    }
+  end
+
 
   it "views a person and expects a task" do
     person = Person.create(
@@ -21,12 +35,9 @@ RSpec.describe "tasks", :type => :feature do
       gender: "male"
     )
 
-    task1 = Task.create(
-      description: Faker::Lorem.paragraph
-    )
-
+    task1 = Task.create(task1)
+    task1.update(assigned_to_user_id: User.all.pluck(:id).sample)
     person.tasks << task1
-    person.save
 
     visit "/people/#{person.id}"
 
@@ -36,6 +47,11 @@ RSpec.describe "tasks", :type => :feature do
 
     within ".person-#{person.id}-tasks" do
       expect(page).to have_content(task1.description)
+      page.save_screenshot('task-person-expect.png')
+      expect(page).to have_content(task1.deadline)
+      expect(page).to have_content(task1.priority)
+      expect(page).to have_content(User.find(task1.assigned_to_user_id).username)
+      expect(page).to have_content(task1.status)
     end
 
   end
