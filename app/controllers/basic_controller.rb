@@ -4,8 +4,8 @@ class BasicController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.order(:name).page(params[:page]).per(20)
-    @institutions = Institution.order(:name).page(params[:page]).per(20)
+    #@people = Person.order(:name).page(params[:page]).per(20)
+    #@institutions = Institution.order(:name).page(params[:page]).per(20)
     #@people = Person.all.limit(25)
     #@people = Person.all
     #@people = Person.all.order(:name).page(params[:page])

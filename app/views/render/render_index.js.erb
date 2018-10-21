@@ -1,0 +1,11 @@
+var index = ".index";
+
+$( index ).fadeOut( "slow", function() {
+
+    content = $("<div id="index"><%= escape_javascript( render "basic/index", records: @records ) %></div>")
+
+    $(parent_id).replaceWith(function(){
+      return $(content).hide().fadeIn("slow");
+    });
+
+});

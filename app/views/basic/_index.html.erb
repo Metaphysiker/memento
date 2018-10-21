@@ -1,4 +1,4 @@
-
+<% records = records || @records %>
   <h1 class="text-center">
     <%= link_to "#{records.klass.model_name.human(count: 2)}", polymorphic_url(records.klass), class: "black_link" %>
   </h1>

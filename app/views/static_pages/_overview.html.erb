@@ -16,9 +16,35 @@
 
 
       <div class="col-12 col-md-8 col-lg-9 col-xl-10">
-        <div id="content">
-          <%= render "static_pages/content", people: @people, notes: @notes, tag_lists: @tag_lists, tasks: @tasks, institutions: @institutions %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <div id="index">
+              <%= render "basic/index", records: @people %>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+
   </div>
 </div>
+
+<script>
+  $( document ).ready(function() {
+
+      $( ".index-load" ).click(function() {
+        target = $(this).attr("target");
+        alert(target);
+
+        $.ajax({
+          url: "/render_index",
+          method: 'GET',
+          data: { model: target}
+        }).done(function(response) {
+        $("#index").fadeOut("slow", function(){
+          $("#index").empty().append(response).fadeIn("slow");
+        });
+
+      })
+    });
+  });
+</script>

@@ -1,11 +1,11 @@
 <a name="top"/>
 
-<div class="list-group" id="list-tab" role="tablist">
+<div class="list-group">
   <a class="list-group-item text-center">
     <h3>Übersicht</h3>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start active" data-toggle="list" href="#list-people" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load" target="Person">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "user" %> Personen</h5>
       <hr>
@@ -26,7 +26,7 @@
     </p>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-institutions" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load" target="Institution">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "university" %> Institutionen</h5>
       <hr>
@@ -47,7 +47,7 @@
     </p>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-notes" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "sticky-note" %> Notizen</h5>
       <hr>
@@ -68,7 +68,7 @@
     </p>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-tasks" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "tasks" %> Aufgaben</h5>
       <hr>
@@ -89,7 +89,7 @@
     </p>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-tags" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "tags" %> Tags</h5>
       <hr>
@@ -110,7 +110,7 @@
     </p>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start" data-toggle="list" href="#list-team" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "users" %> Team</h5>
       <hr>
@@ -123,6 +123,7 @@
 </div>
 
 <script>
+$( document ).ready(function() {
   function scrollToAnchor(aid){
     var aTag = $("a[name='"+ aid +"']");
     $('html,body').animate({scrollTop: aTag.offset().top},'slow');
@@ -131,4 +132,5 @@
   $(".list-group-item").click(function() {
    scrollToAnchor('top');
   });
+});
 </script>

@@ -14,4 +14,30 @@ class RenderController < ApplicationController
       end
 =end
   end
+
+  def render_index
+    model = params[:model]
+
+
+    klass = class_for(model)
+
+    @records = klass.all
+
+
+    if klass == Person
+      @records = @records.order(:name).page(params[:page]).per(20)
+    elsif klass == Institution
+      @records = @records.order(:name).page(params[:page]).per(20)
+    elsif klass == Note
+      @records = @records.order(:created_at).page(params[:page]).per(20)
+    elsif klass == Task
+      @records = @records.order(:created_at).page(params[:page]).per(20)
+    else
+      @records = @records.order(:created_at).page(params[:page]).per(20)
+    end
+
+
+    render partial: "basic/index"
+  end
+
 end
