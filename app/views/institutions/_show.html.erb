@@ -54,7 +54,9 @@
             <p> <b>Mitglieder: </b>
               <ul>
               <% institution.people.each do |person| %>
-                <li><button type="button" class="btn btn-link"><%= person.name %></button></li>
+                <li>
+                  <%= link_to person.name, person_path(person) %>
+                </li>
               <% end %>
             </ul>
             </p>
