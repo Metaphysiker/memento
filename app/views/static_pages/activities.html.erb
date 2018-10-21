@@ -27,6 +27,12 @@
             <b><%= a[0] %>:</b> Von "<%= a[1][0] %>" zu "<%= a[1][1] %>" <br />
             <% end %>
           <% end %>
+
+          <% if audit.action == "destroy" %>
+            <% audit.audited_changes.each do |a| %>
+            <b><%= a[0] %>:</b> <%= a[1] %><br />
+            <% end %>
+          <% end %>
         </p>
         <hr />
       <% end %>
