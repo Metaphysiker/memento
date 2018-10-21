@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   #static_pages
   get '/overview', to: 'static_pages#overview', as: 'overview'
+  get '/my_tasks', to: 'static_pages#my_tasks', as: 'my_tasks'
 
   #search
   get '/search_people_form', to: 'people#search_people', as: 'search_people_form'

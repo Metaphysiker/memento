@@ -19,6 +19,10 @@ class StaticPagesController < ApplicationController
     @tasks = Task.order(:created_at).page(params[:page]).per(20)
   end
 
+  def my_tasks
+    @tasks = Task.where(assigned_to_user_id: current_user.id).order(:created_at).page(params[:page]).per(20)
+  end
+
   def playfield
     @people = Person.all.order(:name).page(params[:page])
   end
