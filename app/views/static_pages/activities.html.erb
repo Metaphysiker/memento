@@ -16,15 +16,16 @@
           <b>Datum: </b><%= audit.created_at.strftime("%d.%m.%Y %H:%M") %>
         </p>
         <p>
-          <% audit.audited_changes.each do |c| %>
-          <% next if c[1].nil? %>
-          <% next if c[1][0] == c[1][1]%>
-            <%= c[0] %>:
-            <%= c[1] unless c[1].is_a? Enumerable %>
-            <% if c[1].is_a? Enumerable %>
-              Von "<%= c[1][0] %>" zu "<%= c[1][1] %>".
+          <% if audit.action == "create" %>
+            <% audit.audited_changes.each do |a| %>
+            <b><%= a[0] %>:</b> <%= a[1] %><br />
             <% end %>
-            <br />
+          <% end %>
+
+          <% if audit.action == "update"%>
+            <% audit.audited_changes.each do |a| %>
+            <b><%= a[0] %>:</b> Von "<%= a[1][0] %>" zu "<%= a[1][1] %>" <br />
+            <% end %>
           <% end %>
         </p>
         <hr />
