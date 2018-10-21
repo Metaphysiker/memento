@@ -30,21 +30,21 @@
 
 <script>
   $( document ).ready(function() {
+    var models = ["Person", "Institution", "Note", "Task"];
 
       $( ".index-load" ).click(function() {
         target = $(this).attr("target");
-        alert(target);
-
-        $.ajax({
-          url: "/render_index",
-          method: 'GET',
-          data: { model: target}
-        }).done(function(response) {
-        $("#index").fadeOut("slow", function(){
-          $("#index").empty().append(response).fadeIn("slow");
-        });
-
-      })
+        if(jQuery.inArray("Person", models) !== -1){
+          $.ajax({
+            url: "/render_index",
+            method: 'GET',
+            data: { model: target}
+          }).done(function(response) {
+          $("#index").fadeOut("fast", function(){
+            $("#index").empty().append(response).fadeIn("fast");
+          });
+        })
+      };
     });
   });
 </script>

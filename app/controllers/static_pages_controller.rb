@@ -11,12 +11,6 @@ class StaticPagesController < ApplicationController
 
   def overview
     @people = Person.order(:name).page(params[:page]).per(20) #Person.all.includes(:notes)
-    #@notes = Note.all.order(:created_at).reverse_order
-    @tag_lists = TagList.all.order(:name)
-    #@tasks = Task.all
-    @institutions = Institution.order(:name).page(params[:page]).per(20)
-    @notes = Note.order(:created_at).page(params[:page]).per(20)
-    @tasks = Task.order(:created_at).page(params[:page]).per(20)
   end
 
   def my_tasks
@@ -28,6 +22,6 @@ class StaticPagesController < ApplicationController
   end
 
   def team
-  
+
   end
 end
