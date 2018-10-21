@@ -72,8 +72,11 @@ class BasicController < ApplicationController
   end
 
   def search_basic
-    model = params[:model]
-    search_term = params[:"search_#{model.pluralize.downcase}"]
+    search_inputs = params[:search_inputs]
+    model = search_inputs[:model]
+    search_term = search_inputs[:"search_#{model.pluralize.downcase}"]
+    institutions = search_inputs[:institutions]
+    tags = search_inputs[:tags]
 
     klass = class_for(model)
 
@@ -86,6 +89,7 @@ class BasicController < ApplicationController
     end
 
     if klass == Person
+      @records = PeopleSearch.new(search_term: search_term, tags: tags, institutions: institutions).search
       @records = @records.order(:name).page(params[:page]).per(20)
     elsif klass == Institution
       @records = @records.order(:name).page(params[:page]).per(20)
