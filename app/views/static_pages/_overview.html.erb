@@ -34,9 +34,31 @@
 
       $( ".index-load" ).click(function() {
         target = $(this).attr("target");
-        if(jQuery.inArray("Person", models) !== -1){
+        console.log(target);
+        console.log(jQuery.inArray("Tags", models));
+        console.log(jQuery.inArray(target, models) != -1);
+        if(jQuery.inArray(target, models) != -1){
           $.ajax({
             url: "/render_index",
+            method: 'GET',
+            data: { model: target}
+          }).done(function(response) {
+          $("#index").fadeOut("fast", function(){
+            $("#index").empty().append(response).fadeIn("fast");
+          });
+        })
+      } else if(target == "Tags"){
+        $.ajax({
+            url: "/render_tags",
+            method: 'GET'
+          }).done(function(response) {
+          $("#index").fadeOut("fast", function(){
+            $("#index").empty().append(response).fadeIn("fast");
+          });
+        })
+      } else if(target == "Team"){
+        $.ajax({
+            url: "/render_tags",
             method: 'GET',
             data: { model: target}
           }).done(function(response) {

@@ -1,12 +1,20 @@
-<div class="container">
+<% tag_lists = tag_lists || @tag_lists %>
   <h1>Tags</h1>
   <hr />
 
   <% tag_lists.each do |tag_list| %>
     <p>
-      <button type="button" class="btn btn-outline-dark"><%= tag_list.name %></button>
-      -
-      Personen mit diesem Tag: <%= Person.tagged_with(tag_list.name).count %>
+      <div class="row">
+        <div class="col-4">
+          <button type="button" class="btn btn-outline-dark"><%= tag_list.name %></button>
+        </div>
+        <div class="col-4">
+          Personen mit diesem Tag: <%= Person.tagged_with(tag_list.name).count %>
+        </div>
+        <div class="col-4">
+          Institutionen mit diesem Tag: <%= Institution.tagged_with(tag_list.name).count %>
+        </div>
+      </div>
     </p>
     <hr>
   <% end %>
@@ -14,4 +22,3 @@
   <br>
 
     <%= render 'tag_lists/new', tag_list: TagList.new %>
-</div>

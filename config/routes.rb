@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   #render
   get '/render_shared', to: 'render#render_shared', as: 'render_shared'
   get '/render_index', to: 'render#render_index', as: 'render_index'
+  get '/render_tags', to: 'render#render_tags', as: 'render_tags'
 end
