@@ -17,7 +17,6 @@ RSpec.describe "tasks", :type => :feature do
   let(:task1) do
     {
       description: Faker::Lorem.paragraph,
-      deadline: Faker::Time.between(DateTime.now, DateTime.now + 3.month),
       priority: [1,2,3].sample,
       assigned_to_user_id: User.all.pluck(:id).sample,
       status: Task.statuses.sample
@@ -36,7 +35,11 @@ RSpec.describe "tasks", :type => :feature do
     )
 
     task1 = Task.create(task1)
-    task1.update(assigned_to_user_id: User.all.pluck(:id).sample)
+    task1.update(
+      assigned_to_user_id: User.all.pluck(:id).sample,
+      deadline: Faker::Time.between(DateTime.now, DateTime.now + 3.month)
+    )
+
     person.tasks << task1
 
     visit "/people/#{person.id}"
@@ -47,8 +50,7 @@ RSpec.describe "tasks", :type => :feature do
 
     within ".person-#{person.id}-tasks" do
       expect(page).to have_content(task1.description)
-      page.save_screenshot('task-person-expect.png')
-      expect(page).to have_content(task1.deadline)
+      expect(page).to have_content(task1.deadline.strftime("%d.%m.%Y %H:%M"))
       expect(page).to have_content(task1.priority)
       expect(page).to have_content(User.find(task1.assigned_to_user_id).username)
       expect(page).to have_content(task1.status)
@@ -69,8 +71,6 @@ RSpec.describe "tasks", :type => :feature do
     description = Faker::Lorem.paragraph
 
     visit "/people/#{person.id}"
-
-    expect(page).to have_content("Aufgaben anzeigen")
 
     click_link "Aufgaben anzeigen"
 
@@ -175,12 +175,13 @@ RSpec.describe "tasks", :type => :feature do
 
   it "views an institution and expects a task" do
 
-    task1 = Task.create(
-      description: Faker::Lorem.paragraph
+    task1 = Task.create(task1)
+    task1.update(
+      assigned_to_user_id: User.all.pluck(:id).sample,
+      deadline: Faker::Time.between(DateTime.now, DateTime.now + 3.month)
     )
 
     institution.tasks << task1
-    institution.save
 
     visit "/institutions/#{institution.id}"
 
@@ -190,6 +191,10 @@ RSpec.describe "tasks", :type => :feature do
 
     within ".institution-#{institution.id}-tasks" do
       expect(page).to have_content(task1.description)
+      expect(page).to have_content(task1.deadline.strftime("%d.%m.%Y %H:%M"))
+      expect(page).to have_content(task1.priority)
+      expect(page).to have_content(User.find(task1.assigned_to_user_id).username)
+      expect(page).to have_content(task1.status)
     end
 
   end
