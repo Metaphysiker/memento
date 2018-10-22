@@ -37,7 +37,7 @@ RSpec.describe "search_people", :type => :feature do
 
     visit "/people/"
     #fill_in "#search_people", :with => unique_lastname
-    find('#search_people').set(unique_lastname)
+    find('#search_inputs_search_term').set(unique_lastname)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -88,7 +88,7 @@ RSpec.describe "search_people", :type => :feature do
 
     visit "/people/"
     #fill_in "#search_people", :with => unique_lastname
-    find('#search_people').set(unique_lastname)
+    find('#search_inputs_search_term').set(unique_lastname)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -140,7 +140,7 @@ RSpec.describe "search_people", :type => :feature do
 
     visit "/people/"
     #fill_in "#search_people", :with => unique_lastname
-    find('#search_people').set(unique_lastname)
+    find('#search_inputs_search_term').set(unique_lastname)
 
     expect(page).to_not have_content(person.email)
     expect(page).to_not have_content(person.firstname)
@@ -175,7 +175,7 @@ RSpec.describe "search_people", :type => :feature do
 
     visit "/people/"
     #fill_in "#search_people", :with => "#{person.firstname} #{person.lastname}"
-    find('#search_people').set("#{person.firstname} #{person.lastname}")
+    find('#search_inputs_search_term').set("#{person.firstname} #{person.lastname}")
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -196,7 +196,7 @@ RSpec.describe "search_people", :type => :feature do
 
     visit "/people/"
     #fill_in "#search_people", :with => person.email
-    find('#search_people').set(person.email)
+    find('#search_inputs_search_term').set(person.email)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -217,7 +217,7 @@ RSpec.describe "search_people", :type => :feature do
 
     visit "/people/"
     #fill_in "#search_people", :with => person.phone
-    find('#search_people').set(person.phone)
+    find('#search_inputs_search_term').set(person.phone)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -238,7 +238,7 @@ RSpec.describe "search_people", :type => :feature do
 
     visit "/people/"
     #fill_in "#search_people", :with => person.description
-    find('#search_people').set(person.description)
+    find('#search_inputs_search_term').set(person.description)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)
@@ -278,7 +278,7 @@ RSpec.describe "search_people", :type => :feature do
     visit "/people/"
     find(".list-view").click
     #fill_in "#search_people", :with => unique_lastname
-    find('#search_people').set(unique_lastname)
+    find('#search_inputs_search_term').set(unique_lastname)
 
     expect(page).to have_content(person.email)
     expect(page).to have_content(person.firstname)

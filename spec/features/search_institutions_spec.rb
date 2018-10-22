@@ -29,7 +29,7 @@ RSpec.describe "search_institutions", :type => :feature do
 
     visit "/institutions/"
     #fill_in "#search_institutions", :with => unique_lastname
-    find('#search_institutions').set(institution1.name)
+    find('#search_inputs_search_term').set(institution1.name)
 
     expect(page).to have_content(institution1.name)
     expect(page).to have_content(institution1.email)
@@ -67,7 +67,7 @@ RSpec.describe "search_institutions", :type => :feature do
 
     visit "/institutions/"
     #fill_in "#search_institutions", :with => unique_lastname
-    find('#search_institutions').set(name)
+    find('#search_inputs_search_term').set(name)
 
     expect(page).to have_content(institution1.name)
     expect(page).to have_content(institution1.email)
@@ -108,7 +108,7 @@ RSpec.describe "search_institutions", :type => :feature do
 
     visit "/institutions/"
     #fill_in "#search_institutions", :with => unique_lastname
-    find('#search_institutions').set(unique_name)
+    find('#search_inputs_search_term').set(unique_name)
 
     expect(page).to_not have_content(institution1.name)
     expect(page).to_not have_content(institution1.email)
@@ -146,7 +146,7 @@ RSpec.describe "search_institutions", :type => :feature do
 
     visit "/institutions/"
     #fill_in "#search_institutions", :with => unique_lastname
-    find('#search_institutions').set(institution1.description)
+    find('#search_inputs_search_term').set(institution1.description)
 
     expect(page).to have_content(institution1.name)
     expect(page).to have_content(institution1.email)

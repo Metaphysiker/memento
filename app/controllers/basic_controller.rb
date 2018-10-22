@@ -74,7 +74,7 @@ class BasicController < ApplicationController
   def search_basic
     search_inputs = params[:search_inputs]
     model = search_inputs[:model]
-    search_term = search_inputs[:"search_#{model.pluralize.downcase}"]
+    search_term = search_inputs[:search_term]
     institutions = search_inputs[:institutions]
     tags = search_inputs[:tags]
 

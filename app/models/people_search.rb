@@ -28,6 +28,6 @@ class PeopleSearch
     end
   end
 
-  query
+    query.distinct
   end
 end
