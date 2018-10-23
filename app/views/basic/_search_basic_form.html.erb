@@ -8,7 +8,7 @@
   </p>
 <div class="collapse mb-2" id="search_options">
   <div class="card card-body">
-    <%= f.input :tags, as: :select, collection: TagList.all, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+    <%= f.input :tag_list, as: :select, collection: TagList.all, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
     <br>
     <%= f.input :institutions, as: :select, collection: Institution.all, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
     <%= f.hidden_field :model, value: records.klass.to_s %>

@@ -76,7 +76,9 @@ class BasicController < ApplicationController
     model = search_inputs[:model]
     search_term = search_inputs[:search_term]
     institutions = search_inputs[:institutions]
-    tags = search_inputs[:tags]
+    tags = search_inputs[:tag_list]
+
+    #@search_inputs = OpenStruct.new(search_term: "Mannino", model: Person, tag_list: ["Sponsor"])
 
     klass = class_for(model)
 
