@@ -11,6 +11,7 @@ class StaticPagesController < ApplicationController
 
   def overview
     @people = Person.order(:name).page(params[:page]).per(20) #Person.all.includes(:notes)
+    #@search_inputs = {search_term: "Mann", model: Person, tags: ""}
   end
 
   def my_tasks
