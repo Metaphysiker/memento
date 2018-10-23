@@ -78,29 +78,24 @@ class BasicController < ApplicationController
     institutions = search_inputs[:institutions]
     tags = search_inputs[:tag_list]
 
-    #@search_inputs = OpenStruct.new(search_term: "Mannino", model: Person, tag_list: ["Sponsor"])
-
     klass = class_for(model)
 
-    if search_term.nil? || search_term.empty?
-      @records = klass.all
-    else
-      @records = klass.search_records_ilike("%#{search_term}%")
-      #search_scope = "search_#{model.pluralize.downcase}_ilike()"
-      #@records = model.singularize.classify.safe_constantize.public_send(search_scope, "%#{search_term}%")
-    end
-
     if klass == Person
+      #@records = Search.new(search_term: search_term, model: model, institutions: institutions, tag_list: tag_list).search
       @records = PeopleSearch.new(search_term: search_term, tags: tags, institutions: institutions).search
       @records = @records.order(:name).page(params[:page]).per(20)
     elsif klass == Institution
+      @records = klass.search_records_ilike("%#{search_term}%")
       @records = @records.order(:name).page(params[:page]).per(20)
     elsif klass == Note
+      @records = klass.search_records_ilike("%#{search_term}%")
       @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
     else
+      @records = klass.search_records_ilike("%#{search_term}%")
       @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
     end
 
+    @search_inputs = OpenStruct.new(search_inputs)
 
     respond_to do |format|
       format.js
