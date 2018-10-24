@@ -4,6 +4,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
+=begin
     search_inputs = params[:search_inputs]
     klass = class_for(search_inputs[:model]) || Person
     search_term = search_inputs[:search_term] || ""
@@ -12,8 +13,9 @@ class PeopleController < ApplicationController
 
     @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, page: params[:page]).search
     @search_inputs = params[:search_inputs]
+=end
 
-    #@people = Person.order(:name).page(params[:page]).per(20)
+    @people = Person.all.order(:name).page(params[:page]).per(20)
     #@people = Person.all.limit(25)
     #@people = Person.all
     #@people = Person.all.order(:name).page(params[:page])
