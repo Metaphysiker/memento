@@ -7,6 +7,17 @@ RSpec.describe "search_notes", :type => :feature do
     login_with(first_user)
   end
 
+  let(:person) do
+    Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: "male"
+    )
+  end
+
   it "searches among 3 notes and expects 1 result" do
 
     note1 = Note.create(
@@ -21,12 +32,12 @@ RSpec.describe "search_notes", :type => :feature do
       description: Faker::Lorem.paragraph
     )
 
+    person.notes << [note1, note2, note3]
+    person.save
+
     visit "/notes/"
     #fill_in "#search_notes", :with => unique_lastname
     find('#search_inputs_search_term').set(note1.description)
-
-    sleep 2
-    page.save_screenshot('findnote31.png')
 
     expect(page).to have_content(note1.description)
     expect(page).to_not have_content(note2.description)
@@ -47,6 +58,9 @@ RSpec.describe "search_notes", :type => :feature do
     note3 = Note.create(
       description: description
     )
+
+    person.notes << [note1, note2, note3]
+    person.save
 
     visit "/notes/"
     #fill_in "#search_notes", :with => unique_lastname
