@@ -73,13 +73,22 @@ class BasicController < ApplicationController
 
   def search_basic
     search_inputs = params[:search_inputs]
+    klass = class_for(search_inputs[:model])
+    search_term = search_inputs[:search_term]
+    institutions = search_inputs[:institutions]
+    tag_list = search_inputs[:tag_list]
+
+    @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, page: params[:page]).search
+    @search_inputs = params[:search_inputs]
+=begin
+    search_inputs = params[:search_inputs]
     model = search_inputs[:model]
     search_term = search_inputs[:search_term]
     institutions = search_inputs[:institutions]
     tag_list = search_inputs[:tag_list]
 
     klass = class_for(model)
-=begin
+
     if klass == Person
       #@records = Search.new(search_term: search_term, model: model, institutions: institutions, tag_list: tag_list).search
       @records = PeopleSearch.new(search_term: search_term, tags: tags, institutions: institutions).search
@@ -95,10 +104,6 @@ class BasicController < ApplicationController
       @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
     end
 =end
-
-    @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, page: params[:page]).search
-    @search_inputs = params[:search_inputs]
-
     respond_to do |format|
       format.js
     end

@@ -4,7 +4,16 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.order(:name).page(params[:page]).per(20)
+    search_inputs = params[:search_inputs]
+    klass = class_for(search_inputs[:model]) || Person
+    search_term = search_inputs[:search_term] || ""
+    institutions = search_inputs[:institutions] || ""
+    tag_list = search_inputs[:tag_list] || ""
+
+    @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, page: params[:page]).search
+    @search_inputs = params[:search_inputs]
+
+    #@people = Person.order(:name).page(params[:page]).per(20)
     #@people = Person.all.limit(25)
     #@people = Person.all
     #@people = Person.all.order(:name).page(params[:page])
