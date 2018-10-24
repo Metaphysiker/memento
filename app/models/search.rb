@@ -30,9 +30,4 @@ class Search
   def return_search_inputs
     OpenStruct.new(search_term: @search_term, tags: @tags, institutions: @institutions, model: @model)
   end
-
-  def returnnewclass
-    PeopleSearch.new(search_term: "Man")
-  end
-
 end

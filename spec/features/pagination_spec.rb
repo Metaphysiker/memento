@@ -146,8 +146,7 @@ RSpec.describe "pagination", :type => :feature do
         expect(page).to have_content("ccc@ccc@cc")
 
     end
-
-
+    
 end
 
 def login_with(user)
