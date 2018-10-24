@@ -4,10 +4,25 @@ class Search
     @tags = tag_list
     @institutions = institutions
     @model = model
+    @records = []
   end
 
   def search
-    PeopleSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
+    klass = class_for(@model)
+
+    if klass == Person
+      @records = PeopleSearch.new(search_term: search_term, tags: tags, institutions: institutions).search
+      @records = @records.order(:name).page(params[:page]).per(20)
+    elsif klass == Institution
+      @records = klass.search_records_ilike("%#{search_term}%")
+      @records = @records.order(:name).page(params[:page]).per(20)
+    elsif klass == Note
+      @records = klass.search_records_ilike("%#{search_term}%")
+      @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
+    else
+      @records = klass.search_records_ilike("%#{search_term}%")
+      @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
+    end
   end
 
   def return_search_inputs
