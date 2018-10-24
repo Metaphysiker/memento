@@ -1,27 +1,29 @@
 class Search
-  def initialize(search_term: nil, model: nil, tag_list: nil, institutions: nil)
+  def initialize(search_term: nil, model: nil, tag_list: nil, institutions: nil, page: 0)
     @search_term = search_term
     @tags = tag_list
     @institutions = institutions
     @model = model
+    @page = page
     @records = []
   end
 
   def search
-    klass = class_for(@model)
+    #klass = class_for(@model)
+    klass = @model
 
     if klass == Person
-      @records = PeopleSearch.new(search_term: search_term, tags: tags, institutions: institutions).search
-      @records = @records.order(:name).page(params[:page]).per(20)
+      @records = PeopleSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
+      @records = @records.order(:name).page(@page).per(20)
     elsif klass == Institution
-      @records = klass.search_records_ilike("%#{search_term}%")
-      @records = @records.order(:name).page(params[:page]).per(20)
+      @records = InstitutionsSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
+      @records = @records.order(:name).page(@page).per(20)
     elsif klass == Note
-      @records = klass.search_records_ilike("%#{search_term}%")
-      @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
-    else
-      @records = klass.search_records_ilike("%#{search_term}%")
-      @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
+      @records = NotesSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
+      @records = @records.order(:created_at).reverse_order.page(@page).per(20)
+    elsif klass == Task
+      @records = TasksSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
+      @records = @records.order(:created_at).reverse_order.page(@page).per(20)
     end
   end
 
