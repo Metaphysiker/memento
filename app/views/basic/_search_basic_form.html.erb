@@ -1,20 +1,26 @@
-<%= simple_form_for :search_inputs, {url: search_basic_form_path, method: :get, remote: true} do |f| %>
-  <%= f.text_field :search_term, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control" %>
-  <br>
-  <p>
-    <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#search_options" aria-expanded="false" aria-controls="collapseExample">
-      <%= fa_icon "plus" %> Weitere Optionen
-    </button>
-  </p>
-<div class="collapse mb-2" id="search_options">
-  <div class="card card-body">
-    <%= f.input :tag_list, as: :select, collection: TagList.all, label: "Tags", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+<%= form_tag(search_basic_form_path, method: "get", remote: true, class: "form-group") do %>
+    <%= text_field_tag(:"search_term", nil, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control") %>
+    <%= hidden_field_tag(:model, records.klass.to_s) %>
     <br>
-    <%= f.input :institutions, as: :select, collection: Institution.all, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
-    <%= f.hidden_field :model, value: records.klass.to_s %>
+    <p>
+      <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#search_options" aria-expanded="false" aria-controls="collapseExample">
+        <%= fa_icon "plus" %> Weitere Optionen
+      </button>
+    </p>
+  <div class="collapse mb-2" id="search_options">
+    <div class="card card-body">
+      <%= select_tag(:tag_list, as: :select, collection: TagList.all, label: "Tags", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true}) %>
+      <br>
+
+      <%= select_tag :tag_list,
+          TagList.all.map { |u| [u.name, u.id] },
+                          { class: 'chosen-select' }
+      %>
+    <br />
+      <%= select_tag(:institutions, as: :select, collection: Institution.all, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true}) %>
+    </div>
   </div>
-</div>
-  <%= f.submit "Suchen", id: "trigger_search", class: "btn btn-primary" %>
+    <%= submit_tag("Search", id: "trigger_search", class: "btn btn-primary") %>
 <% end %>
 
 <script>
