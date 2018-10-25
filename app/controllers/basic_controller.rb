@@ -72,11 +72,18 @@ class BasicController < ApplicationController
   end
 
   def search_basic
-    #search_inputs = params[:search_inputs]
-    klass = class_for(params[:model])
-    search_term = params[:search_term]
-    institutions = params[:institutions]
-    tag_list = params[:tag_list]
+    if params[:search_inputs].present?
+      search_inputs = params[:search_inputs]
+      klass = class_for(search_inputs[:model])
+      search_term = search_inputs[:search_term]
+      institutions = search_inputs[:institutions]
+      tag_list = search_inputs[:tag_list]
+    else
+      klass = Person
+      search_term = ""
+      institutions = ""
+      tag_list = ""
+    end
 
     @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, page: params[:page]).search
     #@search_inputs = params[:search_inputs]
