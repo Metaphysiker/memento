@@ -78,6 +78,8 @@ class BasicController < ApplicationController
       search_term = search_inputs[:search_term]
       institutions = search_inputs[:institutions]
       tag_list = search_inputs[:tag_list]
+      assigned_to_user_id = search_inputs[:assigned_to_user_id]
+      @search_inputs = OpenStruct.new(search_inputs)
     else
       klass = Person
       search_term = ""
@@ -85,7 +87,7 @@ class BasicController < ApplicationController
       tag_list = ""
     end
 
-    @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, page: params[:page]).search
+    @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
     #@search_inputs = params[:search_inputs]
 =begin
     search_inputs = params[:search_inputs]

@@ -1,8 +1,9 @@
 class TasksSearch
-  def initialize(search_term: nil, tags: nil, institutions: nil)
+  def initialize(search_term: nil, tags: nil, institutions: nil, assigned_to_user_id: nil)
     @search_term = search_term
     @tags = tags
     @institutions = institutions
+    @assigned_to_user_id = assigned_to_user_id
   end
 
   def search
@@ -10,6 +11,10 @@ class TasksSearch
 
   unless @search_term.nil? || @search_term.blank?
     query = query.search_records_ilike("%#{@search_term}%")
+  end
+
+  unless @assigned_to_user_id.nil? || @assigned_to_user_id.blank?
+    query = query.where(assigned_to_user_id: @assigned_to_user_id)
   end
 =begin
   unless @institutions.nil? || @institutions.empty?

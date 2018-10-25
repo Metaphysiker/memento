@@ -1,17 +1,21 @@
 <%= simple_form_for :search_inputs, {url: search_basic_form_path, method: :get, remote: true} do |f| %>
   <%= f.text_field :search_term, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control" %>
+  <%= f.hidden_field :model, value: records.klass.to_s %>
   <br>
   <p>
     <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#search_options" aria-expanded="false" aria-controls="collapseExample">
       <%= fa_icon "plus" %> Weitere Optionen
     </button>
   </p>
-<div class="collapse mb-2" id="search_options">
+<div class="collapse <%= "show" unless @search_inputs.nil? || (@search_inputs.tag_list.blank? && @search_inputs.institutions) %> mb-2" id="search_options">
   <div class="card card-body">
     <%= f.input :tag_list, as: :select, collection: TagList.all, label: "Tags", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
     <br>
     <%= f.input :institutions, as: :select, collection: Institution.all, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
-    <%= f.hidden_field :model, value: records.klass.to_s %>
+
+    <% if records.klass.to_s == "Task" %>
+      <%= f.input :assigned_to_user_id, collection: User.all, label_method: :username, value_method: :id, include_blank: true %>
+    <% end %>
   </div>
 </div>
   <%= f.submit "Suchen", id: "trigger_search", class: "btn btn-primary" %>

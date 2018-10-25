@@ -1,9 +1,10 @@
 class Search
-  def initialize(search_term: nil, model: nil, tag_list: nil, institutions: nil, page: 0)
+  def initialize(search_term: nil, model: nil, tag_list: nil, institutions: nil, assigned_to_user_id: nil, page: 0)
     @search_term = search_term
     @tags = tag_list
     @institutions = institutions
     @model = model
+    @assigned_to_user_id = assigned_to_user_id
     @page = page
     @records = []
   end
@@ -22,7 +23,7 @@ class Search
       @records = NotesSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
       @records = @records.order(:created_at).reverse_order.page(@page).per(20)
     elsif klass == Task
-      @records = TasksSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
+      @records = TasksSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions, assigned_to_user_id: @assigned_to_user_id).search
       @records = @records.order(:created_at).reverse_order.page(@page).per(20)
     end
   end
