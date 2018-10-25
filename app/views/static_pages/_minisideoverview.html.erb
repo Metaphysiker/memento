@@ -20,8 +20,8 @@
         <h5 class="mb-1"><%= fa_icon "tags" %></h5>
     </a>
 
-    <a class="nav-item nav-link index-load" data-toggle="list" href="#list-team" role="tab">
-        <h5 class="mb-1"><%= fa_icon "users" %></h5>
-    </a>
+    <%= link_to team_path, class: "nav-item nav-link index-load" do %>
+      <h5 class="mb-1"><%= fa_icon "users" %></h5>
+    <% end %>
   </div>
 </nav>
