@@ -11,10 +11,10 @@
   <div class="card card-body">
     <%= f.input :tag_list, as: :select, collection: TagList.all, label: "Tags", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
     <br>
-    <%= f.input :institutions, as: :select, collection: Institution.all, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
+    <%= f.input :institutions, as: :select, collection: Institution.all, label: "Institutionen", label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
 
     <% if records.klass.to_s == "Task" %>
-      <%= f.input :assigned_to_user_id, collection: User.all, label_method: :username, value_method: :id, include_blank: true %>
+      <%= f.input :assigned_to_user_id, collection: User.all, label: "Zuständig: ", label_method: :username, value_method: :id, include_blank: true %>
     <% end %>
   </div>
 </div>
