@@ -6,7 +6,7 @@
     <p>
       <div class="row">
         <div class="col-4">
-          <button type="button" class="btn btn-outline-dark"><%= tag_list.name %></button>
+          <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: Person, tag_list: [tag_list.name]}}), class: "btn btn-outline-dark" %>
         </div>
         <div class="col-4">
           Personen mit diesem Tag: <%= Person.tagged_with(tag_list.name).count %>
