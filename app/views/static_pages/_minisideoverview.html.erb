@@ -1,18 +1,18 @@
 <nav>
   <div class="nav nav-tabs" id="list-tab" role="tablist">
-    <a class="nav-item nav-link active index-load" data-toggle="list" href="#list-people" target="Person" role="tab">
+    <a class="nav-item nav-link index-load <%= "active" if records.klass.to_s == "Person" %>" data-toggle="list" href="#list-people" target="Person" role="tab">
         <h5 class="mb-1"><%= fa_icon "user" %></h5>
     </a>
 
-    <a class="nav-item nav-link index-load" data-toggle="list" href="#list-institutions" target="Institution" role="tab">
+    <a class="nav-item nav-link index-load <%= "active" if records.klass.to_s == "Institution" %>" data-toggle="list" href="#list-institutions" target="Institution" role="tab">
         <h5 class="mb-1"><%= fa_icon "university" %></h5>
     </a>
 
-    <a class="nav-item nav-link index-load" data-toggle="list" href="#list-notes" target="Note" role="tab">
+    <a class="nav-item nav-link index-load <%= "active" if records.klass.to_s == "Note" %>" data-toggle="list" href="#list-notes" target="Note" role="tab">
         <h5 class="mb-1"><%= fa_icon "sticky-note" %></h5>
     </a>
 
-    <a class="nav-item nav-link index-load" data-toggle="list" href="#list-tasks" target="Task" role="tab">
+    <a class="nav-item nav-link index-load <%= "active" if records.klass.to_s == "Task" %>" data-toggle="list" href="#list-tasks" target="Task" role="tab">
         <h5 class="mb-1"><%= fa_icon "tasks" %></h5>
     </a>
 

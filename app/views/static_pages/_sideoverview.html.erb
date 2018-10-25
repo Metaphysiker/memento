@@ -5,7 +5,7 @@
     <h3>Übersicht</h3>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start index-load active" data-toggle="list" href="#list-people" target="Person" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load <%= "active" if records.klass.to_s == "Person" %>" data-toggle="list" href="#list-people" target="Person" role="tab">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "user" %> Personen</h5>
       <hr>
@@ -26,7 +26,7 @@
     </p>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start index-load" data-toggle="list" href="#list-institutions" target="Institution" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load <%= "active" if records.klass.to_s == "Institution" %>" data-toggle="list" href="#list-institutions" target="Institution" role="tab">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "university" %> Institutionen</h5>
       <hr>
@@ -47,7 +47,7 @@
     </p>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start index-load" data-toggle="list" href="#list-notes" target="Note" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load <%= "active" if records.klass.to_s == "Notes" %>" data-toggle="list" href="#list-notes" target="Note" role="tab">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "sticky-note" %> Notizen</h5>
       <hr>
@@ -68,7 +68,7 @@
     </p>
   </a>
 
-  <a class="list-group-item list-group-item-action flex-column align-items-start index-load" data-toggle="list" href="#list-tasks" target="Task" role="tab">
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load <%= "active" if records.klass.to_s == "Task" %>" data-toggle="list" href="#list-tasks" target="Task" role="tab">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "tasks" %> Aufgaben</h5>
       <hr>
