@@ -16,7 +16,7 @@ class RenderController < ApplicationController
   end
 
   def render_index
-    model = params[:model]
+    model = params[:search_inputs][:model]
 
     klass = class_for(model)
 

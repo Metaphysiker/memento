@@ -41,7 +41,7 @@
           $.ajax({
             url: "/render_index",
             method: 'GET',
-            data: { model: target}
+            data: { search_inputs: {model: target}}
           }).done(function(response) {
           $("#index").fadeOut("fast", function(){
             $("#index").empty().append(response).fadeIn("fast");
