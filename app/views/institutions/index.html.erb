@@ -1,4 +1,6 @@
 <div class="container">
   <%#= render "institutions/index", institutions: @institutions %>
-  <%= render "basic/index", records: @institutions %>
+  <%= params.inspect %>
+  <%= @search_inputs.inspect %>
+  <%= render "basic/index", records: @records %>
 </div>

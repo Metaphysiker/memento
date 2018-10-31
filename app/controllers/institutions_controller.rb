@@ -5,11 +5,45 @@ class InstitutionsController < ApplicationController
   # GET /institutions.json
   def index
     #@institutions = Institution.all
-    @institutions = Institution.order(:name).page(params[:page]).per(20)
+    #@institutions = Institution.order(:name).page(params[:page]).per(20)
+=begin
+    if params[:search_inputs].present?
+      search_inputs = params[:search_inputs]
+      klass = class_for(search_inputs[:model])
+      search_term = search_inputs[:search_term]
+      institutions = search_inputs[:institutions]
+      tag_list = search_inputs[:tag_list]
+      assigned_to_user_id = search_inputs[:assigned_to_user_id]
+      @search_inputs = OpenStruct.new(search_inputs)
+    else
+      klass = Institution
+      search_term = ""
+      institutions = ""
+      tag_list = ""
+      @search_inputs = OpenStruct.new(model: klass)
+    end
+
+    @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
+=end
+
+  if params[:search_inputs].present?
+    search_inputs = params[:search_inputs]
+    klass = class_for(search_inputs[:model])
+    search_term = search_inputs[:search_term]
+    institutions = search_inputs[:institutions]
+    tag_list = search_inputs[:tag_list]
+    assigned_to_user_id = search_inputs[:assigned_to_user_id]
+    @search_inputs = OpenStruct.new(search_inputs)
+  else
+    klass = Institution
+    @search_inputs = OpenStruct.new(model: klass)
+  end
+
+  @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
 
     respond_to do |format|
         format.html
-        format.js { render :file => "/institutions/search_institutions.js.erb" }
+        format.js { render :file => "/basic/search_basic.js.erb" }
     end
   end
 
