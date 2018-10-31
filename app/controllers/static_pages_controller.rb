@@ -18,10 +18,10 @@ class StaticPagesController < ApplicationController
       institutions = search_inputs[:institutions]
       tag_list = search_inputs[:tag_list]
       assigned_to_user_id = search_inputs[:assigned_to_user_id]
-      #@search_inputs = OpenStruct.new(search_inputs)
+      @search_inputs = OpenStruct.new(search_inputs)
     else
       klass = Person
-      #@search_inputs = OpenStruct.new(model: klass)
+      @search_inputs = OpenStruct.new(model: klass)
     end
 
     @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
