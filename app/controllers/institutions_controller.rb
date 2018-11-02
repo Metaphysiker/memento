@@ -33,19 +33,13 @@ class InstitutionsController < ApplicationController
     institutions = search_inputs[:institutions]
     tag_list = search_inputs[:tag_list]
     assigned_to_user_id = search_inputs[:assigned_to_user_id]
-    @search_inputs = OpenStruct.new(search_inputs)
+    #@search_inputs = OpenStruct.new(search_inputs)
+    @search_inputs = params[:search_inputs]
   else
     klass = Institution
-    #@search_inputs = OpenStruct.new(model: klass)
+    @search_inputs = OpenStruct.new(model: klass)
     #[:search_inputs][:model] = Institution
     #@search_inputs = {model: Institution, search_term: ""}
-    @params = ActionController::Parameters.new({
-      person: {
-        name: "Francesco",
-        age:  22,
-        role: "admin"
-      }
-    })
 
   end
 
