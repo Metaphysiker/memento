@@ -173,7 +173,6 @@ RSpec.describe "pagination", :type => :feature do
         expect(page).to have_selector :css, '.pagination'
 
         expect(page).to have_content("aaa")
-        page.save_screenshot('pagination-instit.png')
         expect(page).to_not have_content("bbb")
         expect(page).to_not have_content("ccc")
 
