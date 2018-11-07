@@ -146,7 +146,52 @@ RSpec.describe "pagination", :type => :feature do
         expect(page).to have_content("ccc@ccc@cc")
 
     end
-    
+
+    it "clicks through pagination in institutions" do
+
+        entries_per_page.times.each do
+          Institution.create(name: "aaa#{Faker::Name.unique.last_name}",
+                              description: "aaa"
+                            )
+        end
+
+        entries_per_page.times.each do
+          Institution.create(name: "bbb#{Faker::Name.unique.last_name}",
+                              description: "bbb"
+                            )
+        end
+
+        entries_per_page.times.each do
+          Institution.create(name: "ccc#{Faker::Name.unique.last_name}",
+                              description: "ccc"
+                            )
+        end
+
+
+        visit "/institutions/"
+
+        expect(page).to have_selector :css, '.pagination'
+
+        expect(page).to have_content("aaa")
+        page.save_screenshot('pagination-instit.png')
+        expect(page).to_not have_content("bbb")
+        expect(page).to_not have_content("ccc")
+
+        first('.page-link', text: 2).click
+
+
+        expect(page).to_not have_content("aaa")
+        expect(page).to have_content("bbb")
+        expect(page).to_not have_content("ccc")
+
+        first('.page-link', text: 3).click
+
+        expect(page).to_not have_content("aaa")
+        expect(page).to_not have_content("bbb")
+        expect(page).to have_content("ccc")
+
+    end
+
 end
 
 def login_with(user)
