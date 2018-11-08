@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
+  require 'csv'
   # GET /people
   # GET /people.json
   def index
@@ -27,7 +28,7 @@ class PeopleController < ApplicationController
     else
       @records = Search.new(model: "Person").search
     end
-    
+
     respond_to do |format|
         format.html
         format.js { render :file => "/people/search_people.js.erb" }
@@ -105,6 +106,20 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def csv
+    if params[:search_inputs].present?
+      search_inputs = params[:search_inputs]
+      search_inputs[:page] = params[:page]
+      @records = Search.new(search_inputs).search
+      @search_inputs = OpenStruct.new(search_inputs)
+    else
+      @records = Search.new(model: "Person").search
+    end
+
+    byebug
+    send_data @people.to_csv, filename: "Personen-#{Date.today}.csv"
   end
 
 
