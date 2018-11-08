@@ -15,10 +15,19 @@ class PeopleController < ApplicationController
     @search_inputs = params[:search_inputs]
 =end
 
-    @people = Person.all.order(:name).page(params[:page]).per(20)
+    #@people = Person.all.order(:name).page(params[:page]).per(20)
     #@people = Person.all.limit(25)
     #@people = Person.all
     #@people = Person.all.order(:name).page(params[:page])
+    if params[:search_inputs].present?
+      search_inputs = params[:search_inputs]
+      search_inputs[:page] = params[:page]
+      @records = Search.new(search_inputs).search
+      @search_inputs = OpenStruct.new(search_inputs)
+    else
+      @records = Search.new(model: "Person").search
+    end
+    
     respond_to do |format|
         format.html
         format.js { render :file => "/people/search_people.js.erb" }

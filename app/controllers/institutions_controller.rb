@@ -25,9 +25,9 @@ class InstitutionsController < ApplicationController
 
     @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
 =end
-
-  if params[:search_inputs].present?
 =begin
+  if params[:search_inputs].present?
+
     search_inputs = params[:search_inputs]
     klass = class_for(search_inputs[:model])
     search_term = search_inputs[:search_term]
@@ -36,7 +36,7 @@ class InstitutionsController < ApplicationController
     assigned_to_user_id = search_inputs[:assigned_to_user_id]
     #@search_inputs = OpenStruct.new(search_inputs)
     @search_inputs = params[:search_inputs]
-=end
+
   @records = Search.new(params[:search_inputs].to_h).search
   else
     klass = Institution
@@ -45,6 +45,16 @@ class InstitutionsController < ApplicationController
     #@search_inputs = {model: Institution, search_term: ""}
     @records = Search.new(model: "Institution").search
 
+  end
+=end
+
+  if params[:search_inputs].present?
+    search_inputs = params[:search_inputs]
+    search_inputs[:page] = params[:page]
+    @records = Search.new(search_inputs).search
+    @search_inputs = OpenStruct.new(search_inputs)
+  else
+    @records = Search.new(model: "Institution").search
   end
 
   #@records = Search.new(params[:search_inputs].to_h).search

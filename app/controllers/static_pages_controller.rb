@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
   end
 
   def overview
-
+=begin
     if params[:search_inputs].present?
       search_inputs = params[:search_inputs]
       klass = class_for(search_inputs[:model])
@@ -23,8 +23,18 @@ class StaticPagesController < ApplicationController
       klass = Person
       @search_inputs = OpenStruct.new(model: klass)
     end
+=end
 
-    @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
+    if params[:search_inputs].present?
+      search_inputs = params[:search_inputs]
+      search_inputs[:page] = params[:page]
+      @records = Search.new(search_inputs).search
+      @search_inputs = OpenStruct.new(search_inputs)
+    else
+      @records = Search.new(model: "Person").search
+    end
+
+    #@records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
     #@people = Person.order(:name).page(params[:page]).per(20) #Person.all.includes(:notes)
 
 

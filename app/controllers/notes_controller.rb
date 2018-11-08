@@ -5,7 +5,14 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     #@notes = Note.all
-    @notes = Note.order(:description).page(params[:page]).per(20)
+    if params[:search_inputs].present?
+      search_inputs = params[:search_inputs]
+      search_inputs[:page] = params[:page]
+      @records = Search.new(search_inputs).search
+      @search_inputs = OpenStruct.new(search_inputs)
+    else
+      @records = Search.new(model: "Note").search
+    end
   end
 
   # GET /notes/1

@@ -1,11 +1,20 @@
 <div class="d-none d-md-block">
   <div class="d-flex justify-content-center">
-    <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic', search_inputs: params.merge(model: records.klass.to_s).permit!} , theme: 'prevnext', remote: true %>
+    <% if params[:search_inputs].present? %>
+      <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic'} , theme: 'prevnext', remote: true %>
+    <% else %>
+      <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic', search_inputs: {model: records.klass.to_s}} , theme: 'prevnext', remote: true %>
+    <% end %>
   </div>
 </div>
 
 <div class="d-md-none">
   <div class="d-flex justify-content-center">
-    <%= paginate records, window: 1, params: {controller: 'basic', action: 'search_basic', search_inputs: params.merge(model: records.klass.to_s).permit!}, remote: true %>
+    <%#= paginate records, window: 1, params: {controller: 'basic', action: 'search_basic', search_inputs: params[:search_inputs].merge(model: records.klass.to_s).permit!}, remote: true %>
+    <% if params[:search_inputs].present? %>
+      <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic'}, remote: true %>
+    <% else %>
+      <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic', search_inputs: {model: records.klass.to_s}}, remote: true %>
+    <% end %>
   </div>
 </div>

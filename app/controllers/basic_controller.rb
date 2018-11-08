@@ -73,58 +73,17 @@ class BasicController < ApplicationController
 
   def search_basic
     if params[:search_inputs].present?
-      search_inputs = params[:search_inputs].permit!.to_h
-      hashy = {
-        model: "Person",
-        page: 3
-      }
-      hashy.merge!(params[:search_inputs])
-      #search_inputs[:page] = params[:page].to_i
-      @records = Search.new(hashy).search
-
-=begin
-
-      klass = class_for(search_inputs[:model])
-      search_term = search_inputs[:search_term]
-      institutions = search_inputs[:institutions]
-      tag_list = search_inputs[:tag_list]
-      assigned_to_user_id = search_inputs[:assigned_to_user_id]
-=end
+      search_inputs = params[:search_inputs]
+      search_inputs[:page] = params[:page]
+      @records = Search.new(search_inputs).search
       @search_inputs = OpenStruct.new(search_inputs)
     else
-      klass = Person
-      search_term = ""
-      institutions = ""
-      tag_list = ""
       @records = Search.new(model: "Person").search
     end
 
     #@records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
     #@search_inputs = params[:search_inputs]
-=begin
-    search_inputs = params[:search_inputs]
-    model = search_inputs[:model]
-    search_term = search_inputs[:search_term]
-    institutions = search_inputs[:institutions]
-    tag_list = search_inputs[:tag_list]
 
-    klass = class_for(model)
-
-    if klass == Person
-      #@records = Search.new(search_term: search_term, model: model, institutions: institutions, tag_list: tag_list).search
-      @records = PeopleSearch.new(search_term: search_term, tags: tags, institutions: institutions).search
-      @records = @records.order(:name).page(params[:page]).per(20)
-    elsif klass == Institution
-      @records = klass.search_records_ilike("%#{search_term}%")
-      @records = @records.order(:name).page(params[:page]).per(20)
-    elsif klass == Note
-      @records = klass.search_records_ilike("%#{search_term}%")
-      @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
-    else
-      @records = klass.search_records_ilike("%#{search_term}%")
-      @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
-    end
-=end
     respond_to do |format|
       format.js
     end

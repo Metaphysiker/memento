@@ -4,7 +4,15 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.order(:created_at).page(params[:page]).per(20)
+    #@tasks = Task.order(:created_at).page(params[:page]).per(20)
+    if params[:search_inputs].present?
+      search_inputs = params[:search_inputs]
+      search_inputs[:page] = params[:page]
+      @records = Search.new(search_inputs).search
+      @search_inputs = OpenStruct.new(search_inputs)
+    else
+      @records = Search.new(model: "Task").search
+    end
   end
 
   # GET /tasks/1

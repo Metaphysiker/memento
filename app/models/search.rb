@@ -1,13 +1,23 @@
 class Search
   include ApplicationHelper
 
-  def initialize(search_term: nil, model: "Person", tag_list: nil, institutions: nil, assigned_to_user_id: nil, page: 0)
+  def initializex(search_term: nil, model: "Person", tag_list: nil, institutions: nil, assigned_to_user_id: nil, page: 0)
     @search_term = search_term
     @tags = tag_list
     @institutions = institutions
     @model = model
     @assigned_to_user_id = assigned_to_user_id
     @page = page
+    @records = []
+  end
+
+  def initialize(search_inputs)
+    @search_term = search_inputs[:search_term] || nil
+    @tags = search_inputs[:tag_list] || nil
+    @institutions = search_inputs[:institutions] || nil
+    @model = search_inputs[:model] || "Person"
+    @assigned_to_user_id = search_inputs[:assigned_to_user_id] || nil
+    @page = search_inputs[:page] || 0
     @records = []
   end
 
@@ -28,10 +38,5 @@ class Search
       @records = TasksSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions, assigned_to_user_id: @assigned_to_user_id).search
       @records = @records.order(:created_at).reverse_order.page(@page).per(20)
     end
-    byebug
-  end
-
-  def return_search_inputs
-    OpenStruct.new(search_term: @search_term, tags: @tags, institutions: @institutions, model: @model)
   end
 end
