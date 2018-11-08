@@ -107,16 +107,6 @@ class PeopleController < ApplicationController
     end
   end
 
-  def csv
-    if params[:search_inputs].present?
-      @search_inputs = params[:search_inputs]
-    else
-      @search_inputs = OpenStruct.new(model: "Person")
-    end
-    @records = Search.new(@search_inputs).search
-    send_data @records.to_csv, filename: "Personen-#{Date.today}.csv"
-  end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

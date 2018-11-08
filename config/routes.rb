@@ -34,6 +34,6 @@ Rails.application.routes.draw do
   get '/render_tags', to: 'render#render_tags', as: 'render_tags'
 
   #csv
-  get '/people_csv', to: 'people#csv', as: 'people_csv'
+  get '/basic_csv', to: 'basic#csv', as: 'basic_csv'
 
 end

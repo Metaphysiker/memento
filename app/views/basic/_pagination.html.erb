@@ -1,5 +1,9 @@
 <div class="d-flex justify-content-center">
-  <%= link_to "PDF", people_csv_path(search_inputs: params.permit!) %>
+  <% if params[:search_inputs].present? %>
+    <%= link_to "CSV", basic_csv_path(search_inputs: params[:search_inputs].permit!) %>
+  <% else %>
+    <%= link_to "CSV", basic_csv_path %>
+  <% end %> | 
   <%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.count %> von <%= records.total_count %>
 </div>
 
