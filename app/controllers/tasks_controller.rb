@@ -6,13 +6,12 @@ class TasksController < ApplicationController
   def index
     #@tasks = Task.order(:created_at).page(params[:page]).per(20)
     if params[:search_inputs].present?
-      search_inputs = params[:search_inputs]
-      search_inputs[:page] = params[:page]
-      @records = Search.new(search_inputs).search
-      @search_inputs = OpenStruct.new(search_inputs)
+      @search_inputs = OpenStruct.new(params[:search_inputs])
     else
-      @records = Search.new(model: "Task").search
+      @search_inputs = OpenStruct.new(model: "Task")
     end
+    @records = Search.new(@search_inputs).search
+    @records = @records.page(params[:page]).per(20)
   end
 
   # GET /tasks/1

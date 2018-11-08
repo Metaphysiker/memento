@@ -21,13 +21,12 @@ class PeopleController < ApplicationController
     #@people = Person.all
     #@people = Person.all.order(:name).page(params[:page])
     if params[:search_inputs].present?
-      search_inputs = params[:search_inputs]
-      search_inputs[:page] = params[:page]
-      @records = Search.new(search_inputs).search
-      @search_inputs = OpenStruct.new(search_inputs)
+      @search_inputs = OpenStruct.new(params[:search_inputs])
     else
-      @records = Search.new(model: "Person").search
+      @search_inputs = OpenStruct.new(model: "Person")
     end
+    @records = Search.new(@search_inputs).search
+    @records = @records.page(params[:page]).per(20)
 
     respond_to do |format|
         format.html

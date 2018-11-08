@@ -49,13 +49,12 @@ class InstitutionsController < ApplicationController
 =end
 
   if params[:search_inputs].present?
-    search_inputs = params[:search_inputs]
-    search_inputs[:page] = params[:page]
-    @records = Search.new(search_inputs).search
-    @search_inputs = OpenStruct.new(search_inputs)
+    @search_inputs = OpenStruct.new(params[:search_inputs])
   else
-    @records = Search.new(model: "Institution").search
+    @search_inputs = OpenStruct.new(model: "Institution")
   end
+  @records = Search.new(@search_inputs).search
+  @records = @records.page(params[:page]).per(20)
 
   #@records = Search.new(params[:search_inputs].to_h).search
   #@records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
