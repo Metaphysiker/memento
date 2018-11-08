@@ -1,3 +1,7 @@
+<div class="d-flex justify-content-center">
+  <%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.count %> von <%= records.total_count %>
+</div>
+
 <div class="d-none d-md-block">
   <div class="d-flex justify-content-center">
     <% if params[:search_inputs].present? %>
