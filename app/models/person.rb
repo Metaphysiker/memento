@@ -60,7 +60,7 @@ end
     person_attributes = %w{firstname lastname email phone gender description}
     human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
     address_attributes = %w{firstname lastname company street plz location country }
-    human_address_attributes = address_attributes.map{ |attr| Address.human_attribute_name(attr) }
+    human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
       csv << human_person_attributes + human_address_attributes
