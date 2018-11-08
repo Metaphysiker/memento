@@ -1,5 +1,7 @@
 class Search
-  def initialize(search_term: nil, model: nil, tag_list: nil, institutions: nil, assigned_to_user_id: nil, page: 0)
+  include ApplicationHelper
+
+  def initialize(search_term: nil, model: "Person", tag_list: nil, institutions: nil, assigned_to_user_id: nil, page: 0)
     @search_term = search_term
     @tags = tag_list
     @institutions = institutions
@@ -10,8 +12,8 @@ class Search
   end
 
   def search
-    #klass = class_for(@model)
-    klass = @model
+    klass = class_for(@model)
+    #klass = @model
 
     if klass == Person
       @records = PeopleSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
@@ -26,6 +28,7 @@ class Search
       @records = TasksSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions, assigned_to_user_id: @assigned_to_user_id).search
       @records = @records.order(:created_at).reverse_order.page(@page).per(20)
     end
+    byebug
   end
 
   def return_search_inputs

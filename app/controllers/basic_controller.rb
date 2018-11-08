@@ -73,21 +73,33 @@ class BasicController < ApplicationController
 
   def search_basic
     if params[:search_inputs].present?
-      search_inputs = params[:search_inputs]
+      search_inputs = params[:search_inputs].permit!.to_h
+      hashy = {
+        model: "Person",
+        page: 3
+      }
+      hashy.merge!(params[:search_inputs])
+      #search_inputs[:page] = params[:page].to_i
+      @records = Search.new(hashy).search
+
+=begin
+
       klass = class_for(search_inputs[:model])
       search_term = search_inputs[:search_term]
       institutions = search_inputs[:institutions]
       tag_list = search_inputs[:tag_list]
       assigned_to_user_id = search_inputs[:assigned_to_user_id]
+=end
       @search_inputs = OpenStruct.new(search_inputs)
     else
       klass = Person
       search_term = ""
       institutions = ""
       tag_list = ""
+      @records = Search.new(model: "Person").search
     end
 
-    @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
+    #@records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
     #@search_inputs = params[:search_inputs]
 =begin
     search_inputs = params[:search_inputs]
