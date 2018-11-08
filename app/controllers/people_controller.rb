@@ -109,16 +109,12 @@ class PeopleController < ApplicationController
 
   def csv
     if params[:search_inputs].present?
-      search_inputs = params[:search_inputs]
-      search_inputs[:page] = params[:page]
-      @records = Search.new(search_inputs).search
-      @search_inputs = OpenStruct.new(search_inputs)
+      @search_inputs = params[:search_inputs]
     else
-      @records = Search.new(model: "Person").search
+      @search_inputs = OpenStruct.new(model: "Person")
     end
-
-    byebug
-    send_data @people.to_csv, filename: "Personen-#{Date.today}.csv"
+    @records = Search.new(@search_inputs).search
+    send_data @records.to_csv, filename: "Personen-#{Date.today}.csv"
   end
 
 

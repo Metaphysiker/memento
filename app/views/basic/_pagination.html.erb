@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-  <%= link_to "PDF", people_csv_path(records: records) %>
+  <%= link_to "PDF", people_csv_path(search_inputs: params.permit!) %>
   <%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.count %> von <%= records.total_count %>
 </div>
 
