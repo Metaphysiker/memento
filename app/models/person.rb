@@ -57,13 +57,16 @@ end
   end
 
   def self.to_csv
-    attributes = %w{id firstname lastname email}
+    person_attributes = %w{firstname lastname email phone gender description}
+    human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
+    address_attributes = %w{firstname lastname company street plz location country }
+    human_address_attributes = address_attributes.map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
-      csv << attributes
+      csv << human_person_attributes + human_address_attributes
 
       all.each do |user|
-        csv << attributes.map{ |attr| user.send(attr) }
+        csv << person_attributes.map{ |attr| user.send(attr) } + address_attributes.map{ |attr| user.address.send(attr) }
       end
     end
   end
