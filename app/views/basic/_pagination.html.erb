@@ -25,14 +25,14 @@
        <%= link_to "CSV", basic_csv_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm" %>
        <%= link_to "PDF", basic_pdf_path(search_inputs: params[:search_inputs].permit!, :format => :pdf), class: "btn btn-primary btn-sm" %>
        <%= link_to "ODT", basic_odf_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm" %>
+       <button type="button" class="btn btn-light btn-sm border border-primary"><%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.count %> von <%= records.total_count %></button>
      </div>
   <% else %>
     <div class="btn-group mx-2" role="group" aria-label="Toolbar for CSV, PDF and ODT">
       <%= link_to "CSV", basic_csv_path, class: "btn btn-primary btn-sm" %>
       <%= link_to "PDF", basic_pdf_path(:format => :pdf), class: "btn btn-primary btn-sm" %>
       <%= link_to "ODT", basic_odf_path, class: "btn btn-primary btn-sm" %>
+      <button type="button" class="btn btn-light btn-sm border border-primary"><%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.count %> von <%= records.total_count %></button>
     </div>
   <% end %>
-
-  <%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.count %> von <%= records.total_count %>
 </div>
