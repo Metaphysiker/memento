@@ -82,6 +82,11 @@
               </p>
             <% end %>
           </div>
+          <p>
+            <%= link_to person_bill_path(person) do %>
+              <%= fa_icon "money" %> Rechnung erstellen
+            <% end %>
+          </p>
 
           <p>
             <div class="shared-person-<%=person.id%>">

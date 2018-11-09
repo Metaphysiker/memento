@@ -125,10 +125,15 @@ class BasicController < ApplicationController
     end
     @records = Search.new(@search_inputs).search
 
-    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/test.odt") do |r|
+    @person = Person.last
 
-      r.add_field :user_name, "Petrus"
-      r.add_field :address, "My new address XXX"
+    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/rechnung.odt") do |r|
+
+      r.add_image :graphics1, "#{Rails.root}/app/views/odfs/logo1.jpg"
+      r.add_field :name, "#{@person.firstname} #{@person.lastname}"
+      r.add_field :street, @person.address.street.to_s
+      r.add_field :location, "#{@person.address.plz} #{@person.address.location}"
+      r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
 
     end
 

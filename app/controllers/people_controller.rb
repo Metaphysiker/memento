@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :set_person, only: [:show, :edit, :update, :destroy, :odf]
 
   require 'csv'
   # GET /people
@@ -105,6 +105,24 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def odf
+    
+    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/rechnung.odt") do |r|
+
+      r.add_image :graphics1, "#{Rails.root}/app/views/odfs/logo1.jpg"
+      r.add_field :name, "#{@person.firstname} #{@person.lastname}"
+      r.add_field :street, @person.address.street.to_s
+      r.add_field :location, "#{@person.address.plz} #{@person.address.location}"
+      r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+
+    end
+
+    send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
+                            disposition: 'attachment',
+                            filename: 'report.odt'
+
   end
 
 
