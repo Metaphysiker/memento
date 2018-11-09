@@ -77,7 +77,7 @@
             <% unless person.tag_list.empty? %>
               <p class="mt-2">
                 <% person.tag_list.each do |tag| %>
-                  <button type="button" class="btn btn-outline-dark m-1"><%= tag %></button>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", tag_list: [tag]}}), class: "btn btn-outline-dark" %>
                 <% end %>
               </p>
             <% end %>
