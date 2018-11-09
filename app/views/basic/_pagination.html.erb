@@ -1,12 +1,15 @@
 <div class="d-flex justify-content-center">
   <% if params[:search_inputs].present? %>
-    <%= link_to "CSV", basic_csv_path(search_inputs: params[:search_inputs].permit!) %> 
+    <%= link_to "CSV", basic_csv_path(search_inputs: params[:search_inputs].permit!) %>
   <% else %>
     <%= link_to "CSV", basic_csv_path %>
   <% end %>
    |
+   <%= link_to 'Create PDF document', basic_pdf_path(:format => :pdf) %>
+   |
   <%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.count %> von <%= records.total_count %>
 </div>
+
 
 <div class="d-none d-md-block">
   <div class="d-flex justify-content-center">

@@ -100,6 +100,16 @@ class BasicController < ApplicationController
     send_data @records.to_csv, filename: "#{@search_inputs.model.to_s}-#{Date.today}.csv"
   end
 
+  def pdf
+  @records = Person.all
+  respond_to do |format|
+      format.pdf do
+        render pdf: "Your_filename",
+        template: "basic/pdf.html.erb",
+        layout: "pdf_layout.html"
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
