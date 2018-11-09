@@ -101,7 +101,13 @@ class BasicController < ApplicationController
   end
 
   def pdf
-  @records = Person.all
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
+    else
+      @search_inputs = OpenStruct.new(model: "Person")
+    end
+    @records = Search.new(@search_inputs).search
+
   respond_to do |format|
       format.pdf do
         render pdf: "Your_filename",
