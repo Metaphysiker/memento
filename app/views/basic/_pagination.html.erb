@@ -21,21 +21,17 @@
 
 <div class="d-flex justify-content-center p-1">
   <% if params[:search_inputs].present? %>
-    <%= link_to basic_csv_path(search_inputs: params[:search_inputs].permit!) do %>
-      <button type="button" class="btn btn-primary btn-sm mx-2">CSV</button>
-    <% end %>
-
-     <%= link_to basic_pdf_path(search_inputs: params[:search_inputs].permit!, :format => :pdf) do %>
-      <button type="button" class="btn btn-primary btn-sm mx-2">PDF</button>
-     <% end %>
+     <div class="btn-group mx-2" role="group" aria-label="Toolbar for CSV, PDF and ODT">
+       <%= link_to "CSV", basic_csv_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm" %>
+       <%= link_to "PDF", basic_pdf_path(search_inputs: params[:search_inputs].permit!, :format => :pdf), class: "btn btn-primary btn-sm" %>
+       <%= link_to "ODT", basic_odf_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm" %>
+     </div>
   <% else %>
-    <%= link_to basic_csv_path do %>
-    <button type="button" class="btn btn-primary btn-sm mx-2">CSV</button>
-    <% end %>
-
-     <%= link_to basic_pdf_path(:format => :pdf) do %>
-      <button type="button" class="btn btn-primary btn-sm mx-2">PDF</button>
-     <% end %>
+    <div class="btn-group mx-2" role="group" aria-label="Toolbar for CSV, PDF and ODT">
+      <%= link_to "CSV", basic_csv_path, class: "btn btn-primary btn-sm" %>
+      <%= link_to "PDF", basic_pdf_path(:format => :pdf), class: "btn btn-primary btn-sm" %>
+      <%= link_to "ODT", basic_odf_path, class: "btn btn-primary btn-sm" %>
+    </div>
   <% end %>
 
   <%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.count %> von <%= records.total_count %>
