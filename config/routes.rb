@@ -39,4 +39,8 @@ Rails.application.routes.draw do
   #pdf
   get '/basic_pdf', to: 'basic#pdf', as: 'basic_pdf'
 
+  #odf
+  get '/basic_odf', to: 'basic#odf', as: 'basic_odf'
+
+
 end

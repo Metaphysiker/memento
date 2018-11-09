@@ -117,6 +117,27 @@ class BasicController < ApplicationController
     end
   end
 
+  def odf
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
+    else
+      @search_inputs = OpenStruct.new(model: "Person")
+    end
+    @records = Search.new(@search_inputs).search
+
+    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/test.odt") do |r|
+
+      r.add_field :user_name, "Petrus"
+      r.add_field :address, "My new address XXX"
+
+    end
+
+    send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
+                            disposition: 'attachment',
+                            filename: 'report.odt'
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
