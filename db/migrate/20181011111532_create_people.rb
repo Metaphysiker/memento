@@ -9,6 +9,7 @@ class CreatePeople < ActiveRecord::Migration[5.2]
       t.integer :philosophie_id
       t.string :gender, default: ""
       t.text :description, default: ""
+      t.string :language, default: ""
 
       t.timestamps
     end

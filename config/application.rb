@@ -16,6 +16,8 @@ module Memento
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.time_zone = "Berlin"
+    #Rails.configuration.language
+    config.language = %w(de fr en it)
 
     config.generators do |g|
       g.test_framework :rspec,
