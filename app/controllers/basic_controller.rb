@@ -74,7 +74,6 @@ class BasicController < ApplicationController
   end
 
   def search_basic
-    byebug
     if params[:search_inputs].present?
       @search_inputs = OpenStruct.new(params[:search_inputs])
     else
