@@ -33,7 +33,10 @@
         <%= link_to "PDF", basic_pdf_path(:format => :pdf), class: "btn btn-primary btn-sm" %>
         <%= link_to "ODT", basic_odf_path, class: "btn btn-primary btn-sm #{disable_odt}" %>
     <% end %>
-      <button type="button" class="btn btn-light btn-sm border border-primary"><b><%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.count %></b> von <b><%= records.total_count %></b></button>
+      <button type="button" class="btn btn-light btn-sm border border-primary">
+        <b><%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.size %></b> von <b><%= records.total_count %>
+        </b>
+      </button>
     </div>
   <% end %>
 </div>

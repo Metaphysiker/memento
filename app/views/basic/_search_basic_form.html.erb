@@ -9,12 +9,22 @@
   </p>
 <div class="collapse <%= "show" unless @search_inputs.nil? || (@search_inputs.tag_list.blank? && @search_inputs.institutions.nil?) %> mb-2" id="search_options">
   <div class="card card-body">
-    <%= f.input :tag_list, as: :select, collection: TagList.all, label: "Tags", required: false, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
-    <br>
-    <%= f.input :institutions, as: :select, collection: Institution.all, label: "Institutionen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
+    <% if records.klass.to_s == "Person" %>
+      <%= f.input :tag_list, as: :select, collection: TagList.all, label: "Tags", required: false, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+      <br>
+      <%= f.input :institutions, as: :select, collection: Institution.all, label: "Institutionen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
+    <% elsif records.klass.to_s == "Institution" %>
+      <%= f.input :tag_list, as: :select, collection: TagList.all, label: "Tags", required: false, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+      <br>
+      <%= f.input :institutions, as: :select, collection: Institution.all, label: "Institutionen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
+    <% elsif records.klass.to_s == "Note" %>
 
-    <% if records.klass.to_s == "Task" %>
+    <% elsif records.klass.to_s == "Task" %>
       <%= f.input :assigned_to_user_id, collection: User.all, label: "Zuständig: ", required: false, label_method: :username, value_method: :id, include_blank: true %>
+    <% end %>
+
+    <%= f.fields_for :advanced1 do |ff| %>
+      <%= ff.text_field :search_termx, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control" %>
     <% end %>
   </div>
 </div>
