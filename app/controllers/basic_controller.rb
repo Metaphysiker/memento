@@ -139,7 +139,7 @@ class BasicController < ApplicationController
 
       end
 
-      reports << ["#{person.name}-#{person.id}.odt".parameterize, report.generate]
+      reports << ["#{person.name}-#{person.id}".parameterize + ".odt", report.generate]
     end
 
     compressed_filestream = Zip::OutputStream.write_buffer do |zos|
