@@ -16,6 +16,11 @@
     <% if records.klass.to_s == "Task" %>
       <%= f.input :assigned_to_user_id, collection: User.all, label: "Zuständig: ", required: false, label_method: :username, value_method: :id, include_blank: true %>
     <% end %>
+
+    <%= f.fields_for :advanced1 do |ff| %>
+      <%= ff.text_field :search_term, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control" %>
+    <% end %>
+
   </div>
 </div>
   <%= f.submit "Suchen", id: "trigger_search", class: "btn btn-primary" %>
