@@ -121,7 +121,7 @@ class PeopleController < ApplicationController
 
     send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
                             disposition: 'attachment',
-                            filename: 'report.odt'
+                            filename: 'rechnung.odt'
 
   end
 

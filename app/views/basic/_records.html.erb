@@ -1,5 +1,10 @@
 <div class="<%=records.klass.to_s.pluralize.downcase%>">
   <%= render "basic/pagination", records: records %>
+  <% if records.nil? || records.empty? %>
+  <div class="text-center">
+    Nichts gefunden!
+  </div>
+  <% end %>
   <%= render partial: "#{records.klass.to_s.pluralize.downcase}/show", collection: records, as: :record %>
   <%= render "basic/pagination", records: records %>
 </div>
