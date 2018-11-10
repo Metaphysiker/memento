@@ -63,6 +63,10 @@
             <p class="card-text"><strong>Sprache: </strong><%= t(person.language) %></p>
           <% end %>
 
+          <% if !person.blogger_status.blank? %>
+            <p class="card-text"><strong>Blogger-Status: </strong><%= person.blogger_status %></p>
+          <% end %>
+
           <div class="person-<%=person.id%>-institutions">
             <% unless person.institutions.empty? %>
             <p> <b>Ist Mitglied bei:</b>

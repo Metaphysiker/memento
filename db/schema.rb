@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 2018_10_20_193719) do
     t.string "gender", default: ""
     t.text "description", default: ""
     t.string "language", default: ""
+    t.string "blogger_status", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

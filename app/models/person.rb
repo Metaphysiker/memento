@@ -42,6 +42,10 @@ end
     ['male', 'female', 'transgender']
   end
 
+  def self.blogger_statuses
+    ['aktiver Blogger', 'passiver Blogger', 'einmalig']
+  end
+
   def set_name
     name = ""
 

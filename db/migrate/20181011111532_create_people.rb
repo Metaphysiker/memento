@@ -10,6 +10,7 @@ class CreatePeople < ActiveRecord::Migration[5.2]
       t.string :gender, default: ""
       t.text :description, default: ""
       t.string :language, default: ""
+      t.string :blogger_status, default: ""
 
       t.timestamps
     end
