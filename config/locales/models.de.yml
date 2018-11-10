@@ -30,6 +30,7 @@ de:
         institutions: "Institutionen"
         gender: "Geschlecht"
         description: "Beschreibung"
+        language: "Sprache"
       address:
         form_of_address: "Anrede"
         firstname: "Vorname"

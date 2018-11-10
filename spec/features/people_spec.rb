@@ -337,6 +337,42 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(phone)
   end
 
+  it "expects language" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample,
+      language: Rails.configuration.language.sample
+    )
+
+    visit "/people/#{person.id}"
+    expect(page).to have_content("Sprache:")
+    expect(page).to have_content(I18n.t(person.language))
+  end
+
+  it "updates and expects language" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    language = Rails.configuration.language.sample
+
+    visit "/people/#{person.id}"
+
+    find(".person-#{person.id}-edit").click
+
+    select(I18n.t(language), :from => 'Sprache')
+
+    click_button "Person aktualisieren"
+
+    expect(page).to have_content("Sprache:")
+    expect(page).to have_content(I18n.t(language))
+  end
+
 end
 
 def login_with(user)

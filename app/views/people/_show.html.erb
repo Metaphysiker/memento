@@ -59,6 +59,10 @@
             <p class="card-text"><strong>Geschlecht: </strong><%= t(person.gender) %></p>
           <% end %>
 
+          <% if !person.language.blank? %>
+            <p class="card-text"><strong>Sprache: </strong><%= t(person.language) %></p>
+          <% end %>
+
           <div class="person-<%=person.id%>-institutions">
             <% unless person.institutions.empty? %>
             <p> <b>Ist Mitglied bei:</b>
