@@ -23,14 +23,25 @@
       <%= f.input :assigned_to_user_id, collection: User.all, label: "Zuständig: ", required: false, label_method: :username, value_method: :id, include_blank: true %>
     <% end %>
 
-    <%= f.fields_for :advanced1 do |ff| %>
-      <%= ff.text_field :search_termx, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control" %>
+    <% f.fields_for :advanced1 do |ff| %>
+      <%= ff.text_field :search_termx, placeholder: "Nach x suchen", autocomplete: :off %>
     <% end %>
   </div>
 </div>
   <%= f.submit "Suchen", id: "trigger_search", class: "btn btn-primary" %>
 <% end %>
 
+<%= form_with model: @article, class: "nifty_form" do |sf| %>
+  <span>
+    <%= sf.text_field :title %>
+  </span>
+  <span>
+    <%= sf.text_field :body %>
+  </span>
+  <br />
+
+  <%= sf.submit "Create" %>
+<% end %>
 
 <script>
     $(document).ready(function(){
