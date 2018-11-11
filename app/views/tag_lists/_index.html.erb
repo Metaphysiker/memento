@@ -2,17 +2,38 @@
   <h1>Tags - Übersicht</h1>
   <hr />
 
-  <h3>Personen - Tags</h3>
-  <% tag_lists.order(:model, :category).each do |tag_list| %>
-    <p>
-      <div class="row">
-        <div class="col-4">
-          <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+        <div class="bg-light rounded p-2 m-2">
+          <h3>Personen</h3>
+          <% tag_lists.where(model: "Person").order(:category).each do |tag_list| %>
+            <p>
+              <div class="row">
+                <div class="col-4">
+                  <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
+                </div>
+              </div>
+            </p>
+            <hr>
+            <% end %>
         </div>
       </div>
-    </p>
-    <hr>
-  <% end %>
+    <div class="col-sm-12 col-md-6">
+      <div class="bg-light rounded p-2 m-2">
+        <h3>Institutionen</h3>
+        <% tag_lists.where(model: "Institution").order(:category).each do |tag_list| %>
+          <p>
+            <div class="row">
+              <div class="col-4">
+                <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
+              </div>
+            </div>
+          </p>
+          <hr>
+      <% end %>
+      </div>
+    </div>
+  </div>
 
   <br>
 
