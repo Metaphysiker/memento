@@ -3,11 +3,11 @@
   <hr />
 
   <h3>Personen - Tags</h3>
-  <% tag_lists.where(model: "Person").order(:category).each do |tag_list| %>
+  <% tag_lists.order(:model, :category).each do |tag_list| %>
     <p>
       <div class="row">
         <div class="col-4">
-          <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, functionality_list: [tag_list.name] }}), class: "btn btn-outline-dark" %>
+          <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
         </div>
       </div>
     </p>
