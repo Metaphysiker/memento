@@ -15,11 +15,24 @@ class PeopleSearch
   unless @institutions.nil? || @institutions.empty?
     institutions = @institutions.reject { |c| c.blank? }
     institutions = institutions.collect {|x| x.to_i}
+    ids_of_people_with_institutions = Person.all.pluck(:id)
 
+    unless institutions.empty?
+      institutions.each do |institution|
+        ids = Person.all.includes(:institutions).where(institutions: {id: institution}).pluck(:id)
+        ids_of_people_with_institutions = ids_of_people_with_institutions & ids
+      end
+      query = query.where(id: ids_of_people_with_institutions)
+    end
+
+=begin
     unless institutions.empty?
       query = query.includes(:institutions).where(institutions: {id: institutions})
     end
+=end
   end
+
+
 
   unless @tags.nil? || @tags.empty?
     tags = @tags.reject { |c| c.blank? }
