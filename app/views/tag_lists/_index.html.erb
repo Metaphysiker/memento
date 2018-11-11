@@ -1,18 +1,13 @@
 <% tag_lists = tag_lists || @tag_lists %>
-  <h1>Tags</h1>
+  <h1>Tags - Übersicht</h1>
   <hr />
 
-  <% tag_lists.each do |tag_list| %>
+  <h3>Personen - Tags</h3>
+  <% tag_lists.where(model: "Person").order(:category).each do |tag_list| %>
     <p>
       <div class="row">
         <div class="col-4">
-          <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: "Person", tag_list: [tag_list.name]}}), class: "btn btn-outline-dark" %>
-        </div>
-        <div class="col-4">
-          Personen mit diesem Tag: <%= Person.tagged_with(tag_list.name).count %>
-        </div>
-        <div class="col-4">
-          Institutionen mit diesem Tag: <%= Institution.tagged_with(tag_list.name).count %>
+          <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, functionality_list: [tag_list.name] }}), class: "btn btn-outline-dark" %>
         </div>
       </div>
     </p>

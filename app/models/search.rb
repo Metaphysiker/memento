@@ -31,7 +31,7 @@ class Search
       @records = PeopleSearch.new(search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions).search
       @records = @records.order(:name)
     elsif klass == Institution
-      @records = InstitutionsSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
+      @records = InstitutionsSearch.new(search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions).search
       @records = @records.order(:name)
     elsif klass == Note
       @records = NotesSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search
