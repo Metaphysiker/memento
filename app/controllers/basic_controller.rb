@@ -113,7 +113,8 @@ class BasicController < ApplicationController
       format.pdf do
         render pdf: "Your_filename",
         template: "basic/pdf.html.erb",
-        layout: "pdf_layout.html"
+        layout: "pdf_layout.html",
+        dpi: 75
       end
     end
   end
