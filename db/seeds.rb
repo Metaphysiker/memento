@@ -33,12 +33,28 @@ User.create(
     password: 123456
 )
 
-tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
+person_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
         "Portalmitglied", "Veranstalter", "Lehrperson", "Öffentliche Institution",
       "Blogger", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
 
-tags.each do |tag|
+person_functionality_tags.each do |tag|
   TagList.create(
-    name: tag
+    name: tag,
+    category: "functionality",
+    model: "Person"
   )
 end
+
+person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Uni-Mitarbeitende",
+        "Gymnasiallehrperson", "Private", "Beruffachleute", "Medienfachleute",
+      "Mitglieder Verein", "ehrenamtliche Blogger"]
+
+person_target_groups_tags.each do |tag|
+  TagList.create(
+    name: tag,
+    category: "target_group",
+    model: "Person"
+  )
+end
+
+#rails db:create && rails db:migrate && rails db:seed && rake sync:totalsync
