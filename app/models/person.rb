@@ -14,7 +14,8 @@ class Person < ApplicationRecord
   validates :email, presence: :true, uniqueness: :true
 
   acts_as_taggable
-  #acts_as_taggable_on :target_groups
+  acts_as_taggable_on :functionalities
+  acts_as_taggable_on :target_groups
 
   #scope :search_people_ilike, ->(search_term) { left_outer_joins(:institutions).where("people.email ILIKE ? OR people.phone ILIKE ? OR people.name ILIKE ? OR people.description ILIKE ? OR institutions.name ILIKE ?", search_term, search_term, search_term, search_term, search_term) }
   scope :search_records_ilike, ->(search_term) { left_outer_joins(:institutions).where("people.email ILIKE ? OR people.phone ILIKE ? OR people.name ILIKE ? OR people.description ILIKE ? OR institutions.name ILIKE ?", search_term, search_term, search_term, search_term, search_term) }

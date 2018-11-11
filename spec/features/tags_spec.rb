@@ -3,13 +3,27 @@ require 'rails_helper'
 RSpec.describe "tags", :type => :feature do
 
   before(:each) do
-    tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
+    person_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
             "Portalmitglied", "Veranstalter", "Lehrperson", "Öffentliche Institution",
           "Blogger", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
 
-    tags.each do |tag|
+    person_functionality_tags.each do |tag|
       TagList.create(
-        name: tag
+        name: tag,
+        category: "functionality",
+        model: "Person"
+      )
+    end
+
+    person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Uni-Mitarbeitende",
+            "Gymnasiallehrperson", "Private", "Beruffachleute", "Medienfachleute",
+          "Mitglieder Verein", "ehrenamtliche Blogger"]
+
+    person_target_groups_tags.each do |tag|
+      TagList.create(
+        name: tag,
+        category: "target_group",
+        model: "Person"
       )
     end
   end
@@ -19,7 +33,7 @@ RSpec.describe "tags", :type => :feature do
     login_with(first_user)
   end
 
-  it "views a person and expects tags" do
+  it "views a person and expects functionality and target group tags" do
     person = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
@@ -29,21 +43,60 @@ RSpec.describe "tags", :type => :feature do
       gender: "male"
     )
 
-    tag1 = TagList.first.name
-    person.tag_list.add(tag1)
+    ftag = TagList.where(model: "Person", category: "functionality").sample
+    person.functionality_list.add(ftag)
 
-    tag2 = TagList.second.name
-    person.tag_list.add(tag2)
+    ttag = TagList.where(model: "Person", category: "target_group").sample
+    person.target_group_list.add(ttag)
     person.save
 
     visit "/people/#{person.id}"
 
-    within ".person-#{person.id}-tags" do
-      expect(page).to have_content(tag1)
-      expect(page).to have_content(tag2)
+    within ".person-#{person.id}-functionality-tags" do
+      expect(page).to have_content(ftag)
+    end
+
+    within ".person-#{person.id}-target-group-tags" do
+      expect(page).to have_content(ttag)
     end
 
   end
+
+  it "views a person, adds and expects functionality and target group tags" do
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: "male"
+    )
+
+    ftag = TagList.where(model: "Person", category: "functionality").sample
+    person.functionality_list.add(ftag)
+
+    ttag = TagList.where(model: "Person", category: "target_group").sample
+    person.target_group_list.add(ttag)
+    person.save
+
+    visit "/people/#{person.id}"
+
+    find(".person-#{person.id}-edit").click
+    select_from_chosen(ftag.name, from: 'person_functionality_list')
+    select_from_chosen(ttag.name, from: 'person_target_group_list')
+
+    click_button "Person aktualisieren"
+
+    within ".person-#{person.id}-functionality-tags" do
+      expect(page).to have_content(ftag)
+    end
+
+    within ".person-#{person.id}-target-group-tags" do
+      expect(page).to have_content(ttag)
+    end
+
+  end
+
 
   it "views a person, adds tags and expects tags" do
     person = Person.create(

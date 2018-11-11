@@ -77,15 +77,28 @@
           <% end %>
           </div>
 
-          <div class="person-<%= person.id %>-tags">
-            <% unless person.tag_list.empty? %>
+          <div class="person-<%= person.id %>-functionality-tags">
+            <% unless person.functionality_list.empty? %>
+            <p class="card-text"><strong>Funktionalitäten: </p>
               <p class="mt-2">
-                <% person.tag_list.each do |tag| %>
+                <% person.functionality_list.each do |tag| %>
                   <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", tag_list: [tag]}}), class: "btn btn-outline-dark" %>
                 <% end %>
               </p>
             <% end %>
           </div>
+
+          <div class="person-<%= person.id %>-target-group-tags">
+            <% unless person.target_group_list.empty? %>
+            <p class="card-text"><strong>Zielgruppe: </p>
+              <p class="mt-2">
+                <% person.target_group_list.each do |tag| %>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", tag_list: [tag]}}), class: "btn btn-outline-dark" %>
+                <% end %>
+              </p>
+            <% end %>
+          </div>
+
           <p>
             <%= link_to person_bill_path(person) do %>
               <%= fa_icon "money" %> Rechnung erstellen
