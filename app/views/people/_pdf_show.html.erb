@@ -1,6 +1,7 @@
 <% person = person || record %>
 
 <div class="person-<%= person.id %>">
+
   <div class="person-profile-view">
       <div class="card my-3">
         <div class="card-body">
@@ -18,6 +19,10 @@
             <p class="card-text"><strong>Geschlecht: </strong><%= t(person.gender) %></p>
           <% end %>
 
+          <% if !person.language.blank? %>
+            <p class="card-text"><strong>Sprache: </strong><%= t(person.language) %></p>
+          <% end %>
+
           <div class="person-<%=person.id%>-institutions">
             <% unless person.institutions.empty? %>
             <p> <b>Ist Mitglied bei:</b>
@@ -32,17 +37,30 @@
           <% end %>
           </div>
 
-          <div class="person-<%= person.id %>-tags">
-            <% unless person.tag_list.empty? %>
+          <div class="person-<%= person.id %>-functionality-tags">
+            <% unless person.functionality_list.empty? %>
+            <p class="card-text"><strong>Funktionalitäten: </p>
               <p class="mt-2">
-                <% person.tag_list.each do |tag| %>
-                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", tag_list: [tag]}}), class: "btn btn-outline-dark" %>
+                <% person.functionality_list.each do |tag| %>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", functionality_list: [tag]}}), class: "btn btn-outline-dark" %>
                 <% end %>
               </p>
             <% end %>
           </div>
+
+          <div class="person-<%= person.id %>-target-group-tags">
+            <% unless person.target_group_list.empty? %>
+            <p class="card-text"><strong>Zielgruppe: </p>
+              <p class="mt-2">
+                <% person.target_group_list.each do |tag| %>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", target_group_list: [tag]}}), class: "btn btn-outline-dark" %>
+                <% end %>
+              </p>
+            <% end %>
+          </div>
+
           <hr />
-          <%= render "shared/created_and_updated", parent: person %>
+            <%= render "shared/created_and_updated", parent: person %>
         </div>
       </div>
   </div>
