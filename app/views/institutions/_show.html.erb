@@ -63,11 +63,23 @@
           <% end %>
           </div>
 
-          <div class="institution-<%= institution.id %>-tags">
-            <% unless institution.tag_list.empty? %>
+          <div class="institution-<%= institution.id %>-functionality-tags">
+            <% unless institution.functionality_list.empty? %>
+            <p class="card-text"><strong>Funktionalitäten: </p>
               <p class="mt-2">
-                <% institution.tag_list.each do |tag| %>
-                  <button type="button" class="btn btn-outline-dark m-1"><%= tag %></button>
+                <% institution.functionality_list.each do |tag| %>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Institution", tag_list: [tag]}}), class: "btn btn-outline-dark" %>
+                <% end %>
+              </p>
+            <% end %>
+          </div>
+
+          <div class="institution-<%= institution.id %>-target-group-tags">
+            <% unless institution.target_group_list.empty? %>
+            <p class="card-text"><strong>Zielgruppe: </p>
+              <p class="mt-2">
+                <% institution.target_group_list.each do |tag| %>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Institution", tag_list: [tag]}}), class: "btn btn-outline-dark" %>
                 <% end %>
               </p>
             <% end %>

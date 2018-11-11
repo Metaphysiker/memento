@@ -15,9 +15,26 @@
     <%= f.input :email %>
   </div>
 
+  <%= f.input :functionality_list, as: :select, collection: TagList.where(model: "Institution", category: "functionality"), label: "Funktionalitäten", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+  <%= f.input :target_group_list, as: :select, collection: TagList.where(model: "Institution", category: "target_group"), label: "Zielgruppe", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
 <% end %>
 
 </div>
+
+<script>
+  $( document ).ready(function() {
+
+    $('.chosen-select').chosen({
+      allow_single_deselect: true,
+      no_results_text: 'Nichts gefunden',
+      inherit_select_classes: false,
+      search_contains: true,
+      width: '100%'
+    });
+
+  });
+</script>

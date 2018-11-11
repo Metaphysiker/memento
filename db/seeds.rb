@@ -57,4 +57,28 @@ person_target_groups_tags.each do |tag|
   )
 end
 
+institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
+        "Portalmitglied", "Veranstalter", "Lehrperson", "Öffentliche Institution",
+      "Blogger", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
+
+institutions_functionality_tags.each do |tag|
+  TagList.create(
+    name: tag,
+    category: "functionality",
+    model: "Institution"
+  )
+end
+
+institutions_target_groups_tags = ["Philosophisches Institut", "Kooperationspartner","SPG/SAGW", "Charles Hummel Stiftung",
+        "Stiftung", "Philosophischer Verein", "Verlag", "Sponsor",
+      "Verein", "öffentliche Institution", "Unternehmen", "Medienkontakt"]
+
+institutions_target_groups_tags.each do |tag|
+  TagList.create(
+    name: tag,
+    category: "target_group",
+    model: "Institution"
+  )
+end
+
 #rails db:create && rails db:migrate && rails db:seed && rake sync:totalsync
