@@ -111,7 +111,7 @@ class BasicController < ApplicationController
 
   respond_to do |format|
       format.pdf do
-        render pdf: "Your_filename",
+        render pdf: "#{@search_inputs.model.to_s}-#{Date.today}.pdf",
         template: "basic/pdf.html.erb",
         layout: "pdf_layout.html",
         dpi: 75
