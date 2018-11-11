@@ -261,7 +261,7 @@ RSpec.describe "search_people", :type => :feature do
     person2 = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
+      lastname: Faker::Name.unique.last_name,
       description: Faker::Lorem.paragraph,
       phone: Faker::PhoneNumber.cell_phone,
       gender: Person.genders.sample
@@ -269,7 +269,7 @@ RSpec.describe "search_people", :type => :feature do
     person3 = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
+      lastname: Faker::Name.unique.last_name,
       description: Faker::Lorem.paragraph,
       phone: Faker::PhoneNumber.cell_phone,
       gender: Person.genders.sample

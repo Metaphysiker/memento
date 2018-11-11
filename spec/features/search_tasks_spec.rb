@@ -21,15 +21,15 @@ RSpec.describe "search_tasks", :type => :feature do
   it "searches among 3 tasks and expects 1 result" do
 
     task1 = Task.create(
-      description: Faker::Lorem.paragraph
+      description: Faker::Lorem.unique.paragraph
     )
 
     task2 = Task.create(
-      description: Faker::Lorem.paragraph
+      description: Faker::Lorem.unique.paragraph
     )
 
     task3 = Task.create(
-      description: Faker::Lorem.paragraph
+      description: Faker::Lorem.unique.paragraph
     )
 
     person.tasks << [task1, task2, task3]

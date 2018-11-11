@@ -51,3 +51,7 @@ de:
         priority: "Priorität"
         assigned_to_user_id: "Zuständig:"
         status: "Status"
+      tag_list:
+        name: "Name"
+        category: "Kategorie"
+        model: "Modell"
