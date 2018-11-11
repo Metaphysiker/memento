@@ -73,11 +73,8 @@ RSpec.describe "tags", :type => :feature do
     )
 
     ftag = TagList.where(model: "Person", category: "functionality").sample
-    person.functionality_list.add(ftag)
 
     ttag = TagList.where(model: "Person", category: "target_group").sample
-    person.target_group_list.add(ttag)
-    person.save
 
     visit "/people/#{person.id}"
 
@@ -88,17 +85,16 @@ RSpec.describe "tags", :type => :feature do
     click_button "Person aktualisieren"
 
     within ".person-#{person.id}-functionality-tags" do
-      expect(page).to have_content(ftag)
+      expect(page).to have_content(ftag.name)
     end
 
     within ".person-#{person.id}-target-group-tags" do
-      expect(page).to have_content(ttag)
+      expect(page).to have_content(ttag.name)
     end
 
   end
 
-
-  it "views a person, adds tags and expects tags" do
+  it "views a person, adds and expects 5 functionality and target group tags" do
     person = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
@@ -107,27 +103,36 @@ RSpec.describe "tags", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
-    tag1 = TagList.first.name
-
-    tag2 = TagList.second.name
 
     visit "/people/#{person.id}"
 
     find(".person-#{person.id}-edit").click
 
-    select_from_chosen(tag1, from: 'person_tag_list')
-    select_from_chosen(tag2, from: 'person_tag_list')
+    TagList.where(model: "Person", category: "functionality").first(5).each do |ftag|
+      select_from_chosen(ftag.name, from: 'person_functionality_list')
+    end
+
+    TagList.where(model: "Person", category: "target_group").first(5).each do |ttag|
+      select_from_chosen(ttag.name, from: 'person_target_group_list')
+    end
 
     click_button "Person aktualisieren"
 
-    within ".person-#{person.id}-tags" do
-      expect(page).to have_content(tag1)
-      expect(page).to have_content(tag2)
+    within ".person-#{person.id}-functionality-tags" do
+      TagList.where(model: "Person", category: "functionality").first(5).each do |ftag|
+        expect(page).to have_content(ftag.name)
+      end
+    end
+
+    within ".person-#{person.id}-target-group-tags" do
+      TagList.where(model: "Person", category: "target_group").first(5).each do |ttag|
+        expect(page).to have_content(ttag.name)
+      end
     end
 
   end
 
-  it "views a person, adds 5 tags and expects tags" do
+  it "views a person, removes and expects 0 functionality and target group tags" do
     person = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
@@ -136,69 +141,42 @@ RSpec.describe "tags", :type => :feature do
       phone: Faker::PhoneNumber.cell_phone,
       gender: "male"
     )
-    tag1 = TagList.first.name
-    tag2 = TagList.second.name
-    tag3 = TagList.third.name
-    tag4 = TagList.fourth.name
-    tag5 = TagList.fifth.name
+
+    ftag = TagList.where(model: "Person", category: "functionality").sample
+
+    ttag = TagList.where(model: "Person", category: "target_group").sample
 
     visit "/people/#{person.id}"
 
     find(".person-#{person.id}-edit").click
-
-    select_from_chosen(tag1, from: 'person_tag_list')
-    select_from_chosen(tag2, from: 'person_tag_list')
-    select_from_chosen(tag3, from: 'person_tag_list')
-    select_from_chosen(tag4, from: 'person_tag_list')
-    select_from_chosen(tag5, from: 'person_tag_list')
+    select_from_chosen(ftag.name, from: 'person_functionality_list')
+    select_from_chosen(ttag.name, from: 'person_target_group_list')
 
     click_button "Person aktualisieren"
 
-    within ".person-#{person.id}-tags" do
-      expect(page).to have_content(tag1)
-      expect(page).to have_content(tag2)
-      expect(page).to have_content(tag3)
-      expect(page).to have_content(tag4)
-      expect(page).to have_content(tag5)
-      expect(page).to_not have_content(TagList.last.name)
+    within ".person-#{person.id}-functionality-tags" do
+      expect(page).to have_content(ftag.name)
     end
 
-  end
-
-  it "views a person, remove tags and expects no tags" do
-    person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: "male"
-    )
-    tag1 = TagList.first.name
-    person.tag_list.add(tag1)
-
-    tag2 = TagList.second.name
-    person.tag_list.add(tag2)
-    person.save
-
-    visit "/people/#{person.id}"
-
-    within ".person-#{person.id}-tags" do
-      expect(page).to have_content(tag1)
-      expect(page).to have_content(tag2)
+    within ".person-#{person.id}-target-group-tags" do
+      expect(page).to have_content(ttag.name)
     end
 
     find(".person-#{person.id}-edit").click
 
-    remove_from_chosen(tag1, from: 'person_tag_list')
-    remove_from_chosen(tag2, from: 'person_tag_list')
+    remove_from_chosen(ftag.name, from: 'person_functionality_list')
+    remove_from_chosen(ttag.name, from: 'person_target_group_list')
 
     click_button "Person aktualisieren"
 
-    within ".person-#{person.id}-tags" do
-      expect(page).to_not have_content(tag1)
-      expect(page).to_not have_content(tag2)
+    within ".person-#{person.id}-functionality-tags" do
+      expect(page).to_not have_content(ftag.name)
     end
+
+    within ".person-#{person.id}-target-group-tags" do
+      expect(page).to_not have_content(ttag.name)
+    end
+
   end
 
   it "creates a tag" do
