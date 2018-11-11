@@ -81,4 +81,4 @@ institutions_target_groups_tags.each do |tag|
   )
 end
 
-#rails db:create && rails db:migrate && rails db:seed && rake sync:totalsync
+#rails db:drop && rails db:create && rails db:migrate && rails db:seed && rake sync:totalsync

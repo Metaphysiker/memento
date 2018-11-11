@@ -13,6 +13,30 @@ RSpec.describe "tags", :type => :feature do
         category: "functionality",
         model: "Person"
       )
+
+      institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
+              "Portalmitglied", "Veranstalter", "Lehrperson", "Öffentliche Institution",
+            "Blogger", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
+
+      institutions_functionality_tags.each do |tag|
+        TagList.create(
+          name: tag,
+          category: "functionality",
+          model: "Institution"
+        )
+      end
+
+      institutions_target_groups_tags = ["Philosophisches Institut", "Kooperationspartner","SPG/SAGW", "Charles Hummel Stiftung",
+              "Stiftung", "Philosophischer Verein", "Verlag", "Sponsor",
+            "Verein", "öffentliche Institution", "Unternehmen", "Medienkontakt"]
+
+      institutions_target_groups_tags.each do |tag|
+        TagList.create(
+          name: tag,
+          category: "target_group",
+          model: "Institution"
+        )
+      end
     end
 
     person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Uni-Mitarbeitende",
@@ -132,7 +156,7 @@ RSpec.describe "tags", :type => :feature do
 
   end
 
-  it "views a person, removes and expects 0 functionality and target group tags" do
+  it "views a person, adds, removes and expects 0 functionality and target group tags" do
     person = Person.create(
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
@@ -174,6 +198,46 @@ RSpec.describe "tags", :type => :feature do
     end
 
     within ".person-#{person.id}-target-group-tags" do
+      expect(page).to_not have_content(ttag.name)
+    end
+
+  end
+
+  it "views an institution, adds, removes and expects 0 functionality and target group tags" do
+    institution = Institution.create(name: Faker::Name.unique.last_name)
+
+    ftag = TagList.where(model: "Institution", category: "functionality").sample
+
+    ttag = TagList.where(model: "Institution", category: "target_group").sample
+
+    visit "/institutions/#{institution.id}"
+
+    find(".institution-#{institution.id}-edit").click
+    select_from_chosen(ftag.name, from: 'institution_functionality_list')
+    select_from_chosen(ttag.name, from: 'institution_target_group_list')
+
+    click_button "Institution aktualisieren"
+
+    within ".institution-#{institution.id}-functionality-tags" do
+      expect(page).to have_content(ftag.name)
+    end
+
+    within ".institution-#{institution.id}-target-group-tags" do
+      expect(page).to have_content(ttag.name)
+    end
+
+    find(".institution-#{institution.id}-edit").click
+
+    remove_from_chosen(ftag.name, from: 'institution_functionality_list')
+    remove_from_chosen(ttag.name, from: 'institution_target_group_list')
+
+    click_button "Institution aktualisieren"
+
+    within ".institution-#{institution.id}-functionality-tags" do
+      expect(page).to_not have_content(ftag.name)
+    end
+
+    within ".institution-#{institution.id}-target-group-tags" do
       expect(page).to_not have_content(ttag.name)
     end
 
