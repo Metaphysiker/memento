@@ -70,7 +70,7 @@ institutions_functionality_tags.each do |tag|
 end
 
 institutions_target_groups_tags = ["Philosophisches Institut", "Kooperationspartner","SPG/SAGW", "Charles Hummel Stiftung",
-        "Stiftung", "Philosophischer Verein", "Verlag", "Sponsor",
+        "Stiftung", "Philosophischer Verein", "Verlag", "Sponsor(Zielgruppe)",
       "Verein", "öffentliche Institution", "Unternehmen", "Medienkontakt"]
 
 institutions_target_groups_tags.each do |tag|

@@ -23,16 +23,39 @@
 
   <% unless records.nil? || records.empty? %>
     <div class="btn-group mx-2" role="group" aria-label="Toolbar for CSV, PDF and ODT">
-    <% disable_odt = (records.total_count > 20) ? "disabled" : "" %>
-    <% if params[:search_inputs].present? %>
-         <%= link_to "CSV", basic_csv_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm" %>
-         <%= link_to "PDF", basic_pdf_path(search_inputs: params[:search_inputs].permit!, :format => :pdf), class: "btn btn-primary btn-sm" %>
-         <%= link_to "ODT", basic_odf_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm #{disable_odt}" %>
-    <% else %>
-        <%= link_to "CSV", basic_csv_path, class: "btn btn-primary btn-sm" %>
-        <%= link_to "PDF", basic_pdf_path(:format => :pdf), class: "btn btn-primary btn-sm" %>
-        <%= link_to "ODT", basic_odf_path, class: "btn btn-primary btn-sm #{disable_odt}" %>
-    <% end %>
+
+      <% if records.klass.to_s == "Person" %>
+      <% disable_odt = (records.total_count > 20) ? "disabled" : "" %>
+      <% if params[:search_inputs].present? %>
+           <%= link_to "CSV", basic_csv_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm" %>
+           <%= link_to "PDF", basic_pdf_path(search_inputs: params[:search_inputs].permit!, :format => :pdf), class: "btn btn-primary btn-sm" %>
+           <%= link_to "ODT", basic_odf_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm #{disable_odt}" %>
+      <% else %>
+          <%= link_to "CSV", basic_csv_path, class: "btn btn-primary btn-sm" %>
+          <%= link_to "PDF", basic_pdf_path(:format => :pdf), class: "btn btn-primary btn-sm" %>
+          <%= link_to "ODT", basic_odf_path, class: "btn btn-primary btn-sm #{disable_odt}" %>
+      <% end %>
+      <% elsif records.klass.to_s == "Institution" %>
+        <% if params[:search_inputs].present? %>
+             <%= link_to "CSV", basic_csv_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm" %>
+             <%= link_to "PDF", basic_pdf_path(search_inputs: params[:search_inputs].permit!, :format => :pdf), class: "btn btn-primary btn-sm" %>
+        <% else %>
+            <%= link_to "CSV", basic_csv_path, class: "btn btn-primary btn-sm" %>
+            <%= link_to "PDF", basic_pdf_path(:format => :pdf), class: "btn btn-primary btn-sm" %>
+        <% end %>
+      <% elsif records.klass.to_s == "Note" %>
+
+      <% elsif records.klass.to_s == "Task" %>
+
+      <% end %>
+
+
+
+
+
+
+
+
       <button type="button" class="btn btn-light btn-sm border border-primary">
         <b><%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.size %></b> von <b><%= records.total_count %>
         </b>
