@@ -7,7 +7,7 @@
       <%= fa_icon "plus" %> Weitere Optionen
     </button>
   </p>
-<div class="collapse <%= "show" unless @search_inputs.nil? || @search_inputs.empty? %> mb-2" id="search_options">
+<div class="collapse <%= "show" if @search_inputs.institutions.present? || @search_inputs.functionality_list.present? || @search_inputs.target_group_list.present? || @search_inputs.assigned_to_user_id.present? %> mb-2" id="search_options">
   <div class="card card-body">
     <% if records.klass.to_s == "Person" %>
       <%#= f.input :tag_list, as: :select, collection: TagList.all, label: "Tags", required: false, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
