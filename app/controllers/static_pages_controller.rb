@@ -56,7 +56,6 @@ class StaticPagesController < ApplicationController
     @records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, page: params[:page]).search
     @search_inputs = params[:search_inputs]
 =end
-
   end
 
   def my_tasks

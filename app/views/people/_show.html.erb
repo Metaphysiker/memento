@@ -79,7 +79,7 @@
 
           <div class="person-<%= person.id %>-functionality-tags">
             <% unless person.functionality_list.empty? %>
-            <p class="card-text"><strong>Funktionalitäten: </p>
+            <p class="card-text"><strong>Funktionalitäten: </strong></p>
               <p class="mt-2">
                 <% person.functionality_list.each do |tag| %>
                   <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", functionality_list: [tag]}}), class: "btn btn-outline-dark" %>
@@ -90,7 +90,7 @@
 
           <div class="person-<%= person.id %>-target-group-tags">
             <% unless person.target_group_list.empty? %>
-            <p class="card-text"><strong>Zielgruppe: </p>
+            <p class="card-text"><strong>Zielgruppe: </strong></p>
               <p class="mt-2">
                 <% person.target_group_list.each do |tag| %>
                   <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", target_group_list: [tag]}}), class: "btn btn-outline-dark" %>

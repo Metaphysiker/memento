@@ -49,16 +49,8 @@
 
       <% end %>
 
-
-
-
-
-
-
-
       <button type="button" class="btn btn-light btn-sm border border-primary">
-        <b><%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.size %></b> von <b><%= records.total_count %>
-        </b>
+        <b><%= (records.limit_value * (records.current_page-1)) + 1  %> - <%= (records.limit_value * (records.current_page-1)) + records.size %></b> von <b><%= records.total_count %></b>
       </button>
     </div>
   <% end %>
