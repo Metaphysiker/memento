@@ -127,28 +127,21 @@ class BasicController < ApplicationController
     end
     @records = Search.new(@search_inputs).search
 
-    reports = []
-
-    @records.each do |person|
-      report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/rechnung.odt") do |r|
-
-        r.add_image :graphics1, "#{Rails.root}/app/views/odfs/logo1.jpg"
-        r.add_field :name, "#{person.firstname} #{person.lastname}"
-        r.add_field :street, person.address.street.to_s
-        r.add_field :location, "#{person.address.plz} #{person.address.location}"
-        r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
-
-      end
-
-      reports << ["#{person.name}-#{person.id}".parameterize + ".odt", report.generate]
-    end
-
     compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-      reports.each do |report|
-        zos.put_next_entry report.first
-        zos.write report.last
+
+      @records.each do |person|
+        report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/rechnung.odt") do |r|
+          r.add_image :graphics1, "#{Rails.root}/app/views/odfs/logo1.jpg"
+          r.add_field :name, "#{person.firstname} #{person.lastname}"
+          r.add_field :street, person.address.street.to_s
+          r.add_field :location, "#{person.address.plz} #{person.address.location}"
+          r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+        end
+        zos.put_next_entry "#{person.name}-#{person.id}".parameterize + ".odt"
+        zos.write report.generate
       end
     end
+
     compressed_filestream.rewind
     send_data compressed_filestream.read, filename: "odfs.zip"
 
