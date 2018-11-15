@@ -65,12 +65,13 @@
 
           <div class="institution-<%=institution.id%>-people">
             <% unless institution.affiliations.empty? %>
-            <p> <b>Affiliation: </b>
+            <p> <b>Mitglieder: </b>
               <ul>
               <% institution.affiliations.each do |affiliation| %>
                 <li>
                   <%= link_to affiliation.person.name, person_path(affiliation.person) %>
                   <%= "Funktion: #{affiliation.function}" unless affiliation.function.blank? %>
+                  <%= fa_icon "plus" %> Funktion hinzufügen
                 </li>
               <% end %>
             </ul>
