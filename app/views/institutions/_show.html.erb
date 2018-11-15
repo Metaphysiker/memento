@@ -69,7 +69,8 @@
               <ul>
               <% institution.affiliations.each do |affiliation| %>
                 <li>
-                  <%= affiliation.inspect %>
+                  <%= link_to affiliation.person.name, person_path(affiliation.person) %>
+                  <%= "Funktion: #{affiliation.function}" unless affiliation.function.blank? %>
                 </li>
               <% end %>
             </ul>
