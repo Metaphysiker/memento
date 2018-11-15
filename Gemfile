@@ -12,7 +12,6 @@ gem "font-awesome-rails"
 gem 'devise'
 gem 'chosen-rails'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
-gem 'ahoy_matey'
 gem 'pg_search'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'seed_dump'

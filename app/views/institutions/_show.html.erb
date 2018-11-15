@@ -63,6 +63,20 @@
           <% end %>
           </div>
 
+          <div class="institution-<%=institution.id%>-people">
+            <% unless institution.affiliations.empty? %>
+            <p> <b>Affiliation: </b>
+              <ul>
+              <% institution.affiliations.each do |affiliation| %>
+                <li>
+                  <%= affiliation.inspect %>
+                </li>
+              <% end %>
+            </ul>
+            </p>
+          <% end %>
+          </div>
+
           <div class="institution-<%= institution.id %>-functionality-tags">
             <% unless institution.functionality_list.empty? %>
             <p class="card-text"><strong>Funktionalitäten: </strong></p>

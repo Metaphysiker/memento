@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   before_action :is_user_allowed?, except: :login
-  #after_action :track_action
 
   include ApplicationHelper
 
@@ -12,10 +11,6 @@ class ApplicationController < ActionController::Base
     added_attrs = [:username, :email, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
-  end
-
-  def track_action
-    ahoy.track "Ran action", request.path_parameters
   end
 
   def is_user_allowed?

@@ -12,6 +12,7 @@ class CreateInstitutions < ActiveRecord::Migration[5.2]
     create_table :affiliations do |t|
       t.belongs_to :institution, index: true
       t.belongs_to :person, index: true
+      t.string :function, default: ""
       t.timestamps
     end
   end

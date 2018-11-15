@@ -1,10 +1,3 @@
-<% Person.attribute_names.each do |n| %>
-  <%= n %>
-<% end %>
-
-<% Model.columns.collect { |c| "#{c.name} (#{c.type})" } %>
-
-
 <%= simple_form_for :search_inputs, {url: search_basic_form_path, method: :get, remote: true} do |f| %>
   <%= f.text_field :search_term, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control" %>
   <%= f.hidden_field :model, value: records.klass.to_s %>
