@@ -2,7 +2,7 @@
 
 <div class="affiliation-<%= affiliation.id %>">
   <%= link_to affiliation.person.name, person_path(affiliation.person) %>
-   - 
+   -
   <%= mail_to affiliation.person.email, affiliation.person.email %>
   <%= " - #{affiliation.function}" unless affiliation.function.blank? %>
 
@@ -14,7 +14,7 @@
       <%= form_with model: affiliation, remote: true do |f| %>
         <%= f.label :function, "Funktion" %>
         <%= f.text_field :function, class: "affiliation-#{affiliation.id}-function" %>
-        <%= f.submit "Funktion aktualisieren" %>
+        <%= f.submit "Funktion aktualisieren", class: "btn btn-light" %>
       <% end %>
     </div>
   </div>

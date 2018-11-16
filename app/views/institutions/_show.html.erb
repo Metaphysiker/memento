@@ -50,23 +50,9 @@
           <% end %>
 
           <div class="institution-<%=institution.id%>-people">
-            <% unless institution.people.empty? %>
-            <p> <b>Mitglieder: </b>
-              <ul>
-              <% institution.people.each do |person| %>
-                <li>
-                  <%= link_to person.name, person_path(person) %>
-                </li>
-              <% end %>
-            </ul>
-            </p>
-          <% end %>
-          </div>
-
-          <div class="institution-<%=institution.id%>-people">
             <% unless institution.affiliations.empty? %>
             <p> <b>Mitglieder: </b>
-              <%= render partial: "affiliations/show", collection: institution.affiliations, as: :record %>
+              <%= render partial: "affiliations/show", collection: institution.affiliations.order(:function).reverse_order, as: :record %>
             </p>
           <% end %>
           </div>
