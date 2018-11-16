@@ -21,15 +21,15 @@ RSpec.describe "search_notes", :type => :feature do
   it "searches among 3 notes and expects 1 result" do
 
     note1 = Note.create(
-      description: Faker::Lorem.paragraph
+      description: Faker::Lorem.unique.paragraph
     )
 
     note2 = Note.create(
-      description: Faker::Lorem.paragraph
+      description: Faker::Lorem.unique.paragraph
     )
 
     note3 = Note.create(
-      description: Faker::Lorem.paragraph
+      description: Faker::Lorem.unique.paragraph
     )
 
     person.notes << [note1, note2, note3]
