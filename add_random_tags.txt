@@ -1,0 +1,11 @@
+Person.all.each do |p|
+  p.functionality_list.add(TagList.where(model: "Person", category: "functionality").sample)
+  p.target_group_list.add(TagList.where(model: "Person", category: "target_group").sample)
+  p.save
+end
+
+Institution.all.each do |p|
+  p.functionality_list.add(TagList.where(model: "Institution", category: "functionality").sample)
+  p.target_group_list.add(TagList.where(model: "Institution", category: "target_group").sample)
+  p.save
+end
