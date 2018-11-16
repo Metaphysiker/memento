@@ -33,9 +33,28 @@ User.create(
     password: 123456
 )
 
-person_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
-        "Portalmitglied", "Veranstalter", "Lehrperson", "Öffentliche Institution",
-      "Blogger", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
+person_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner",
+                              "Stiftungsmitglied", "Portalmitglied", "Veranstalter",
+                              "Lehrperson", "Öffentliche Institution",
+                              "Blogger", "Platinmitglied", "200er-Mitglied",
+                              "Patronatskomitee"]
+
+person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Sponsor(Zielgruppe)",
+                              "Uni-Mitarbeitende", "Gymnasiallehrperson",
+                              "Private", "Beruffachleute", "Medienfachleute",
+                              "Mitglieder Verein", "ehrenamtliche Blogger"]
+
+institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner",
+                                    "Stiftung", "Veranstalter", "Lehrperson",
+                                    "Öffentliche Institution", "Platinmitglied",
+                                    "200er-Mitglied", "Patronatskomitee"]
+
+institutions_target_groups_tags = ["Sponsor(Zielgruppe)", "Medienkontakt(Zielgruppe)", "Kooperationspartner(Zielgruppe)",
+                                    "Stiftung(Zielgruppe)", 
+                                  "Philosophisches Institut", "Kooperationspartner(Zielgruppe)","SPG/SAGW",
+                                    "Charles Hummel Stiftung", "Philosophischer Verein",
+                                    "Verlag", "Verein", "öffentliche Institution",
+                                    "Unternehmen"]
 
 person_functionality_tags.each do |tag|
   TagList.create(
@@ -45,10 +64,6 @@ person_functionality_tags.each do |tag|
   )
 end
 
-person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Uni-Mitarbeitende",
-        "Gymnasiallehrperson", "Private", "Beruffachleute", "Medienfachleute",
-      "Mitglieder Verein", "ehrenamtliche Blogger"]
-
 person_target_groups_tags.each do |tag|
   TagList.create(
     name: tag,
@@ -57,9 +72,6 @@ person_target_groups_tags.each do |tag|
   )
 end
 
-institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftung", "Veranstalter", "Lehrperson",
-  "Öffentliche Institution", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
-
 institutions_functionality_tags.each do |tag|
   TagList.create(
     name: tag,
@@ -67,10 +79,6 @@ institutions_functionality_tags.each do |tag|
     model: "Institution"
   )
 end
-
-institutions_target_groups_tags = ["Philosophisches Institut", "Kooperationspartner(Zielgruppe)","SPG/SAGW", "Charles Hummel Stiftung",
-        "Stiftung", "Philosophischer Verein", "Verlag", "Sponsor(Zielgruppe)",
-      "Verein", "öffentliche Institution", "Unternehmen", "Medienkontakt"]
 
 institutions_target_groups_tags.each do |tag|
   TagList.create(
