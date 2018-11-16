@@ -71,11 +71,19 @@
                 <li>
                   <%= link_to affiliation.person.name, person_path(affiliation.person) %>
                   <%= "Funktion: #{affiliation.function}" unless affiliation.function.blank? %>
-                  <%= fa_icon "plus" %> Funktion hinzufügen
-                  <%= form_with model: affiliation do |f| %>
-                    <%= f.text_field :function %>
-                    <%= f.submit "Create" %>
-                  <% end %>
+
+                    <button class="btn btn-light affiliation-<%= affiliation.id %>-edit" type="button" data-toggle="collapse" data-target=".affiliation-<%= affiliation.id %>-edit-modal" aria-expanded="false" aria-controls="collapseExample">
+                      <%= fa_icon "plus" %>
+                    </button>
+                  <div class="collapse affiliation-<%= affiliation.id %>-edit-modal">
+                    <div class="card card-body">
+                      <%= form_with model: affiliation, remote: true do |f| %>
+                        <%= f.label :function, "Funktion" %>
+                        <%= f.text_field :function, class: "affiliation-#{affiliation.id}-function" %>
+                        <%= f.submit "Funktion aktualisieren" %>
+                      <% end %>
+                    </div>
+                  </div>
                 </li>
               <% end %>
             </ul>

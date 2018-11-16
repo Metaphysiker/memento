@@ -274,6 +274,44 @@ RSpec.describe "institutions", :type => :feature do
     expect { Institution.find(institution.id)}.to raise_error ActiveRecord::RecordNotFound
   end
 
+  it "adds a function to an institution member" do
+    function = "Präsident"
+
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: "male"
+    )
+
+    institution1 = Institution.create(name: Faker::Address.community)
+
+    visit "/people/#{person.id}"
+
+    find(".person-#{person.id}-edit").click
+
+    select_from_chosen(institution1.name, from: 'person_institution_ids')
+
+    click_button "Person aktualisieren"
+
+    within ".person-#{person.id}-institutions" do
+      expect(page).to have_content(institution1.name)
+    end
+
+    visit "/institutions/#{institution1.id}"
+
+    find(".affiliation-#{institution1.affiliations.first.id}-edit").click
+    fill_in "Funktion", :with => function
+    click_button "Funktion aktualisieren"
+    expect(page).to have_content(function)
+    #affiliation-#{affiliation.id}-function
+
+
+
+  end
+
 end
 
 def login_with(user)
