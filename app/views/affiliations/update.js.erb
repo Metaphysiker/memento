@@ -1,1 +1,11 @@
-alert("lol!");
+var record_id = ".<%= @record.class.to_s.downcase%>-<%= @record.id %>";
+
+  $( record_id ).fadeOut( "slow", function() {
+
+      content = $("<%= escape_javascript( render "#{@record.class.to_s.pluralize.downcase}/show", Hash[@record.class.to_s.downcase.to_sym, @record] ) %>")
+
+      $(record_id).replaceWith(function(){
+        return $(content).hide().fadeIn("slow");
+      });
+
+  });

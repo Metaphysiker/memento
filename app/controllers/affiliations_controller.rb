@@ -4,6 +4,7 @@ class AffiliationsController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
+    @record = @affiliation
     respond_to do |format|
       if @affiliation.update(affiliation_params)
         format.html { redirect_to root_path, notice: 'Funktion wurde aktualisiert.' }
