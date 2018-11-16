@@ -12,7 +12,7 @@
   <div class="collapse affiliation-<%= affiliation.id %>-edit-modal">
     <div class="card card-body">
       <%= form_with model: affiliation, remote: true do |f| %>
-        <%= f.label :function, "Funktion" %>
+        <%= f.label :function, "Funktion: " %>
         <%= f.text_field :function, class: "affiliation-#{affiliation.id}-function" %>
         <%= f.submit "Funktion aktualisieren", class: "btn btn-light" %>
       <% end %>
