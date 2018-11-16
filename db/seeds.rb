@@ -57,9 +57,8 @@ person_target_groups_tags.each do |tag|
   )
 end
 
-institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
-        "Portalmitglied", "Veranstalter", "Lehrperson", "Öffentliche Institution",
-      "Blogger", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
+institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftung", "Veranstalter", "Lehrperson",
+  "Öffentliche Institution", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
 
 institutions_functionality_tags.each do |tag|
   TagList.create(
@@ -69,7 +68,7 @@ institutions_functionality_tags.each do |tag|
   )
 end
 
-institutions_target_groups_tags = ["Philosophisches Institut", "Kooperationspartner","SPG/SAGW", "Charles Hummel Stiftung",
+institutions_target_groups_tags = ["Philosophisches Institut", "Kooperationspartner(Zielgruppe)","SPG/SAGW", "Charles Hummel Stiftung",
         "Stiftung", "Philosophischer Verein", "Verlag", "Sponsor(Zielgruppe)",
       "Verein", "öffentliche Institution", "Unternehmen", "Medienkontakt"]
 

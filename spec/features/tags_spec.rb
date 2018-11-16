@@ -13,10 +13,11 @@ RSpec.describe "tags", :type => :feature do
         category: "functionality",
         model: "Person"
       )
+    end
 
-      institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner", "Stiftungsmitglied",
-              "Portalmitglied", "Veranstalter", "Lehrperson", "Öffentliche Institution",
-            "Blogger", "Platinmitglied", "200er-Mitglied", "Patronatskomitee"]
+      institutions_functionality_tags = ["Sponsors", "Medienkontakts","Kooperationspartners", "Stiftungsmitglieds",
+              "Portalmitglieds", "Veranstalters", "Lehrpersons", "Öffentliche Institution",
+            "Platinmitglieds", "200er-Mitglieds", "Patronatskomitees"]
 
       institutions_functionality_tags.each do |tag|
         TagList.create(
@@ -26,9 +27,9 @@ RSpec.describe "tags", :type => :feature do
         )
       end
 
-      institutions_target_groups_tags = ["Philosophisches Institut", "Kooperationspartner","SPG/SAGW", "Charles Hummel Stiftung",
-              "Stiftung", "Philosophischer Verein", "Verlag", "Sponsor",
-            "Verein", "öffentliche Institution", "Unternehmen", "Medienkontakt"]
+      institutions_target_groups_tags = ["Philosophisches Institut(Zielgruppe)", "Kooperationspartner(Zielgruppe)","SPG/SAGW(Zielgruppe)", "Charles Hummel Stiftung(Zielgruppe)",
+              "Stiftung(Zielgruppe)", "Philosophischer Verein(Zielgruppe)", "Verlag(Zielgruppe)", "Sponsor(Zielgruppe)",
+            "Verein(Zielgruppe)", "öffentliche Institution(Zielgruppe)", "Unternehmen(Zielgruppe)", "Medienkontakt(Zielgruppe)"]
 
       institutions_target_groups_tags.each do |tag|
         TagList.create(
@@ -37,7 +38,6 @@ RSpec.describe "tags", :type => :feature do
           model: "Institution"
         )
       end
-    end
 
     person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Uni-Mitarbeitende",
             "Gymnasiallehrperson", "Private", "Beruffachleute", "Medienfachleute",
@@ -213,8 +213,10 @@ RSpec.describe "tags", :type => :feature do
     visit "/institutions/#{institution.id}"
 
     find(".institution-#{institution.id}-edit").click
+
     select_from_chosen(ftag.name, from: 'institution_functionality_list')
     select_from_chosen(ttag.name, from: 'institution_target_group_list')
+    #page.save_screenshot('insti-add2.png')
 
     click_button "Institution aktualisieren"
 
