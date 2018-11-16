@@ -50,7 +50,7 @@ institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartn
                                     "200er-Mitglied", "Patronatskomitee"]
 
 institutions_target_groups_tags = ["Sponsor(Zielgruppe)", "Medienkontakt(Zielgruppe)", "Kooperationspartner(Zielgruppe)",
-                                    "Stiftung(Zielgruppe)", 
+                                    "Stiftung(Zielgruppe)",
                                   "Philosophisches Institut", "Kooperationspartner(Zielgruppe)","SPG/SAGW",
                                     "Charles Hummel Stiftung", "Philosophischer Verein",
                                     "Verlag", "Verein", "öffentliche Institution",
