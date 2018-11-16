@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :addresses
   resources :people
   resources :basic
+  resources :affiliations
   devise_for :users
 
 

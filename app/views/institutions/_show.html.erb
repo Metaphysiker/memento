@@ -72,6 +72,10 @@
                   <%= link_to affiliation.person.name, person_path(affiliation.person) %>
                   <%= "Funktion: #{affiliation.function}" unless affiliation.function.blank? %>
                   <%= fa_icon "plus" %> Funktion hinzufügen
+                  <%= form_with model: affiliation do |f| %>
+                    <%= f.text_field :function %>
+                    <%= f.submit "Create" %>
+                  <% end %>
                 </li>
               <% end %>
             </ul>
