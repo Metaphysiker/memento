@@ -7,7 +7,7 @@
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -16,7 +16,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <%= form_with model: @article, url: playfield_path(@article), class: "nifty_form" do |f| %>
+          <%#= form_with model: @article, url: playfield_path(@article) do |f| %>
+          <%= simple_form_for :project_information, {url: playfield_path, method: :get} do |f| %>
+          <%= f.input :project, collection: Project.all, label_method: :name, value_method: :id, include_blank: false %>
           <div class="table-wrapper-scroll-y">
             <table class="table table-bordered table-striped">
               <thead>
@@ -41,7 +43,7 @@
               </tbody>
             </table>
           </div>
-          <%= f.submit "Create" %>
+          <%= f.submit "Personen zum Projekt hinzufügen" %>
         <% end %>
         </div>
         <div class="modal-footer">

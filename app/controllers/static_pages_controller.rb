@@ -63,15 +63,22 @@ class StaticPagesController < ApplicationController
   end
 
   def playfield
-    #byebug
-    selection = [14]
+    if params.fetch(:project_information, {}).fetch(:selection, false)
+      selection = params[:project_information][:selection]
+    end
+    if params.fetch(:project_information, {}).fetch(:project, false)
+      project = Project.find(params[:project_information][:project])
+      project.people << Person.where(id: selection)
+    end
     if params[:search_inputs].present?
       @search_inputs = OpenStruct.new(params[:search_inputs])
     else
       @search_inputs = OpenStruct.new(model: "Person", selection: selection)
     end
-    @records = Search.new(@search_inputs).search
-    @records = @records.page(params[:page]).per(20)
+
+    @records = Person.where.not(id: project.person_ids) unless project.nil?
+    @records = Person.all if project.nil?
+    #@records = @records.page(params[:page]).per(20)
   end
 
   def team
