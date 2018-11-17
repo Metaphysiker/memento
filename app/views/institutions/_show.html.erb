@@ -52,7 +52,9 @@
           <div class="institution-<%=institution.id%>-people">
             <% unless institution.affiliations.empty? %>
             <p> <b>Mitglieder: </b>
-              <%= render partial: "affiliations/show", collection: institution.affiliations.order(:function).reverse_order, as: :record %>
+              <ul>
+                <%= render partial: "affiliations/show_li", collection: institution.affiliations.order(:function).reverse_order, as: :record %>
+              </ul>
             </p>
           <% end %>
           </div>
