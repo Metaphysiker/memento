@@ -39,7 +39,7 @@ class AffiliationsController < ApplicationController
       if @affiliation.update(affiliation_params)
         format.html { redirect_to root_path, notice: 'Funktion wurde aktualisiert.' }
         format.json { render :show, status: :ok, location: @affiliation }
-        format.js { render :file => "/affiliations/update_person_affiliation.js.erb" }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @affiliation.errors, status: :unprocessable_entity }

@@ -2,7 +2,7 @@ var record_id = ".<%= @record.class.to_s.downcase%>-<%= @record.id %>";
 
   $( record_id ).fadeOut( "slow", function() {
 
-      content = $("<%= escape_javascript( render "#{@record.class.to_s.pluralize.downcase}/person_affiliation", Hash[@record.class.to_s.downcase.to_sym, @record] ) %>")
+      content = $("<%= escape_javascript( render "#{@record.class.to_s.pluralize.downcase}/institution_affiliation", Hash[@record.class.to_s.downcase.to_sym, @record] ) %>")
 
       $(record_id).replaceWith(function(){
         return $(content).hide().fadeIn("slow");
