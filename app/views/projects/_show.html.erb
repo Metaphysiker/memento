@@ -39,6 +39,7 @@
               <% end %>
             </div>
           </div>
+          <h3 class="card-title person-name"><%= link_to project.name, project_path(project), class: "black_link" %></h3>
           <p class="card-text"><%= simple_format(project.description) %></p>
         </div>
         <div class="card-footer">
