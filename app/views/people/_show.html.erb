@@ -68,10 +68,7 @@
             <p> <b>Ist Mitglied bei:</b>
               <ul>
               <% person.affiliations.each do |affiliation| %>
-                <li>
-                  <%= link_to affiliation.institution.name, institution_path(affiliation.institution)%>
-                  <%= " - #{affiliation.function}" unless affiliation.function.blank? %>
-                </li>
+                <%= render partial: "affiliations/person_affiliation", collection: person.affiliations.order(:function).reverse_order, as: :record %>
               <% end %>
             </ul>
             </p>

@@ -1,0 +1,25 @@
+<% affiliation = affiliation || record %>
+
+<li class="affiliation-<%= affiliation.id %>">
+  <%= link_to affiliation.person.name, person_path(affiliation.person) %>
+   -
+  <%= mail_to affiliation.person.email, affiliation.person.email %>
+  <%= " - #{affiliation.function}" unless affiliation.function.blank? %>
+
+    <button class="btn btn-light affiliation-<%= affiliation.id %>-edit <%= "d-none" if affiliation.function.blank? %>" type="button" data-toggle="collapse" data-target=".affiliation-<%= affiliation.id %>-edit-modal" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "edit" %>
+    </button>
+    <button class="btn btn-light affiliation-<%= affiliation.id %>-edit <%= "d-none" unless affiliation.function.blank? %>" type="button" data-toggle="collapse" data-target=".affiliation-<%= affiliation.id %>-edit-modal" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "plus" %>
+    </button>
+
+  <div class="collapse affiliation-<%= affiliation.id %>-edit-modal">
+    <div class="card card-body">
+      <%= form_with model: affiliation, url: update_institution_affiliation_path(affiliation), remote: true do |f| %>
+        <%= f.label :function, "Funktion: " %>
+        <%= f.text_field :function, class: "affiliation-#{affiliation.id}-function" %>
+        <%= f.submit "Funktion aktualisieren", class: "btn btn-light" %>
+      <% end %>
+    </div>
+  </div>
+</li>

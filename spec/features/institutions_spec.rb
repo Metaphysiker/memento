@@ -306,10 +306,6 @@ RSpec.describe "institutions", :type => :feature do
     fill_in "Funktion", :with => function
     click_button "Funktion aktualisieren"
     expect(page).to have_content(function)
-    #affiliation-#{affiliation.id}-function
-
-
-
   end
 
 end

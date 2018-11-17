@@ -373,6 +373,40 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(I18n.t(language))
   end
 
+  it "adds a function to member from person view" do
+    function = "Präsident"
+
+    person = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: "male"
+    )
+
+    institution1 = Institution.create(name: Faker::Address.community)
+
+    visit "/people/#{person.id}"
+
+    find(".person-#{person.id}-edit").click
+
+    select_from_chosen(institution1.name, from: 'person_institution_ids')
+
+    click_button "Person aktualisieren"
+
+    within ".person-#{person.id}-institutions" do
+      expect(page).to have_content(institution1.name)
+    end
+
+    visit "/people/#{person.id}"
+
+    find(".affiliation-#{person.affiliations.first.id}-edit").click
+    fill_in "Funktion", :with => function
+    click_button "Funktion aktualisieren"
+    expect(page).to have_content(function)
+  end
+
 end
 
 def login_with(user)
