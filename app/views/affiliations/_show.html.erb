@@ -6,7 +6,10 @@
   <%= mail_to affiliation.person.email, affiliation.person.email %>
   <%= " - #{affiliation.function}" unless affiliation.function.blank? %>
 
-    <button class="btn btn-light affiliation-<%= affiliation.id %>-edit" type="button" data-toggle="collapse" data-target=".affiliation-<%= affiliation.id %>-edit-modal" aria-expanded="false" aria-controls="collapseExample">
+    <button class="btn btn-light affiliation-<%= affiliation.id %>-edit <%= "d-none" if affiliation.function.blank? %>" type="button" data-toggle="collapse" data-target=".affiliation-<%= affiliation.id %>-edit-modal" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "edit" %>
+    </button>
+    <button class="btn btn-light affiliation-<%= affiliation.id %>-edit <%= "d-none" unless affiliation.function.blank? %>" type="button" data-toggle="collapse" data-target=".affiliation-<%= affiliation.id %>-edit-modal" aria-expanded="false" aria-controls="collapseExample">
       <%= fa_icon "plus" %>
     </button>
   <div class="collapse affiliation-<%= affiliation.id %>-edit-modal">
