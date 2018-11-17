@@ -1,1 +1,29 @@
-<%= link_to "Tag", overview_path(params: {search_inputs: {search_term: "Mann", model: Person, tag_list: ["Sponsor", "Kooperationspartner"]}}) %>
+<div class="container">
+  <%= form_with model: @article, url: playfield_path(@article), class: "nifty_form" do |f| %>
+  <div class="table-wrapper-scroll-y">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th scope="col">Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.collection_check_boxes :model_ids, Person.all, :id, :name do |m| %>
+          <tr>
+            <td>
+              <%= m.check_box %>
+            </td>
+            <td>
+              <%= m.label %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= f.submit "Create" %>
+<% end %>
+</div>

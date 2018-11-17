@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get '/activities', to: 'static_pages#activities', as: 'activities'
 
   #playfield
-  get '/playfield', to: 'static_pages#playfield', as: 'playfield'
+  match '/playfield', to: 'static_pages#playfield', as: 'playfield', via: [:get, :post]
 
   #render
   get '/render_shared', to: 'render#render_shared', as: 'render_shared'

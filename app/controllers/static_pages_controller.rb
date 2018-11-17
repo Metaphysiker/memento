@@ -63,7 +63,7 @@ class StaticPagesController < ApplicationController
   end
 
   def playfield
-    @people = Person.all.order(:name).page(params[:page])
+    #byebug
   end
 
   def team
