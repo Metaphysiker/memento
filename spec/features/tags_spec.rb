@@ -28,8 +28,7 @@ RSpec.describe "tags", :type => :feature do
       end
 
       institutions_target_groups_tags = ["Philosophisches Institut(Zielgruppe)", "Kooperationspartner(Zielgruppe)","SPG/SAGW(Zielgruppe)", "Charles Hummel Stiftung(Zielgruppe)",
-              "Stiftung(Zielgruppe)", "Philosophischer Verein(Zielgruppe)", "Verlag(Zielgruppe)", "Sponsor(Zielgruppe)",
-            "Verein(Zielgruppe)", "öffentliche Institution(Zielgruppe)", "Unternehmen(Zielgruppe)", "Medienkontakt(Zielgruppe)"]
+              "Stiftung(Zielgruppe)", "Philosophischer Verein(Zielgruppe)", "Verlag(Zielgruppe)", "Sponsor(Zielgruppe)", "öffentliche Institution(Zielgruppe)", "Unternehmen(Zielgruppe)", "Medienkontakt(Zielgruppe)"]
 
       institutions_target_groups_tags.each do |tag|
         TagList.create(
