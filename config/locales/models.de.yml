@@ -19,6 +19,9 @@ de:
       institution:
         one: "Institution"
         other: "Institutionen"
+      project:
+        one: "Projekt"
+        other: "Projekte"
     attributes:
       person:
         name: "Name"
@@ -55,3 +58,8 @@ de:
         name: "Name"
         category: "Kategorie"
         model: "Modell"
+      project:
+        name: "Name"
+        description: "Beschreibung"
+        start: "Start"
+        end: "Ende"

@@ -39,6 +39,9 @@ class Search
     elsif klass == Task
       @records = TasksSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions, assigned_to_user_id: @assigned_to_user_id).search
       @records = @records.order(:created_at)
+    elsif klass == Project
+      @records = ProjectsSearch.new(search_term: @search_term).search
+      @records = @records.order(:name)
     end
     #@records.page(@page).per(20)
   end
