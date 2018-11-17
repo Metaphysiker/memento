@@ -12,6 +12,7 @@ class Search
   end
 
   def initialize(search_inputs)
+    @selection = search_inputs[:selection] || nil
     @search_term = search_inputs[:search_term] || nil
     @tags = search_inputs[:tag_list] || nil
     @functionalities = search_inputs[:functionality_list] || nil
@@ -28,7 +29,7 @@ class Search
     #klass = @model
 
     if klass == Person
-      @records = PeopleSearch.new(search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions).search
+      @records = PeopleSearch.new(selection: @selection, search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions).search
       @records = @records.order(:name)
     elsif klass == Institution
       @records = InstitutionsSearch.new(search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions).search

@@ -11,6 +11,9 @@ class Person < ApplicationRecord
   has_many :affiliations
   has_many :institutions, :through => :affiliations
 
+  has_many :project_people
+  has_many :projects, :through => :project_people
+
   validates :email, presence: :true, uniqueness: :true
 
   acts_as_taggable

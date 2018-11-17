@@ -1,5 +1,6 @@
 class PeopleSearch
-  def initialize(search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil)
+  def initialize(selection: nil, search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil)
+    @selection = selection
     @search_term = search_term
     @tags = tags
     @institutions = institutions
@@ -8,7 +9,11 @@ class PeopleSearch
   end
 
   def search
-  query = Person.all
+    query = Person.all
+
+  unless @selection.nil? || @selection.blank?
+    query = query.where(id: @selection)
+  end
 
   unless @search_term.nil? || @search_term.blank?
     query = query.search_records_ilike("%#{@search_term}%")

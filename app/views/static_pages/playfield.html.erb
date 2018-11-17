@@ -28,7 +28,7 @@
                 </tr>
               </thead>
               <tbody>
-                <%= f.collection_check_boxes :model_ids, Person.all, :id, :name do |m| %>
+                <%= f.collection_check_boxes :selection, @records, :id, :name do |m| %>
                   <tr>
                     <td>
                       <%= m.check_box %>

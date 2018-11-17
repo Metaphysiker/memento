@@ -132,6 +132,15 @@ ActiveRecord::Schema.define(version: 2018_11_17_163104) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "project_people", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_project_people_on_person_id"
+    t.index ["project_id"], name: "index_project_people_on_project_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name", default: ""
     t.text "description", default: ""

@@ -64,6 +64,14 @@ class StaticPagesController < ApplicationController
 
   def playfield
     #byebug
+    selection = [14]
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
+    else
+      @search_inputs = OpenStruct.new(model: "Person", selection: selection)
+    end
+    @records = Search.new(@search_inputs).search
+    @records = @records.page(params[:page]).per(20)
   end
 
   def team
