@@ -9,7 +9,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title"><%= project.name %></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -21,10 +21,10 @@
             <% end %>
           </ol>
 
-          <button type="button" id="add-to-project" class="btn btn-primary">Zum Projekt <%= project.name %> hinzufügen</button>
+          <button type="button" id="add-people-to-project-<%=project.id%>-button" class="btn btn-primary">Zum Projekt "<%= project.name %>" hinzufügen</button>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
         </div>
       </div>
     </div>
@@ -34,12 +34,13 @@
 <script>
   $( document ).ready(function() {
     var array_of_ids = [];
+    var project_id = <%= raw project.id %>;
 
     $( function() {
       $( "#selectable" ).selectable();
     } );
 
-    $( "#add-to-project" ).click(function() {
+    $( "#add-people-to-project-" + project_id + "-button" ).click(function() {
       $( ".ui-selected" ).each(function() {
         array_of_ids.push($(this).attr("id_of_record"))
       })
@@ -47,13 +48,13 @@
       $.ajax({
         url: "/add_people_to_project",
         method: 'POST',
-        data: { selection: array_of_ids, project_id: 2}
+        data: { selection: array_of_ids, project_id: project_id}
       }).done(function(response) {
         $( ".ui-selected" ).each(function() {
           $( this ).fadeOut( "slow", function() {});
         })
-
-    })
+        array_of_ids = [];
+      })
     });
 
   });
