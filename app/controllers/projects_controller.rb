@@ -70,6 +70,13 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def add_people_to_project
+    if params[:selection].present? && params[:project_id].present?
+      project = Project.find(params[:project_id])
+      project.people << Person.where(id: params[:selection])
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project

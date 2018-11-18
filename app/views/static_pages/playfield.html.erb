@@ -18,7 +18,7 @@
         <div class="modal-body">
           <ol id="selectable" class="table-wrapper-scroll-y">
             <% @records.each do |record| %>
-              <li class="ui-widget-content"><%= record.name %></li>
+              <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
             <% end %>
           </ol>
 
@@ -66,6 +66,7 @@
 
 <script>
   $( document ).ready(function() {
+    var array_of_ids = [];
 
     $( function() {
       $( "#selectable" ).selectable();
@@ -73,8 +74,16 @@
 
     $( "#add-to-project" ).click(function() {
       $( ".ui-selected" ).each(function() {
-        console.log($(this).text())
+        array_of_ids.push($(this).attr("id_of_record"))
       })
+      console.log(array_of_ids);
+      $.ajax({
+        url: "/add_people_to_project",
+        method: 'POST',
+        data: { selection: array_of_ids, project_id: 2}
+      }).done(function(response) {
+      alert("LOL");
+    })
     });
 
   });

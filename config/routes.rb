@@ -49,5 +49,7 @@ Rails.application.routes.draw do
   patch '/update_person_affiliation/:id', to: 'affiliations#update_person_affiliation', as: 'update_person_affiliation'
   patch '/update_institution_affiliation/:id', to: 'affiliations#update_institution_affiliation', as: 'update_institution_affiliation'
 
+  #project
+  post '/add_people_to_project', to: 'projects#add_people_to_project', as: 'add_people_to_project'
 
 end
