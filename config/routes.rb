@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get '/render_shared', to: 'render#render_shared', as: 'render_shared'
   get '/render_index', to: 'render#render_index', as: 'render_index'
   get '/render_tags', to: 'render#render_tags', as: 'render_tags'
+  post '/render_project_people', to: 'render#render_project_people', as: 'render_project_people'
 
   #csv
   get '/basic_csv', to: 'basic#csv', as: 'basic_csv'

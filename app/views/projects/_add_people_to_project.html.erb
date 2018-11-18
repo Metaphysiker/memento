@@ -53,7 +53,21 @@
         $( ".ui-selected" ).each(function() {
           $( this ).fadeOut( "slow", function() {});
         })
-        $(".project-people-" + project_id).replaceWith(response);
+
+        $.ajax({
+          url: "/render_project_people",
+          method: 'POST',
+          data: { project_id: project_id}
+
+        }).done(function(response2){
+          $(".project-people-" + project_id).fadeOut( "slow", function() {
+
+              $(".project-people-" + project_id).replaceWith(function(){
+                return $(response2).hide().fadeIn("slow");
+              });
+          });
+
+        })
         array_of_ids = [];
       })
     });

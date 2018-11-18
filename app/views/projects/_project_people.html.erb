@@ -1,3 +1,5 @@
+<% project = project || @project %>
+
 <div class="project-people-<%=project.id%>">
   <% project.people.order(:name).each do |person| %>
     <%= person.name %>

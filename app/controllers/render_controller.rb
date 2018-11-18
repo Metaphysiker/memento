@@ -43,4 +43,10 @@ class RenderController < ApplicationController
     render partial: "tag_lists/index"
   end
 
+  def render_project_people
+    @project = Project.find(params[:project_id])
+
+    render partial: "projects/project_people"
+  end
+
 end
