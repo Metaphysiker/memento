@@ -1,6 +1,6 @@
 <% project = project || @project %>
 
-<div class="project-people-<%=project.id%>">
+<div class="project-people-<%=project.id%> table-wrapper-scroll-y border rounded">
   <% project.people.order(:name).each do |person| %>
     <%= person.name %>
     <hr />
