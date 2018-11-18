@@ -16,35 +16,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <%#= form_with model: @article, url: playfield_path(@article) do |f| %>
-          <%= simple_form_for :project_information, {url: playfield_path, method: :get} do |f| %>
-          <%= f.input :project, collection: Project.all, label_method: :name, value_method: :id, include_blank: false %>
-          <div class="table-wrapper-scroll-y">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>
-                    #
-                  </th>
-                  <th scope="col">Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                <%= f.collection_check_boxes :selection, @records, :id, :name do |m| %>
-                  <tr>
-                    <td>
-                      <%= m.check_box %>
-                    </td>
-                    <td>
-                      <%= m.label %>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <%= f.submit "Personen zum Projekt hinzufügen" %>
-        <% end %>
+          <ol id="selectable" class="table-wrapper-scroll-y">
+            <% @records.each do |record| %>
+              <li class="ui-widget-content"><%= record.name %></li>
+            <% end %>
+          </ol>
+
+          <button type="button" id="add-to-project" class="btn btn-primary">Zum Projekt hinzufügen</button>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -54,17 +32,37 @@
     </div>
   </div>
 
-<ol id="selectable">
-  <li class="ui-widget-content p-2">Item 1</li>
-  <li class="ui-widget-content">Item 2</li>
-  <li class="ui-widget-content">Item 3</li>
-  <li class="ui-widget-content">Item 4</li>
-  <li class="ui-widget-content">Item 5</li>
-  <li class="ui-widget-content">Item 6</li>
-  <li class="ui-widget-content">Item 7</li>
-</ol>
 
 </div>
+
+<%= simple_form_for :project_information, {url: playfield_path, method: :get} do |f| %>
+<%= f.input :project, collection: Project.all, label_method: :name, value_method: :id, include_blank: false %>
+<div class="table-wrapper-scroll-y">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= f.collection_check_boxes :selection, @records, :id, :name do |m| %>
+        <tr>
+          <td>
+            <%= m.check_box %>
+          </td>
+          <td>
+            <%= m.label %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= f.submit "Personen zum Projekt hinzufügen" %>
+<% end %>
 
 <script>
   $( document ).ready(function() {
@@ -72,6 +70,12 @@
     $( function() {
       $( "#selectable" ).selectable();
     } );
+
+    $( "#add-to-project" ).click(function() {
+      $( ".ui-selected" ).each(function() {
+        console.log($(this).text())
+      })
+    });
 
   });
 </script>
