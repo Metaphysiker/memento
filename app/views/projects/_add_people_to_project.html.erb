@@ -1,0 +1,60 @@
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".project_<%=project.id%>_add_people">
+    Personen zum Projekt hinzufügen
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade project_<%=project.id%>_add_people" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ol id="selectable" class="table-wrapper-scroll-y">
+            <% Person.where.not(id: project.people.pluck(:id)).each do |record| %>
+              <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
+            <% end %>
+          </ol>
+
+          <button type="button" id="add-to-project" class="btn btn-primary">Zum Projekt <%= project.name %> hinzufügen</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+  $( document ).ready(function() {
+    var array_of_ids = [];
+
+    $( function() {
+      $( "#selectable" ).selectable();
+    } );
+
+    $( "#add-to-project" ).click(function() {
+      $( ".ui-selected" ).each(function() {
+        array_of_ids.push($(this).attr("id_of_record"))
+      })
+      console.log(array_of_ids);
+      $.ajax({
+        url: "/add_people_to_project",
+        method: 'POST',
+        data: { selection: array_of_ids, project_id: 2}
+      }).done(function(response) {
+        $( ".ui-selected" ).each(function() {
+          $( this ).fadeOut( "slow", function() {});
+        })
+
+    })
+    });
+
+  });
+</script>
