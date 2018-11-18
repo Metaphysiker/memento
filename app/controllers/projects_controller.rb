@@ -73,7 +73,10 @@ class ProjectsController < ApplicationController
   def add_people_to_project
     if params[:selection].present? && params[:project_id].present?
       project = Project.find(params[:project_id])
-      project.people << Person.where(id: params[:selection])
+      #project.people << Person.where(id: params[:selection])
+      Person.where(id: params[:selection]).each do |person|
+        project.people << person unless project.people.include?(person)
+      end
     end
   end
 

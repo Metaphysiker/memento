@@ -16,7 +16,7 @@
         </div>
         <div class="modal-body">
           <ol id="selectable" class="table-wrapper-scroll-y">
-            <% Person.where.not(id: project.people.pluck(:id)).each do |record| %>
+            <% Person.where.not(id: project.people.pluck(:id)).order(:name).each do |record| %>
               <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
             <% end %>
           </ol>
@@ -53,6 +53,7 @@
         $( ".ui-selected" ).each(function() {
           $( this ).fadeOut( "slow", function() {});
         })
+        $(".project-people-" + project_id).replaceWith(response);
         array_of_ids = [];
       })
     });
