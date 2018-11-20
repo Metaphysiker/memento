@@ -52,5 +52,6 @@ Rails.application.routes.draw do
 
   #project
   post '/add_people_to_project', to: 'projects#add_people_to_project', as: 'add_people_to_project'
+  post '/remove_people_to_project', to: 'projects#remove_people_to_project', as: 'remove_people_to_project'
 
 end

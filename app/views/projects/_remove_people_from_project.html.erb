@@ -1,11 +1,11 @@
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".project_<%=project.id%>_add_people">
-    Personen zum Projekt hinzufügen
+  <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".project_<%=project.id%>_remove_people">
+    Personen vom Projekt entfernen
   </button>
 
   <!-- Modal -->
-  <div class="modal fade project_<%=project.id%>_add_people" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade project_<%=project.id%>_remove_people" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -15,13 +15,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <ol id="selectable-<%=project.id%>" class="table-wrapper-scroll-y selectable">
-            <% Person.where.not(id: project.people.pluck(:id)).order(:name).each do |record| %>
+          <ol id="selectable-<%=project.id%>-remove" class="table-wrapper-scroll-y selectable">
+            <% project.people.order(:name).each do |record| %>
               <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
             <% end %>
           </ol>
 
-          <button type="button" id="add-people-to-project-<%=project.id%>-button" class="btn btn-primary">Zum Projekt "<%= project.name %>" hinzufügen</button>
+          <button type="button" id="remove-people-from-project-<%=project.id%>-button" class="btn btn-warning">Vom Projekt "<%= project.name %>" entfernen</button>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
@@ -37,16 +37,16 @@
     var project_id = <%= raw project.id %>;
 
     $( function() {
-      $( "#selectable-" + project_id).selectable();
+      $( "#selectable-" + project_id + "-remove").selectable();
     } );
 
-    $( "#add-people-to-project-" + project_id + "-button" ).click(function() {
+    $( "#remove-people-from-project-" + project_id + "-button" ).click(function() {
       $( ".ui-selected" ).each(function() {
         array_of_ids.push($(this).attr("id_of_record"))
       })
       console.log(array_of_ids);
       $.ajax({
-        url: "/add_people_to_project",
+        url: "/remove_people_to_project",
         method: 'POST',
         data: { selection: array_of_ids, project_id: project_id}
       }).done(function(response) {
@@ -54,7 +54,7 @@
           $( this ).fadeOut( "slow", function() {});
         })
 
-        $(".project_" + project_id + "_add_people").modal('hide')
+        $(".project_" + project_id + "_remove_people").modal('hide')
 
         $.ajax({
           url: "/render_project_people",
