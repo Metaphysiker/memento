@@ -14,6 +14,9 @@ class Person < ApplicationRecord
   has_many :project_people
   has_many :projects, :through => :project_people
 
+  has_many :group_people
+  has_many :groups, :through => :group_people
+
   validates :email, presence: :true, uniqueness: :true
 
   acts_as_taggable
