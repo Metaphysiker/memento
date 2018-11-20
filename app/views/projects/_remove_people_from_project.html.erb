@@ -40,6 +40,24 @@
       $( "#selectable-" + project_id + "-remove").selectable();
     } );
 
+    $(".project_" + project_id + "_remove_people").on('hidden.bs.modal', function (e) {
+
+      $.ajax({
+        url: "/render_project_people",
+        method: 'POST',
+        data: { project_id: project_id}
+
+      }).done(function(response2){
+        $(".project-people-" + project_id).fadeOut( "slow", function() {
+
+            $(".project-people-" + project_id).replaceWith(function(){
+              return $(response2).hide().fadeIn("slow");
+            });
+        });
+
+      });
+    });
+
     $( "#remove-people-from-project-" + project_id + "-button" ).click(function() {
       $( ".ui-selected" ).each(function() {
         array_of_ids.push($(this).attr("id_of_record"))
@@ -52,23 +70,6 @@
       }).done(function(response) {
         $( ".ui-selected" ).each(function() {
           $( this ).fadeOut( "slow", function() {});
-        })
-
-        $(".project_" + project_id + "_remove_people").modal('hide')
-
-        $.ajax({
-          url: "/render_project_people",
-          method: 'POST',
-          data: { project_id: project_id}
-
-        }).done(function(response2){
-          $(".project-people-" + project_id).fadeOut( "slow", function() {
-
-              $(".project-people-" + project_id).replaceWith(function(){
-                return $(response2).hide().fadeIn("slow");
-              });
-          });
-
         })
         array_of_ids = [];
       })
