@@ -43,6 +43,9 @@ class Search
     elsif klass == Project
       @records = ProjectsSearch.new(search_term: @search_term).search
       @records = @records.order(:name)
+    elsif klass == Group
+      @records = GroupsSearch.new(search_term: @search_term).search
+      @records = @records.order(:name)
     end
     #@records.page(@page).per(20)
   end
