@@ -15,7 +15,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <ol id="selectable" class="table-wrapper-scroll-y">
+          <ol id="selectable-<%=project.id%>" class="table-wrapper-scroll-y selectable">
             <% Person.where.not(id: project.people.pluck(:id)).order(:name).each do |record| %>
               <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
             <% end %>
@@ -37,7 +37,7 @@
     var project_id = <%= raw project.id %>;
 
     $( function() {
-      $( "#selectable" ).selectable();
+      $( "#selectable-" + project_id).selectable();
     } );
 
     $( "#add-people-to-project-" + project_id + "-button" ).click(function() {

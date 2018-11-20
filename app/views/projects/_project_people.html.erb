@@ -1,8 +1,33 @@
 <% project = project || @project %>
 
-<div class="project-people-<%=project.id%> table-wrapper-scroll-y border rounded">
-  <% project.people.order(:name).each do |person| %>
-    <%= person.name %>
-    <hr />
-  <% end %>
+<div class="project-people-<%=project.id%>">
+
+  <div class="text-center">
+    <button type="button" class="btn btn-light btn-sm border border-primary m-2">
+      Anzahl: <b><%= project.people.count %></b>
+    </button>
+  </div>
+
+  <div class="table-wrapper-scroll-y border rounded">
+    <%#= render partial: "people/show", collection: project.people.order(:name), as: :record, locals: {show_headers: true} %>
+
+
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">e-Mail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% project.people.order(:name).each do |person| %>
+        <tr>
+          <td><%= link_to person.name, person_path(person) %></td>
+          <td><%= mail_to person.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  </div>
 </div>
