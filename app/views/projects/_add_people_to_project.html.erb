@@ -4,8 +4,6 @@
     Personen zum Projekt hinzufügen
   </button>
 
-  https://getbootstrap.com/docs/4.1/components/modal/
-
   <!-- Modal -->
   <div class="modal fade project_<%=project.id%>_add_people" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -17,11 +15,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <ol id="selectable-<%=project.id%>" class="table-wrapper-scroll-y selectable">
+          <ol id="selectable-<%=project.id%>" class="table-wrapper-scroll-y selectable border rounded">
             <% Person.where.not(id: project.people.pluck(:id)).order(:name).each do |record| %>
               <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
             <% end %>
           </ol>
+          <br>
 
           <button type="button" id="add-people-to-project-<%=project.id%>-button" class="btn btn-primary">Zum Projekt "<%= project.name %>" hinzufügen</button>
         </div>

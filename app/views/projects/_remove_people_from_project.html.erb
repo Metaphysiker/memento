@@ -15,11 +15,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <ol id="selectable-<%=project.id%>-remove" class="table-wrapper-scroll-y selectable">
+          <ol id="selectable-<%=project.id%>-remove" class="table-wrapper-scroll-y selectable border rounded">
             <% project.people.order(:name).each do |record| %>
               <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
             <% end %>
           </ol>
+          <br>
 
           <button type="button" id="remove-people-from-project-<%=project.id%>-button" class="btn btn-warning">Vom Projekt "<%= project.name %>" entfernen</button>
         </div>
