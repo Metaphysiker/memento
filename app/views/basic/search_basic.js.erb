@@ -1,8 +1,7 @@
 var records_div = ".<%= @search_inputs.random_div%>";
-alert(records_div);
 $( records_div ).fadeOut( "fast", function() {
 
-    content = $("<%= escape_javascript( render 'basic/records', records: @records ) %>")
+    content = $("<%= escape_javascript( render 'basic/records', records: @records, random_div: @search_inputs.random_div  ) %>")
 
     $(records_div).fadeOut("fast", function(){
       $(records_div).empty().append(content).fadeIn("fast");

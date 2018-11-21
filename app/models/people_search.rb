@@ -12,7 +12,9 @@ class PeopleSearch
     query = Person.all
 
   unless @selection.nil? || @selection.blank?
-    query = query.where(id: @selection)
+    selection = @selection.split
+    query = query.where(id: selection)
+    byebug
   end
 
   unless @search_term.nil? || @search_term.blank?

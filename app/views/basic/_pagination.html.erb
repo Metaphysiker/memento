@@ -14,7 +14,7 @@
     <% if params[:search_inputs].present? %>
       <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic'}, remote: true %>
     <% else %>
-      <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic', search_inputs: {model: records.klass.to_s}}, remote: true %>
+      <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic', search_inputs: {model: records.klass.to_s, andom_div: random_div}}, remote: true %>
     <% end %>
   </div>
 </div>

@@ -81,7 +81,7 @@ class BasicController < ApplicationController
     end
     @records = Search.new(@search_inputs).search
     @records = @records.page(params[:page]).per(20)
-
+    byebug
     respond_to do |format|
       format.js
     end
