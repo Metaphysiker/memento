@@ -1,11 +1,11 @@
-var records_div = ".<%= @records.klass.to_s.pluralize.downcase%>";
-
+var records_div = ".<%= @search_inputs.random_div%>";
+alert(records_div);
 $( records_div ).fadeOut( "fast", function() {
 
     content = $("<%= escape_javascript( render 'basic/records', records: @records ) %>")
 
-    $(records_div).replaceWith(function(){
-      return $(content).hide().fadeIn("fast");
+    $(records_div).fadeOut("fast", function(){
+      $(records_div).empty().append(content).fadeIn("fast");
     });
 
 });

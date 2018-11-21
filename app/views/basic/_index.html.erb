@@ -1,11 +1,12 @@
 <% records = records || @records %>
+<% random_div = SecureRandom.uuid %>
   <h1 class="text-center">
     <%= link_to "#{records.klass.model_name.human(count: 2)}", polymorphic_url(records.klass), class: "black_link" %>
   </h1>
   <nav>
     <p>
       <%#= render "#{records.klass.to_s.pluralize.downcase}/search_#{records.klass.to_s.pluralize.downcase}_form" %>
-      <%= render "basic/search_basic_form", records: records %>
+      <%= render "basic/search_basic_form", records: records, random_div: random_div %>
     </p>
   <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
     <a class="nav-item nav-link list-view active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">
@@ -16,8 +17,9 @@
     </a>
   </div>
 </nav>
-
-    <%= render 'basic/records', records: records %>
+  <div class="<%=random_div%>">
+    <%= render 'basic/records', records: records, random_div: random_div %>
+  </div>
 
     <%#= render "#{records.klass.to_s.pluralize.downcase}/new", record: records.klass.new %>
     <%= render "basic/new", record: records.klass.new unless (records.klass == Note) || (records.klass == Task) %>
