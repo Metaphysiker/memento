@@ -10,7 +10,8 @@
 
   <div class="table-wrapper-scroll-y border rounded">
     <%#= render partial: "people/show", collection: group.people.order(:name), as: :record, locals: {show_headers: true} %>
-    <%= render "basic/index", records: group.people.page(0) %>
+    <%#= render "basic/index", records: group.people.page(0) %>
+    <%= render "basic/list_search", records: group.people %>
 
   </div>
   <br />
