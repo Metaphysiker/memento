@@ -49,4 +49,10 @@ class RenderController < ApplicationController
     render partial: "projects/project_people"
   end
 
+  def render_group_people
+    @group = Group.find(params[:group_id])
+
+    render partial: "groups/group_people"
+  end
+
 end

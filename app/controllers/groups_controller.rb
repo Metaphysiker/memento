@@ -68,6 +68,26 @@ class GroupsController < ApplicationController
     end
   end
 
+  def add_people_to_group
+    if params[:selection].present? && params[:group_id].present?
+      group = Group.find(params[:group_id])
+      #group.people << Person.where(id: params[:selection])
+      Person.where(id: params[:selection]).each do |person|
+        group.people << person unless group.people.include?(person)
+      end
+    end
+  end
+
+  def remove_people_from_group
+    if params[:selection].present? && params[:group_id].present?
+      group = Group.find(params[:group_id])
+      #group.people << Person.where(id: params[:selection])
+      Person.where(id: params[:selection]).each do |person|
+        group.people.delete(person)
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group

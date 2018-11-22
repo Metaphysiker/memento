@@ -42,7 +42,7 @@
           <h3 class="card-title person-name"><%= link_to group.name, group_path(group), class: "black_link" %></h3>
           <p class="card-text"><%= simple_format(group.description) %></p>
           <br />
-          <%#= render 'groups/group_people', group: group %>
+          <%= render 'groups/group_people', group: group %>
           <br>
         </div>
         <div class="card-footer">

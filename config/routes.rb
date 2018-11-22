@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get '/render_index', to: 'render#render_index', as: 'render_index'
   get '/render_tags', to: 'render#render_tags', as: 'render_tags'
   post '/render_project_people', to: 'render#render_project_people', as: 'render_project_people'
+  post '/render_group_people', to: 'render#render_group_people', as: 'render_group_people'
+
 
   #csv
   get '/basic_csv', to: 'basic#csv', as: 'basic_csv'
@@ -54,5 +56,9 @@ Rails.application.routes.draw do
   #project
   post '/add_people_to_project', to: 'projects#add_people_to_project', as: 'add_people_to_project'
   post '/remove_people_to_project', to: 'projects#remove_people_to_project', as: 'remove_people_to_project'
+
+  #group
+  post '/add_people_to_group', to: 'groups#add_people_to_group', as: 'add_people_to_group'
+  post '/remove_people_from_group', to: 'groups#remove_people_from_group', as: 'remove_people_from_group'
 
 end
