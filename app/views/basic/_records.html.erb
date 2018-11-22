@@ -8,14 +8,3 @@
   <%= render partial: "#{records.klass.to_s.pluralize.downcase}/show", collection: records, as: :record %>
   <%= render "basic/pagination", records: records %>
 </div>
-
-<script>
-$( document ).ready(function() {
-  var class_div = ".<%=raw records.klass.to_s.pluralize.downcase%>";
-  $( function() {
-    console.log("CHECK!");
-    $( class_div ).selectable();
-    } );
-
-});
-</script>
