@@ -18,6 +18,7 @@ class Search
     @functionalities = search_inputs[:functionality_list] || nil
     @target_groups = search_inputs[:target_group_list] || nil
     @institutions = search_inputs[:institutions] || nil
+    @groups = search_inputs[:groups] || nil
     @model = search_inputs[:model] || "Person"
     @assigned_to_user_id = search_inputs[:assigned_to_user_id] || nil
     @page = search_inputs[:page] || 0
@@ -29,7 +30,7 @@ class Search
     #klass = @model
 
     if klass == Person
-      @records = PeopleSearch.new(selection: @selection, search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions).search
+      @records = PeopleSearch.new(selection: @selection, groups: @groups, search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions).search
       @records = @records.order(:name)
     elsif klass == Institution
       @records = InstitutionsSearch.new(search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions).search

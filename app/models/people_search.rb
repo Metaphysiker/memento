@@ -1,5 +1,6 @@
 class PeopleSearch
-  def initialize(selection: nil, search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil)
+  def initialize(groups: nil, selection: nil, search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil)
+    @groups = groups
     @selection = selection
     @search_term = search_term
     @tags = tags
@@ -37,6 +38,20 @@ class PeopleSearch
       query = query.includes(:institutions).where(institutions: {id: institutions})
     end
 =end
+  end
+
+  unless @groups.nil? || @groups.empty?
+    groups = @groups.reject { |c| c.blank? }
+    groups = groups.collect {|x| x.to_i}
+    ids_of_people_with_groups = Person.all.pluck(:id)
+
+    unless groups.empty?
+      groups.each do |group|
+        ids = Person.all.includes(:groups).where(groups: {id: group}).pluck(:id)
+        ids_of_people_with_groups = ids_of_people_with_groups & ids
+      end
+      query = query.where(id: ids_of_people_with_groups)
+    end
   end
 
 
