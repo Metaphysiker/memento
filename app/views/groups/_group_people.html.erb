@@ -11,7 +11,7 @@
   <div class="table-wrapper-scroll-y border rounded">
     <%#= render partial: "people/show", collection: group.people.order(:name), as: :record, locals: {show_headers: true} %>
     <%#= render "basic/index", records: group.people.page(0) %>
-    <% search_inputs = OpenStruct.new(search_term: "Kant", model: "Person", group_list: [group.name]) %>
+    <% search_inputs = OpenStruct.new(search_term: "Helpyx", model: "Person", groups: [group.id]) %>
     <%= render "basic/list_search", records: group.people, search_inputs: search_inputs %>
 
   </div>

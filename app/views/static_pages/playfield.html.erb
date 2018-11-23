@@ -1,5 +1,7 @@
 <div class="container">
-  <%= render 'projects/add_people_to_project', project: Project.last %>
+  <% tag_list = TagList.where(category: "functionality").first %>
+  <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
   <br />
-  <%= render 'projects/project_people', project: Project.last %>
+  <%= link_to Institution.last.name, overview_path(params: {search_inputs: {model: "Person", institutions: [Institution.last.id] }}), class: "btn btn-outline-dark" %>
+
 </div>
