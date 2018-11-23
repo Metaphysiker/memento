@@ -90,6 +90,19 @@ class BasicController < ApplicationController
     end
   end
 
+  def search_list
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
+    else
+      @search_inputs = OpenStruct.new(model: "Person")
+    end
+    @records = Search.new(@search_inputs).search
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def csv
     if params[:search_inputs].present?
       @search_inputs = OpenStruct.new(params[:search_inputs])

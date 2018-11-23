@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/search_people_form', to: 'people#search_people', as: 'search_people_form'
   get '/search_institutions_form', to: 'institutions#search_institutions', as: 'search_institutions_form'
   get '/search_basic_form', to: 'basic#search_basic', as: 'search_basic_form'
+  get '/search_list_form', to: 'basic#search_list', as: 'search_list_form'
 
   #activities
   get '/activities', to: 'static_pages#activities', as: 'activities'

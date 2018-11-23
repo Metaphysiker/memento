@@ -1,0 +1,69 @@
+<%= search_inputs.inspect %>
+<% @search_inputs = search_inputs %>
+<%= simple_form_for :search_inputs, {url: search_list_form_path, method: :get, remote: true} do |f| %>
+  <%= f.text_field :search_term, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control" %>
+  <%= f.hidden_field :model, value: records.klass.to_s %>
+  <%= f.hidden_field :random_div, value: random_div %>
+  <br>
+  <p>
+    <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#search_options" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "plus" %> Weitere Optionen
+    </button>
+  </p>
+<div class="collapse <%= "show" unless @search_inputs.nil? || !(@search_inputs.institutions.present? || @search_inputs.functionality_list.present? || @search_inputs.target_group_list.present? || @search_inputs.assigned_to_user_id.present?) %> mb-2" id="search_options">
+  <div class="card card-body">
+    <% if records.klass.to_s == "Person" %>
+      <%#= f.input :tag_list, as: :select, collection: TagList.all, label: "Tags", required: false, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+      <%= f.input :institutions, as: :select, collection: Institution.all, label: "Institutionen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
+      <br>
+      <%= f.input :functionality_list, as: :select, collection: TagList.where(model: "Person", category: "functionality"), label: "Funktionalitäten", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+      <br>
+      <%= f.input :target_group_list, as: :select, collection: TagList.where(model: "Person", category: "target_group"), label: "Zielgruppe", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+      <br>
+      <%= f.input :groups, as: :select, collection: Group.all, label: "Gruppen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Gruppen auswählen"}, multiple: true} %>
+    <% elsif records.klass.to_s == "Institution" %>
+      <%= f.input :institutions, as: :select, collection: Institution.all, label: "Institutionen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
+      <br>
+      <%= f.input :functionality_list, as: :select, collection: TagList.where(model: "Institution", category: "functionality"), label: "Funktionalitäten", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+      <br>
+      <%= f.input :target_group_list, as: :select, collection: TagList.where(model: "Institution", category: "target_group"), label: "Zielgruppe", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+    <% elsif records.klass.to_s == "Note" %>
+
+    <% elsif records.klass.to_s == "Task" %>
+      <%= f.input :assigned_to_user_id, collection: User.all, label: "Zuständig: ", required: false, label_method: :username, value_method: :id, include_blank: true %>
+    <% end %>
+
+    <% f.fields_for :advanced1 do |ff| %>
+      <%= ff.text_field :search_termx, placeholder: "Nach x suchen", autocomplete: :off %>
+    <% end %>
+  </div>
+</div>
+  <%= f.submit "Suchen", id: "trigger_search", class: "btn btn-primary" %>
+<% end %>
+
+
+<script>
+    $(document).ready(function(){
+      $('.chosen-select').chosen({
+        allow_single_deselect: true,
+        no_results_text: 'Nichts gefunden',
+        inherit_select_classes: false,
+        search_contains: true,
+        width: '100%'
+      });
+
+      var records = <%= raw records.klass.to_s.pluralize.downcase.inspect %>;
+      var records_div = "." + records;
+      var search_records = "#search_inputs_search_term";
+      var trigger_records = "#trigger_search";
+
+        $( search_records ).keyup(function() {
+          if ($( search_records ).val().length > 3){
+            if ($( records_div ).html() != "<div class=\"mx-auto loader\"></div>"){
+              $( records_div ).html( "<div class=\"mx-auto loader\"></div>" );
+            }
+            $(trigger_records).click();
+          }
+        });
+    });
+</script>
