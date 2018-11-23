@@ -82,6 +82,7 @@ class BasicController < ApplicationController
     @records = Search.new(@search_inputs).search
     @records = @records.page(params[:page]).per(20)
 
+    byebug
     #@records = Search.new(model: klass, search_term: search_term, tag_list: tag_list, institutions: institutions, assigned_to_user_id: assigned_to_user_id, page: params[:page]).search
     #@search_inputs = params[:search_inputs]
 
