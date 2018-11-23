@@ -6,6 +6,7 @@ class RenderController < ApplicationController
     klass = class_for(parent_type)
 
     @parent = klass.find(parent_id)
+    @random_div = SecureRandom.uuid
 
     render partial: "shared/children"
 =begin
