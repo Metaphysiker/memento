@@ -1,4 +1,3 @@
-<%= search_inputs.inspect %>
 <% @search_inputs = search_inputs %>
 <%= simple_form_for :search_inputs, {url: search_list_form_path, method: :get, remote: true} do |f| %>
   <%= f.text_field :search_term, placeholder: "Nach #{records.klass.model_name.human(count: 2)} suchen", autocomplete: :off, class: "form-control" %>

@@ -1,12 +1,11 @@
 <% records = records || @records %>
 <% random_div = SecureRandom.uuid %>
-<%= search_inputs %>
 <div class="m-2">
 <p>
   <%= render "basic/search_list_form", records: records, random_div: random_div, search_inputs: search_inputs %>
 </p>
 
 <div class="<%=random_div%>">
-    <%= render "#{records.klass.to_s.pluralize.downcase}/list", records: records, random_div: random_div %>
+    <%= render "#{records.klass.to_s.pluralize.downcase}/list", records: records, random_div: random_div, search_inputs: search_inputs %>
 </div>
 </div>

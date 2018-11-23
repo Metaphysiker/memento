@@ -1,4 +1,31 @@
-<% people = people || records %>
+<% records = records %>
+<% search_inputs = search_inputs.to_h || params[:search_inputs] %>
+
+<div class="d-flex justify-content-center p-1">
+
+  <% unless records.nil? || records.empty? %>
+    <div class="btn-group mx-2" role="group" aria-label="Toolbar for CSV, PDF and ODT">
+
+      <% disable_odt = (records.count > 20) ? "disabled" : "" %>
+      <% if search_inputs %>
+          xd
+           <%= link_to "CSV", basic_csv_path(search_inputs: search_inputs), class: "btn btn-primary btn-sm" %>
+           <%= link_to "PDF", basic_pdf_path(search_inputs: search_inputs, :format => :pdf), class: "btn btn-primary btn-sm" %>
+           <%= link_to "ODT", basic_odf_path(search_inputs: search_inputs), class: "btn btn-primary btn-sm #{disable_odt}" %>
+      <% else %>
+          <%= link_to "CSV", basic_csv_path, class: "btn btn-primary btn-sm" %>
+          <%= link_to "PDF", basic_pdf_path(:format => :pdf), class: "btn btn-primary btn-sm" %>
+          <%= link_to "ODT", basic_odf_path, class: "btn btn-primary btn-sm #{disable_odt}" %>
+      <% end %>
+
+      <button type="button" class="btn btn-light btn-sm border border-primary">
+        <b><%= records.count %></b>
+      </button>
+    </div>
+  <% end %>
+</div>
+
+
 <table class="table">
 <thead>
   <tr>
@@ -7,7 +34,7 @@
   </tr>
 </thead>
 <tbody>
-  <% people.each do |person| %>
+  <% records.each do |person| %>
     <tr>
       <td><%= link_to person.name, person_path(person) %></td>
       <td><%= mail_to person.email %></td>
