@@ -12,6 +12,7 @@
   <br />
   <%= render 'groups/remove_people_from_group', group: group, search_inputs: search_inputs %>
    |
-  <%= render 'groups/add_people_to_group', group: group, search_inputs: search_inputs %>
+     <% search_inputs_without_group = OpenStruct.new(model: "Person") %>
+  <%= render 'groups/add_people_to_group', group: group, search_inputs: search_inputs_without_group %>
 
 </div>

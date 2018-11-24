@@ -94,8 +94,8 @@ class GroupsController < ApplicationController
     else
       @search_inputs = OpenStruct.new(model: "Person")
     end
-    @records = Search.new(@search_inputs).search
     @group = Group.find(params[:search_inputs][:group])
+    @records = Search.new(@search_inputs).search
 
     respond_to do |format|
       format.js
