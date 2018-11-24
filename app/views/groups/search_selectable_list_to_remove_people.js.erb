@@ -1,7 +1,7 @@
 var records_div = ".<%= @search_inputs.random_div%>";
 $( records_div ).fadeOut( "fast", function() {
 
-    content = $("<%= escape_javascript( render "#{@records.klass.to_s.pluralize.downcase}/selectable_list_to_add_people", records: @records, random_div: @search_inputs.random_div  ) %>")
+    content = $("<%= escape_javascript( render "#{@records.klass.to_s.pluralize.downcase}/selectable_list_to_remove_people", records: @records, random_div: @search_inputs.random_div  ) %>")
 
     $(records_div).fadeOut("fast", function(){
       $(records_div).empty().append(content).fadeIn("fast");

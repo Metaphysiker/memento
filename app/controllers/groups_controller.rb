@@ -102,6 +102,20 @@ class GroupsController < ApplicationController
     end
   end
 
+  def search_selectable_list_to_remove_people
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
+    else
+      @search_inputs = OpenStruct.new(model: "Person")
+    end
+    @records = Search.new(@search_inputs).search
+    @group = Group.find(params[:search_inputs][:group])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group

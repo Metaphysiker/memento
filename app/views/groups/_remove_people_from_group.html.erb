@@ -1,80 +1,58 @@
+<% random_div = SecureRandom.uuid %>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target=".group_<%=group.id%>_add_people">
+  Personen vom Projekt entfernen
+</button>
 
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".group_<%=group.id%>_remove_people">
-    Personen vom Projekt entfernen
-  </button>
-
-  <!-- Modal -->
-  <div class="modal fade group_<%=group.id%>_remove_people" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"><%= group.name %></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <ol id="selectable-<%=group.id%>-remove" class="table-wrapper-scroll-y selectable border rounded">
-            <% group.people.order(:name).each do |record| %>
-              <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
-            <% end %>
-          </ol>
+<!-- Modal -->
+<div class="modal fade group_<%=group.id%>_add_people" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= group.name %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% @search_inputs = search_inputs %>
+        <%= simple_form_for :search_inputs, {url: search_selectable_list_to_add_people_path, method: :post, remote: true} do |f| %>
+          <%= f.text_field :search_term, placeholder: "Nach Personen suchen", autocomplete: :off, class: "form-control" %>
+          <%= f.hidden_field :model, value: "Person" %>
+          <%= f.hidden_field :random_div, value: random_div %>
+          <%= f.hidden_field :group, value: group.id %>
           <br>
+          <p>
+            <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#search_options" aria-expanded="false" aria-controls="collapseExample">
+              <%= fa_icon "plus" %> Weitere Optionen
+            </button>
+          </p>
+        <div class="collapse <%= "show" unless @search_inputs.nil? || !(@search_inputs.institutions.present? || @search_inputs.functionality_list.present? || @search_inputs.target_group_list.present? || @search_inputs.assigned_to_user_id.present?) %> mb-2" id="search_options">
+          <div class="card card-body">
+              <%#= f.input :tag_list, as: :select, collection: TagList.all, label: "Tags", required: false, label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+              <%= f.input :institutions, as: :select, collection: Institution.all, label: "Institutionen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
+              <br>
+              <%= f.input :functionality_list, as: :select, collection: TagList.where(model: "Person", category: "functionality"), label: "Funktionalitäten", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+              <br>
+              <%= f.input :target_group_list, as: :select, collection: TagList.where(model: "Person", category: "target_group"), label: "Zielgruppe", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+              <br>
+              <%= f.input :groups, as: :select, collection: Group.all, label: "Gruppen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Gruppen auswählen"}, multiple: true} %>
 
-          <button type="button" id="remove-people-from-group-<%=group.id%>-button" class="btn btn-warning">Vom Projekt "<%= group.name %>" entfernen</button>
+            <% f.fields_for :advanced1 do |ff| %>
+              <%= ff.text_field :search_termx, placeholder: "Nach x suchen", autocomplete: :off %>
+            <% end %>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+          <%= f.submit "Suchen", id: "trigger_search", class: "btn btn-primary" %>
+        <% end %>
+        <br />
+        <div class="<%=random_div%>">
+          <%= render "people/selectable_list_to_remove_people", records: group.people, group: group %>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
       </div>
     </div>
   </div>
-
-
-<script>
-  $( document ).ready(function() {
-    var array_of_ids = [];
-    var group_id = <%= raw group.id %>;
-
-    $( function() {
-      $( "#selectable-" + group_id + "-remove").selectable();
-    } );
-
-    $(".group_" + group_id + "_remove_people").on('hidden.bs.modal', function (e) {
-
-      $.ajax({
-        url: "/render_group_people",
-        method: 'POST',
-        data: { group_id: group_id}
-
-      }).done(function(response2){
-        $(".group-people-" + group_id).fadeOut( "slow", function() {
-
-            $(".group-people-" + group_id).replaceWith(function(){
-              return $(response2).hide().fadeIn("slow");
-            });
-        });
-
-      });
-    });
-
-    $( "#remove-people-from-group-" + group_id + "-button" ).click(function() {
-      $( ".ui-selected" ).each(function() {
-        array_of_ids.push($(this).attr("id_of_record"))
-      })
-      console.log(array_of_ids);
-      $.ajax({
-        url: "/remove_people_from_group",
-        method: 'POST',
-        data: { selection: array_of_ids, group_id: group_id}
-      }).done(function(response) {
-        $( ".ui-selected" ).each(function() {
-          $( this ).fadeOut( "slow", function() {});
-        })
-        array_of_ids = [];
-      })
-    });
-
-  });
-</script>
+</div>
