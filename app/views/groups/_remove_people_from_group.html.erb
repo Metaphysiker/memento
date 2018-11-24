@@ -1,11 +1,11 @@
 <% random_div = SecureRandom.uuid %>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-warning" data-toggle="modal" data-target=".group_<%=group.id%>_add_people">
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target=".group_<%=group.id%>_remove_people">
   Personen vom Projekt entfernen
 </button>
 
 <!-- Modal -->
-<div class="modal fade group_<%=group.id%>_add_people" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade group_<%=group.id%>_remove_people" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,7 +16,7 @@
       </div>
       <div class="modal-body">
         <% @search_inputs = search_inputs %>
-        <%= simple_form_for :search_inputs, {url: search_selectable_list_to_add_people_path, method: :post, remote: true} do |f| %>
+        <%= simple_form_for :search_inputs, {url: search_selectable_list_to_remove_people_path, method: :post, remote: true} do |f| %>
           <%= f.text_field :search_term, placeholder: "Nach Personen suchen", autocomplete: :off, class: "form-control" %>
           <%= f.hidden_field :model, value: "Person" %>
           <%= f.hidden_field :random_div, value: random_div %>

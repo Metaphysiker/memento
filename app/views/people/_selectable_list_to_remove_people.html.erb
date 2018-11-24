@@ -1,6 +1,6 @@
 <% records = records || @records %>
 <% group = group || @group %>
-<ol id="selectable-<%=group.id%>" class="table-wrapper-scroll-y selectable border rounded">
+<ol id="selectable-<%=group.id%>-remove" class="table-wrapper-scroll-y selectable border rounded">
   <% records.each do |record| %>
     <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
   <% end %>
@@ -14,7 +14,7 @@ $( document ).ready(function() {
   var group_id = <%= raw group.id %>;
 
   $( function() {
-    $( "#selectable-" + group_id).selectable();
+    $( "#selectable-" + group_id + "-remove").selectable();
   } );
 
   $(".group_" + group_id + "_remove_people").on('hidden.bs.modal', function (e) {
