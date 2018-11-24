@@ -61,5 +61,5 @@ Rails.application.routes.draw do
   #group
   post '/add_people_to_group', to: 'groups#add_people_to_group', as: 'add_people_to_group'
   post '/remove_people_from_group', to: 'groups#remove_people_from_group', as: 'remove_people_from_group'
-
+  post '/search_selectable_list_to_add_people', to: 'groups#search_selectable_list_to_add_people', as: 'search_selectable_list_to_add_people'
 end
