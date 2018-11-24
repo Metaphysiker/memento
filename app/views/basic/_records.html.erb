@@ -1,4 +1,5 @@
 <div class="<%=records.klass.to_s.pluralize.downcase%>">
+  <% random_div = SecureRandom.uuid if random_div.nil? %>
   <%= render "basic/pagination", records: records, random_div: random_div %>
   <% if records.nil? || records.empty? %>
   <div class="text-center">
