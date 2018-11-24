@@ -9,9 +9,9 @@ class CreateProjects < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :project_people do |t|
+    create_table :project_groups do |t|
       t.belongs_to :project, index: true
-      t.belongs_to :person, index: true
+      t.belongs_to :group, index: true
       t.timestamps
     end
   end

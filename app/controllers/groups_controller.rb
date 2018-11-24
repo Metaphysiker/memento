@@ -95,7 +95,7 @@ class GroupsController < ApplicationController
       @search_inputs = OpenStruct.new(model: "Person")
     end
     @group = Group.find(params[:search_inputs][:group])
-    @records = Search.new(@search_inputs).search
+    @records = Search.new(@search_inputs).search.where.not(id: @group.people.pluck(:id))
 
     respond_to do |format|
       format.js

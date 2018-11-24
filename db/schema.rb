@@ -148,13 +148,13 @@ ActiveRecord::Schema.define(version: 2018_11_20_210725) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "project_people", force: :cascade do |t|
+  create_table "project_groups", force: :cascade do |t|
     t.bigint "project_id"
-    t.bigint "person_id"
+    t.bigint "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["person_id"], name: "index_project_people_on_person_id"
-    t.index ["project_id"], name: "index_project_people_on_project_id"
+    t.index ["group_id"], name: "index_project_groups_on_group_id"
+    t.index ["project_id"], name: "index_project_groups_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
