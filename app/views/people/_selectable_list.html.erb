@@ -1,0 +1,37 @@
+<% records = records %>
+<% search_inputs = search_inputs.to_h || params[:search_inputs] %>
+
+<div class="d-flex justify-content-center p-1">
+
+  <% unless records.nil? || records.empty? %>
+    <div class="btn-group mx-2" role="group" aria-label="Toolbar for CSV, PDF and ODT">
+      <button type="button" class="btn btn-light btn-sm border border-primary">
+        <b><%= records.count %></b>
+      </button>
+    </div>
+  <% end %>
+</div>
+
+<ol id="selectable-group-id" class="table-wrapper-scroll-y selectable border rounded">
+  <% records.order(:name).each do |record| %>
+    <li class="ui-widget-content" id_of_record="<%= record.id %>" ><%= record.name %></li>
+  <% end %>
+</ol>
+
+
+<table class="table">
+<thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">e-Mail</th>
+  </tr>
+</thead>
+<tbody>
+  <% records.each do |person| %>
+    <tr>
+      <td><%= link_to person.name, person_path(person) %></td>
+      <td><%= mail_to person.email %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

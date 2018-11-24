@@ -6,12 +6,12 @@
     <%#= render partial: "people/show", collection: group.people.order(:name), as: :record, locals: {show_headers: true} %>
     <%#= render "basic/index", records: group.people.page(0) %>
     <% search_inputs = OpenStruct.new(model: "Person", groups: [group.id]) %>
-    <%= render "basic/list_search", records: group.people, search_inputs: search_inputs %>
+    <%= render "basic/list_search", records: group.people.order(:name), search_inputs: search_inputs %>
 
   </div>
   <br />
-  <%= render 'groups/remove_people_from_group', group: group %>
+  <%= render 'groups/remove_people_from_group', group: group, search_inputs: search_inputs %>
    |
-  <%= render 'groups/add_people_to_group', group: group %>
+  <%= render 'groups/add_people_to_group', group: group, search_inputs: search_inputs %>
 
 </div>
