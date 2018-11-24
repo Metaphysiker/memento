@@ -31,6 +31,7 @@
 <script>
   $( document ).ready(function() {
     var models = ["Person", "Institution", "Note", "Task", "Project", "Group"];
+    var random_div = Math.floor((Math.random() * 10000) + 1);
 
       $( ".index-load" ).click(function() {
         target = $(this).attr("target");
@@ -41,7 +42,7 @@
           $.ajax({
             url: "/render_index",
             method: 'GET',
-            data: { search_inputs: {model: target}}
+            data: { search_inputs: {model: target, random_div: random_div}}
           }).done(function(response) {
           $("#index").fadeOut("fast", function(){
             $("#index").empty().append(response).fadeIn("fast");

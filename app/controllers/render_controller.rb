@@ -19,21 +19,13 @@ class RenderController < ApplicationController
   def render_index
     model = params[:search_inputs][:model]
 
-    klass = class_for(model)
-
-    @records = klass.all
-
-    if klass == Person
-      @records = @records.order(:name).page(params[:page]).per(20)
-    elsif klass == Institution
-      @records = @records.order(:name).page(params[:page]).per(20)
-    elsif klass == Note
-      @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
-    elsif klass == Task
-      @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
     else
-      @records = @records.order(:created_at).reverse_order.page(params[:page]).per(20)
+      @search_inputs = OpenStruct.new(model: model, random_div: SecureRandom.uuid)
     end
+    @records = Search.new(@search_inputs).search
+    @records = @records.page(params[:page]).per(20)
 
     render partial: "basic/index"
   end

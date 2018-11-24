@@ -3,7 +3,6 @@
     <% if params[:search_inputs].present? %>
       <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic'} , theme: 'prevnext', remote: true %>
     <% else %>
-      <%= random_div %>
       <%= paginate records, window: 2, outer_window: 1, params: {controller: 'basic', action: 'search_basic', search_inputs: {model: records.klass.to_s, random_div: random_div}} , theme: 'prevnext', remote: true %>
     <% end %>
   </div>
