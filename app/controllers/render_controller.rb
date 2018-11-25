@@ -16,6 +16,18 @@ class RenderController < ApplicationController
 =end
   end
 
+  def render_notes_and_tasks
+    parent_type = params[:parent_type]
+    parent_id = params[:parent_id]
+
+    klass = class_for(parent_type)
+
+    @parent = klass.find(parent_id)
+    @random_div = SecureRandom.uuid
+
+    render partial: "shared/notes_and_tasks"
+  end
+
   def render_index
     model = params[:search_inputs][:model]
 

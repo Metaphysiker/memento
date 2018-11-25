@@ -1,0 +1,23 @@
+<% parent = parent || @parent %>
+
+<div class="shared-<%=parent.class.name.downcase%>-<%=parent.id%>">
+  <p>
+    <a class="btn btn-link btn-sm" data-toggle="collapse" href=".<%= parent.class.to_s.downcase %>-<%= parent.id %>-notes-toggle" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "sticky-note" %> Notizen anzeigen
+    </a>
+
+    <a class="btn btn-link btn-sm" data-toggle="collapse" href=".<%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks-toggle" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "tasks" %>  Aufgaben anzeigen
+    </a>
+  </p>
+
+<div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-notes-toggle" >
+  <%= render "notes/notes_of_a_thing", parent: parent %>
+</div>
+
+
+  <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks-toggle" >
+    <%= render "tasks/tasks_of_a_thing", parent: parent %>
+  </div>
+
+</div>

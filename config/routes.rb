@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   #render
   get '/render_shared', to: 'render#render_shared', as: 'render_shared'
+  get '/render_notes_and_tasks', to: 'render#render_notes_and_tasks', as: 'render_notes_and_tasks'
   get '/render_index', to: 'render#render_index', as: 'render_index'
   get '/render_tags', to: 'render#render_tags', as: 'render_tags'
   post '/render_project_people', to: 'render#render_project_people', as: 'render_project_people'

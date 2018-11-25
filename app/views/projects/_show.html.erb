@@ -44,6 +44,16 @@
           <br />
           <%#= render 'projects/project_people', project: project %>
           <br>
+          <div class="shared-project-<%=project.id%>">
+            <p>
+              <a class="btn btn-link btn-sm">
+                <%= fa_icon "sticky-note" %> Notizen anzeigen
+              </a>
+              <a class="btn btn-link btn-sm">
+                <%= fa_icon "tasks" %>  Aufgaben anzeigen
+              </a>
+            </p>
+          </div>
         </div>
         <div class="card-footer">
           <% unless project.start.blank? %>
@@ -107,6 +117,14 @@
         $(".project-<%= project.id %>-edit-placeholder").replaceWith(response);
       })
     });
+
+    $.ajax({
+      url: "/render_notes_and_tasks",
+      method: 'GET',
+      data: { parent_type: "Project", parent_id: "<%= project.id %>"}
+    }).done(function(response) {
+    $(".shared-project-<%=project.id%>").replaceWith(response);
+  })
 
     //  $( ".shared-project-<%=project.id%>-get-button" ).click();
     });
