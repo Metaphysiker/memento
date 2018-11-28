@@ -74,7 +74,8 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
       format.json { head :no_content }
-      format.js { render :file => "/basic/reload_children.js.erb" }
+      #format.js { render :file => "/basic/reload_children.js.erb" }
+      format.js
     end
   end
 

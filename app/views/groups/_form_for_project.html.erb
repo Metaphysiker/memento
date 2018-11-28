@@ -6,7 +6,8 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :description %>
-    <%= f.association :projects, as: :select, collection: Project.all, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Gruppen auswählen"}, multiple: true} %>
+    <%#= f.hidden_field :project_ids, value: [1,2] %>
+    <%= f.hidden_field :project_ids, :multiple => true, :value => parent.id %>
   </div>
 
   <div class="form-actions">

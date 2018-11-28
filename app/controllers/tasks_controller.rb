@@ -72,7 +72,8 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
-      format.js { render :file => "/basic/reload_children.js.erb" }
+      #format.js { render :file => "/basic/reload_children.js.erb" }
+      format.js
     end
   end
 

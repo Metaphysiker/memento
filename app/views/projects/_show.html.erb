@@ -46,8 +46,24 @@
           <% if project.groups.empty? %>
             Keine Gruppen vorhanden.
           <% else %>
-            <%= render partial: "groups/show", collection: project.groups, as: :group %>
+            <h3><%= Group.model_name.human(count: 2) %></h3>
+            <% project.groups.each do |group| %>
+            <p>
+              <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapse-group-<%=group.id%>" aria-expanded="false" aria-controls="collapseExample">
+                <%= group.name %>
+              </button>
+            </p>
+            <div class="collapse" id="collapse-group-<%=group.id%>">
+              <%= render "groups/show", group: group %>
+              <hr />
+            </div>
+            <% end %>
+
           <% end %>
+          <hr />
+          <div class="<%= project.class.to_s.downcase%>-<%= project.id%>-groups-new">
+            <%#= render "groups/form_for_project", group: Group.new, parent: project  %>
+          </div>
           <hr />
           <div class="shared-project-<%=project.id%>">
             <p>
