@@ -1,0 +1,26 @@
+<p>
+  <button class="btn btn-dark collapse-group-<%=group.id%>-button" type="button" data-toggle="collapse" data-target=".collapse-group-<%=group.id%>" aria-expanded="false" aria-controls="collapseExample">
+    <%= group.name %>
+  </button>
+</p>
+<div class="collapse collapse-group-<%=group.id%>">
+
+</div>
+
+<script>
+  $( document ).ready(function() {
+
+  $( ".collapse-group-<%=group.id%>-button" ).click(function() {
+      $.ajax({
+        url: "/groups/<%= group.id %>.js",
+        method: 'GET'
+      }).done(function(response) {
+      $(".collapse-group-<%=group.id%>").append(response);
+      $(".collapse-group-<%=group.id%>-button").unbind("click");
+    })
+  });
+
+  });
+
+
+</script>
