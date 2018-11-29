@@ -75,4 +75,30 @@ end
       end
     end
   end
+
+  def self.create_or_update_person(person, tags, institutions)
+    person = person.select!{|x| Person.attribute_names.index(x)}
+    puts person["email"]
+    if person["email"].nil? || person["email"].blank?
+      return
+    elsif Person.where(email: person["email"]).empty?
+      person = Person.create(person)
+    else
+      Person.find_by_email(person["email"]).update(person)
+      person = Person.find_by_email(person["email"])
+    end
+
+    unless tags.blank?
+      puts tags.inspect
+      person.tag_list.add(tags)
+      person.save
+    end
+
+    unless institutions.nil?
+      institutions.each do |institution|
+        person.institutions << Institution.find(institution)
+      end
+    end
+  end
+
 end

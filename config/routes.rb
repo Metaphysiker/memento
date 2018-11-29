@@ -65,4 +65,10 @@ Rails.application.routes.draw do
   post '/search_selectable_list_to_add_people', to: 'groups#search_selectable_list_to_add_people', as: 'search_selectable_list_to_add_people'
   post '/search_selectable_list_to_remove_people', to: 'groups#search_selectable_list_to_remove_people', as: 'search_selectable_list_to_remove_people'
   post '/create_for_project', to: 'groups#create_for_project', as: 'create_for_project'
+
+  #import and upload
+  get '/upload_page', to: 'import#upload_page', as: 'upload_page'
+  post '/import_people', to: 'import#people', as: 'import_people'
+  get '/testing', to: 'import#testing', as: 'testing'
+
 end

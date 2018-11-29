@@ -5,6 +5,8 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
+    <%= f.input :category, collection: [['Funktionalität', 'functionality'],['Zielgruppe', 'target_group']] %>
+    <%= f.input :model, collection: [['Person', 'Person'],['Institution', 'Institution']] %>
   </div>
 
   <div class="form-actions">
