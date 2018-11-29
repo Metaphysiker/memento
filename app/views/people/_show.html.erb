@@ -65,10 +65,10 @@
 
           <div class="person-<%=person.id%>-institutions">
             <% unless person.institutions.empty? %>
-            <p> <b>Ist Mitglied bei:</b>
+            <p> <b>Ist Mitglied bei:</b> <%= person.affiliations.count %>
               <ul>
-              <% person.affiliations.each do |affiliation| %>
-                <%= render partial: "affiliations/person_affiliation", collection: person.affiliations.order(:function).reverse_order, as: :record %>
+              <% person.affiliations.order(:function).reverse_order.each do |affiliation| %>
+                <%= render "affiliations/person_affiliation", record: affiliation %>
               <% end %>
             </ul>
             </p>
