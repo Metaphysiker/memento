@@ -2,12 +2,12 @@
 
 <div class="new-group">
 
-  <button type="button" class="btn btn-light group-<%= group.id %>-edit" data-toggle="modal" data-target=".group-<%= group.id %>-edit-modal">
+  <button type="button" class="btn btn-light group-parent-<%= parent.id %>-edit" data-toggle="modal" data-target=".group-parent-<%= parent.id %>-edit-modal">
     <%= fa_icon "plus" %> Gruppe erstellen
   </button>
 
   <!-- Modal -->
-  <div class="modal fade group-<%= group.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit Gruppe" aria-hidden="true">
+  <div class="modal fade group-parent-<%= parent.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit Gruppe" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -17,6 +17,7 @@
           </button>
         </div>
         <div class="modal-body">
+          <%#= parent.id %>
           <%= render "groups/form_for_project", group: group, parent: parent %>
         </div>
         <div class="modal-footer">

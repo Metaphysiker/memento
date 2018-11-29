@@ -1,1 +1,16 @@
-alert("created!");
+parent_div = ".project-<%= @parent.id %>";
+console.log(<%= @record.projects.first.id %>);
+console.log(".group-<%= @record.id %>-edit-modal");
+console.log(parent_div);
+
+$( ".modal" ).modal('hide')
+
+$( parent_div ).fadeOut( "slow", function() {
+
+    content = $("<%= escape_javascript( render "projects/show", project: @record.projects.first ) %>")
+
+    $(parent_div).replaceWith(function(){
+      return $(content).hide().fadeIn("slow");
+    });
+
+});

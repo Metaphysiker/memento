@@ -47,6 +47,8 @@ class GroupsController < ApplicationController
   def create_for_project
 
     @group = Group.new(group_params)
+    @parent = @group.projects.first
+    @record = @group
     #byebug
     respond_to do |format|
       if @group.save
