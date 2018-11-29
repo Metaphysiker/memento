@@ -53,6 +53,7 @@
           <hr />
           <div class="<%= project.class.to_s.downcase%>-<%= project.id%>-groups-new">
             <%#= render "groups/form_for_project", group: Group.new, parent: project  %>
+            <%= render "projects/add_group_to_project", group: Group.new, parent: project %>
           </div>
           <hr />
           <div class="shared-project-<%=project.id%>">

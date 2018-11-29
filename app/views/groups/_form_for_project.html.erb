@@ -1,5 +1,4 @@
-
-<%= simple_form_for(group, remote: true) do |f| %>
+<%= simple_form_for(group, url: create_for_project_path, method: :post, remote: true) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -7,6 +6,7 @@
     <%= f.input :name %>
     <%= f.input :description %>
     <%#= f.hidden_field :project_ids, value: [1,2] %>
+    <%#= parent.id %>
     <%= f.hidden_field :project_ids, :multiple => true, :value => parent.id %>
   </div>
 
