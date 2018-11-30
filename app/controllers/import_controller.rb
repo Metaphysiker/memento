@@ -15,6 +15,7 @@ class ImportController < ApplicationController
       functionality = row["functionality"].split(' | ') unless row["functionality"].nil?
       target_group = row["target_group"].split(' | ') unless row["target_group"].nil?
       institutions = row["institutions"].split(' | ') unless row["institutions"].nil?
+      #adress = row["institutions"].split(' | ') unless row["institutions"].nil?
 
       Person.create_or_update_person(person, functionality, target_group, institutions)
     end
