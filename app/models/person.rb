@@ -76,7 +76,7 @@ end
     end
   end
 
-  def self.create_or_update_person(person, tags, institutions)
+  def self.create_or_update_person(person, functionality_tags, target_group_tags, institutions)
     person = person.select!{|x| Person.attribute_names.index(x)}
     puts person["email"]
     if person["email"].nil? || person["email"].blank?
@@ -88,9 +88,15 @@ end
       person = Person.find_by_email(person["email"])
     end
 
-    unless tags.blank?
-      puts tags.inspect
-      person.tag_list.add(tags)
+    unless functionality_tags.blank?
+      puts functionality_tags.inspect
+      person.functionality_list.add(functionality_tags)
+      person.save
+    end
+
+    unless target_group_tags.blank?
+      puts target_group_tags.inspect
+      person.target_group_list.add(target_group_tags)
       person.save
     end
 
