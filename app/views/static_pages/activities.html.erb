@@ -10,7 +10,10 @@
           <%= audit.user ? audit.user.username : "Sandros Skript" %>
         </p>
         <p>
-          <b>Aktivität: </b><%= audit.action %>
+          <b>Modell:</b> <%= t(audit.auditable_type) %>
+        </p>
+        <p>
+          <b>Aktivität: </b><%= t("helpers.submit.#{audit.action}", model: audit.auditable_type) %>
         </p>
         <p>
           <b>Datum: </b><%= audit.created_at.strftime("%d.%m.%Y %H:%M") %>
@@ -18,19 +21,22 @@
         <p>
           <% if audit.action == "create" %>
             <% audit.audited_changes.each do |a| %>
-            <b><%= a[0] %>:</b> <%= a[1] %><br />
+            <% next if a[1].blank? %>
+            <b><%= audit.auditable_type.constantize.human_attribute_name(a[0]) %>:</b> <%= a[1] %><br />
             <% end %>
           <% end %>
 
           <% if audit.action == "update"%>
             <% audit.audited_changes.each do |a| %>
-            <b><%= a[0] %>:</b> Von "<%= a[1][0] %>" zu "<%= a[1][1] %>" <br />
+            <% next if a[1][0].blank? && a[1][1].blank? %>
+            <b><%= audit.auditable_type.constantize.human_attribute_name(a[0]) %>:</b> Von "<%= a[1][0] %>" zu "<%= a[1][1] %>" <br />
             <% end %>
           <% end %>
 
           <% if audit.action == "destroy" %>
             <% audit.audited_changes.each do |a| %>
-            <b><%= a[0] %>:</b> <%= a[1] %><br />
+            <% next if a[1].blank? %>
+            <b><%= audit.auditable_type.constantize.human_attribute_name(a[0]) %>:</b> <%= a[1] %><br />
             <% end %>
           <% end %>
         </p>
