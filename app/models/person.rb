@@ -9,7 +9,7 @@ class Person < ApplicationRecord
   has_many :notes, as: :noteable
   has_many :tasks, as: :taskable
 
-  has_many :affiliations
+  has_many :affiliations, dependent: :destroy
   has_many :institutions, :through => :affiliations
 
   has_many :project_people
