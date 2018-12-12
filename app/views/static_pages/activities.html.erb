@@ -3,8 +3,13 @@
     <div class="card-header text-center">
       <h1>Aktivitäten</h1>
     </div>
+
+    <div class="d-flex justify-content-center">
+      <%= paginate @audits, window: 2, outer_window: 1 %>
+    </div>
+
     <div class="card-body">
-      <% Audited::Audit.order(:created_at).limit(100).reverse_order.each do |audit| %>
+      <% @audits.each do |audit| %>
         <p>
           <b>Änderung von: </b>
           <%= audit.user ? audit.user.username : "Sandros Skript" %>

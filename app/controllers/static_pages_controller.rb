@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
   end
 
   def activities
-
+    @audits = Audited::Audit.order(:created_at).reverse_order.page(params[:page]).per(50)
   end
 
   def overview
