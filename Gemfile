@@ -29,8 +29,6 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'odf-report'
 gem 'rubyzip'
-gem 'gender_detector'
-gem 'unicode_utils'
 gem 'guess'
 
 
