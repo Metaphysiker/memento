@@ -1,5 +1,6 @@
 class Person < ApplicationRecord
   after_create :create_address
+  after_create :set_gender
   after_save :set_name
 
   audited
@@ -59,6 +60,14 @@ end
     end
 
     self.update_column(:name, name)
+  end
+
+  def set_gender
+    if self.gender.blank? && !self.firstname.blank?
+
+      gender = Guess.gender(self.firstname)[:gender]
+      self.update_column(:gender, gender)
+    end
   end
 
   def self.to_csv
