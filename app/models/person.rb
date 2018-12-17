@@ -71,7 +71,7 @@ end
   end
 
   def self.to_csv
-    person_attributes = %w{firstname lastname email phone gender description}
+    person_attributes = %w{firstname lastname email phone gender language description}
     human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
     address_attributes = %w{firstname lastname company street plz location country }
     human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
@@ -82,6 +82,17 @@ end
       all.each do |user|
         csv << person_attributes.map{ |attr| user.send(attr) } + address_attributes.map{ |attr| user.address.send(attr) }
       end
+    end
+  end
+
+  def self.headers_to_csv
+    person_attributes = %w{firstname lastname email phone gender language description}
+    #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
+    address_attributes = %w{firstname lastname company street plz location country }
+    #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
+
+    CSV.generate(headers: true) do |csv|
+      csv << person_attributes + address_attributes
     end
   end
 
