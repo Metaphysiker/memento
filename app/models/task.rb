@@ -10,6 +10,14 @@ class Task < ApplicationRecord
     ['noch nicht angefangen', 'angefangen', 'bald abgeschlossen', 'abgeschlossen']
   end
 
+  def self.priorities
+    {
+      1 => "Niedrig",
+      2 => "Normal",
+      3 => "Hoch"
+    }
+  end
+
   def self.to_csv
     attributes = %w{id description}
 
