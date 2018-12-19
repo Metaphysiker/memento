@@ -87,27 +87,33 @@ end
 
   def self.headers_to_csv
     person_attributes = %w{firstname lastname email phone gender language description}
+    other_attributes = %w{institutions functionality target_group}
+
     #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
-    address_attributes = %w{firstname lastname company street plz location country }
+    address_attributes = %w{company street plz location country }
     #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
-      csv << person_attributes + address_attributes
+      csv << person_attributes + other_attributes + address_attributes
     end
   end
 
   def self.example_csv
     person_attributes = %w{firstname lastname email phone gender language description}
     #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
+    other_attributes = %w{institutions functionality target_group}
+
     address_attributes = %w{company street plz location country }
     #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
-      csv << person_attributes + address_attributes
+      csv << person_attributes + other_attributes + address_attributes
       csv << ["Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik",
-              "Stefan", "Müller", "Intersport AG", "Hagenstrasse 1", "8301", "Zürich", "Schweiz"]
+              "1", "", "",
+              "Intersport AG", "Hagenstrasse 1", "8301", "Zürich", "Schweiz"]
       csv << ["Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "",
-              "Stefan", "Müller", "", "Rue de la gare 3", "6402", "Bern", "Schweiz"]
+              "4 | 7", "", "",
+              "", "Rue de la gare 3", "6402", "Bern", "Schweiz"]
     end
   end
 
