@@ -114,6 +114,12 @@ end
       csv << ["Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "",
               "4 | 7", "", "Studierende",
               "", "Rue de la gare 3", "6402", "Bern", "CH"]
+      csv << ["Heinrich", "Keller", "email@adresse3.ch", "079123456784", "male", "de", "",
+              "2 | 3 | 12", "Blogger", "Uni-Mitarbeitende",
+              "Univerrsität Köln", "Uni-Strasse 56", "6402", "Köln", "DE"]
+      csv << ["Francesca", "Berlusconi", "email@adresse4.ch", "078123456784", "female", "it", "",
+              "2 | 3 | 12", "Blogger", "Uni-Mitarbeitende",
+              "", "Focatia 34", "6402", "Venedig", "IT"]
     end
   end
 
