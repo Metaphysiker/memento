@@ -146,7 +146,7 @@ end
 
     unless institutions.nil?
       institutions.each do |institution|
-        person.institutions << Institution.find(institution) unless person.institutions.include?(institution)
+        person.institutions << Institution.find(institution) unless person.institutions.include?(Institution.find(institution))
       end
     end
   end
