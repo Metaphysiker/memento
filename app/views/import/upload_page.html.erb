@@ -1,4 +1,6 @@
-<div class="container mt-2">
+<div class="container">
+
+
   <div class="card mb-3">
     <div class="card-body">
       <h1 class="card-title">Erklärung</h1>
@@ -16,9 +18,7 @@
       <p class="card-text"><small class="text-muted"><strong>Fragen und Änderungswünsche an:</strong> <%= mail_to "sandro.raess@philosophie.ch" %></small></p>
     </div>
   </div>
-</div>
 
-  <div class="container">
     <div class="card mb-3">
       <div class="card-body">
         <h4>Personen importieren</h4>
@@ -30,7 +30,7 @@
           <%= link_to "CSV mit Beispielen", example_csv_path(search_inputs: {model: "Person"}), class: "btn btn-primary btn-sm" %>
         </p>
         <p>
-          Tags müssen mit einem " | " getrennt werden. Beispiel: "Sponsor | Mitglied | Stiftungsmitglied"
+          Tags und Institutionen müssen mit einem " | " getrennt werden. Beispiel: "Sponsor | Mitglied | Stiftungsmitglied"
         </p>
         <p>
           <b>Wichtig!</b> Die Abstände müssen richtig sein. Das geht nicht: "Sponsor|  Mitglied |Stiftungsmitglied"
@@ -42,6 +42,30 @@
           <%= submit_tag "Importieren", class: "btn btn-primary" %>
         <% end %>
       </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text">
+          <h3>Informationen</h3>
+          <b>IDs der Institutionen:</b>
+          <hr />
+          <% Institution.all.each do |institution| %>
+            <%= institution.name %>: <%= institution.id %>
+            <hr />
+          <% end %>
+        </p>
+
+        <p class="card-text">
+          <b>Funktionalitäten-Tags zum Kopieren:</b>
+          <hr />
+          <% Institution.all.each do |institution| %>
+            <%= institution.name %>: <%= institution.id %>
+            <hr />
+          <% end %>
+        </p>
+
+      </div>
       <hr />
     </div>
-  </div>
+</div>

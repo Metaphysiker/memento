@@ -118,10 +118,10 @@ end
               "2 | 3 | 12", "Blogger | Patronatskomitee | Lehrperson", "Sponsor(Zielgruppe) | Uni-Mitarbeitende | Mitglieder Verein",
               "Univerrsität Köln", "Uni-Strasse 56", "6402", "Köln", "DE"]
       csv << ["Franz", "Schneider", "email@adresse5.ch", "078123456734", "male", "de", "",
-              "2 | 3 | 12", "Platinmitglied", "Medienfachleute",
-              "", "Mozartstrasse 4", "3517", "Wien", "AT"]
+              "6 | 7 | 8 | 9", "Platinmitglied", "Medienfachleute",
+              "Müller GmbH", "Mozartstrasse 4", "3517", "Wien", "AT"]
       csv << ["Francesca", "Berlusconi", "email@adresse4.ch", "078123456784", "female", "it", "",
-              "2 | 3 | 12", "Veranstalter", "Kinder",
+              "12 | 16 | 21", "Veranstalter", "Kinder",
               "", "Focatia 34", "6402", "Venedig", "IT"]
     end
   end
