@@ -11,4 +11,4 @@ Institution.all.each do |p|
 end
 
 
-heroku pg:push memento_development postgresql-elliptical-88337 --app mement0
+#heroku pg:push memento_development postgresql-elliptical-88337 --app mement0

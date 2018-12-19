@@ -6,7 +6,17 @@
     <div class="col-sm-12 col-md-6">
         <div class="bg-light rounded p-2 m-2">
           <h3>Personen</h3>
-          <% tag_lists.where(model: "Person").order(:category).each do |tag_list| %>
+          <h4>Funktionalitäten</h4>
+          <% tag_lists.where(model: "Person", category: "functionality").each do |tag_list| %>
+            <p>
+              <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
+                - Anzahl: <%= class_for(tag_list.model).tagged_with(tag_list.name, :on => tag_list.category.pluralize.to_sym).count %>
+            </p>
+            <hr>
+            <% end %>
+            <br />
+          <h4>Zielgruppen</h4>
+          <% tag_lists.where(model: "Person", category: "target_group").each do |tag_list| %>
             <p>
               <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
                 - Anzahl: <%= class_for(tag_list.model).tagged_with(tag_list.name, :on => tag_list.category.pluralize.to_sym).count %>
@@ -18,13 +28,23 @@
     <div class="col-sm-12 col-md-6">
       <div class="bg-light rounded p-2 m-2">
         <h3>Institutionen</h3>
-        <% tag_lists.where(model: "Institution").order(:category).each do |tag_list| %>
+        <h4>Funktionalitäten</h4>
+        <% tag_lists.where(model: "Institution", category: "functionality").each do |tag_list| %>
           <p>
             <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
-            - Anzahl: <%= class_for(tag_list.model).tagged_with(tag_list.name, :on => tag_list.category.pluralize.to_sym).count %>
+              - Anzahl: <%= class_for(tag_list.model).tagged_with(tag_list.name, :on => tag_list.category.pluralize.to_sym).count %>
           </p>
           <hr>
-      <% end %>
+          <% end %>
+          <br />
+        <h4>Zielgruppen</h4>
+        <% tag_lists.where(model: "Institution", category: "target_group").each do |tag_list| %>
+          <p>
+            <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
+              - Anzahl: <%= class_for(tag_list.model).tagged_with(tag_list.name, :on => tag_list.category.pluralize.to_sym).count %>
+          </p>
+          <hr>
+          <% end %>
       </div>
     </div>
   </div>

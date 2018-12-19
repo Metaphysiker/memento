@@ -109,13 +109,13 @@ end
     CSV.generate(headers: true) do |csv|
       csv << person_attributes + other_attributes + address_attributes
       csv << ["Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik",
-              "1", "Lehrperson", "",
+              "1", "Sponsor", "",
               "Intersport AG", "Hagenstrasse 1", "8301", "Zürich", "CH"]
       csv << ["Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "",
-              "4 | 7", "", "Studierende",
+              "4 | 7", "Veranstalter | Medienkontakt", "Private | Beruffachleute",
               "", "Rue de la gare 3", "6402", "Bern", "CH"]
       csv << ["Heinrich", "Keller", "email@adresse3.ch", "079123456784", "male", "de", "",
-              "2 | 3 | 12", "Blogger", "Uni-Mitarbeitende",
+              "2 | 3 | 12", "Blogger | Patronatskomitee | Lehrperson", "Sponsor(Zielgruppe) | Uni-Mitarbeitende | Mitglieder Verein",
               "Univerrsität Köln", "Uni-Strasse 56", "6402", "Köln", "DE"]
       csv << ["Franz", "Schneider", "email@adresse5.ch", "078123456734", "male", "de", "",
               "2 | 3 | 12", "Platinmitglied", "Medienfachleute",
