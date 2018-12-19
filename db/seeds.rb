@@ -37,7 +37,7 @@ person_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner",
                               "Stiftungsmitglied", "Portalmitglied", "Veranstalter",
                               "Lehrperson", "Öffentliche Institution",
                               "Blogger", "Platinmitglied", "200er-Mitglied",
-                              "Patronatskomitee"]
+                              "Patronatskomitee", "Podiumsgast/Events"]
 
 person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Sponsor(Zielgruppe)",
                               "Uni-Mitarbeitende", "Gymnasiallehrperson",
