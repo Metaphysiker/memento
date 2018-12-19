@@ -122,10 +122,10 @@ class BasicController < ApplicationController
     end
     @records = Search.new(@search_inputs).search
 
-    send_data render_to_string pdf: "#{@search_inputs.model.to_s}-#{Date.today}",
+    send_data render_to_string(pdf: "#{@search_inputs.model.to_s}-#{Date.today}",
                                template: "basic/pdf.html.erb",
                                layout: "pdf_layout.html",
-                               dpi: 75
+                               dpi: 75), filename: "#{@search_inputs.model.to_s}-#{Date.today}.pdf"
   end
 
   def odf
