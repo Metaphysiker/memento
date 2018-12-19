@@ -1,6 +1,4 @@
 <div class="container">
-
-
   <div class="card mb-3">
     <div class="card-body">
       <h1 class="card-title">Erklärung</h1>
@@ -13,7 +11,9 @@
         Wenn die e-Mail-Adresse nicht vorhanden ist, dann wird eine neue Person erstellt.<br />
         <%= fa_icon "arrow-right" %>
         Wenn die e-Mail-Adresse vorhanden ist, dann wird keine neue Person erstellt und die bereits bestehende Person wird aktualisiert.
-        Leere Felder werden nichts verändern.
+        <p>
+          <b>Leere Felder werden nichts verändern.</b>
+        </p>
       </p>
       <p class="card-text"><small class="text-muted"><strong>Fragen und Änderungswünsche an:</strong> <%= mail_to "sandro.raess@philosophie.ch" %></small></p>
     </div>
@@ -47,35 +47,62 @@
     <div class="card mb-3">
       <div class="card-body">
         <p class="card-text">
-          <h3>Informationen</h3>
-          <b>IDs der Institutionen:</b>
+          <h3>IDs der Institutionen</h3>
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Institution</th>
+              <th scope="col">ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Institution.all.each do |institution| %>
+              <tr>
+                <td><%= institution.name %></td>
+                <td><b><%= institution.id %></b></td>
+              </tr>
+            <% end %>
+          </tbody>
+          </table>
+
           <hr />
-          <% Institution.all.each do |institution| %>
-            <%= institution.name %>: <%= institution.id %>
-            <hr />
-          <% end %>
         </p>
 
         <p class="card-text">
-            <h3>Tags zum Kopieren</h3>
-            <h4>Funktionalitäten</h4>
-            <% TagList.where(model: "Person", category: "functionality").each do |tag_list| %>
-              <p>
-                <%= tag_list.name %>
-              </p>
-              <hr>
+            <h2>Tags zum Kopieren</h2>
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Funktionalität</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% TagList.where(model: "Person", category: "functionality").each do |tag_list| %>
+                <tr>
+                  <td><%= tag_list.name %></td>
+                  <td></td>
+                </tr>
               <% end %>
-              <br />
-            <h4>Zielgruppen</h4>
-            <% TagList.where(model: "Person", category: "target_group").each do |tag_list| %>
-              <p>
-                <%= tag_list.name %>
-              </p>
-              <hr>
+            </tbody>
+            </table>
+            <br />
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Zielgruppe</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% TagList.where(model: "Person", category: "target_group").each do |tag_list| %>
+                <tr>
+                  <td><%= tag_list.name %></td>
+                  <td></td>
+                </tr>
               <% end %>
-        </p>
-
+            </tbody>
+            </table>
       </div>
-      <hr />
     </div>
 </div>
