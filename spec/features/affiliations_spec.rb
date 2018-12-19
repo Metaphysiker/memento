@@ -28,6 +28,31 @@ RSpec.describe "affiliations", :type => :feature do
 
   end
 
+  it "views a person and adds an affiliation" do
+    person1 = Person.create(
+      email: Faker::Internet.email,
+      firstname: Faker::Name.first_name,
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone,
+      gender: Person.genders.sample
+    )
+
+    institution1 = Institution.create(name: Faker::Address.community)
+
+    function = "Präsident der Organisation"
+
+    affiliation1 = Affiliation.create(institution_id: institution1.id, person_id: person1.id)
+
+    visit "/people/#{person1.id}"
+    expect(page).to have_css(".affiliation-#{affiliation1.id}")
+    find(".affiliation-#{affiliation1.id}-edit").click
+    find(".affiliation-#{affiliation1.id}-function").set(function)
+    click_button "Funktion aktualisieren"
+    expect(page).to have_css(".affiliation-#{affiliation1.id}", text: function)
+
+  end
+
 end
 
 def login_with(user)
