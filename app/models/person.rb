@@ -109,15 +109,15 @@ end
     CSV.generate(headers: true) do |csv|
       csv << person_attributes + other_attributes + address_attributes
       csv << ["Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik",
-              "1", "", "",
-              "Intersport AG", "Hagenstrasse 1", "8301", "Zürich", "Schweiz"]
+              "1", "Lehrperson", "",
+              "Intersport AG", "Hagenstrasse 1", "8301", "Zürich", "CH"]
       csv << ["Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "",
-              "4 | 7", "", "",
-              "", "Rue de la gare 3", "6402", "Bern", "Schweiz"]
+              "4 | 7", "", "Studierende",
+              "", "Rue de la gare 3", "6402", "Bern", "CH"]
     end
   end
 
-  def self.create_or_update_person(person, functionality_tags, target_group_tags, institutions)
+  def self.create_or_update_person(person, institutions, functionality_tags, target_group_tags, address)
     person = person.select!{|x| Person.attribute_names.index(x)}
     puts person["email"]
     if person["email"].nil? || person["email"].blank?
@@ -128,6 +128,9 @@ end
       Person.find_by_email(person["email"]).update(person)
       person = Person.find_by_email(person["email"])
     end
+
+    address = address.select!{|x| Address.attribute_names.index(x)}
+    person.address.update(address)
 
     unless functionality_tags.blank?
       puts functionality_tags.inspect
