@@ -128,7 +128,8 @@ end
 
   def self.create_or_update_person(person, institutions, functionality_tags, target_group_tags, address)
     person = person.select!{|x| Person.attribute_names.index(x)}
-    person.reject!{|x| x.blank?}
+    #person.reject!{|x| x.blank?}
+    person = person.delete_if {|key, value| value.blank?}
 
     puts person["email"]
     if person["email"].nil? || person["email"].blank?
@@ -141,7 +142,7 @@ end
     end
 
     address = address.select!{|x| Address.attribute_names.index(x)}
-    address.reject!{|x| x.blank?}
+    address.delete_if {|key, value| value.blank?}
     person.address.update(address)
 
     unless functionality_tags.blank?
