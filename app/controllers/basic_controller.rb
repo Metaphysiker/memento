@@ -122,14 +122,11 @@ class BasicController < ApplicationController
     end
     @records = Search.new(@search_inputs).search
 
-  respond_to do |format|
-      format.pdf do
-        render pdf: "#{@search_inputs.model.to_s}-#{Date.today}.pdf",
-        template: "basic/pdf.html.erb",
-        layout: "pdf_layout.html",
-        dpi: 75
-      end
-    end
+    send_data render_to_string pdf: "#{@search_inputs.model.to_s}-#{Date.today}",
+                               filename: "elo",
+                               template: "basic/pdf.html.erb",
+                               layout: "pdf_layout.html",
+                               dpi: 75
   end
 
   def odf
