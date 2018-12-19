@@ -1,5 +1,5 @@
 class CsvController < ApplicationController
-  def csv
+  def basic_csv
     if params[:search_inputs].present?
       @search_inputs = OpenStruct.new(params[:search_inputs])
     else
