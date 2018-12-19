@@ -43,6 +43,8 @@ Rails.application.routes.draw do
 
   #csv
   get '/basic_csv', to: 'csv#basic_csv', as: 'basic_csv'
+  get '/headers_csv', to: 'csv#headers_csv', as: 'headers_csv'
+  get '/example_csv', to: 'csv#example_csv', as: 'example_csv'
 
   #pdf
   get '/basic_pdf', to: 'pdf#basic_pdf', as: 'basic_pdf'

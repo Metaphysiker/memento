@@ -96,6 +96,21 @@ end
     end
   end
 
+  def self.example_csv
+    person_attributes = %w{firstname lastname email phone gender language description}
+    #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
+    address_attributes = %w{company street plz location country }
+    #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
+
+    CSV.generate(headers: true) do |csv|
+      csv << person_attributes + address_attributes
+      csv << ["Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik",
+              "Stefan", "Müller", "Intersport AG", "Hagenstrasse 1", "8301", "Zürich", "Schweiz"]
+      csv << ["Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "",
+              "Stefan", "Müller", "", "Rue de la gare 3", "6402", "Bern", "Schweiz"]
+    end
+  end
+
   def self.create_or_update_person(person, functionality_tags, target_group_tags, institutions)
     person = person.select!{|x| Person.attribute_names.index(x)}
     puts person["email"]
