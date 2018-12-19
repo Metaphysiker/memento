@@ -15,10 +15,10 @@
           <%= audit.user ? audit.user.username : "Sandros Skript" %>
         </p>
         <p>
-          <b>Modell:</b> <%= t(audit.auditable_type) %>
+          <b>Modell:</b> <%= audit.auditable_type.constantize.model_name.human %>
         </p>
         <p>
-          <b>Aktivität: </b><%= t("helpers.submit.#{audit.action}", model: audit.auditable_type) %>
+          <b>Aktivität: </b><%= t("helpers.submit.#{audit.action}", model: audit.auditable_type.constantize.model_name.human ) %>
         </p>
         <p>
           <b>Datum: </b><%= audit.created_at.strftime("%d.%m.%Y %H:%M") %>
