@@ -8,7 +8,7 @@
         Auf dieser Seite kann man Personen und Institutionen importieren.
       </p>
       <p class="card-text">
-        Wenn eine Person importiert wird, dann wird geprüft, ob die e-Mail-Adresse bereits bei einer anderen Person vorhanden ist.<br />
+        Wenn eine Person importiert wird, dann wird geprüft, ob die e-Mail-Adresse bereits vorhanden ist.<br />
         <%= fa_icon "arrow-right" %>
         Wenn die e-Mail-Adresse nicht vorhanden ist, dann wird eine neue Person erstellt.<br />
         <%= fa_icon "arrow-right" %>
@@ -57,12 +57,22 @@
         </p>
 
         <p class="card-text">
-          <b>Funktionalitäten-Tags zum Kopieren:</b>
-          <hr />
-          <% Institution.all.each do |institution| %>
-            <%= institution.name %>: <%= institution.id %>
-            <hr />
-          <% end %>
+            <h3>Tags zum Kopieren</h3>
+            <h4>Funktionalitäten</h4>
+            <% TagList.where(model: "Person", category: "functionality").each do |tag_list| %>
+              <p>
+                <%= tag_list.name %>
+              </p>
+              <hr>
+              <% end %>
+              <br />
+            <h4>Zielgruppen</h4>
+            <% TagList.where(model: "Person", category: "target_group").each do |tag_list| %>
+              <p>
+                <%= tag_list.name %>
+              </p>
+              <hr>
+              <% end %>
         </p>
 
       </div>
