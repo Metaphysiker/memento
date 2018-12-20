@@ -116,7 +116,7 @@ end
               "", "Rue de la gare 3", "6402", "Bern", "CH"]
       csv << ["Heinrich", "Keller", "email@adresse3.ch", "079123456784", "male", "de", "",
               "2 | 3 | 12", "Blogger | Patronatskomitee | Lehrperson", "Sponsor(Zielgruppe) | Uni-Mitarbeitende | Mitglieder Verein",
-              "Univerrsität Köln", "Uni-Strasse 56", "6402", "Köln", "DE"]
+              "Univerrsität Köln", "Uni-Strasse 56", "9662", "Köln", "DE"]
       csv << ["Franz", "Schneider", "email@adresse5.ch", "078123456734", "male", "de", "",
               "6 | 7 | 8 | 9", "Platinmitglied", "Medienfachleute",
               "Müller GmbH", "Mozartstrasse 4", "3517", "Wien", "AT"]
