@@ -80,11 +80,11 @@
             <tbody>
               <% TagList.where(model: "Person", category: "functionality").each do |tag_list| %>
                 <tr>
-                  <td id="clipboard-<%=tag_list.name%>"><%= tag_list.name %></td>
+                  <td id="clipboard-<%=tag_list.name.parameterize%>"><%= tag_list.name %></td>
                   <td>
 
                     <!-- Trigger -->
-                    <button class="clipboard-btn btn" data-clipboard-action="copy" data-clipboard-target="#clipboard-<%=tag_list.name%>">
+                    <button class="clipboard-btn btn" data-clipboard-action="copy" data-clipboard-target="#clipboard-<%=tag_list.name.parameterize%>">
                         Copy to clipboard
                     </button>
                   </td>
