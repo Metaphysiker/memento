@@ -66,8 +66,6 @@ RSpec.describe "groups", :type => :feature do
     expect(page).to_not have_content(description)
     expect(page).to have_content(name2)
     expect(page).to have_content(description2)
-
-
   end
 end
 
