@@ -8,17 +8,23 @@ RSpec.describe "groups", :type => :feature do
   end
 
   it "creates a group" do
-    person = Person.create(
-      email: Faker::Internet.email,
-      firstname: Faker::Name.first_name,
-      lastname: Faker::Name.last_name,
-      description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
-    )
 
-    visit "/people/#{person.id}"
-    expect(page).to have_content(person.email)
+    name = Faker::Demographic.educational_attainment
+    description = Faker::Lorem.paragraph
+
+    visit "/groups/"
+    click_button "Gruppe erstellen"
+    fill_in "Name", :with => name
+    fill_in "Beschreibung", :with => description
+
+    within('.group--edit-modal') do
+      click_button "Gruppe erstellen"
+    end
+
+    expect(page).to have_content(name)
+    expect(page).to have_content(description)
+    page.save_screenshot('gruppe-erstellen.png')
+
   end
 end
 
