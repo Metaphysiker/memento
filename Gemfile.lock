@@ -114,6 +114,7 @@ GEM
       cocaine
       orm_adapter (~> 0.5.0)
     climate_control (0.2.0)
+    clipboard-rails (1.7.1)
     cocaine (0.6.0)
       terrapin (= 0.6.0)
     code_analyzer (0.4.8)
@@ -401,6 +402,7 @@ DEPENDENCIES
   chosen-rails
   chromedriver-helper
   ckeditor
+  clipboard-rails
   coffee-rails (~> 4.2)
   country_select
   devise

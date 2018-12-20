@@ -30,6 +30,7 @@ gem 'wkhtmltopdf-binary'
 gem 'odf-report'
 gem 'rubyzip'
 gem 'guess'
+gem 'clipboard-rails'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
