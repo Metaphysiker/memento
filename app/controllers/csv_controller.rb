@@ -31,6 +31,6 @@ class CsvController < ApplicationController
     end
     @records = Search.new(@search_inputs).search
 
-    send_data @records.example_csv, filename: "headers.csv"
+    send_data @records.example_csv, filename: "examples.csv"
   end
 end
