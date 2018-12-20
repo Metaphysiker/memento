@@ -87,7 +87,7 @@ end
 
   def self.headers_to_csv
     person_attributes = %w{firstname lastname email phone gender language description}
-    other_attributes = %w{institutions functionality target_group}
+    other_attributes = %w{institutions groups functionality target_group}
 
     #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
     address_attributes = %w{company street plz location country }
@@ -101,7 +101,7 @@ end
   def self.example_csv
     person_attributes = %w{firstname lastname email phone gender language description}
     #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
-    other_attributes = %w{institutions functionality target_group}
+    other_attributes = %w{institutions groups functionality target_group}
 
     address_attributes = %w{company street plz location country }
     #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
@@ -109,24 +109,24 @@ end
     CSV.generate(headers: true) do |csv|
       csv << person_attributes + other_attributes + address_attributes
       csv << ["Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik",
-              "1", "Sponsor", "",
+              "1", "", "Sponsor", "",
               "Intersport AG", "Hagenstrasse 1", "8301", "Zürich", "CH"]
       csv << ["Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "",
-              "4 | 7", "Veranstalter | Medienkontakt", "Private | Beruffachleute",
+              "4 | 7", "4", "Veranstalter | Medienkontakt", "Private | Beruffachleute",
               "", "Rue de la gare 3", "6402", "Bern", "CH"]
       csv << ["Heinrich", "Keller", "email@adresse3.ch", "079123456784", "male", "de", "",
-              "2 | 3 | 12", "Blogger | Patronatskomitee | Lehrperson", "Sponsor(Zielgruppe) | Uni-Mitarbeitende | Mitglieder Verein",
+              "2 | 3 | 12", "5 | 6", "Blogger | Patronatskomitee | Lehrperson", "Sponsor(Zielgruppe) | Uni-Mitarbeitende | Mitglieder Verein",
               "Univerrsität Köln", "Uni-Strasse 56", "9662", "Köln", "DE"]
       csv << ["Franz", "Schneider", "email@adresse5.ch", "078123456734", "male", "de", "",
-              "6 | 7 | 8 | 9", "Platinmitglied", "Medienfachleute",
+              "6 | 7 | 8 | 9","5 | 6 | 7", "Platinmitglied", "Medienfachleute",
               "Müller GmbH", "Mozartstrasse 4", "3517", "Wien", "AT"]
       csv << ["Francesca", "Berlusconi", "email@adresse4.ch", "078123456784", "female", "it", "",
-              "12 | 16 | 21", "Veranstalter", "Kinder",
+              "12 | 16 | 21", "", "Veranstalter", "Kinder",
               "", "Focatia 34", "6402", "Venedig", "IT"]
     end
   end
 
-  def self.create_or_update_person(person, institutions, functionality_tags, target_group_tags, address)
+  def self.create_or_update_person(person, institutions, groups, functionality_tags, target_group_tags, address)
     person = person.select!{|x| Person.attribute_names.index(x)}
     #person.reject!{|x| x.blank?}
     person.delete_if {|key, value| value.blank?}
@@ -160,6 +160,12 @@ end
     unless institutions.nil?
       institutions.each do |institution|
         person.institutions << Institution.find(institution) unless person.institutions.include?(Institution.find(institution))
+      end
+    end
+
+    unless groups.nil?
+      groups.each do |group|
+        person.groups << Group.find(group) unless person.groups.include?(Group.find(group))
       end
     end
   end
