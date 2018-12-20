@@ -40,7 +40,34 @@ RSpec.describe "groups", :type => :feature do
     find(".group-#{group.id}-delete").click
     page.evaluate_script('window.confirm = function() { return true; }')
     expect(page).to_not have_content(name)
+    expect(page).to_not have_content(description)
+  end
+
+  it "updates a group" do
+
+    name = Faker::Demographic.educational_attainment
+    description = Faker::Lorem.paragraph
+
+    name2 = Faker::Demographic.educational_attainment
+    description2 = Faker::Lorem.paragraph
+
+    group = Group.create(name: name, description: description)
+
+    visit "/groups/#{group.id}"
+    expect(page).to have_content(name)
     expect(page).to have_content(description)
+
+    find(".group-#{group.id}-edit").click
+    fill_in "Name", :with => name2
+    fill_in "Beschreibung", :with => description2
+    click_button "Gruppe aktualisieren"
+
+    expect(page).to_not have_content(name)
+    expect(page).to_not have_content(description)
+    expect(page).to have_content(name2)
+    expect(page).to have_content(description2)
+
+
   end
 end
 
