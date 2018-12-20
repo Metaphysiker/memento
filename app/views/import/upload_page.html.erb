@@ -141,6 +141,28 @@
         </p>
 
         <p class="card-text">
+          <h3>IDs der Gruppen</h3>
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Gruppe</th>
+              <th scope="col">ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Group.all.each do |group| %>
+              <tr>
+                <td><%= group.name %></td>
+                <td><b><%= group.id %></b></td>
+              </tr>
+            <% end %>
+          </tbody>
+          </table>
+
+          <hr />
+        </p>
+
+        <p class="card-text">
             <h2>Tags zum Kopieren</h2>
             <table class="table">
             <thead>
