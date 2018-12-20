@@ -407,6 +407,31 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(function)
   end
 
+  it "creates two people with male and female names and expects gender accordingly" do
+    person1 = Person.create(
+      email: Faker::Internet.email,
+      firstname: "Stefan",
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone
+    )
+
+    person2 = Person.create(
+      email: Faker::Internet.email,
+      firstname: "Leonie",
+      lastname: Faker::Name.last_name,
+      description: Faker::Lorem.paragraph,
+      phone: Faker::PhoneNumber.cell_phone
+    )
+
+    visit "/people/#{person1.id}"
+    expect(page).to have_content(I18n.t("male"))
+
+    visit "/people/#{person2.id}"
+    expect(page).to have_content(I18n.t("female"))
+
+  end
+
 end
 
 def login_with(user)
