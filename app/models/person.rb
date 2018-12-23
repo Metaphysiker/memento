@@ -73,7 +73,7 @@ end
   def self.to_csv
     person_attributes = %w{firstname lastname email phone gender language description}
     human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
-    address_attributes = %w{firstname lastname company street plz location country }
+    address_attributes = %w{firstname lastname company  company2 street plz location country }
     human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
@@ -90,7 +90,7 @@ end
     other_attributes = %w{institutions groups functionality target_group}
 
     #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
-    address_attributes = %w{company street plz location country }
+    address_attributes = %w{company company2 street plz location country }
     #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
@@ -103,26 +103,26 @@ end
     #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
     other_attributes = %w{institutions groups functionality target_group}
 
-    address_attributes = %w{company street plz location country }
+    address_attributes = %w{company company2 street plz location country }
     #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
       csv << person_attributes + other_attributes + address_attributes
       csv << ["Herr Prof. Dr. ", "Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik", "www.kant.ch",
               "1", "", "Sponsor", "",
-              "Intersport AG", "Hagenstrasse 1", "8301", "Zürich", "CH"]
+              "Intersport AG", "", "Hagenstrasse 1", "8301", "Zürich", "CH"]
       csv << ["Frau Dr.", "Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "", "www.meinewebseite.ch",
               "4 | 7", "4", "Veranstalter | Medienkontakt", "Private | Beruffachleute",
-              "", "Rue de la gare 3", "6402", "Bern", "CH"]
+              "", "", "Rue de la gare 3", "6402", "Bern", "CH"]
       csv << ["", "Heinrich", "Keller", "email@adresse3.ch", "079123456784", "male", "de", "", "",
               "2 | 3 | 12", "5 | 6", "Blogger | Patronatskomitee | Lehrperson", "Sponsor(Zielgruppe) | Uni-Mitarbeitende | Mitglieder Verein",
-              "Univerrsität Köln", "Uni-Strasse 56", "9662", "Köln", "DE"]
+              "Universität Köln", "Philosophisches Seminar", "Uni-Strasse 56", "9662", "Köln", "DE"]
       csv << ["Herr", "Franz", "Schneider", "email@adresse5.ch", "078123456734", "male", "de", "", "www.medien.de",
               "6 | 7 | 8 | 9","5 | 6 | 7", "Platinmitglied", "Medienfachleute",
-              "Müller GmbH", "Mozartstrasse 4", "3517", "Wien", "AT"]
+              "Müller GmbH", "Informatik-Abteilung", "Mozartstrasse 4", "3517", "Wien", "AT"]
       csv << ["Frau", "Francesca", "Berlusconi", "email@adresse4.ch", "078123456784", "female", "it", "", "www.philosophie.ch",
               "12 | 16 | 21", "", "Veranstalter", "Kinder",
-              "", "Focatia 34", "6402", "Venedig", "IT"]
+              "", "", "Focatia 34", "6402", "Venedig", "IT"]
     end
   end
 
@@ -159,13 +159,13 @@ end
 
     unless institutions.nil?
       institutions.each do |institution|
-        person.institutions << Institution.find(institution) unless person.institutions.include?(Institution.find(institution))
+        person.institutions << Institution.find(institution) unless person.institutions.include?(Institution.find(institution)) || !Institution.where(id: institution).exists?
       end
     end
 
     unless groups.nil?
       groups.each do |group|
-        person.groups << Group.find(group) unless person.groups.include?(Group.find(group))
+        person.groups << Group.find(group) unless person.groups.include?(Group.find(group)) || !Group.where(id: group).exists?
       end
     end
   end
