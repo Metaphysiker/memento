@@ -219,6 +219,7 @@ RSpec.describe "institutions", :type => :feature do
 
     name = Faker::Address.community
     description = Faker::Lorem.paragraph
+    website = Faker::Internet.url
 
     visit "/institutions/"
 
@@ -226,6 +227,7 @@ RSpec.describe "institutions", :type => :feature do
 
     fill_in "Name", :with => name
     fill_in "Beschreibung", :with => description
+    fill_in "Webseite", :with => website
 
     within(".form-actions") do
       click_button "Institution erstellen"
@@ -234,6 +236,7 @@ RSpec.describe "institutions", :type => :feature do
     #page.save_screenshot('create-institution.png')
     expect(page).to have_content(name)
     expect(page).to have_content(description)
+    expect(page).to have_content(website)
   end
 
   it "updates an institution" do

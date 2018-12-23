@@ -14,7 +14,8 @@ RSpec.describe "people", :type => :feature do
       lastname: Faker::Name.last_name,
       description: Faker::Lorem.paragraph,
       phone: Faker::PhoneNumber.cell_phone,
-      gender: Person.genders.sample
+      gender: Person.genders.sample,
+      website: Faker::Internet.url
     )
 
     visit "/people/#{person.id}"
@@ -29,6 +30,8 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content("Telefon:")
     expect(page).to have_content(I18n.t(person.gender))
     expect(page).to have_content("Geschlecht:")
+    expect(page).to have_content(person.website)
+    expect(page).to have_content("Webseite:")
 
   end
 
@@ -78,7 +81,8 @@ RSpec.describe "people", :type => :feature do
       lastname: Faker::Name.last_name,
       description: Faker::Lorem.paragraph,
       phone: Faker::PhoneNumber.cell_phone,
-      gender: "male"
+      gender: "male",
+      website: Faker::Internet.url
     )
 
     visit "/people/#{person.id}"
@@ -90,6 +94,7 @@ RSpec.describe "people", :type => :feature do
     description = Faker::Lorem.unique.paragraph
     email = Faker::Internet.unique.email
     phone = Faker::PhoneNumber.unique.cell_phone
+    website = Faker::Internet.unique.url
 
     fill_in "Vorname", :with => firstname
     fill_in "Nachname", :with => lastname
@@ -97,6 +102,7 @@ RSpec.describe "people", :type => :feature do
     fill_in "e-Mail", :with => email
     fill_in "Telefon", :with => phone
     select(I18n.t("female"), :from => 'Geschlecht')
+    fill_in "Webseite", :with => website
 
     click_button "Person aktualisieren"
 

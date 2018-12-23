@@ -8,6 +8,7 @@
       <%= f.input :lastname %>
       <%= f.input :description %>
       <%= f.input :email %>
+      <%= f.input :website %>
       <%= f.input :phone %>
       <%= f.input :gender, collection: Person.genders.map {|p| [t("#{p}"), p]} %>
       <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]} %>

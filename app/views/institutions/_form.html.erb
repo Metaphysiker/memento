@@ -15,6 +15,7 @@
     <%= f.input :email %>
   </div>
 
+  <%= f.input :website %>
   <%= f.input :functionality_list, as: :select, collection: TagList.where(model: "Institution", category: "functionality"), label: "Funktionalitäten", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
   <%= f.input :target_group_list, as: :select, collection: TagList.where(model: "Institution", category: "target_group"), label: "Zielgruppe", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
 

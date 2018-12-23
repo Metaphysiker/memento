@@ -49,6 +49,10 @@
             <p class="card-text"><strong>e-Mail: </strong><%= mail_to institution.email %></p>
           <% end %>
 
+          <% if !institution.website.blank? %>
+            <p class="card-text"><strong>Webseite: </strong><%= institution.website %></p>
+          <% end %>
+
           <div class="institution-<%=institution.id%>-people">
             <% unless institution.affiliations.empty? %>
             <p> <b>Mitglieder: </b>

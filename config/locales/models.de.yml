@@ -37,6 +37,7 @@ de:
         gender: "Geschlecht"
         description: "Beschreibung"
         language: "Sprache"
+        website: "Webseite"
       address:
         form_of_address: "Anrede"
         firstname: "Vorname"
@@ -49,6 +50,7 @@ de:
       institution:
         description: "Beschreibung"
         email: "e-Mail"
+        website: "Webseite"
       note:
         description: "Beschreibung"
       task:
