@@ -46,7 +46,7 @@ person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Sponsor(Zielgr
 
 institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner",
                                     "Stiftung", "Veranstalter", "Lehrperson",
-                                    "Öffentliche Institution", "Platinmitglied",
+                                    "Öffentliche Institution", "Philosophische Institution", "Platinmitglied",
                                     "200er-Mitglied", "Patronatskomitee", "Portalmitglied",]
 
 institutions_target_groups_tags = ["Sponsor(Zielgruppe)", "Medienkontakt(Zielgruppe)", "Kooperationspartner(Zielgruppe)",
