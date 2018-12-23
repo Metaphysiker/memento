@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_210725) do
+ActiveRecord::Schema.define(version: 2018_12_23_182745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_210725) do
     t.integer "philosophie_society_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "website", default: ""
   end
 
   create_table "notes", force: :cascade do |t|
@@ -146,6 +147,7 @@ ActiveRecord::Schema.define(version: 2018_11_20_210725) do
     t.string "language", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "website", default: ""
   end
 
   create_table "project_groups", force: :cascade do |t|
