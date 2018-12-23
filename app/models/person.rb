@@ -29,20 +29,11 @@ class Person < ApplicationRecord
 
   def create_address
 
-    form_of_address = ""
-
-    if self.gender == "male"
-      form_of_address = "Herr"
-    elsif self.gender == "female"
-      form_of_address = "Frau"
-    end
-
   Address.create(
     addressable_id: self.id,
     addressable_type: Person,
     firstname: self.firstname,
-    lastname: self.lastname,
-    form_of_address: form_of_address
+    lastname: self.lastname
   )
 end
 
@@ -108,19 +99,19 @@ end
 
     CSV.generate(headers: true) do |csv|
       csv << person_attributes + other_attributes + address_attributes
-      csv << ["Herr Prof. Dr. ", "Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik", "www.kant.ch",
+      csv << ["Prof. Dr.", "Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik", "www.kant.ch",
               "1", "", "Sponsor", "",
               "Intersport AG", "", "Hagenstrasse 1", "8301", "Zürich", "CH"]
-      csv << ["Frau Dr.", "Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "", "www.meinewebseite.ch",
+      csv << ["Dr.", "Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "", "www.meinewebseite.ch",
               "4 | 7", "4", "Veranstalter | Medienkontakt", "Private | Beruffachleute",
               "", "", "Rue de la gare 3", "6402", "Bern", "CH"]
       csv << ["", "Heinrich", "Keller", "email@adresse3.ch", "079123456784", "male", "de", "", "",
               "2 | 3 | 12", "5 | 6", "Blogger | Patronatskomitee | Lehrperson", "Sponsor(Zielgruppe) | Uni-Mitarbeitende | Mitglieder Verein",
               "Universität Köln", "Philosophisches Seminar", "Uni-Strasse 56", "9662", "Köln", "DE"]
-      csv << ["Herr", "Franz", "Schneider", "email@adresse5.ch", "078123456734", "male", "de", "", "www.medien.de",
+      csv << ["Habil. jur.", "Franz", "Schneider", "email@adresse5.ch", "078123456734", "male", "de", "", "www.medien.de",
               "6 | 7 | 8 | 9","5 | 6 | 7", "Platinmitglied", "Medienfachleute",
               "Müller GmbH", "Informatik-Abteilung", "Mozartstrasse 4", "3517", "Wien", "AT"]
-      csv << ["Frau", "Francesca", "Berlusconi", "email@adresse4.ch", "078123456784", "female", "it", "", "www.philosophie.ch",
+      csv << ["Dr. med.", "Francesca", "Berlusconi", "email@adresse4.ch", "078123456784", "female", "it", "", "www.philosophie.ch",
               "12 | 16 | 21", "", "Veranstalter", "Kinder",
               "", "", "Focatia 34", "6402", "Venedig", "IT"]
     end
