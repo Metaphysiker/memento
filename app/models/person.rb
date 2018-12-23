@@ -144,6 +144,7 @@ end
     address = address.select!{|x| Address.attribute_names.index(x)}
     address.delete_if {|key, value| value.blank?}
     person.address.update(address)
+    puts address
 
     unless functionality_tags.blank?
       puts functionality_tags.inspect
