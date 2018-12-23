@@ -25,6 +25,8 @@
 
 $(document).ready(function(){
 
+  console.log("Document ready!")
+
   var clipboard = new Clipboard('.clipboard-btn');
   console.log(clipboard);
 
@@ -50,6 +52,7 @@ function hideTooltip(btn) {
 // Clipboard
 
 var clipboard = new Clipboard('.clipboard-btn');
+console.log(clipboard);
 
 clipboard.on('success', function(e) {
   setTooltip(e.trigger, 'Kopiert!');
