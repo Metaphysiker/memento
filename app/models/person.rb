@@ -159,13 +159,13 @@ end
 
     unless institutions.nil?
       institutions.each do |institution|
-        person.institutions << Institution.find(institution) unless person.institutions.include?(Institution.find(institution)) || !Institution.where(id: institution).exists?
+        person.institutions << Institution.find(institution) unless !Institution.where(id: institution).exists? || person.institutions.include?(Institution.find(institution))
       end
     end
 
     unless groups.nil?
       groups.each do |group|
-        person.groups << Group.find(group) unless person.groups.include?(Group.find(group)) || !Group.where(id: group).exists?
+        person.groups << Group.find(group) unless  !Group.where(id: group).exists? || person.groups.include?(Group.find(group))
       end
     end
   end

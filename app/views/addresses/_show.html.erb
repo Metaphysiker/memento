@@ -25,7 +25,7 @@
         <% unless address.form_of_address.blank? %>
           <%= address.form_of_address %>
         <% end %>
-        <% if address.company.blank? %>
+        <% if address.company.blank? && address.company2.blank? %>
           <br />
         <% end %>
         <% unless address.firstname.blank? && address.lastname.blank? %>
