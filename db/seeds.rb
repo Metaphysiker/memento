@@ -35,14 +35,14 @@ User.create(
 
 person_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner",
                               "Stiftungsmitglied", "Portalmitglied", "Veranstalter",
-                              "Lehrperson", "Öffentliche Institution",
+                              "Lehrperson",
                               "Blogger", "Platinmitglied", "200er-Mitglied",
                               "Patronatskomitee", "Podiumsgast/Events"]
 
 person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Sponsor(Zielgruppe)",
                               "Uni-Mitarbeitende", "Gymnasiallehrperson",
                               "Private", "Beruffachleute", "Medienfachleute",
-                              "Mitglieder Verein", "ehrenamtliche Blogger"]
+                              "Vereinsmitglied", "ehrenamtliche Blogger"]
 
 institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner",
                                     "Stiftung", "Veranstalter", "Lehrperson",

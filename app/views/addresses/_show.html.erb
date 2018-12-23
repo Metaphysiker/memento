@@ -19,6 +19,9 @@
         <% unless address.company.blank? %>
           <%= address.company %> <br />
         <% end %>
+        <% unless address.company2.blank? %>
+          <%= address.company2 %> <br />
+        <% end %>
         <% unless address.form_of_address.blank? %>
           <%= address.form_of_address %>
         <% end %>
