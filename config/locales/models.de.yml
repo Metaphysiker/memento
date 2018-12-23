@@ -43,6 +43,7 @@ de:
         firstname: "Vorname"
         lastname: "Nachname"
         company: "Firma"
+        company: "Firma (zweite Zeile)"
         street: "Strasse"
         plz: "PLZ"
         location: "Ort"

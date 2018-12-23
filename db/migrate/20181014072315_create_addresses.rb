@@ -5,6 +5,7 @@ class CreateAddresses < ActiveRecord::Migration[5.2]
       t.string :firstname, default: ""
       t.string :lastname, default: ""
       t.string :company, default: ""
+      t.string :company2, default: ""
       t.string :street, default: ""
       t.string :plz, default: ""
       t.string :location, default: ""
