@@ -86,7 +86,7 @@ end
   end
 
   def self.headers_to_csv
-    person_attributes = %w{form_of_address firstname lastname email phone gender language description}
+    person_attributes = %w{form_of_address firstname lastname email phone gender language description website}
     other_attributes = %w{institutions groups functionality target_group}
 
     #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
@@ -99,7 +99,7 @@ end
   end
 
   def self.example_csv
-    person_attributes = %w{form_of_address firstname lastname email phone gender language description}
+    person_attributes = %w{form_of_address firstname lastname email phone gender language description website}
     #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
     other_attributes = %w{institutions groups functionality target_group}
 
@@ -108,19 +108,19 @@ end
 
     CSV.generate(headers: true) do |csv|
       csv << person_attributes + other_attributes + address_attributes
-      csv << ["Herr Prof. Dr. ", "Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik",
+      csv << ["Herr Prof. Dr. ", "Stefan", "Müller", "email@adresse.ch", "079123456789", "male", "de", "Experte in Metaphysik", "www.kant.ch",
               "1", "", "Sponsor", "",
               "Intersport AG", "Hagenstrasse 1", "8301", "Zürich", "CH"]
-      csv << ["Frau Dr.", "Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "",
+      csv << ["Frau Dr.", "Lara", "Wagner", "email@adresse2.ch", "079123456787", "female", "fr", "", "www.meinewebseite.ch",
               "4 | 7", "4", "Veranstalter | Medienkontakt", "Private | Beruffachleute",
               "", "Rue de la gare 3", "6402", "Bern", "CH"]
-      csv << ["", "Heinrich", "Keller", "email@adresse3.ch", "079123456784", "male", "de", "",
+      csv << ["", "Heinrich", "Keller", "email@adresse3.ch", "079123456784", "male", "de", "", "",
               "2 | 3 | 12", "5 | 6", "Blogger | Patronatskomitee | Lehrperson", "Sponsor(Zielgruppe) | Uni-Mitarbeitende | Mitglieder Verein",
               "Univerrsität Köln", "Uni-Strasse 56", "9662", "Köln", "DE"]
-      csv << ["Herr", "Franz", "Schneider", "email@adresse5.ch", "078123456734", "male", "de", "",
+      csv << ["Herr", "Franz", "Schneider", "email@adresse5.ch", "078123456734", "male", "de", "", "www.medien.de",
               "6 | 7 | 8 | 9","5 | 6 | 7", "Platinmitglied", "Medienfachleute",
               "Müller GmbH", "Mozartstrasse 4", "3517", "Wien", "AT"]
-      csv << ["Frau", "Francesca", "Berlusconi", "email@adresse4.ch", "078123456784", "female", "it", "",
+      csv << ["Frau", "Francesca", "Berlusconi", "email@adresse4.ch", "078123456784", "female", "it", "", "www.philosophie.ch",
               "12 | 16 | 21", "", "Veranstalter", "Kinder",
               "", "Focatia 34", "6402", "Venedig", "IT"]
     end
