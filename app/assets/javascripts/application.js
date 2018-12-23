@@ -49,11 +49,6 @@ function hideTooltip(btn) {
   }, 1000);
 }
 
-// Clipboard
-
-var clipboard = new Clipboard('.clipboard-btn');
-console.log(clipboard);
-
 clipboard.on('success', function(e) {
   setTooltip(e.trigger, 'Kopiert!');
   hideTooltip(e.trigger);
