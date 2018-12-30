@@ -31,6 +31,8 @@ gem 'odf-report'
 gem 'rubyzip'
 gem 'guess'
 gem 'clipboard-rails'
+gem "chartkick"
+gem 'groupdate'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

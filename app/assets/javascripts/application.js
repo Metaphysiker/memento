@@ -21,4 +21,5 @@
 //= require lazyload
 //= require scaffold
 //= require clipboard
+//= require chartkick
 //= require_tree .
