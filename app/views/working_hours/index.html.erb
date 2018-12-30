@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Working Hours</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Hours</th>
+      <th>Project</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @working_hours.each do |working_hour| %>
+      <tr>
+        <td><%= working_hour.date %></td>
+        <td><%= working_hour.name %></td>
+        <td><%= working_hour.hours %></td>
+        <td><%= working_hour.project %></td>
+        <td><%= link_to 'Show', working_hour %></td>
+        <td><%= link_to 'Edit', edit_working_hour_path(working_hour) %></td>
+        <td><%= link_to 'Destroy', working_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Working Hour', new_working_hour_path %>

@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4>Arbeitsstunden importieren</h4>
+      <%= form_tag import_working_hours_path, multipart: true do %>
+        <%= file_field_tag :file, class: "btn btn-secondary" %>
+        <br>
+        <br>
+        <%= submit_tag "Importieren", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -27,6 +27,21 @@ class ImportController < ApplicationController
     redirect_to upload_page_path, notice: "CSV importiert!"
   end
 
+  def import_working_hours_page
+
+  end
+
+  def import_working_hours
+    file = params[:file]
+
+    CSV.foreach(file.path, headers: true) do |row|
+      working_hour = row.to_hash
+      WorkingHour.create(working_hour)
+    end
+
+    redirect_to import_working_hours_page_path, notice: "CSV importiert!"
+  end
+
   def testing
 
   end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :working_hours
   resources :groups
   resources :projects
   resources :tasks
@@ -72,5 +73,8 @@ Rails.application.routes.draw do
   get '/upload_page', to: 'import#upload_page', as: 'upload_page'
   post '/import_people', to: 'import#people', as: 'import_people'
   get '/testing', to: 'import#testing', as: 'testing'
+
+  get '/import_working_hours_page', to: 'import#import_working_hours_page', as: 'import_working_hours_page'
+  post '/import_working_hours', to: 'import#import_working_hours', as: 'import_working_hours'
 
 end

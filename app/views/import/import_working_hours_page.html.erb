@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4>Arbeitsstunden importieren</h4>
+      <%= form_tag import_working_hours_path, multipart: true do %>
+        <%= file_field_tag :file, class: "btn btn-secondary" %>
+        <br>
+        <br>
+        <%= submit_tag "Importieren", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4>Arbeitsstunden</h4>
+
+      <% ["Sandro", "Anja", "Sahra", "Benjamin"].each do |name| %>
+      <h1><%= name %></h1>
+      <strong>Total: </strong><%= WorkingHour.where(name: name).sum(:hours) %>
+      <table class="table table-striped table-wrapper-scroll-y border border-primary rounded m-1 p-1">
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Name</th>
+            <th>Stunden</th>
+            <th>Bereich</th>
+            <th>Projekt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% WorkingHour.where(name: name).each do |w| %>
+          <tr>
+            <th><%= w.date %></th>
+            <td><%= w.name %></td>
+            <td><%= w.hours %></td>
+            <td><%= w.area %></td>
+            <td><%= w.project %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <hr />
+      <% end %>
+    </div>
+  </div>
+</div>
