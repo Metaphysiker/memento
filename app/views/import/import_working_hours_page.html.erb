@@ -31,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          <% WorkingHour.where(name: name).each do |w| %>
+          <% WorkingHour.where(name: name).order(:date).each do |w| %>
           <tr>
             <th><%= w.date %></th>
             <td><%= w.name %></td>
