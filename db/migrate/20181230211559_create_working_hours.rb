@@ -7,6 +7,8 @@ class CreateWorkingHours < ActiveRecord::Migration[5.2]
       t.decimal :hours
       t.string :area
       t.string :project
+      t.string :category
+      t.string :extern
 
       t.timestamps
     end

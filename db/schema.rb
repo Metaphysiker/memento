@@ -238,6 +238,8 @@ ActiveRecord::Schema.define(version: 2018_12_30_211559) do
     t.decimal "hours"
     t.string "area"
     t.string "project"
+    t.string "category"
+    t.string "extern"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

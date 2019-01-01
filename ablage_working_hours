@@ -1,0 +1,19 @@
+<p>
+  <strong>Intern: </strong><%= query.where(extern: [nil, ""]).sum(:hours) %> | <%= query.where(extern: [nil, ""]).count %>
+</p>
+<p>
+  <strong>Extern: </strong><%= query.where(extern: "x").sum(:hours) %> | <%= query.where(extern: "x").count %>
+</p>
+<p>
+  <% query.select(:area).map(&:area).uniq.each do |a| %>
+    <%= a %>: <%= query.where(area: a).count %>
+    <hr />
+  <% end %>
+</p>
+<hr />
+<p>
+  <% query.select(:project).map(&:project).uniq.each do |a| %>
+    <%= a %>: <%= query.where(project: a).count %>
+    <hr />
+  <% end %>
+</p>
