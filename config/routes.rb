@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/overview', to: 'static_pages#overview', as: 'overview'
   get '/my_tasks', to: 'static_pages#my_tasks', as: 'my_tasks'
   get '/team', to: 'static_pages#team', as: 'team'
+  get '/merch_showcase', to: 'static_pages#merch_showcase', as: 'merch_showcase'
 
   #search
   get '/search_people_form', to: 'people#search_people', as: 'search_people_form'

@@ -1,0 +1,85 @@
+<div class="container">
+<h1 class="text-center">Ideen für Merchandise</h1>
+<hr />
+
+<h2>Sprüche von Philosoph*Innen</h2>
+
+<% sayings = [
+  ["Ich weiss, dass ich nichts weiss", "Sokrates"],
+  ["By all means marry: if you get a good wife, you’ll become happy; if you get a bad one, you’ll become a philosopher", "Socrates"],
+  ["Das ungeprüfte Leben ist nicht lebenswert", "Platon"],
+  ["Das Ganze ist mehr als die Summe seiner Teile", "Aristoteles"],
+  ["In Wirklichkeit gibt es nur die Atome und das Leere", "Demokrit"],
+  ["Viele verlieren den Verstand deshalb nicht, weil sie keinen haben", "Schopenhauer"],
+  ["Es ist schwerer seinen Weg zu finden, als ihn zu gehen", "Lisz Hirn"],
+  ["Gestern? Ich hätte das gestern machen sollen?", "Sandro Räss"]
+  ] %>
+
+<% sayings.each do |saying| %>
+  <div class="card m-2">
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p><%= saying[0]%></p>
+        <footer class="blockquote-footer"><cite title="Source Title"><%= saying[1]%></cite></footer>
+      </blockquote>
+    </div>
+  </div>
+<% end %>
+
+<hr />
+
+
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+    <h2>Motive</h2>
+    <!-- START THE FEATURETTES -->
+    <hr />
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">Logo von Philosophie.ch <span class="text-muted">Classic.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      </div>
+      <div class="col-md-5">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect fill="#eee" width="100%" height="100%"/><text fill="#aaa" dy=".3em" x="50%" y="50%">500x500</text></svg>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7 order-md-2">
+        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      </div>
+      <div class="col-md-5 order-md-1">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect fill="#eee" width="100%" height="100%"/><text fill="#aaa" dy=".3em" x="50%" y="50%">500x500</text></svg>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+      </div>
+      <div class="col-md-5">
+        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect fill="#eee" width="100%" height="100%"/><text fill="#aaa" dy=".3em" x="50%" y="50%">500x500</text></svg>
+      </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+  </div><!-- /.container -->
+</div>
+
+<!-- FOOTER -->
+<footer class="container">
+  <p class="float-right"><a href="#">Back to top</a></p>
+  <p>&copy; 2017-2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>

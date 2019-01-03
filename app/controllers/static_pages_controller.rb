@@ -84,4 +84,8 @@ class StaticPagesController < ApplicationController
   def team
 
   end
+
+  def merch_showcase
+    
+  end
 end
