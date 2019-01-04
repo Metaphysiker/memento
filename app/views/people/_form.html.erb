@@ -10,6 +10,7 @@
       <%= f.input :email %>
       <%= f.input :website %>
       <%= f.input :phone %>
+      <%= f.input :phone2 %>
       <%= f.input :gender, collection: Person.genders.map {|p| [t("#{p}"), p]} %>
       <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]} %>
       <%= f.association :institutions, as: :select, collection: Institution.all, label_method: :name, value_method: :id, :data => {:placeholder => 'User Name'}, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>

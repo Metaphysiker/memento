@@ -32,6 +32,7 @@ de:
         lastname: "Nachname"
         email: "e-Mail"
         phone: "Telefon"
+        phone2: "Telefon (2)"
         tag_list: "Tags"
         institutions: "Institutionen"
         gender: "Geschlecht"
@@ -52,6 +53,7 @@ de:
         description: "Beschreibung"
         email: "e-Mail"
         website: "Webseite"
+        phone: "Telefon"
       note:
         description: "Beschreibung"
       task:

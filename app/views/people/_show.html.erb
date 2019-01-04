@@ -54,6 +54,9 @@
           <% if !person.phone.blank? %>
             <p class="card-text"><strong>Telefon: </strong><%= person.phone %></p>
           <% end %>
+          <% if !person.phone2.blank? %>
+            <p class="card-text"><strong>Telefon (2): </strong><%= person.phone2 %></p>
+          <% end %>
 
           <% if !person.gender.blank? %>
             <p class="card-text"><strong>Geschlecht: </strong><%= t(person.gender) %></p>

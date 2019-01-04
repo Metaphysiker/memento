@@ -52,6 +52,9 @@
           <% if !institution.website.blank? %>
             <p class="card-text"><strong>Webseite: </strong><%= institution.website %></p>
           <% end %>
+          <% if !institution.phone.blank? %>
+            <p class="card-text"><strong>Telefon: </strong><%= institution.phone %></p>
+          <% end %>
 
           <div class="institution-<%=institution.id%>-people">
             <% unless institution.affiliations.empty? %>

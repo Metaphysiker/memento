@@ -80,7 +80,8 @@ RSpec.describe "people", :type => :feature do
       firstname: Faker::Name.first_name,
       lastname: Faker::Name.last_name,
       description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
+      phone: Faker::PhoneNumber.unique.cell_phone,
+      phone2: Faker::PhoneNumber.unique.cell_phone,
       gender: "male",
       website: Faker::Internet.url
     )
@@ -94,6 +95,7 @@ RSpec.describe "people", :type => :feature do
     description = Faker::Lorem.unique.paragraph
     email = Faker::Internet.unique.email
     phone = Faker::PhoneNumber.unique.cell_phone
+    phone2 = Faker::PhoneNumber.unique.cell_phone
     website = Faker::Internet.unique.url
 
     fill_in "Vorname", :with => firstname
@@ -101,6 +103,7 @@ RSpec.describe "people", :type => :feature do
     fill_in "Beschreibung", :with => description
     fill_in "e-Mail", :with => email
     fill_in "Telefon", :with => phone
+    fill_in "Telefon (2)", :with => phone2
     select(I18n.t("female"), :from => 'Geschlecht')
     fill_in "Webseite", :with => website
 
@@ -111,6 +114,7 @@ RSpec.describe "people", :type => :feature do
     expect(page).to_not have_content(person.lastname)
     expect(page).to_not have_content(person.description)
     expect(page).to_not have_content(person.phone)
+    expect(page).to_not have_content(person.phone2)
     expect(page).to_not have_content(I18n.t("male"))
 
     expect(page).to have_content(email)
@@ -118,6 +122,7 @@ RSpec.describe "people", :type => :feature do
     expect(page).to have_content(lastname)
     expect(page).to have_content(description)
     expect(page).to have_content(phone)
+    expect(page).to have_content(phone2)
     expect(page).to have_content(I18n.t("female"))
   end
 
