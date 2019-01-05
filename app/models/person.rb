@@ -61,14 +61,18 @@ class Person < ApplicationRecord
     end
   end
 
+  PERSON_ATTRIBUTES = %w{form_of_address firstname lastname email phone phone2 gender language description website}
+  OTHER_ATTRIBUTES = %w{institutions groups functionality target_group}
+  ADDRESS_ATTRIBUTES = %w{company company2 street plz location country }
+
   def self.to_csv
-    person_attributes = %w{firstname lastname email phone phone2 gender language description}
-    human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
-    address_attributes = %w{firstname lastname company  company2 street plz location country }
-    human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
+    #person_attributes = %w{firstname lastname email phone phone2 gender language description}
+    #address_attributes = %w{firstname lastname company  company2 street plz location country }
+    #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
+    #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
-      csv << human_person_attributes + human_address_attributes
+      csv << PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + ADDRESS_ATTRIBUTES
 
       all.each do |user|
         csv << person_attributes.map{ |attr| user.send(attr) } + address_attributes.map{ |attr| user.address.send(attr) }
@@ -77,28 +81,14 @@ class Person < ApplicationRecord
   end
 
   def self.headers_to_csv
-    person_attributes = %w{form_of_address firstname lastname email phone phone2 gender language description website}
-    other_attributes = %w{institutions groups functionality target_group}
-
-    #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
-    address_attributes = %w{company company2 street plz location country }
-    #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
-
     CSV.generate(headers: true) do |csv|
-      csv << person_attributes + other_attributes + address_attributes
+      csv << PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + ADDRESS_ATTRIBUTES
     end
   end
 
   def self.example_csv
-    person_attributes = %w{form_of_address firstname lastname email phone phone2 gender language description website}
-    #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
-    other_attributes = %w{institutions groups functionality target_group}
-
-    address_attributes = %w{company company2 street plz location country }
-    #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
-
     CSV.generate(headers: true) do |csv|
-      csv << person_attributes + other_attributes + address_attributes
+      csv << PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + ADDRESS_ATTRIBUTES
       csv << ["Prof. Dr.", "Stefan", "Müller", "email@adresse.ch", "079123456789", "", "male", "de", "Experte in Metaphysik", "www.kant.ch",
               "1", "", "Sponsor", "",
               "Intersport AG", "", "Hagenstrasse 1", "8301", "Zürich", "CH"]
@@ -119,10 +109,8 @@ class Person < ApplicationRecord
 
   def self.create_or_update_person(person, institutions, groups, functionality_tags, target_group_tags, address)
     person = person.select!{|x| Person.attribute_names.index(x)}
-    #person.reject!{|x| x.blank?}
     person.delete_if {|key, value| value.blank?}
 
-    puts person["email"]
     if person["email"].nil? || person["email"].blank?
       return
     elsif Person.where(email: person["email"]).empty?
@@ -135,16 +123,13 @@ class Person < ApplicationRecord
     address = address.select!{|x| Address.attribute_names.index(x)}
     address.delete_if {|key, value| value.blank?}
     person.address.update(address)
-    puts address
 
     unless functionality_tags.blank?
-      puts functionality_tags.inspect
       person.functionality_list.add(functionality_tags)
       person.save
     end
 
     unless target_group_tags.blank?
-      puts target_group_tags.inspect
       person.target_group_list.add(target_group_tags)
       person.save
     end
