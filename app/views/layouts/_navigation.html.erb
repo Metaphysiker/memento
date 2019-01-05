@@ -22,8 +22,15 @@
       <li class="nav-item">
         <%= link_to "Aktivitäten", activities_path, class:"nav-link"  %>
       </li>
-      <li class="nav-item">
-        <%= link_to "Importieren", upload_page_path, class:"nav-link"  %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Importieren
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Personen", import_people_page_path, class:"dropdown-item"  %>
+          <div class="dropdown-divider"></div>
+            <%= link_to "Institutionen", import_institutions_page_path, class:"dropdown-item"  %>
+        </div>
       </li>
     </ul>
     <ul class="navbar-nav my-2 my-lg-0">

@@ -1,15 +1,11 @@
 require 'csv'
 
 class ImportController < ApplicationController
-  def upload_page
+  def import_people_page
 
   end
 
-  def institution
-
-  end
-
-  def people
+  def import_people
     file = params[:file]
 
     CSV.foreach(file.path, headers: true) do |row|
@@ -25,6 +21,14 @@ class ImportController < ApplicationController
     end
 
     redirect_to upload_page_path, notice: "CSV importiert!"
+  end
+
+  def import_institutions
+
+  end
+
+  def institutions_import_page
+
   end
 
   def import_working_hours_page

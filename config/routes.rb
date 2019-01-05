@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   resources :projects
   resources :tasks
   resources :notes
-  resources :institutions
+  resources :people
   resources :tag_lists
   resources :addresses
-  resources :people
+  resources :institutions
   resources :basic
   resources :affiliations
   devise_for :users
@@ -71,8 +71,11 @@ Rails.application.routes.draw do
   post '/create_for_project', to: 'groups#create_for_project', as: 'create_for_project'
 
   #import and upload
-  get '/upload_page', to: 'import#upload_page', as: 'upload_page'
-  post '/import_people', to: 'import#people', as: 'import_people'
+  get '/import_people_page', to: 'import#import_people_page', as: 'import_people_page'
+  post '/import_people', to: 'import#import_people', as: 'import_people'
+  get '/import_institutions_page', to: 'import#import_institutions_page', as: 'import_institutions_page'
+  post '/import_institutions', to: 'import#import_institutions', as: 'import_institutions'
+
   get '/testing', to: 'import#testing', as: 'testing'
 
   get '/import_working_hours_page', to: 'import#import_working_hours_page', as: 'import_working_hours_page'

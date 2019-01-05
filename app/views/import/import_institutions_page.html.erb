@@ -3,17 +3,7 @@
     <div class="card-body">
       <h1 class="card-title">Erklärung</h1>
       <p class="card-text">
-        Auf dieser Seite kann man Personen und Institutionen importieren.
-      </p>
-      <p class="card-text">
-        Wenn eine Person importiert wird, dann wird geprüft, ob die e-Mail-Adresse bereits vorhanden ist.<br />
-        <%= fa_icon "arrow-right" %>
-        Wenn die e-Mail-Adresse nicht vorhanden ist, dann wird eine neue Person erstellt.<br />
-        <%= fa_icon "arrow-right" %>
-        Wenn die e-Mail-Adresse vorhanden ist, dann wird keine neue Person erstellt und die Person mit dieser e-Mail-Adresse wird aktualisiert.
-        <p>
-          <b>Leere Felder werden nichts verändern.</b>
-        </p>
+        Auf dieser Seite kann man Institutionen importieren.
       </p>
       <p class="card-text"><small class="text-muted"><strong>Fragen und Änderungswünsche an:</strong> <%= mail_to "sandro.raess@philosophie.ch" %></small></p>
     </div>
@@ -21,21 +11,16 @@
 
     <div class="card mb-3">
       <div class="card-body">
-        <h4>Personen importieren</h4>
+        <h4>Institutionen importieren</h4>
         <p>
           <%#= link_to "CSV mit Header runterladenx", "personen.csv", download: 'personen.csv' %>
-          <%= link_to "CSV mit Header herunterladen", headers_csv_path(search_inputs: {model: "Person"}), class: "btn btn-primary btn-sm" %>
+          <%= link_to "CSV mit Header herunterladen", headers_csv_path(search_inputs: {model: "Institution"}), class: "btn btn-primary btn-sm" %>
         </p>
         <p>
-          <%= link_to "CSV mit Beispielen", example_csv_path(search_inputs: {model: "Person"}), class: "btn btn-primary btn-sm" %>
+          <%= link_to "CSV mit Beispielen", example_csv_path(search_inputs: {model: "Institution"}), class: "btn btn-primary btn-sm" %>
         </p>
-        <p>
-          Tags und Institutionen müssen mit einem " | " getrennt werden. Beispiel: "Sponsor | Mitglied | Stiftungsmitglied"
-        </p>
-        <p>
-          <b>Wichtig!</b> Die Abstände müssen richtig sein. Das geht nicht: "Sponsor|  Mitglied |Stiftungsmitglied"
-        </p>
-        <%= form_tag import_people_path, multipart: true do %>
+
+        <%= form_tag import_institutions_path, multipart: true do %>
           <%= file_field_tag :file, class: "btn btn-secondary" %>
           <br>
           <br>

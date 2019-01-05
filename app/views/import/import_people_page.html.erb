@@ -1,0 +1,256 @@
+<div class="container">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h1 class="card-title">Erklärung</h1>
+      <p class="card-text">
+        Auf dieser Seite kann man Personen importieren.
+      </p>
+      <p class="card-text">
+        Wenn eine Person importiert wird, dann wird geprüft, ob die e-Mail-Adresse bereits vorhanden ist.<br />
+        <%= fa_icon "arrow-right" %>
+        Wenn die e-Mail-Adresse nicht vorhanden ist, dann wird eine neue Person erstellt.<br />
+        <%= fa_icon "arrow-right" %>
+        Wenn die e-Mail-Adresse vorhanden ist, dann wird keine neue Person erstellt und die Person mit dieser e-Mail-Adresse wird aktualisiert.
+        <p>
+          <b>Leere Felder werden nichts verändern.</b>
+        </p>
+      </p>
+      <p class="card-text"><small class="text-muted"><strong>Fragen und Änderungswünsche an:</strong> <%= mail_to "sandro.raess@philosophie.ch" %></small></p>
+    </div>
+  </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h4>Personen importieren</h4>
+        <p>
+          <%#= link_to "CSV mit Header runterladenx", "personen.csv", download: 'personen.csv' %>
+          <%= link_to "CSV mit Header herunterladen", headers_csv_path(search_inputs: {model: "Person"}), class: "btn btn-primary btn-sm" %>
+        </p>
+        <p>
+          <%= link_to "CSV mit Beispielen", example_csv_path(search_inputs: {model: "Person"}), class: "btn btn-primary btn-sm" %>
+        </p>
+        <p>
+          Tags und Institutionen müssen mit einem " | " getrennt werden. Beispiel: "Sponsor | Mitglied | Stiftungsmitglied"
+        </p>
+        <p>
+          <b>Wichtig!</b> Die Abstände müssen richtig sein. Das geht nicht: "Sponsor|  Mitglied |Stiftungsmitglied"
+        </p>
+        <%= form_tag import_people_path, multipart: true do %>
+          <%= file_field_tag :file, class: "btn btn-secondary" %>
+          <br>
+          <br>
+          <%= submit_tag "Importieren", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text">
+          <h3>Sprachen</h3>
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Sprache</th>
+              <th scope="col">Abkürzung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Rails.configuration.language.each do |language| %>
+              <tr>
+                <td>
+                  <%= t(language) %>
+                </td>
+                <td>
+                  <%= language %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+          </table>
+
+        </p>
+        <p class="card-text">
+          <h3>Geschlecht</h3>
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Geschlecht</th>
+              <th scope="col">Übersetzung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Person.genders.each do |gender| %>
+              <tr>
+                <td>
+                  <%= t(gender) %>
+                </td>
+                <td>
+                  <%= gender %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+          </table>
+        </p>
+
+        <p class="card-text">
+          <h3>Länder</h3>
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Land</th>
+              <th scope="col">Abkürzung</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% ["CH", "DE", "AT", "FR", "IT"].each do |country| %>
+              <tr>
+                <td>
+                  <%= ISO3166::Country[country].translations[I18n.locale.to_s] %>
+                </td>
+                <td>
+                  <%= country %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+          </table>
+        </p>
+
+        <p class="card-text">
+          <h3>IDs der Institutionen</h3>
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Institution</th>
+              <th scope="col">ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Institution.all.each do |institution| %>
+              <tr>
+                <td><%= institution.name %></td>
+                <td><b><%= institution.id %></b></td>
+              </tr>
+            <% end %>
+          </tbody>
+          </table>
+
+          <hr />
+        </p>
+
+        <p class="card-text">
+          <h3>IDs der Gruppen</h3>
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Gruppe</th>
+              <th scope="col">ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Group.all.each do |group| %>
+              <tr>
+                <td><%= group.name %></td>
+                <td><b><%= group.id %></b></td>
+              </tr>
+            <% end %>
+          </tbody>
+          </table>
+
+          <hr />
+        </p>
+
+        <p class="card-text">
+            <h2>Tags zum Kopieren</h2>
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Funktionalität</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% TagList.where(model: "Person", category: "functionality").each do |tag_list| %>
+                <tr>
+                  <td id="clipboard-<%=tag_list.name.parameterize%>"><%= tag_list.name %></td>
+                  <td>
+
+                    <!-- Trigger -->
+                    <button class="clipboard-btn btn" data-clipboard-action="copy" data-clipboard-target="#clipboard-<%=tag_list.name.parameterize%>">
+                        Kopieren
+                    </button>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+            </table>
+            <br />
+            <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Zielgruppe</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% TagList.where(model: "Person", category: "target_group").each do |tag_list| %>
+                <tr>
+                  <td id="clipboard-<%=tag_list.name.parameterize%>"><%= tag_list.name %></td>
+                  <td>
+
+                    <!-- Trigger -->
+                    <button class="clipboard-btn btn" data-clipboard-action="copy" data-clipboard-target="#clipboard-<%=tag_list.name.parameterize%>">
+                        Kopieren
+                    </button>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+            </table>
+      </div>
+    </div>
+</div>
+
+
+<script>
+$(document).ready(function(){
+
+  console.log("Document ready!");
+
+  var clipboard = new Clipboard('.clipboard-btn');
+  console.log(clipboard);
+
+  // Tooltip
+
+$('.clipboard-btn').tooltip({
+  trigger: 'click',
+  placement: 'bottom'
+});
+
+function setTooltip(btn, message) {
+  $(btn).tooltip('show')
+    .attr('data-original-title', message)
+    .tooltip('show');
+}
+
+function hideTooltip(btn) {
+  setTimeout(function() {
+    $(btn).tooltip('hide');
+  }, 1000);
+}
+
+clipboard.on('success', function(e) {
+  setTooltip(e.trigger, 'Kopiert!');
+  hideTooltip(e.trigger);
+});
+
+clipboard.on('error', function(e) {
+  setTooltip(e.trigger, 'Failed!');
+  hideTooltip(e.trigger);
+});
+
+});
+
+</script>
