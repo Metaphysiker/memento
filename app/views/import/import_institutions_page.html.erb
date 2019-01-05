@@ -55,97 +55,7 @@
           </table>
 
         </p>
-        <p class="card-text">
-          <h3>Geschlecht</h3>
-          <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Geschlecht</th>
-              <th scope="col">Übersetzung</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% Person.genders.each do |gender| %>
-              <tr>
-                <td>
-                  <%= t(gender) %>
-                </td>
-                <td>
-                  <%= gender %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-          </table>
-        </p>
 
-        <p class="card-text">
-          <h3>Länder</h3>
-          <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Land</th>
-              <th scope="col">Abkürzung</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% ["CH", "DE", "AT", "FR", "IT"].each do |country| %>
-              <tr>
-                <td>
-                  <%= ISO3166::Country[country].translations[I18n.locale.to_s] %>
-                </td>
-                <td>
-                  <%= country %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-          </table>
-        </p>
-
-        <p class="card-text">
-          <h3>IDs der Institutionen</h3>
-          <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Institution</th>
-              <th scope="col">ID</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% Institution.all.each do |institution| %>
-              <tr>
-                <td><%= institution.name %></td>
-                <td><b><%= institution.id %></b></td>
-              </tr>
-            <% end %>
-          </tbody>
-          </table>
-
-          <hr />
-        </p>
-
-        <p class="card-text">
-          <h3>IDs der Gruppen</h3>
-          <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Gruppe</th>
-              <th scope="col">ID</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% Group.all.each do |group| %>
-              <tr>
-                <td><%= group.name %></td>
-                <td><b><%= group.id %></b></td>
-              </tr>
-            <% end %>
-          </tbody>
-          </table>
-
-          <hr />
-        </p>
 
         <p class="card-text">
             <h2>Tags zum Kopieren</h2>
@@ -157,7 +67,7 @@
               </tr>
             </thead>
             <tbody>
-              <% TagList.where(model: "Person", category: "functionality").each do |tag_list| %>
+              <% TagList.where(model: "Institution", category: "functionality").each do |tag_list| %>
                 <tr>
                   <td id="clipboard-<%=tag_list.name.parameterize%>"><%= tag_list.name %></td>
                   <td>
@@ -180,7 +90,7 @@
               </tr>
             </thead>
             <tbody>
-              <% TagList.where(model: "Person", category: "target_group").each do |tag_list| %>
+              <% TagList.where(model: "Institution", category: "target_group").each do |tag_list| %>
                 <tr>
                   <td id="clipboard-<%=tag_list.name.parameterize%>"><%= tag_list.name %></td>
                   <td>
