@@ -39,10 +39,8 @@ de:
         description: "Beschreibung"
         language: "Sprache"
         website: "Webseite"
-      address:
         form_of_address: "Anrede"
-        firstname: "Vorname"
-        lastname: "Nachname"
+      address:
         company: "Firma"
         company2: "Firma (zweite Zeile)"
         street: "Strasse"

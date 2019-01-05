@@ -22,14 +22,14 @@
         <% unless address.company2.blank? %>
           <%= address.company2 %> <br />
         <% end %>
-        <% unless address.form_of_address.blank? %>
-          <%= address.form_of_address %>
+        <% if address.addressable_type == "Person" && !address.addressable.form_of_address.blank? %>
+          <%= address.addressable.form_of_address %>
         <% end %>
         <% if address.company.blank? && address.company2.blank? %>
           <br />
         <% end %>
-        <% unless address.firstname.blank? && address.lastname.blank? %>
-          <%= address.firstname %> <%= address.lastname %> <br />
+        <% if address.addressable_type == "Person" && !address.addressable.firstname.blank? && !address.addressable.lastname.blank? %>
+          <%= address.addressable.firstname %> <%= address.addressable.lastname %> <br />
         <% end %>
         <% unless address.street.blank? %>
           <%= address.street %> <br />

@@ -31,9 +31,7 @@ class Person < ApplicationRecord
 
   Address.create(
     addressable_id: self.id,
-    addressable_type: Person,
-    firstname: self.firstname,
-    lastname: self.lastname
+    addressable_type: Person
   )
   end
 

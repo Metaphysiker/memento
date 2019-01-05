@@ -9,6 +9,7 @@ RSpec.describe "address", :type => :feature do
 
   it "views a male person and expects an address" do
     person = Person.create(
+      form_of_address: "Prof. Dr.",
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
       lastname: Faker::Name.last_name,
@@ -24,7 +25,7 @@ RSpec.describe "address", :type => :feature do
     click_link "Adresse anzeigen"
 
     within ".address-#{person.address.id}" do
-      #expect(page).to have_content("Herr")
+      expect(page).to have_content("Prof. Dr.")
       expect(page).to have_content(person.firstname)
       expect(page).to have_content(person.lastname)
     end
@@ -79,9 +80,9 @@ RSpec.describe "address", :type => :feature do
     location = Faker::Address.city
     country = "Schweiz"
 
-    fill_in "Anrede", :with => "Herr Dr."
-    fill_in "Vorname", :with => person.firstname
-    fill_in "Nachname", :with => person.lastname
+    #fill_in "Anrede", :with => "Herr Dr."
+    #fill_in "Vorname", :with => person.firstname
+    #fill_in "Nachname", :with => person.lastname
     fill_in "Firma", :with => company
     fill_in "Strasse", :with => street
     fill_in "PLZ", :with => plz
@@ -91,9 +92,9 @@ RSpec.describe "address", :type => :feature do
     click_button "Adresse aktualisieren"
 
     within ".address-#{person.address.id}" do
-      expect(page).to have_content("Herr Dr.")
-      expect(page).to have_content(person.firstname)
-      expect(page).to have_content(person.lastname)
+      #expect(page).to have_content("Herr Dr.")
+      #expect(page).to have_content(person.firstname)
+      #expect(page).to have_content(person.lastname)
       expect(page).to have_content(company)
       expect(page).to have_content(street)
       expect(page).to have_content(plz)
@@ -126,8 +127,8 @@ RSpec.describe "address", :type => :feature do
     location = Faker::Address.city
     country = "Deutschland"
 
-    fill_in "Vorname", :with => person.firstname
-    fill_in "Nachname", :with => person.lastname
+#    fill_in "Vorname", :with => person.firstname
+#    fill_in "Nachname", :with => person.lastname
     fill_in "Firma", :with => company
     fill_in "Strasse", :with => street
     fill_in "PLZ", :with => plz
@@ -192,9 +193,9 @@ RSpec.describe "address", :type => :feature do
     location = Faker::Address.city
     country = "Schweiz"
 
-    fill_in "Anrede", :with => "Herr Dr."
-    fill_in "Vorname", :with => person.firstname
-    fill_in "Nachname", :with => person.lastname
+    #fill_in "Anrede", :with => "Herr Dr."
+    #fill_in "Vorname", :with => person.firstname
+    #fill_in "Nachname", :with => person.lastname
     fill_in "Firma", :with => company
     fill_in "Strasse", :with => street
     fill_in "PLZ", :with => plz
@@ -204,7 +205,7 @@ RSpec.describe "address", :type => :feature do
     click_button "Adresse aktualisieren"
 
     within ".address-#{person.address.id}" do
-      expect(page).to have_content("Herr Dr.")
+      #expect(page).to have_content("Herr Dr.")
       expect(page).to have_content(person.firstname)
       expect(page).to have_content(person.lastname)
       expect(page).to have_content(company)
@@ -244,9 +245,9 @@ RSpec.describe "address", :type => :feature do
     location = Faker::Address.city
     country = "Schweiz"
 
-    fill_in "Anrede", :with => "Herr"
-    fill_in "Vorname", :with => person.firstname
-    fill_in "Nachname", :with => person.lastname
+    #fill_in "Anrede", :with => "Herr"
+    #fill_in "Vorname", :with => person.firstname
+    #fill_in "Nachname", :with => person.lastname
     fill_in "Firma", :with => company
     fill_in "Strasse", :with => street
     fill_in "PLZ", :with => plz
@@ -256,9 +257,9 @@ RSpec.describe "address", :type => :feature do
     click_button "Adresse aktualisieren"
 
     within ".address-#{institution.address.id}" do
-      expect(page).to have_content("Herr")
-      expect(page).to have_content(person.firstname)
-      expect(page).to have_content(person.lastname)
+      #expect(page).to have_content("Herr")
+      #expect(page).to have_content(person.firstname)
+      #expect(page).to have_content(person.lastname)
       expect(page).to have_content(company)
       expect(page).to have_content(street)
       expect(page).to have_content(plz)

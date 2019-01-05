@@ -1,9 +1,6 @@
 class CreateAddresses < ActiveRecord::Migration[5.2]
   def change
     create_table :addresses do |t|
-      t.string :form_of_address, default: ""
-      t.string :firstname, default: ""
-      t.string :lastname, default: ""
       t.string :company, default: ""
       t.string :company2, default: ""
       t.string :street, default: ""

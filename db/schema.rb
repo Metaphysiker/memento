@@ -16,9 +16,6 @@ ActiveRecord::Schema.define(version: 2019_01_04_222616) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string "form_of_address", default: ""
-    t.string "firstname", default: ""
-    t.string "lastname", default: ""
     t.string "company", default: ""
     t.string "company2", default: ""
     t.string "street", default: ""
@@ -138,6 +135,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_222616) do
   end
 
   create_table "people", force: :cascade do |t|
+    t.string "form_of_address", default: ""
     t.string "firstname", default: ""
     t.string "lastname", default: ""
     t.string "name", default: ""

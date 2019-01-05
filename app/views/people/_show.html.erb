@@ -6,7 +6,7 @@
       <div class="list">
         <div class="row mt-3">
           <div class="col-4">
-            <%= link_to person.name, person_path(person), class: "black_link" %>
+            <%= link_to "#{person.form_of_address} #{person.name}", person_path(person), class: "black_link" %>
           </div>
           <div class="col-3">
             <%= mail_to person.email %>
@@ -46,7 +46,7 @@
             </div>
           </div>
 
-          <h3 class="card-title person-name"><%= link_to person.name, person_path(person), class: "black_link" %></h3>
+          <h3 class="card-title person-name"><%= link_to "#{person.form_of_address} #{person.name}", person_path(person), class: "black_link" %></h3>
           <p class="card-text"><%= person.description %></p>
           <% if person.email %>
             <p class="card-text"><strong>e-Mail: </strong><%= mail_to person.email %></p>
