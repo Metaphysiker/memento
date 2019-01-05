@@ -83,7 +83,7 @@ class InstitutionsController < ApplicationController
   # POST /institutions.json
   def create
     @institution = Institution.new(institution_params)
-
+    @record = @institution
     respond_to do |format|
       if @institution.save
         format.html { redirect_to @institution, notice: 'Institution was successfully created.' }
@@ -91,6 +91,7 @@ class InstitutionsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @institution.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/faulty_create.js.erb" }
       end
     end
   end

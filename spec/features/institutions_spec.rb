@@ -242,6 +242,31 @@ RSpec.describe "institutions", :type => :feature do
     expect(page).to have_content(email)
   end
 
+  it "creates an institution without name and expects to re-render" do
+
+    #name = Faker::Address.community
+    description = Faker::Lorem.paragraph
+    website = Faker::Internet.url
+    email = Faker::Internet.email
+
+    visit "/institutions/"
+
+    click_button "Institution erstellen"
+
+    #fill_in "Name", :with => name
+    fill_in "Beschreibung", :with => description
+    fill_in "Webseite", :with => website
+    fill_in "e-Mail", :with => email
+
+    within(".form-actions") do
+      click_button "Institution erstellen"
+    end
+
+    expect(page).to have_content("Name muss ausgefüllt werden")
+
+    #page.save_screenshot('create-institution.png')
+  end
+
   it "edits an institution without name and expects to re-render" do
 
     description = Faker::Lorem.paragraph

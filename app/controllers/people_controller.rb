@@ -52,6 +52,7 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
+    @record = @person
 
     respond_to do |format|
       if @person.save
@@ -60,6 +61,7 @@ class PeopleController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @person.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/faulty_create.js.erb" }
       end
     end
   end
