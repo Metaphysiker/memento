@@ -64,6 +64,7 @@ class Person < ApplicationRecord
   PERSON_ATTRIBUTES = %w{form_of_address firstname lastname email phone phone2 gender language description website}
   OTHER_ATTRIBUTES = %w{institutions groups functionality target_group}
   ADDRESS_ATTRIBUTES = %w{company company2 street plz location country }
+  ALL_ATTRIBUTES = PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + ADDRESS_ATTRIBUTES
 
   def self.to_csv
     #person_attributes = %w{firstname lastname email phone phone2 gender language description}
@@ -72,23 +73,27 @@ class Person < ApplicationRecord
     #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
-      csv << PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + ADDRESS_ATTRIBUTES
+      csv << ALL_ATTRIBUTES
 
       all.each do |user|
-        csv << person_attributes.map{ |attr| user.send(attr) } + address_attributes.map{ |attr| user.address.send(attr) }
+        csv << All_ATTRIBUTES
       end
+
+      #all.each do |user|
+      #  csv << person_attributes.map{ |attr| user.send(attr) } + address_attributes.map{ |attr| user.address.send(attr) }
+      #end
     end
   end
 
   def self.headers_to_csv
     CSV.generate(headers: true) do |csv|
-      csv << PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + ADDRESS_ATTRIBUTES
+      csv << ALL_ATTRIBUTES
     end
   end
 
   def self.example_csv
     CSV.generate(headers: true) do |csv|
-      csv << PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + ADDRESS_ATTRIBUTES
+      csv << ALL_ATTRIBUTES
       csv << ["Prof. Dr.", "Stefan", "Müller", "email@adresse.ch", "079123456789", "", "male", "de", "Experte in Metaphysik", "www.kant.ch",
               "1", "", "Sponsor", "",
               "Intersport AG", "", "Hagenstrasse 1", "8301", "Zürich", "CH"]
