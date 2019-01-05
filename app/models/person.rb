@@ -96,16 +96,16 @@ class Person < ApplicationRecord
               "1", "", "Sponsor", "",
               "Intersport AG", "", "Hagenstrasse 1", "8301", "Zürich", "CH"]
       csv << ["Dr.", "Lara", "Wagner", "email@adresse2.ch", "079123456787", "", "female", "fr", "", "www.meinewebseite.ch",
-              "4 | 7", "4", "Veranstalter | Medienkontakt", "Private | Beruffachleute",
+              "4 7", "4", "Veranstalter Medienkontakt", "Private Beruffachleute",
               "", "", "Rue de la gare 3", "6402", "Bern", "CH"]
       csv << ["", "Heinrich", "Keller", "email@adresse3.ch", "079123456784", "342118918", "male", "de", "", "",
-              "2 | 3 | 12", "5 | 6", "Blogger | Patronatskomitee | Lehrperson", "Sponsor(Zielgruppe) | Uni-Mitarbeitende | Mitglieder Verein",
+              "2 3 12", "5 6", "Blogger Patronatskomitee Lehrperson", "Sponsor(Zielgruppe) Uni-Mitarbeitende Mitglieder Verein",
               "Universität Köln", "Philosophisches Seminar", "Uni-Strasse 56", "9662", "Köln", "DE"]
       csv << ["Habil. jur.", "Franz", "Schneider", "email@adresse5.ch", "078123456734", "0133258765", "male", "de", "", "www.medien.de",
-              "6 | 7 | 8 | 9","5 | 6 | 7", "Platinmitglied", "Medienfachleute",
+              "6 7 8 9","5 6 7", "Platinmitglied", "Medienfachleute",
               "Müller GmbH", "Informatik-Abteilung", "Mozartstrasse 4", "3517", "Wien", "AT"]
       csv << ["Dr. med.", "Francesca", "Berlusconi", "email@adresse4.ch", "078123456784", "", "female", "it", "", "www.philosophie.ch",
-              "12 | 16 | 21", "", "Veranstalter", "Kinder",
+              "12 16 21", "", "Veranstalter", "Kinder",
               "", "", "Focatia 34", "6402", "Venedig", "IT"]
     end
   end
