@@ -52,6 +52,7 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
+    @record = @person
 
     respond_to do |format|
       if @person.save
@@ -60,6 +61,7 @@ class PeopleController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @person.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/faulty_create.js.erb" }
       end
     end
   end
@@ -134,6 +136,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:firstname, :lastname, :email, :phone, :description, :gender, :language, :website, :institution_ids => [], :functionality_list => [], :target_group_list => [])
+      params.require(:person).permit(:form_of_address, :firstname, :lastname, :email, :phone, :phone2, :description, :gender, :language, :website, :institution_ids => [], :functionality_list => [], :target_group_list => [])
     end
 end

@@ -83,7 +83,7 @@ class InstitutionsController < ApplicationController
   # POST /institutions.json
   def create
     @institution = Institution.new(institution_params)
-
+    @record = @institution
     respond_to do |format|
       if @institution.save
         format.html { redirect_to @institution, notice: 'Institution was successfully created.' }
@@ -91,6 +91,7 @@ class InstitutionsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @institution.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/faulty_create.js.erb" }
       end
     end
   end
@@ -146,6 +147,6 @@ class InstitutionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def institution_params
-      params.require(:institution).permit(:name, :description, :email, :website, :functionality_list => [], :target_group_list => [])
+      params.require(:institution).permit(:name, :description, :phone, :email, :website, :functionality_list => [], :target_group_list => [])
     end
 end

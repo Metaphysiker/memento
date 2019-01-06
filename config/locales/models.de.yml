@@ -32,16 +32,15 @@ de:
         lastname: "Nachname"
         email: "e-Mail"
         phone: "Telefon"
+        phone2: "Telefon (2)"
         tag_list: "Tags"
         institutions: "Institutionen"
         gender: "Geschlecht"
         description: "Beschreibung"
         language: "Sprache"
         website: "Webseite"
-      address:
         form_of_address: "Anrede"
-        firstname: "Vorname"
-        lastname: "Nachname"
+      address:
         company: "Firma"
         company2: "Firma (zweite Zeile)"
         street: "Strasse"
@@ -52,6 +51,7 @@ de:
         description: "Beschreibung"
         email: "e-Mail"
         website: "Webseite"
+        phone: "Telefon"
       note:
         description: "Beschreibung"
       task:

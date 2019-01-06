@@ -6,7 +6,7 @@
       <div class="list">
         <div class="row mt-3">
           <div class="col-4">
-            <%= link_to person.name, person_path(person), class: "black_link" %>
+            <%= link_to "#{person.form_of_address} #{person.name}", person_path(person), class: "black_link" %>
           </div>
           <div class="col-3">
             <%= mail_to person.email %>
@@ -46,13 +46,16 @@
             </div>
           </div>
 
-          <h3 class="card-title person-name"><%= link_to person.name, person_path(person), class: "black_link" %></h3>
+          <h3 class="card-title person-name"><%= link_to "#{person.form_of_address} #{person.name}", person_path(person), class: "black_link" %></h3>
           <p class="card-text"><%= person.description %></p>
           <% if person.email %>
             <p class="card-text"><strong>e-Mail: </strong><%= mail_to person.email %></p>
           <% end %>
           <% if !person.phone.blank? %>
             <p class="card-text"><strong>Telefon: </strong><%= person.phone %></p>
+          <% end %>
+          <% if !person.phone2.blank? %>
+            <p class="card-text"><strong>Telefon (2): </strong><%= person.phone2 %></p>
           <% end %>
 
           <% if !person.gender.blank? %>
@@ -84,7 +87,7 @@
             <p class="card-text"><strong>Funktionalitäten: </strong></p>
               <p class="mt-2">
                 <% person.functionality_list.each do |tag| %>
-                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", functionality_list: [tag]}}), class: "btn btn-outline-dark" %>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", functionality_list: [tag]}}), class: "btn btn-outline-dark mb-1" %>
                 <% end %>
               </p>
             <% end %>
@@ -95,7 +98,7 @@
             <p class="card-text"><strong>Zielgruppe: </strong></p>
               <p class="mt-2">
                 <% person.target_group_list.each do |tag| %>
-                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", target_group_list: [tag]}}), class: "btn btn-outline-dark" %>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", target_group_list: [tag]}}), class: "btn btn-outline-dark mb-1" %>
                 <% end %>
               </p>
             <% end %>

@@ -76,11 +76,13 @@ RSpec.describe "people", :type => :feature do
 
   it "updates and displays person's information" do
     person = Person.create(
+      form_of_address: "Prof. Dr.",
       email: Faker::Internet.email,
       firstname: Faker::Name.first_name,
       lastname: Faker::Name.last_name,
       description: Faker::Lorem.paragraph,
-      phone: Faker::PhoneNumber.cell_phone,
+      phone: Faker::PhoneNumber.unique.cell_phone,
+      phone2: Faker::PhoneNumber.unique.cell_phone,
       gender: "male",
       website: Faker::Internet.url
     )
@@ -89,36 +91,68 @@ RSpec.describe "people", :type => :feature do
 
     find(".person-#{person.id}-edit").click
 
+    form_of_address = "Prof. jur. nat. Dr."
     firstname = Faker::Name.unique.first_name
     lastname = Faker::Name.unique.last_name
     description = Faker::Lorem.unique.paragraph
     email = Faker::Internet.unique.email
     phone = Faker::PhoneNumber.unique.cell_phone
+    phone2 = Faker::PhoneNumber.unique.cell_phone
     website = Faker::Internet.unique.url
 
+    fill_in "Anrede", :with => form_of_address
     fill_in "Vorname", :with => firstname
     fill_in "Nachname", :with => lastname
     fill_in "Beschreibung", :with => description
     fill_in "e-Mail", :with => email
     fill_in "Telefon", :with => phone
+    fill_in "Telefon (2)", :with => phone2
     select(I18n.t("female"), :from => 'Geschlecht')
     fill_in "Webseite", :with => website
 
     click_button "Person aktualisieren"
 
     expect(page).to_not have_content(person.email)
+    expect(page).to_not have_content(person.form_of_address)
     expect(page).to_not have_content(person.firstname)
     expect(page).to_not have_content(person.lastname)
     expect(page).to_not have_content(person.description)
     expect(page).to_not have_content(person.phone)
+    expect(page).to_not have_content(person.phone2)
     expect(page).to_not have_content(I18n.t("male"))
 
     expect(page).to have_content(email)
+    expect(page).to have_content(form_of_address)
     expect(page).to have_content(firstname)
     expect(page).to have_content(lastname)
     expect(page).to have_content(description)
     expect(page).to have_content(phone)
+    expect(page).to have_content(phone2)
     expect(page).to have_content(I18n.t("female"))
+  end
+
+  it "creates and leaves email blank which should re-render edit" do
+    visit "/people/"
+    click_button "Person erstellen"
+
+    firstname = Faker::Name.first_name
+    lastname = Faker::Name.last_name
+    description = Faker::Lorem.paragraph
+    #email = Faker::Internet.email
+    phone = Faker::PhoneNumber.cell_phone
+
+    fill_in "Vorname", :with => firstname
+    fill_in "Nachname", :with => lastname
+    fill_in "Beschreibung", :with => description
+    #fill_in "e-Mail", :with => email
+    fill_in "Telefon", :with => phone
+
+    within(".form-actions") do
+      click_button "Person erstellen"
+    end
+
+    expect(page).to have_content("e-Mail muss ausgefüllt werden")
+
   end
 
   it "updates and leaves email blank which should re-render edit" do

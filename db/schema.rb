@@ -10,15 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_30_211559) do
+ActiveRecord::Schema.define(version: 2019_01_04_222616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string "form_of_address", default: ""
-    t.string "firstname", default: ""
-    t.string "lastname", default: ""
     t.string "company", default: ""
     t.string "company2", default: ""
     t.string "street", default: ""
@@ -125,6 +122,7 @@ ActiveRecord::Schema.define(version: 2018_12_30_211559) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "website", default: ""
+    t.string "phone"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -137,6 +135,7 @@ ActiveRecord::Schema.define(version: 2018_12_30_211559) do
   end
 
   create_table "people", force: :cascade do |t|
+    t.string "form_of_address", default: ""
     t.string "firstname", default: ""
     t.string "lastname", default: ""
     t.string "name", default: ""
@@ -149,6 +148,7 @@ ActiveRecord::Schema.define(version: 2018_12_30_211559) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "website", default: ""
+    t.string "phone2"
   end
 
   create_table "project_groups", force: :cascade do |t|
