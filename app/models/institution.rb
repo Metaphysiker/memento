@@ -21,7 +21,7 @@ class Institution < ApplicationRecord
   #scope :search_institutions_ilike, ->(search_term) { left_outer_joins(:people).where("institutions.name ILIKE ? OR institutions.email ILIKE ? OR institutions.description ILIKE ?", search_term, search_term, search_term) }
   scope :search_records_ilike, ->(search_term) { left_outer_joins(:people).where("institutions.name ILIKE ? OR institutions.email ILIKE ? OR institutions.description ILIKE ? OR people.email ILIKE ? OR people.name ILIKE ?", search_term, search_term, search_term, search_term, search_term).distinct }
 
-  INSTITUTION_ATTRIBUTES = %w{name description email phone website}
+  INSTITUTION_ATTRIBUTES = %w{name description email phone website language}
   TAG_ATTRIBUTES = %w{functionality target_group}
   INSTITUTION_ATTRIBUTES_WITH_TAGS = INSTITUTION_ATTRIBUTES + %w{functionality_list target_group_list}
 
@@ -58,6 +58,7 @@ class Institution < ApplicationRecord
               "unibe@unibe.ch",
               "079123477789",
               "www.unibe.ch",
+              "de",
               "Philosophische-Institution Öffentliche-Institution",
               "Kooperationspartner(Zielgruppe) SBFI/swissuniversities",
               "Philosophisches Institut", "Uni Tobler", "Bereich Geisteswissenschaften", "Sekretariat", "Lara Ullmer", "Lerchenweg 36", "3001", "Bern", "CH"]
