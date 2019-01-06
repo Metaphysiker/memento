@@ -23,6 +23,7 @@ class Institution < ApplicationRecord
 
   INSTITUTION_ATTRIBUTES = %w{name description email phone website}
   TAG_ATTRIBUTES = %w{functionality target_group}
+  INSTITUTION_ATTRIBUTES_WITH_TAGS = %w{name description email phone website functionality_list target_group_list}
 
   def create_address
     Address.create(
@@ -35,12 +36,10 @@ class Institution < ApplicationRecord
   def self.to_csv
 
     CSV.generate(headers: true) do |csv|
-      #header
-      csv << INSTITUTION_ATTRIBUTES + TAG_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
+      csv << INSTITUTION_ATTRIBUTES_WITH_TAGS + Address::ADDRESS_ATTRIBUTES
 
       all.each do |user|
-        #content
-        csv << INSTITUTION_ATTRIBUTES.map{ |attr| user.send(attr) } + TAG_ATTRIBUTES.map{ |attr| user.send(attr) } + Address::ADDRESS_ATTRIBUTES.map{ |attr| user.address.send(attr) }
+        csv << INSTITUTION_ATTRIBUTES_WITH_TAGS.map{ |attr| user.send(attr) } + Address::ADDRESS_ATTRIBUTES.map{ |attr| user.address.send(attr) }
       end
     end
   end
@@ -61,7 +60,6 @@ class Institution < ApplicationRecord
               "www.unibe.ch",
               "Philosophische-Institution Öffentliche-Institution",
               "Kooperationspartner(Zielgruppe) SBFI/swissuniversities",
-
               "", "", "Lerchenweg 36", "3001", "Bern", "CH"]
 
     end

@@ -32,7 +32,7 @@ class ImportController < ApplicationController
     CSV.foreach(file.path, headers: true) do |row|
       institution = row.to_hash
       functionality = row["functionality"].split(' ') unless row["functionality"].nil?
-      target_group = row["target_group"].split(' ') unless row["target_groupt"].nil?
+      target_group = row["target_group"].split(' ') unless row["target_group"].nil?
       address = row.to_hash
 
       Institution.create_or_update_institution(institution, functionality, target_group, address)

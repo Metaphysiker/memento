@@ -60,8 +60,14 @@ class Person < ApplicationRecord
   end
 
   PERSON_ATTRIBUTES = %w{form_of_address firstname lastname email phone phone2 gender language description website}
+  TAG_ATTRIBUTES = %w{functionality target_group}
+  PERSON_ATTRIBUTES_WITH_TAGS = %w{form_of_address firstname lastname email phone phone2 gender language description website}
+
+
   OTHER_ATTRIBUTES = %w{institutions groups functionality target_group}
   ALL_ATTRIBUTES = PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
+
+  INSTITUTION_ATTRIBUTES_WITH_TAGS = %w{name description email phone website functionality_list target_group_list}
 
   def self.to_csv
     #person_attributes = %w{firstname lastname email phone phone2 gender language description}
