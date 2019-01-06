@@ -371,6 +371,23 @@ RSpec.describe "institutions", :type => :feature do
     expect(page).to have_content(function)
   end
 
+  it "updates and expects language" do
+    institution = Institution.create(name: Faker::Address.community)
+
+    language = Rails.configuration.language.sample
+
+    visit "/institutions/#{institution.id}"
+
+    find(".institution-#{institution.id}-edit").click
+
+    select(I18n.t(language), :from => 'Sprache')
+
+    click_button "Institution aktualisieren"
+
+    expect(page).to have_content("Sprache:")
+    expect(page).to have_content(I18n.t(language))
+  end
+
 end
 
 def login_with(user)
