@@ -21,9 +21,8 @@ class Institution < ApplicationRecord
   #scope :search_institutions_ilike, ->(search_term) { left_outer_joins(:people).where("institutions.name ILIKE ? OR institutions.email ILIKE ? OR institutions.description ILIKE ?", search_term, search_term, search_term) }
   scope :search_records_ilike, ->(search_term) { left_outer_joins(:people).where("institutions.name ILIKE ? OR institutions.email ILIKE ? OR institutions.description ILIKE ? OR people.email ILIKE ? OR people.name ILIKE ?", search_term, search_term, search_term, search_term, search_term).distinct }
 
-  INSTITUTION_ATTRIBUTES = %w{name description email phone language website}
-  OTHER_ATTRIBUTES = %w{functionality target_group}
-  ALL_ATTRIBUTES = INSTITUTION_ATTRIBUTES + OTHER_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
+  INSTITUTION_ATTRIBUTES = %w{name description email phone website}
+  TAG_ATTRIBUTES = %w{functionality target_group}
 
   def create_address
     Address.create(
@@ -34,20 +33,37 @@ class Institution < ApplicationRecord
   end
 
   def self.to_csv
-    attributes = %w{id name email description}
 
     CSV.generate(headers: true) do |csv|
-      csv << attributes
+      #header
+      csv << INSTITUTION_ATTRIBUTES + TAG_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
 
       all.each do |user|
-        csv << attributes.map{ |attr| user.send(attr) }
+        #content
+        csv << INSTITUTION_ATTRIBUTES.map{ |attr| user.send(attr) } + TAG_ATTRIBUTES.map{ |attr| user.send(attr) } + Address::ADDRESS_ATTRIBUTES.map{ |attr| user.address.send(attr) }
       end
     end
   end
 
   def self.headers_to_csv
     CSV.generate(headers: true) do |csv|
-      csv << ALL_ATTRIBUTES
+      csv << INSTITUTION_ATTRIBUTES + TAG_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
+    end
+  end
+
+  def self.example_csv
+    CSV.generate(headers: true) do |csv|
+      csv << INSTITUTION_ATTRIBUTES + TAG_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
+      csv << ["Universität Bern",
+              "Das Philosophische Institut der Universität Bern ist, bezogen auf die Studierendenzahlen, das zweitgrösste philosophische Institut der Schweiz.",
+              "unibe@unibe.ch",
+              "079123477789",
+              "www.unibe.ch",
+              "Philosophische-Institution Öffentliche-Institution",
+              "Kooperationspartner(Zielgruppe) SBFI/swissuniversities",
+
+              "", "", "Lerchenweg 36", "3001", "Bern", "CH"]
+
     end
   end
 
@@ -57,11 +73,11 @@ class Institution < ApplicationRecord
 
     if institution["name"].nil? || institution["name"].blank?
       return
-    elsif Institution.where(email: institution["name"]).empty?
+    elsif Institution.where(name: institution["name"]).empty?
       institution = Institution.create(institution)
     else
-      Institution.find_by_email(institution["name"]).update(institution)
-      institution = Institution.find_by_email(institution["name"])
+      Institution.find_by_name(institution["name"]).update(institution)
+      institution = Institution.find_by_name(institution["name"])
     end
 
     address = address.select!{|x| Address.attribute_names.index(x)}
