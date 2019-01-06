@@ -17,7 +17,6 @@
 //= require chosen-jquery
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require lazyload
 //= require scaffold
 //= require clipboard
