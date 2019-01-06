@@ -29,12 +29,6 @@
         <p>
           <%= link_to "CSV mit Beispielen", example_csv_path(search_inputs: {model: "Person"}), class: "btn btn-primary btn-sm" %>
         </p>
-        <p>
-          Tags und Institutionen müssen mit einem " | " getrennt werden. Beispiel: "Sponsor | Mitglied | Stiftungsmitglied"
-        </p>
-        <p>
-          <b>Wichtig!</b> Die Abstände müssen richtig sein. Das geht nicht: "Sponsor|  Mitglied |Stiftungsmitglied"
-        </p>
         <%= form_tag import_people_path, multipart: true do %>
           <%= file_field_tag :file, class: "btn btn-secondary" %>
           <br>

@@ -21,6 +21,11 @@ class Institution < ApplicationRecord
   #scope :search_institutions_ilike, ->(search_term) { left_outer_joins(:people).where("institutions.name ILIKE ? OR institutions.email ILIKE ? OR institutions.description ILIKE ?", search_term, search_term, search_term) }
   scope :search_records_ilike, ->(search_term) { left_outer_joins(:people).where("institutions.name ILIKE ? OR institutions.email ILIKE ? OR institutions.description ILIKE ? OR people.email ILIKE ? OR people.name ILIKE ?", search_term, search_term, search_term, search_term, search_term).distinct }
 
+  INSTITUTION_ATTRIBUTES = %w{name description email phone language website}
+  OTHER_ATTRIBUTES = %w{functionality target_group}
+  ADDRESS_ATTRIBUTES = %w{company company2 street plz location country}
+  ALL_ATTRIBUTES = INSTITUTION_ATTRIBUTES + OTHER_ATTRIBUTES + ADDRESS_ATTRIBUTES
+
   def create_address
     Address.create(
       addressable_id: self.id,
@@ -39,5 +44,40 @@ class Institution < ApplicationRecord
         csv << attributes.map{ |attr| user.send(attr) }
       end
     end
+  end
+
+  def self.headers_to_csv
+    CSV.generate(headers: true) do |csv|
+      csv << ALL_ATTRIBUTES
+    end
+  end
+
+  def self.create_or_update_institution(institution, functionality_tags, target_group_tags, address)
+    institution = institution.select!{|x| Institution.attribute_names.index(x)}
+    institution.delete_if {|key, value| value.blank?}
+
+    if institution["name"].nil? || institution["name"].blank?
+      return
+    elsif Institution.where(email: institution["name"]).empty?
+      institution = Institution.create(institution)
+    else
+      Institution.find_by_email(institution["name"]).update(institution)
+      institution = Institution.find_by_email(institution["name"])
+    end
+
+    address = address.select!{|x| Address.attribute_names.index(x)}
+    address.delete_if {|key, value| value.blank?}
+    institution.address.update(address)
+
+    unless functionality_tags.blank?
+      institution.functionality_list.add(functionality_tags)
+      institution.save
+    end
+
+    unless target_group_tags.blank?
+      institution.target_group_list.add(target_group_tags)
+      institution.save
+    end
+
   end
 end

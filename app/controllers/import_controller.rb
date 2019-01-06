@@ -22,12 +22,23 @@ class ImportController < ApplicationController
     redirect_to import_people_page_path, notice: "CSV importiert!"
   end
 
-  def import_institutions
+  def institutions_import_page
 
   end
 
-  def institutions_import_page
+  def import_institutions
+    file = params[:file]
 
+    CSV.foreach(file.path, headers: true) do |row|
+      institution = row.to_hash
+      functionality = row["functionality"].split(' ') unless row["functionality"].nil?
+      target_group = row["target_group"].split(' ') unless row["target_group"].nil?
+      address = row.to_hash
+
+      Institution.create_or_update_institution(institution, functionality, target_group, address)
+    end
+
+    redirect_to import_people_page_path, notice: "CSV importiert!"
   end
 
   def import_working_hours_page
