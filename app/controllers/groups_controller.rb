@@ -74,9 +74,11 @@ class GroupsController < ApplicationController
       if @group.update(group_params)
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
+        format.js { render :file => "/basic/update.js.erb" }
       else
         format.html { render :edit }
         format.json { render json: @group.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/update.js.erb" }
       end
     end
   end
