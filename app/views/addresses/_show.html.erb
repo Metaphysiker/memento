@@ -16,6 +16,12 @@
 
       <h5 class="card-title">Adresse</h5>
       <p class="card-text">
+        <% if address.addressable_type == "Person" && !address.addressable.form_of_address.blank? %>
+          <%= address.addressable.form_of_address %>
+        <% end %>
+        <% if address.addressable_type == "Person" && !address.addressable.firstname.blank? && !address.addressable.lastname.blank? %>
+          <%= address.addressable.firstname %> <%= address.addressable.lastname %> <br />
+        <% end %>
         <% unless address.line1.blank? %>
           <%= address.line1 %> <br />
         <% end %>
@@ -30,12 +36,6 @@
         <% end %>
         <% unless address.line5.blank? %>
           <%= address.line5 %> <br />
-        <% end %>
-        <% if address.addressable_type == "Person" && !address.addressable.form_of_address.blank? %>
-          <%= address.addressable.form_of_address %>
-        <% end %>
-        <% if address.addressable_type == "Person" && !address.addressable.firstname.blank? && !address.addressable.lastname.blank? %>
-          <%= address.addressable.firstname %> <%= address.addressable.lastname %> <br />
         <% end %>
         <% unless address.street.blank? %>
           <%= address.street %> <br />
