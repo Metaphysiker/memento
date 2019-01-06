@@ -31,14 +31,17 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @record = @project
 
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
+        format.js { render :file => "/basic/create.js.erb" }
       else
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/faulty_create.js.erb" }
       end
     end
   end

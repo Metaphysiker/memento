@@ -33,13 +33,16 @@ class GroupsController < ApplicationController
 
     @group = Group.new(group_params)
     #byebug
+    @record = @group
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
+        format.js { render :file => "/basic/create.js.erb" }
       else
         format.html { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/faulty_create.js.erb" }
       end
     end
   end

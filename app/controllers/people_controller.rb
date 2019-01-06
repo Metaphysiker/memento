@@ -58,6 +58,7 @@ class PeopleController < ApplicationController
       if @person.save
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }
+        format.js { render :file => "/basic/create.js.erb" }
       else
         format.html { render :new }
         format.json { render json: @person.errors, status: :unprocessable_entity }

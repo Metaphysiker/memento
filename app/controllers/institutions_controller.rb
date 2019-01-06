@@ -88,6 +88,7 @@ class InstitutionsController < ApplicationController
       if @institution.save
         format.html { redirect_to @institution, notice: 'Institution was successfully created.' }
         format.json { render :show, status: :created, location: @institution }
+        format.js { render :file => "/basic/create.js.erb" }
       else
         format.html { render :new }
         format.json { render json: @institution.errors, status: :unprocessable_entity }
