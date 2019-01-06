@@ -23,8 +23,7 @@ class Institution < ApplicationRecord
 
   INSTITUTION_ATTRIBUTES = %w{name description email phone language website}
   OTHER_ATTRIBUTES = %w{functionality target_group}
-  ADDRESS_ATTRIBUTES = %w{company company2 street plz location country}
-  ALL_ATTRIBUTES = INSTITUTION_ATTRIBUTES + OTHER_ATTRIBUTES + ADDRESS_ATTRIBUTES
+  ALL_ATTRIBUTES = INSTITUTION_ATTRIBUTES + OTHER_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
 
   def create_address
     Address.create(
