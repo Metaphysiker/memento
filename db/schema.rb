@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_222616) do
     t.string "name", default: ""
     t.text "description", default: ""
     t.string "email", default: ""
+    t.string "language", default: ""
     t.integer "philosophie_society_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

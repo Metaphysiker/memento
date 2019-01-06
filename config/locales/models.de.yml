@@ -55,6 +55,7 @@ de:
         email: "e-Mail"
         website: "Webseite"
         phone: "Telefon"
+        language: "Sprache"
       note:
         description: "Beschreibung"
       task:

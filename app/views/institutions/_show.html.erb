@@ -55,6 +55,9 @@
           <% if !institution.phone.blank? %>
             <p class="card-text"><strong>Telefon: </strong><%= institution.phone %></p>
           <% end %>
+          <% if !institution.language.blank? %>
+            <p class="card-text"><strong>Sprache: </strong><%= t(institution.language) %></p>
+          <% end %>
 
           <div class="institution-<%=institution.id%>-people">
             <% unless institution.affiliations.empty? %>

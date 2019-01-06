@@ -4,6 +4,7 @@ class CreateInstitutions < ActiveRecord::Migration[5.2]
       t.string :name, default: ""
       t.text :description, default: ""
       t.string :email, default: ""
+      t.string :language, default: ""
       t.integer :philosophie_society_id
 
       t.timestamps
