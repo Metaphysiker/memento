@@ -69,7 +69,6 @@ class Person < ApplicationRecord
 
   def self.to_csv
     #person_attributes = %w{firstname lastname email phone phone2 gender language description}
-    #address_attributes = %w{firstname lastname company  company2 street plz location country }
     #human_person_attributes = person_attributes.map{ |attr| Person.human_attribute_name(attr) }
     #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 

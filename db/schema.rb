@@ -16,8 +16,11 @@ ActiveRecord::Schema.define(version: 2019_01_04_222616) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string "company", default: ""
-    t.string "company2", default: ""
+    t.string "line1", default: ""
+    t.string "line2", default: ""
+    t.string "line3", default: ""
+    t.string "line4", default: ""
+    t.string "line5", default: ""
     t.string "street", default: ""
     t.string "plz", default: ""
     t.string "location", default: ""

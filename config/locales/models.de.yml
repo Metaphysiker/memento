@@ -41,8 +41,11 @@ de:
         website: "Webseite"
         form_of_address: "Anrede"
       address:
-        company: "Firma"
-        company2: "Firma (zweite Zeile)"
+        line1: "Erste Zeile"
+        line2: Zweite Zeile
+        line3: Dritte Zeile
+        line4: Vierte Zeile
+        line5: Fünfte Zeile
         street: "Strasse"
         plz: "PLZ"
         location: "Ort"

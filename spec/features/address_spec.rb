@@ -74,7 +74,12 @@ RSpec.describe "address", :type => :feature do
 
     find(".address-#{person.address.id}-edit").click
 
-    company = Faker::Address.community
+    line1 = Faker::Address.community
+    line2 = Faker::HarryPotter.quote
+    line3 = Faker::HarryPotter.character
+    line4 = Faker::GreekPhilosophers.name
+    line5 = Faker::GreekPhilosophers.quote
+
     street = Faker::Address.street_address
     plz = Faker::Address.zip_code
     location = Faker::Address.city
@@ -83,7 +88,11 @@ RSpec.describe "address", :type => :feature do
     #fill_in "Anrede", :with => "Herr Dr."
     #fill_in "Vorname", :with => person.firstname
     #fill_in "Nachname", :with => person.lastname
-    fill_in "Firma", :with => company
+    fill_in "Erste Zeile", :with => line1
+    fill_in "Zweite Zeile", :with => line2
+    fill_in "Dritte Zeile", :with => line3
+    fill_in "Vierte Zeile", :with => line4
+    fill_in "Fünfte Zeile", :with => line5
     fill_in "Strasse", :with => street
     fill_in "PLZ", :with => plz
     fill_in "Ort", :with => location
@@ -95,7 +104,11 @@ RSpec.describe "address", :type => :feature do
       #expect(page).to have_content("Herr Dr.")
       #expect(page).to have_content(person.firstname)
       #expect(page).to have_content(person.lastname)
-      expect(page).to have_content(company)
+      expect(page).to have_content(line1)
+      expect(page).to have_content(line2)
+      expect(page).to have_content(line3)
+      expect(page).to have_content(line4)
+      expect(page).to have_content(line5)
       expect(page).to have_content(street)
       expect(page).to have_content(plz)
       expect(page).to have_content(location)
@@ -121,7 +134,7 @@ RSpec.describe "address", :type => :feature do
 
     find(".address-#{person.address.id}-edit").click
 
-    company = Faker::Address.community
+    line1 = Faker::Address.community
     street = Faker::Address.street_address
     plz = Faker::Address.zip_code
     location = Faker::Address.city
@@ -129,7 +142,7 @@ RSpec.describe "address", :type => :feature do
 
 #    fill_in "Vorname", :with => person.firstname
 #    fill_in "Nachname", :with => person.lastname
-    fill_in "Firma", :with => company
+    fill_in "Erste Zeile", :with => line1
     fill_in "Strasse", :with => street
     fill_in "PLZ", :with => plz
     fill_in "Ort", :with => location
@@ -141,7 +154,7 @@ RSpec.describe "address", :type => :feature do
       #expect(page).to have_content("Frau")
       expect(page).to have_content(person.firstname)
       expect(page).to have_content(person.lastname)
-      expect(page).to have_content(company)
+      expect(page).to have_content(line1)
       expect(page).to have_content(street)
       expect(page).to have_content(plz)
       expect(page).to have_content(location)
@@ -187,7 +200,7 @@ RSpec.describe "address", :type => :feature do
 
     find(".address-#{person.address.id}-edit").click
 
-    company = Faker::Address.community
+    line1 = Faker::Address.community
     street = Faker::Address.street_address
     plz = Faker::Address.zip_code
     location = Faker::Address.city
@@ -196,7 +209,7 @@ RSpec.describe "address", :type => :feature do
     #fill_in "Anrede", :with => "Herr Dr."
     #fill_in "Vorname", :with => person.firstname
     #fill_in "Nachname", :with => person.lastname
-    fill_in "Firma", :with => company
+    fill_in "Erste Zeile", :with => line1
     fill_in "Strasse", :with => street
     fill_in "PLZ", :with => plz
     fill_in "Ort", :with => location
@@ -208,7 +221,7 @@ RSpec.describe "address", :type => :feature do
       #expect(page).to have_content("Herr Dr.")
       expect(page).to have_content(person.firstname)
       expect(page).to have_content(person.lastname)
-      expect(page).to have_content(company)
+      expect(page).to have_content(line1)
       expect(page).to have_content(street)
       expect(page).to have_content(plz)
       expect(page).to have_content(location)
@@ -239,7 +252,7 @@ RSpec.describe "address", :type => :feature do
 
     find(".address-#{institution.address.id}-edit").click
 
-    company = Faker::Address.community
+    line1 = Faker::Address.community
     street = Faker::Address.street_address
     plz = Faker::Address.zip_code
     location = Faker::Address.city
@@ -248,7 +261,7 @@ RSpec.describe "address", :type => :feature do
     #fill_in "Anrede", :with => "Herr"
     #fill_in "Vorname", :with => person.firstname
     #fill_in "Nachname", :with => person.lastname
-    fill_in "Firma", :with => company
+    fill_in "Erste Zeile", :with => line1
     fill_in "Strasse", :with => street
     fill_in "PLZ", :with => plz
     fill_in "Ort", :with => location
@@ -260,7 +273,7 @@ RSpec.describe "address", :type => :feature do
       #expect(page).to have_content("Herr")
       #expect(page).to have_content(person.firstname)
       #expect(page).to have_content(person.lastname)
-      expect(page).to have_content(company)
+      expect(page).to have_content(line1)
       expect(page).to have_content(street)
       expect(page).to have_content(plz)
       expect(page).to have_content(location)

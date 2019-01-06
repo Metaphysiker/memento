@@ -8,7 +8,7 @@ RSpec.describe Address, type: :model do
 
     expect(person).to be_valid
 
-    company = Faker::Address.community
+    line1 = Faker::Address.community
     street = Faker::Address.street_address
     plz = Faker::Address.zip_code
     location = Faker::Address.city
@@ -18,7 +18,7 @@ RSpec.describe Address, type: :model do
       form_of_address: "Herr",
       firstname: person.firstname,
       lastname: person.lastname,
-      company: company,
+      line1: line1,
       street: street,
       plz: plz,
       location: country
@@ -72,10 +72,10 @@ RSpec.describe Address, type: :model do
 
   end
 
-  it "it sets company of address after institution-create" do
+  it "it sets line1 of address after institution-create" do
     institution = Institution.create(name: Faker::Address.community)
     expect(institution.address.nil?).to be false
-    expect(institution.address.company == institution.name).to be true
+    expect(institution.address.line1 == institution.name).to be true
   end
 
 end

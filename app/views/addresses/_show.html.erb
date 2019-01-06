@@ -16,17 +16,23 @@
 
       <h5 class="card-title">Adresse</h5>
       <p class="card-text">
-        <% unless address.company.blank? %>
-          <%= address.company %> <br />
+        <% unless address.line1.blank? %>
+          <%= address.line1 %> <br />
         <% end %>
-        <% unless address.company2.blank? %>
-          <%= address.company2 %> <br />
+        <% unless address.line2.blank? %>
+          <%= address.line2 %> <br />
+        <% end %>
+        <% unless address.line3.blank? %>
+          <%= address.line3 %> <br />
+        <% end %>
+        <% unless address.line4.blank? %>
+          <%= address.line4 %> <br />
+        <% end %>
+        <% unless address.line5.blank? %>
+          <%= address.line5 %> <br />
         <% end %>
         <% if address.addressable_type == "Person" && !address.addressable.form_of_address.blank? %>
           <%= address.addressable.form_of_address %>
-        <% end %>
-        <% if address.company.blank? && address.company2.blank? %>
-          <br />
         <% end %>
         <% if address.addressable_type == "Person" && !address.addressable.firstname.blank? && !address.addressable.lastname.blank? %>
           <%= address.addressable.firstname %> <%= address.addressable.lastname %> <br />

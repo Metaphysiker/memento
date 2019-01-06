@@ -29,7 +29,7 @@ class Institution < ApplicationRecord
     Address.create(
       addressable_id: self.id,
       addressable_type: Institution,
-      company: self.name,
+      line1: self.name,
     )
   end
 
