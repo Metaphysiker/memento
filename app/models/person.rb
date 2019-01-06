@@ -61,13 +61,11 @@ class Person < ApplicationRecord
 
   PERSON_ATTRIBUTES = %w{form_of_address firstname lastname email phone phone2 gender language description website}
   TAG_ATTRIBUTES = %w{functionality target_group}
-  PERSON_ATTRIBUTES_WITH_TAGS = %w{form_of_address firstname lastname email phone phone2 gender language description website}
-
-
   OTHER_ATTRIBUTES = %w{institutions groups functionality target_group}
+  PERSON_ATTRIBUTES_WITH_TAGS = PERSON_ATTRIBUTES + %w{functionality_list target_group_list}
+
   ALL_ATTRIBUTES = PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
 
-  INSTITUTION_ATTRIBUTES_WITH_TAGS = %w{name description email phone website functionality_list target_group_list}
 
   def self.to_csv
     #person_attributes = %w{firstname lastname email phone phone2 gender language description}
@@ -76,10 +74,10 @@ class Person < ApplicationRecord
     #human_address_attributes = ["Vorname(Adresse)", "Nachname(Adresse)"] + address_attributes.drop(2).map{ |attr| Address.human_attribute_name(attr) }
 
     CSV.generate(headers: true) do |csv|
-      csv << ALL_ATTRIBUTES
+      csv << PERSON_ATTRIBUTES_WITH_TAGS + Address::ADDRESS_ATTRIBUTES
 
       all.each do |user|
-        csv << All_ATTRIBUTES
+        csv << PERSON_ATTRIBUTES_WITH_TAGS.map{ |attr| user.send(attr) } + Address::ADDRESS_ATTRIBUTES.map{ |attr| user.address.send(attr) }
       end
 
       #all.each do |user|

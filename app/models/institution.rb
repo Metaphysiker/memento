@@ -23,7 +23,7 @@ class Institution < ApplicationRecord
 
   INSTITUTION_ATTRIBUTES = %w{name description email phone website}
   TAG_ATTRIBUTES = %w{functionality target_group}
-  INSTITUTION_ATTRIBUTES_WITH_TAGS = %w{name description email phone website functionality_list target_group_list}
+  INSTITUTION_ATTRIBUTES_WITH_TAGS = INSTITUTION_ATTRIBUTES + %w{functionality_list target_group_list}
 
   def create_address
     Address.create(
@@ -54,7 +54,7 @@ class Institution < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << INSTITUTION_ATTRIBUTES + TAG_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
       csv << ["Universität Bern",
-              "Das Philosophische Institut der Universität Bern ist, bezogen auf die Studierendenzahlen, das zweitgrösste philosophische Institut der Schweiz.",
+              "Das Philosophische Institut der Universität Bern ist das zweitgrösste philosophische Institut der Schweiz.",
               "unibe@unibe.ch",
               "079123477789",
               "www.unibe.ch",

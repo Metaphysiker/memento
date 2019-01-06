@@ -71,7 +71,7 @@
             <p class="card-text"><strong>Funktionalitäten: </strong></p>
               <p class="mt-2">
                 <% institution.functionality_list.each do |tag| %>
-                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Institution", functionality_list: [tag]}}), class: "btn btn-outline-dark" %>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Institution", functionality_list: [tag]}}), class: "btn btn-outline-dark mb-1" %>
                 <% end %>
               </p>
             <% end %>
@@ -82,7 +82,7 @@
             <p class="card-text"><strong>Zielgruppe: </strong></p>
               <p class="mt-2">
                 <% institution.target_group_list.each do |tag| %>
-                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Institution", target_group_list: [tag]}}), class: "btn btn-outline-dark" %>
+                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Institution", target_group_list: [tag]}}), class: "btn btn-outline-dark mb-1" %>
                 <% end %>
               </p>
             <% end %>
