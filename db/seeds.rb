@@ -47,13 +47,13 @@ person_target_groups_tags = ["Kinder", "Schüler","Studierende", "Sponsor(Zielgr
 institutions_functionality_tags = ["Sponsor", "Medienkontakt","Kooperationspartner",
                                     "Stiftung", "Veranstalter", "Lehrperson",
                                     "Öffentliche-Institution", "Philosophische-Institution", "Platinmitglied",
-                                    "200er-Mitglied", "Patronatskomitee", "Portalmitglied",]
+                                    "200er-Mitglied", "Patronatskomitee", "Portalmitglied", "Gymnasium"]
 
 institutions_target_groups_tags = ["Sponsor(Zielgruppe)", "Medienkontakt(Zielgruppe)", "Kooperationspartner(Zielgruppe)",
                                     "Stiftung(Zielgruppe)", "SBFI/swissuniversities",
                                     "Philosophische-Institution(Zielgruppe)","SPG/SAGW",
                                     "Charles-Hummel-Stiftung", "Philosophischer-Verein",
-                                    "Verlag", "Verein", "Öffentliche-Institution(Zielgruppe)",
+                                    "Verlag", "Verein", "Öffentliche-Institution(Zielgruppe)", "Gymnasium(Zielgruppe)",
                                     "Unternehmen"]
 
 person_functionality_tags.each do |tag|
