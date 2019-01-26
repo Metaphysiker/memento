@@ -30,7 +30,6 @@ class Person < ApplicationRecord
   def create_address
 
   Address.create(
-    id: self.id,
     addressable_id: self.id,
     addressable_type: Person
   )

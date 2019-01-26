@@ -29,7 +29,6 @@ class Institution < ApplicationRecord
 
   def create_address
     Address.create(
-      id: self.id,
       addressable_id: self.id,
       addressable_type: Institution,
       line1: self.name,
