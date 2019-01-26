@@ -1,7 +1,9 @@
 <p class="card-text"><small class="text-muted">
   Erstellt: <%= parent.created_at.strftime("%d.%m.%Y %H:%M") %>
-  <% if parent.audits.where(action: "create").last.user.nil? %>
-      - von Sandros Skript
+  <% if parent.audits.where(action: "create").last.nil? %>
+    - von Skript
+  <% elsif parent.audits.where(action: "create").last.user.nil? %>
+      - von Skript
   <% else %>
       - von <%= parent.audits.where(action: "create").last.user.username %>
   <% end %>
