@@ -5,7 +5,7 @@ class Person < ApplicationRecord
 
   audited
 
-  has_one :address, as: :addressable
+  has_one :address, as: :addressable, dependent: :destroy
   has_many :notes, as: :noteable
   has_many :tasks, as: :taskable
 

@@ -3,7 +3,7 @@ class Institution < ApplicationRecord
 
   audited
 
-  has_one :address, as: :addressable
+  has_one :address, as: :addressable, dependent: :destroy
   has_many :notes, as: :noteable
   has_many :tasks, as: :taskable
 
@@ -11,6 +11,7 @@ class Institution < ApplicationRecord
   has_many :people, :through => :affiliations
 
   validates :name, presence: :true, uniqueness: :true
+  validates :email, uniqueness: :true
 
   acts_as_taggable
   acts_as_taggable_on :functionalities
@@ -54,7 +55,7 @@ class Institution < ApplicationRecord
   def self.example_csv
     CSV.generate(headers: true) do |csv|
       csv << INSTITUTION_ATTRIBUTES + TAG_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
-      csv << ["Universität Bern",
+      csv << ["1", "Universität Bern",
               "Das Philosophische Institut der Universität Bern ist das zweitgrösste philosophische Institut der Schweiz.",
               "unibe@unibe.ch",
               "079123477789",
