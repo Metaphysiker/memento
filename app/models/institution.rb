@@ -21,7 +21,8 @@ class Institution < ApplicationRecord
   #scope :search_institutions_ilike, ->(search_term) { left_outer_joins(:people).where("institutions.name ILIKE ? OR institutions.email ILIKE ? OR institutions.description ILIKE ?", search_term, search_term, search_term) }
   scope :search_records_ilike, ->(search_term) { left_outer_joins(:people).where("institutions.name ILIKE ? OR institutions.email ILIKE ? OR institutions.description ILIKE ? OR people.email ILIKE ? OR people.name ILIKE ?", search_term, search_term, search_term, search_term, search_term).distinct }
 
-  INSTITUTION_ATTRIBUTES = %w{name description email phone website language}
+  #INSTITUTION_ATTRIBUTES = %w{name description email phone website language}
+  INSTITUTION_ATTRIBUTES = %w{id name description email phone website language}
   TAG_ATTRIBUTES = %w{functionality target_group}
   INSTITUTION_ATTRIBUTES_WITH_TAGS = INSTITUTION_ATTRIBUTES + %w{functionality_list target_group_list}
 
