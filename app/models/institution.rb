@@ -61,7 +61,7 @@ class Institution < ApplicationRecord
               "de",
               "Philosophische-Institution Öffentliche-Institution",
               "Kooperationspartner(Zielgruppe) SBFI/swissuniversities",
-              "Philosophisches Institut", "Uni Tobler", "Bereich Geisteswissenschaften", "Sekretariat", "Lara Ullmer", "Lerchenweg 36", "3001", "Bern", "CH"]
+              "Fachabteilung Philosophie", "Uni Tobler", "Bereich Geisteswissenschaften", "Sekretariat", "Lara Ullmer", "Lerchenweg 36", "3001", "Bern", "CH"]
 
     end
   end
