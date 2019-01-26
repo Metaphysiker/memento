@@ -11,7 +11,7 @@ class Institution < ApplicationRecord
   has_many :people, :through => :affiliations
 
   validates :name, presence: :true, uniqueness: :true
-  validates :email, uniqueness: :true
+  #validates :email, uniqueness: :true
 
   acts_as_taggable
   acts_as_taggable_on :functionalities
