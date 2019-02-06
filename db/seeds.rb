@@ -54,7 +54,7 @@ institutions_target_groups_tags = ["Sponsor(Zielgruppe)", "Medienkontakt(Zielgru
                                     "Philosophische-Institution(Zielgruppe)","SPG/SAGW",
                                     "Charles-Hummel-Stiftung", "Philosophischer-Verein",
                                     "Verlag", "Verein", "Öffentliche-Institution(Zielgruppe)", "Gymnasium(Zielgruppe)",
-                                    "Unternehmen"]
+                                    "Unternehmen", "Philosophisches-Cafe(Zielgruppe)", "Philosophische-Praxis(Zielgruppe)"]
 
 person_functionality_tags.each do |tag|
   TagList.create(
