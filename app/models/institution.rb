@@ -69,9 +69,11 @@ class Institution < ApplicationRecord
   end
 
   def self.create_or_update_institution(institution, functionality_tags, target_group_tags, address)
+    puts institution.inspect
+    puts functionality_tags.inspect
     institution = institution.select!{|x| Institution.attribute_names.index(x)}
     institution.delete_if {|key, value| value.blank?}
-
+    puts institution.inspect
     if institution["name"].nil? || institution["name"].blank?
       return
     elsif Institution.where(name: institution["name"]).empty?
