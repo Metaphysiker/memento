@@ -87,6 +87,9 @@ class Institution < ApplicationRecord
     address.delete_if {|key, value| value.blank?}
     institution.address.update(address)
 
+    puts "INSTITUTION ID:"
+    puts institution.id.inspect
+
     unless functionality_tags.blank?
       institution.functionality_list.add(functionality_tags)
       institution.save
