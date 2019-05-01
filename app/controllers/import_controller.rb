@@ -74,7 +74,7 @@ class ImportController < ApplicationController
       end
     end
 
-    redirect_to worktime_path, notice: "CSV importiert!"
+    redirect_to my_worktime_path, notice: "CSV importiert!"
   end
 
   def testing

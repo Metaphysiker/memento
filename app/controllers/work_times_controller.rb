@@ -29,7 +29,7 @@ class WorkTimesController < ApplicationController
     respond_to do |format|
       if @work_time.save
         #format.html { redirect_to @work_time, notice: 'Work time was successfully created.' }
-        format.html { redirect_to worktime_path, notice: "Arbeitszeit eingetragen!"}
+        format.html { redirect_to my_worktime_path, notice: "Arbeitszeit eingetragen!"}
         format.json { render :show, status: :created, location: @work_time }
       else
         format.html { render :new }

@@ -31,6 +31,9 @@
             <th>Aufgabe</th>
             <th>Bereich</th>
             <th>Projekt</th>
+            <th>
+              Ehrenamtlich?
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +44,9 @@
             <td><%= w.task %></td>
             <td><%= w.area %></td>
             <td><%= w.project %></td>
+            <td>
+              <%= w.voluntary.to_s %>
+            </td>
           </tr>
           <% end %>
         </tbody>
