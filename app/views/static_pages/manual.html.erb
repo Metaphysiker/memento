@@ -1,13 +1,92 @@
 <div class="container">
+  <h1 class="text-center">Gebrauchsanweisung</h1>
+  <hr />
   <div class="card my-3">
     <div class="card-body">
 
-      <h3 class="card-title">Gebrauchsanweisung</h3>
+      <h3 class="card-title">Arbeitsstunden eintragen</h3>
       <hr />
       <p class="card-text">
-        Personen und Institutionen suchen:
-        <b>Zur Übersicht:</b> <%= link_to "Übersicht", overview_path %>
+        Auf der <%= link_to "Startseite", root_path %> und auf der <%= link_to "Arbeitszeit-Seite", my_worktime_path %>
+        kann man seine Arbeitsstunden eintragen.
+      </p>
+      <p>
+        Dort findet man ein <b>Formular</b> zum Ausfüllen.
+        Wenn man das Formular ausgefüllt hat und auf das Feld "Arbeitszeit erstellen" gedrückt hat,
+        wurde die Arbeitszeit eingetragen.
+      </p>
+      <p>
+        Bei einer erfolgreichen Eintragung kann man seine Arbeitsstunden unten sehen.
+      </p>
+      <p>
+        <%= image_tag("worktime.gif", class: "img-fluid border rounded") %>
       </p>
     </div>
   </div>
+
+  <div class="card my-3">
+    <div class="card-body">
+
+      <h3 class="card-title">Personen und Institutionen suchen</h3>
+      <hr />
+      <p class="card-text">
+        Auf der <%= link_to "Übersichts-Seite", overview_path %> kann man nach Personen und Institutionen suchen.
+      </p>
+      <p>
+        In der linken Spalte kann man zwischen <b>Personen</b> und <b>Institutionen</b>
+        auswählen. In der rechten Spalte findet man oben ein <b>Suchfeld</b>.
+        Dort kann man nach Namen, e-Mail-Adressen und nach Kategorien suchen.
+      </p>
+      <p>
+        <%= image_tag("search.gif", class: "img-fluid border rounded") %>
+      </p>
+    </div>
+  </div>
+
+  <div class="card my-3">
+    <div class="card-body">
+
+      <h3 class="card-title">Notizen hinzufügen</h3>
+      <hr />
+      <p class="card-text">
+        Man kann bei Personen und Institutionen <b>Notizen hinzufügen</b>.
+      </p>
+      <p>
+        Nach einem Gespräch, einer Begegnung oder bei einer Kontaktaufnahme
+        sollten wir eine Notiz hinzufügen, so dass wichtige Informationen
+        nicht vergessen werden und andere Mitarbeiter*innen diese Information auch sehen können.
+      </p>
+      <p>
+        <%= image_tag("note.gif", class: "img-fluid border rounded") %>
+      </p>
+    </div>
+  </div>
+
+  <div class="card my-3">
+    <div class="card-body">
+
+      <h3 class="card-title">Einträge erstellen und editieren</h3>
+      <hr />
+      <p class="card-text">
+        Man kann Personen und Institutionen neu <b>erstellen und bearbeiten</b>.
+      </p>
+      <p>
+        Alle Einträge können bearbeitet werden,
+        wenn man rechts oben auf das Feld mit dem Bearbeitungssymbol drückt.
+      </p>
+      <p>
+        <%= image_tag("edit.gif", class: "img-fluid border rounded") %>
+      </p>
+      <p>
+        Neue Einträge kann man machen, wenn man auf der <%= link_to "Übersichts-Seite", overview_path %>
+         <b>ganz unten</b>
+        auf das Feld "Person erstellen" drückt.
+      </p>
+      <p>
+        <%= image_tag("new.gif", class: "img-fluid border rounded") %>
+      </p>
+    </div>
+  </div>
+
+
 </div>
