@@ -8,13 +8,7 @@
         <b>Zur Übersicht:</b> <%= link_to "Übersicht", overview_path %>
       </p>
       <p class="card-text">
-        <b>Zu meinen Aufgaben:</b> <%= link_to "Meine Aufgaben", my_tasks_path %>
-      </p>
-      <p class="card-text">
-        <b>Gebrauchsanweisung:</b> Link
-      </p>
-      <p class="card-text">
-        <b>Zum Team:</b> <%= link_to "Team", team_path %>
+        <b>Zur Gebrauchsanweisung:</b> Link
       </p>
     </div>
   </div>
@@ -27,12 +21,6 @@
       <hr />
       <p class="card-text">
         <%= render 'work_times/form', work_time: WorkTime.new %>
-      </p>
-      <p class="card-text">
-        Monatsübersicht:
-      </p>
-      <p class="card-text">
-        Jahresübersicht
       </p>
     </div>
   </div>
