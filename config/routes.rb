@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :work_times
   resources :working_hours
   resources :groups
   resources :projects
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
   get '/my_tasks', to: 'static_pages#my_tasks', as: 'my_tasks'
   get '/team', to: 'static_pages#team', as: 'team'
   get '/merch_showcase', to: 'static_pages#merch_showcase', as: 'merch_showcase'
-
+  get '/manual', to: 'static_pages#manual', as: 'manual'
   #search
   get '/search_people_form', to: 'people#search_people', as: 'search_people_form'
   get '/search_institutions_form', to: 'institutions#search_institutions', as: 'search_institutions_form'

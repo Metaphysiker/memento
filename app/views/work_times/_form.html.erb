@@ -1,0 +1,18 @@
+
+<%= simple_form_for(@work_time) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :user_id, collection: User.all, label_method: :username, value_method: :id, selected: current_user.id %>
+    <%= f.input :date %>
+    <%= f.input :time, :step => 0.1 %>
+    <%= f.input :area %>
+    <%= f.input :project %>
+    <%= f.input :voluntary %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

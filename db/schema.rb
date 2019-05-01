@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_222616) do
+ActiveRecord::Schema.define(version: 2019_05_01_091539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_222616) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "taggings", id: :serial, force: :cascade do |t|
+  create_table "taggings", id: :integer, default: nil, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_222616) do
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
-  create_table "tags", id: :serial, force: :cascade do |t|
+  create_table "tags", id: :integer, default: nil, force: :cascade do |t|
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
@@ -233,6 +233,18 @@ ActiveRecord::Schema.define(version: 2019_01_04_222616) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "work_times", force: :cascade do |t|
+    t.bigint "user_id"
+    t.date "date"
+    t.decimal "time", precision: 16, scale: 2, default: "0.0"
+    t.string "area", default: ""
+    t.string "project", default: ""
+    t.boolean "voluntary", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_work_times_on_user_id"
   end
 
   create_table "working_hours", force: :cascade do |t|

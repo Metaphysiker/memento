@@ -86,6 +86,9 @@ class StaticPagesController < ApplicationController
   end
 
   def merch_showcase
-    
+
+  end
+
+  def manual
   end
 end
