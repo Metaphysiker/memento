@@ -1,14 +1,18 @@
 
-<%= simple_form_for(@work_time) do |f| %>
+<%= simple_form_for(work_time) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
     <%= f.input :user_id, collection: User.all, label_method: :username, value_method: :id, selected: current_user.id %>
     <%= f.input :date %>
-    <%= f.input :time, :step => 0.1 %>
-    <%= f.input :area %>
-    <%= f.input :project %>
+    <%= f.label :time %>
+    <br />
+    <i>Zum Beispiel: "2,5" sind 2 Stunden und 30 Minuten</i>
+    <%= f.input :time, as: :decimal, label: false %>
+    <%= f.input :task %>
+    <%= f.input :area, collection: WorkTime.areas.map {|p| [t("#{p}"), p]} %>
+    <%= f.input :project, collection: WorkTime.projects.map {|p| [t("#{p}"), p]} %>
     <%= f.input :voluntary %>
   </div>
 

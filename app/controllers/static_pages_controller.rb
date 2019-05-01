@@ -9,6 +9,10 @@ class StaticPagesController < ApplicationController
     @audits = Audited::Audit.order(:created_at).reverse_order.page(params[:page]).per(50)
   end
 
+  def worktime
+    @worktimes = WorkTime.where(user_id: current_user.id)
+  end
+
   def overview
 =begin
     if params[:search_inputs].present?

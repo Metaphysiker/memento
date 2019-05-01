@@ -28,7 +28,8 @@ class WorkTimesController < ApplicationController
 
     respond_to do |format|
       if @work_time.save
-        format.html { redirect_to @work_time, notice: 'Work time was successfully created.' }
+        #format.html { redirect_to @work_time, notice: 'Work time was successfully created.' }
+        format.html { redirect_to worktime_path, notice: "Arbeitszeit eingetragen!"}
         format.json { render :show, status: :created, location: @work_time }
       else
         format.html { render :new }
@@ -69,6 +70,6 @@ class WorkTimesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def work_time_params
-      params.require(:work_time).permit(:date, :user_id, :time, :area, :project, :voluntary)
+      params.require(:work_time).permit(:date, :task, :user_id, :time, :area, :project, :voluntary)
     end
 end

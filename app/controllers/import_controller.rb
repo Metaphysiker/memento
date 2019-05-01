@@ -57,6 +57,26 @@ class ImportController < ApplicationController
     redirect_to import_working_hours_page_path, notice: "CSV importiert!"
   end
 
+  def import_work_time
+    file = params[:file]
+
+    CSV.foreach(file.path, headers: true) do |row|
+      next if row["time"].blank?
+      username = row["username"].downcase
+      puts username
+      puts User.where(username: username.capitalize).empty?
+      unless User.where(username: username.capitalize).empty?
+        work_time = row.to_hash
+        puts work_time
+        work_time.store("user_id", User.where(username: username.capitalize).last.id)
+        work_time.except!("username")
+        WorkTime.create(work_time)
+      end
+    end
+
+    redirect_to worktime_path, notice: "CSV importiert!"
+  end
+
   def testing
 
   end

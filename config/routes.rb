@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get '/team', to: 'static_pages#team', as: 'team'
   get '/merch_showcase', to: 'static_pages#merch_showcase', as: 'merch_showcase'
   get '/manual', to: 'static_pages#manual', as: 'manual'
+  get '/worktime', to: 'static_pages#worktime', as: 'worktime'
+
   #search
   get '/search_people_form', to: 'people#search_people', as: 'search_people_form'
   get '/search_institutions_form', to: 'institutions#search_institutions', as: 'search_institutions_form'
@@ -81,5 +83,7 @@ Rails.application.routes.draw do
 
   get '/import_working_hours_page', to: 'import#import_working_hours_page', as: 'import_working_hours_page'
   post '/import_working_hours', to: 'import#import_working_hours', as: 'import_working_hours'
+
+  post '/import_work_time', to: 'import#import_work_time', as: 'import_work_time'
 
 end

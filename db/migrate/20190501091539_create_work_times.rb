@@ -4,6 +4,7 @@ class CreateWorkTimes < ActiveRecord::Migration[5.2]
       t.belongs_to :user, index: true
       t.date :date
       t.decimal :time, precision: 16, scale: 2, default: 0
+      t.string :task, default: ""
       t.string :area, default: ""
       t.string :project, default: ""
       t.boolean :voluntary, default: false

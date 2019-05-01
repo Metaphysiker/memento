@@ -239,6 +239,7 @@ ActiveRecord::Schema.define(version: 2019_05_01_091539) do
     t.bigint "user_id"
     t.date "date"
     t.decimal "time", precision: 16, scale: 2, default: "0.0"
+    t.string "task", default: ""
     t.string "area", default: ""
     t.string "project", default: ""
     t.boolean "voluntary", default: false

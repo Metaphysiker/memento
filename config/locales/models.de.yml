@@ -1,6 +1,9 @@
 de:
   activerecord:
     models:
+      work_time:
+        one: "Arbeitszeit"
+        other: "Arbeitszeiten"
       person:
         one: "Person"
         other: "Personen"
@@ -26,6 +29,13 @@ de:
         one: "Gruppe"
         other: "Gruppen"
     attributes:
+      work_time:
+        date: "Datum"
+        time: "Zeit"
+        area: "Bereich"
+        project: "Projekt"
+        voluntary: "ehrenamtlich"
+        task: "Aufgabe"
       person:
         name: "Name"
         firstname: "Vorname"
