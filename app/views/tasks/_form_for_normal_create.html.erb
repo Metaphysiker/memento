@@ -1,0 +1,20 @@
+<%= simple_form_for(task, method: :post, url: normal_create_task_path) do |f| %>
+<%#= simple_form_for(task, remote: true) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :description %>
+    <%= f.input :deadline %>
+    <%#= f.input :priority %>
+    <%= f.input :priority, collection: [[1, "1 - Niedrig"], [2, "2 - Normal"], [3, "3 - Hoch"]], label_method: :second, value_method: :first %>
+    <%#= f.input :assigned_to_user_id %>
+    <%= f.input :assigned_to_user_id, collection: User.all, label_method: :username, value_method: :id, include_blank: true %>
+    <%#= f.input :status %>
+    <%= f.input :status, collection: Task.statuses.map {|p| [t("#{p}"), p]} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -87,4 +87,6 @@ Rails.application.routes.draw do
 
   post '/import_work_time', to: 'import#import_work_time', as: 'import_work_time'
 
+  #task
+  post '/normal_create_task', to: 'tasks#normal_create', as: 'normal_create_task'
 end

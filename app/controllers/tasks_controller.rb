@@ -47,6 +47,40 @@ class TasksController < ApplicationController
     end
   end
 
+  def create
+    @task = Task.new(task_params)
+    @record = @task
+
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.json { render :show, status: :created, location: @task }
+        format.js { render :file => "/basic/reload_children.js.erb" }
+      else
+        format.html { render :new }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/reload_children.js.erb" }
+      end
+    end
+  end
+
+  def normal_create
+    @task = Task.new(task_params)
+    @record = @task
+
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.json { render :show, status: :created, location: @task }
+                format.js { render :file => "/basic/create.js.erb" }
+      else
+        format.html { render :new }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.js { render :file => "/basic/faulty_create.js.erb" }
+      end
+    end
+  end
+
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update

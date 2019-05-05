@@ -24,6 +24,8 @@
 
     <%#= render "#{records.klass.to_s.pluralize.downcase}/new", record: records.klass.new %>
     <%= render "basic/new", record: records.klass.new unless (records.klass == Note) || (records.klass == Task) %>
+    <%#= render "basic/new", record: records.klass.new unless records.klass == Note %>
+    <%= render "tasks/new_for_normal_create", record: records.klass.new if records.klass == Task %>
 
 <script>
   $( document ).ready(function() {

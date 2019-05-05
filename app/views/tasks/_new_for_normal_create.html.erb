@@ -1,0 +1,27 @@
+<div class="new-<%= record.class.to_s.downcase %>">
+
+  <button type="button" class="btn btn-light <%= record.class.to_s.downcase %>-<%= record.id %>-edit" data-toggle="modal" data-target=".<%= record.class.to_s.downcase %>-<%= record.id %>-edit-modal">
+    <%= fa_icon "plus" %> <%= t("helpers.submit.create", model: record.class.model_name.human) %>
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade <%= record.class.to_s.downcase %>-<%= record.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit record" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t("helpers.submit.create", model: record.class.model_name.human) %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= render "#{record.class.to_s.pluralize.downcase}/form_for_normal_create", Hash[record.class.to_s.downcase.to_sym, record] %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
