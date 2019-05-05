@@ -4,6 +4,9 @@ class Task < ApplicationRecord
 
   belongs_to :taskable, polymorphic: true, optional: true
 
+  scope :unfinished, -> { where.not(status: "abgeschlossen") }
+  scope :finished, -> { where(status: "abgeschlossen") }
+
   scope :search_records_ilike, ->(search_term) { where("description ILIKE ? OR status ILIKE ?", search_term, search_term) }
 
   def self.statuses

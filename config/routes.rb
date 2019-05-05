@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   #static_pages
   get '/overview', to: 'static_pages#overview', as: 'overview'
-  get '/my_tasks', to: 'static_pages#my_tasks', as: 'my_tasks'
+  get '/my_tasks/(:user_id)', to: 'static_pages#my_tasks', as: 'my_tasks'
   get '/my_worktime', to: 'static_pages#my_worktime', as: 'my_worktime'
   get '/team', to: 'static_pages#team', as: 'team'
   get '/merch_showcase', to: 'static_pages#merch_showcase', as: 'merch_showcase'

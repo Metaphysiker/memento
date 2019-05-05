@@ -27,6 +27,12 @@
   <div class="collapse multi-collapse task-profile-view">
       <div class="card my-3">
         <div class="card-body">
+          <% unless task.taskable.nil? %>
+          <p class="card-text">
+            <%= link_to task.taskable.name, polymorphic_path(task) %>
+          </p>
+          <hr />
+          <% end %>
           <div class="float-right mb-3">
 
             <div class="btn-group" role="group" aria-label="Toolbar for task">
@@ -46,7 +52,7 @@
             <p class="card-text"><strong>Deadline: </strong><%= task.deadline.strftime("%d.%m.%Y %H:%M") %></p>
           <% end %>
           <p class="card-text"><strong>Priorität: </strong><%= Task.priorities[task.priority] %></p>
-          <p class="card-text"><strong>Zuständig: </strong><%= User.find(task.assigned_to_user_id).username unless task.assigned_to_user_id.blank? %></p>
+          <p class="card-text"><strong>Zuständig: </strong><%= link_to User.find(task.assigned_to_user_id).username, my_tasks_path(task.assigned_to_user_id) unless task.assigned_to_user_id.blank? %></p>
           <p class="card-text"><strong>Status: </strong><%= task.status %></p>
           <hr />
           <%= render "shared/created_and_updated", parent: task %>

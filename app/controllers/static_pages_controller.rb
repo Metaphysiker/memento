@@ -63,7 +63,14 @@ class StaticPagesController < ApplicationController
   end
 
   def my_tasks
-    @tasks = Task.where(assigned_to_user_id: current_user.id).order(:created_at).page(params[:page]).per(20)
+    user_id = params[:user_id]
+    if user_id.blank?
+      @user = current_user
+    else
+      @user = User.find(user_id)
+    end
+
+    @tasks = Task.where(assigned_to_user_id: user_id).order(:created_at).page(params[:page]).per(20)
   end
 
   def playfield

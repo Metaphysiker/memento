@@ -9,6 +9,10 @@
       <%#= render "#{records.klass.to_s.pluralize.downcase}/search_#{records.klass.to_s.pluralize.downcase}_form" %>
       <%= render "basic/search_basic_form", records: records, random_div: random_div %>
     </p>
+
+    <%#= render "basic/new", record: records.klass.new unless (records.klass == Note) || (records.klass == Task) %>
+    <%#= render "tasks/new_for_normal_create", record: records.klass.new if records.klass == Task %>
+
   <div class="nav nav-tabs justify-content-end" id="nav-tab" role="tablist">
     <a class="nav-item nav-link list-view active" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="true">
       <button class="btn btn-light" id="<%=records.klass.to_s.downcase%>-index-view-option" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" aria-controls="multiCollapseExample1 multiCollapseExample2"><%= fa_icon "id-card" %></button>
@@ -22,9 +26,7 @@
     <%= render 'basic/records', records: records, random_div: random_div %>
 </div>
 
-    <%#= render "#{records.klass.to_s.pluralize.downcase}/new", record: records.klass.new %>
     <%= render "basic/new", record: records.klass.new unless (records.klass == Note) || (records.klass == Task) %>
-    <%#= render "basic/new", record: records.klass.new unless records.klass == Note %>
     <%= render "tasks/new_for_normal_create", record: records.klass.new if records.klass == Task %>
 
 <script>

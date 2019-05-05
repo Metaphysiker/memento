@@ -27,6 +27,12 @@
   <div class="collapse multi-collapse note-profile-view">
       <div class="card my-3">
         <div class="card-body">
+          <% unless note.noteable.nil? %>
+          <p class="card-text">
+            <%= link_to note.noteable.name, polymorphic_path(note) %>
+          </p>
+          <hr />
+          <% end %>
           <div class="float-right mb-3">
 
             <div class="btn-group" role="group" aria-label="Toolbar for note">
