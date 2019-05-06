@@ -30,6 +30,21 @@ namespace :sync do
     end
   end
 
+  def getusersx
+    url      = 'http://localhost:3000/getusers'
+    uri      = URI(url)
+    response = Net::HTTP.get(uri)
+    response2 = JSON.parse(response)
+    response3 = response2.first
+    users = response3.second
+
+    users.each do |u|
+      if Person.find_by_philosophie_id(u["id"]).nil?
+        create_person(u)
+      end
+    end
+  end
+
   def create_person(user)
     user = OpenStruct.new(user)
     Person.create(
