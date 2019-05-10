@@ -1,0 +1,42 @@
+<h1><%= user.username %></h1>
+<%# query = WorkingHour.where(user: user) %>
+<% query = WorkTime.where(user_id: user.id) %>
+<strong>Total: </strong><%= query.sum(:time) %> | <%= query.count %>
+
+<%= area_chart query.group(:voluntary).group_by_week(:date).sum(:time) %>
+<table class="table table-striped table-wrapper-scroll-y border border-primary rounded m-1 p-1">
+  <thead>
+    <tr>
+      <th>Datum</th>
+      <th>Stunden</th>
+      <th>Aufgabe</th>
+      <th>Bereich</th>
+      <th>Projekt</th>
+      <th>
+        Ehrenamtlich?
+      </th>
+      <th>
+
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% query.order(:date).reverse_order.each do |w| %>
+    <tr>
+      <th><%= w.date %></th>
+      <td><%= w.time %></td>
+      <td><%= w.task %></td>
+      <td><%= w.area %></td>
+      <td><%= w.project %></td>
+      <td>
+        <%= w.voluntary.to_s %>
+      </td>
+      <td>
+        <%= link_to edit_work_time_path(w) do %>
+        <%= fa_icon "edit" %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
