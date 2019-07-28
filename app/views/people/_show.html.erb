@@ -108,6 +108,9 @@
             <%= link_to person_bill_path(person) do %>
               <%= fa_icon "money" %> Rechnung erstellen
             <% end %>
+            <button type="button" class="btn btn-light person-<%= person.id %>-bill" data-toggle="modal" data-target=".person-<%= person.id %>-bill-modal">
+              <%= fa_icon "money" %> Rechnung erstellen
+            </button>
           </p>
 
           <p>
@@ -143,7 +146,7 @@
 
 
 
-  <!-- Modal -->
+  <!-- Edit-Modal -->
   <div class="modal fade person-<%= person.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit Person" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -157,6 +160,36 @@
           <div class="person-<%= person.id %>-edit-placeholder">
           </div>
           <%#= render "people/form", person: person %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bill-Modal -->
+  <div class="modal fade person-<%= person.id %>-bill-modal" tabindex="-1" role="dialog" aria-labelledby="Bill Person" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Rechnung erstellen</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <%= simple_form_for :bill, {url: person_bill_path(person), method: :get, remote: false} do |f| %>
+          <% billmembership = person.functionality_list.include?("200er-Mitglied") ? "200er-Mitglied" : "Platinmitglied" %>
+          <% amount = person.functionality_list.include?("200er-Mitglied") ? "200" : "80" %>
+          <%#= f.text_field :amount, placeholder: "Betrag", class: "form-control" %>
+          <%#= f.input :amount, value: 20 %>
+          <%= f.number_field :amount, value: amount, class: "form-control" %>
+          <br>
+          <%= f.input :age, collection: ["Platinmitglied", "200er-Mitglied"], prompt: "Mitgliedschaft", selected: billmembership %>
+          <br>
+          <%= f.submit "Rechnung als PDF erstellen", class: "btn btn-primary" %>
+        <% end %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>

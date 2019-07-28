@@ -111,6 +111,8 @@ class PeopleController < ApplicationController
   end
 
   def odf
+    amount = params[:bill][:amount]
+    membership = params[:bill][:membership]
 
     report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/rechnung.odt") do |r|
 
@@ -119,6 +121,9 @@ class PeopleController < ApplicationController
       r.add_field :street, @person.address.street.to_s
       r.add_field :location, "#{@person.address.plz} #{@person.address.location}"
       r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+      r.add_field :amount, amount
+      r.add_field :membership, membership
+      r.add_field :advantages, advantages
 
     end
 
