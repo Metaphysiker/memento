@@ -114,6 +114,22 @@ class PeopleController < ApplicationController
     amount = params[:bill][:amount]
     membership = params[:bill][:membership]
 
+    if membership == "Platinmitglied"
+      membership = "Platin-Mitgliedschaft"
+      advantages =
+      ["Platin-Mitglieder erhalten jährlich eine Kurskostenreduktion von CHF 50.00.",
+      "Kostenloser Eintritt zu den Events von Philosophie.ch"]
+    else
+      membership = "Club 200-Mitgliedschaft"
+      advantages =
+    "Für 200er-Clubmitglieder sind alle Kurse um 25% (CHF 88.00) reduziert.
+    Kostenloser Eintritt zu den Events von Philosophie.ch.
+    Die Club200-Mitglieder erhalten neben dem personalisierten, elektronischen Newsletter einmal jährlich handerlesene Tipps rund um Neuerscheinungen, Veranstaltungen und Onlineangebote sowie
+    ein jährlich abwechselndes, gedrucktes Produkt (Jahreskalender 2020), und auch
+    die gedruckte Broschüre von Philosophie.ch mit zeitnahen, philosophischen Texten per Post.
+    Auf Wunsch, Nennung als Gönnermitglied auf Philosophie.ch"
+    end
+
     report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/rechnung.odt") do |r|
 
       r.add_image :graphics1, "#{Rails.root}/app/views/odfs/logo1.jpg"
@@ -123,7 +139,8 @@ class PeopleController < ApplicationController
       r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
       r.add_field :amount, amount
       r.add_field :membership, membership
-      r.add_field :advantages, advantages
+      #r.add_field :advantages, advantages
+      #r.add_section :advantages, advantages
 
     end
 

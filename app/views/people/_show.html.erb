@@ -182,11 +182,9 @@
         <%= simple_form_for :bill, {url: person_bill_path(person), method: :get, remote: false} do |f| %>
           <% billmembership = person.functionality_list.include?("200er-Mitglied") ? "200er-Mitglied" : "Platinmitglied" %>
           <% amount = person.functionality_list.include?("200er-Mitglied") ? "200" : "80" %>
-          <%#= f.text_field :amount, placeholder: "Betrag", class: "form-control" %>
-          <%#= f.input :amount, value: 20 %>
           <%= f.number_field :amount, value: amount, class: "form-control" %>
           <br>
-          <%= f.input :age, collection: ["Platinmitglied", "200er-Mitglied"], prompt: "Mitgliedschaft", selected: billmembership %>
+          <%= f.input :membership, collection: ["Platinmitglied", "200er-Mitglied"], prompt: "Mitgliedschaft", selected: billmembership %>
           <br>
           <%= f.submit "Rechnung als PDF erstellen", class: "btn btn-primary" %>
         <% end %>
