@@ -6,8 +6,8 @@ RSpec.describe "work_times", :type => :feature do
     User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
     User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
     User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
-    first_user = User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
-    login_with(first_user)
+    @first_user = User.create!(:username => Faker::Internet.username, :role => "admin", :email => Faker::Internet.email, :password => "secret")
+    login_with(@first_user)
   end
 
   let(:work_time1) do
@@ -25,7 +25,7 @@ RSpec.describe "work_times", :type => :feature do
     visit "/my_worktime"
     #click_button "Person erstellen"
 
-    user = first_user.name
+    username = @first_user.username
     date = Date.today
     time = 2.5
     task = "Memento upgedatet und aktualisiert"
@@ -33,23 +33,20 @@ RSpec.describe "work_times", :type => :feature do
     project = WorkTime.projects.first
     #voluntary
 
-    fill_in "User", :with => firstname
+    select username, :from => 'User'
+    select date.day, :from => "work_time_date_3i"
+    select I18n.t("date.month_names")[date.month], :from => "work_time_date_2i"
+    select date.year, :from => "work_time_date_1i"
     fill_in "Zeit", :with => time
     fill_in "Aufgabe", :with => task
-    fill_in "Bereich", :with => area
-    fill_in "Projekt", :with => project
+    select area, :from => 'Bereich'
+    select project, :from => 'Projekt'
 
     within(".form-actions") do
       click_button "Arbeitszeit erstellen"
     end
 
-    fill_in "User", :with => firstname
-    fill_in "Zeit", :with => time
-    fill_in "Aufgabe", :with => task
-    fill_in "Bereich", :with => area
-    fill_in "Projekt", :with => project
-
-    expect(page).to have_content(firstname)
+    expect(page).to have_content(username)
     expect(page).to have_content(time)
     expect(page).to have_content(task)
     expect(page).to have_content(area)
