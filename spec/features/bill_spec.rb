@@ -33,14 +33,18 @@ RSpec.describe "bill", :type => :feature do
     visit "/people/#{person.id}"
 
     within(".person-#{person.id}") do
-      click_link "Rechnung erstellen"
+      click_button "Rechnung erstellen"
     end
 
     amount = 80
     membership = "Platinmitglied"
 
     fill_in "Betrag", :with => amount
-    select membership, :from => "Mitgliedschaftsvariante"
+    select membership, :from => "Mitgliedschaft"
+
+    #click_on 'Rechnung herunterladen'
+
+    #expect( DownloadHelpers::download_content ).to include email_csv
 
   end
 

@@ -105,9 +105,6 @@
           </div>
 
           <p>
-            <%= link_to person_bill_path(person) do %>
-              <%= fa_icon "money" %> Rechnung erstellen
-            <% end %>
             <button type="button" class="btn btn-light person-<%= person.id %>-bill" data-toggle="modal" data-target=".person-<%= person.id %>-bill-modal">
               <%= fa_icon "money" %> Rechnung erstellen
             </button>
@@ -182,11 +179,13 @@
         <%= simple_form_for :bill, {url: person_bill_path(person), method: :get, remote: false} do |f| %>
           <% billmembership = person.functionality_list.include?("200er-Mitglied") ? "200er-Mitglied" : "Platinmitglied" %>
           <% amount = person.functionality_list.include?("200er-Mitglied") ? "200" : "80" %>
+          <%= f.label :amount, "Betrag" %>
           <%= f.number_field :amount, value: amount, class: "form-control" %>
+          <%#= f.input :amount, number: amount, label: "Betrag" %>
           <br>
-          <%= f.input :membership, collection: ["Platinmitglied", "200er-Mitglied"], prompt: "Mitgliedschaft", selected: billmembership %>
+          <%= f.input :membership, collection: ["Platinmitglied", "200er-Mitglied"], label: "Mitgliedschaft", selected: billmembership %>
           <br>
-          <%= f.submit "Rechnung als PDF erstellen", class: "btn btn-primary" %>
+          <%= f.submit "Rechnung herunterladen", class: "btn btn-primary" %>
         <% end %>
         </div>
         <div class="modal-footer">
