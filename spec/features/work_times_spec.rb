@@ -29,8 +29,8 @@ RSpec.describe "work_times", :type => :feature do
     date = Date.today
     time = 2.5
     task = "Memento upgedatet und aktualisiert"
-    area = WorkTime.areas.first
-    project = WorkTime.projects.first
+    area = WorkTime.areas.sample
+    project = WorkTime.projects.sample
     #voluntary
 
     select username, :from => 'User'
@@ -39,8 +39,8 @@ RSpec.describe "work_times", :type => :feature do
     select date.year, :from => "work_time_date_1i"
     fill_in "Zeit", :with => time
     fill_in "Aufgabe", :with => task
-    select area, :from => 'Bereich'
-    select project, :from => 'Projekt'
+    select area.downcase.titleize, :from => 'Bereich'
+    select project.downcase.titleize, :from => 'Projekt'
 
     within(".form-actions") do
       click_button "Arbeitszeit erstellen"
@@ -51,6 +51,7 @@ RSpec.describe "work_times", :type => :feature do
     expect(page).to have_content(task)
     expect(page).to have_content(area)
     expect(page).to have_content(project)
+    #page.save_screenshot('worktimecreated.png')
   end
 
 
