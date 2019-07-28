@@ -7,7 +7,7 @@ RSpec.describe "bill", :type => :feature do
     login_with(first_user)
   end
 
-  it "creates a bill" do
+  it "creates a bill for a platin-member" do
 
     person = Person.create(
       email: Faker::Internet.unique.email,
@@ -35,6 +35,12 @@ RSpec.describe "bill", :type => :feature do
     within(".person-#{person.id}") do
       click_link "Rechnung erstellen"
     end
+
+    amount = 80
+    membership = "Platinmitglied"
+
+    fill_in "Betrag", :with => amount
+    select membership, :from => "Mitgliedschaftsvariante"
 
   end
 
