@@ -62,6 +62,9 @@ class BlogsController < ApplicationController
   end
 
   def blog_calendar
+
+    @blogs = Blog.all
+    
     date = params[:date]
     if date.nil? || date.empty?
       @date = Date.today
