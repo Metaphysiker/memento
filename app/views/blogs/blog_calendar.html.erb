@@ -55,7 +55,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="enter-work-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="enter-blog-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -154,7 +154,7 @@
     var food = "Ich esse nichts.";
     var comment = "";
 
-    $( ".enter-work-button" ).click(function() {
+    $( ".enter-blog-button" ).click(function() {
       date = $(this).val();
       //console.log(date);
       $("#date-for-modal").text(date);
@@ -190,11 +190,11 @@
 
     });
 
-    $( ".day-tdx" ).hover(
+    $( ".day-td" ).hover(
       function() {
-        $(this).children(".enter-work").toggle();
+        $(this).children(".enter-blog").toggle();
       }, function(){
-        $(this).children(".enter-work").toggle();
+        $(this).children(".enter-blog").toggle();
       }
     );
 

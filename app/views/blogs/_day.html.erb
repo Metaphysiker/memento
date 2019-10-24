@@ -1,1 +1,13 @@
 <div class="float-right small-text"><small><%= day.strftime("%d") %></small></div>
+<br />
+
+
+<% unless day.past? %>
+<div class="enter-blog hidden">
+  <hr />
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-outline-primary btn-sm enter-blog-button m-2" value=" <%= day.to_s %>" data-toggle="modal" data-target="#enter-blog-modal">
+    Blog eintragen
+  </button>
+</div>
+<% end %>
