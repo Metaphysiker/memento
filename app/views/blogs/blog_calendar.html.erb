@@ -1,0 +1,202 @@
+<% month = @date.month %>
+<% first_day = @date.beginning_of_month.beginning_of_week %>
+<% last_day = @date.end_of_month.end_of_week %>
+<% all_month_days = first_day..last_day %>
+<% only_month_days = @date.beginning_of_month..@date.end_of_month %>
+
+<!-- Month -->
+<div class="container-fluid bg-white">
+  <div class="">
+    <div class="jumbotron bg-white">
+      <div class="text-center m-2">
+        <%= link_to blog_calendar_path(@date - 1.month) do %>
+          <div class="btn btn-primary">
+            &#8249; &#8249;
+          </div>
+        <% end %>
+        <span class="mx-3">
+          <b><%= I18n.t("date.month_names")[month] %></b>
+        </span>
+        <%= link_to blog_calendar_path(@date + 1.month) do %>
+          <div class="btn btn-primary">
+            &#8250; &#8250;
+          </div>
+        <% end %>
+      </div>
+      <table class="table table-bordered rounded">
+      <thead>
+        <tr>
+          <th class="text-center small-text">Montag</th>
+          <th class="text-center small-text">Dienstag</th>
+          <th class="text-center small-text">Mittwoch</th>
+          <th class="text-center small-text">Donnerstag</th>
+          <th class="text-center small-text">Freitag</th>
+          <th class="text-center small-text">Samstag</th>
+          <th class="text-center small-text">Sonntag</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% all_month_days.to_a.in_groups_of(7).each do |week| %>
+          <tr>
+            <% week.each do |day| %>
+            <% backgroundcolorforday = "bg-lightgray" unless day.between?(@date.beginning_of_month, @date.end_of_month) %>
+            <% backgroundcolorforday = "bg-lightcyan" if day === Date.today %>
+            <td class="day-td <%= day.strftime("%d-%m-%Y") %> <%= backgroundcolorforday %>" style="width: 14.28%">
+              <%= render "blogs/day", day: day %>
+            </td>
+            <% end %>
+          </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="enter-work-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Einsatz</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <b>Datum: </b> <span id="date-for-modal"></span>
+        </p>
+        <p>
+          Ich komme um diese Uhrzeit an:
+        </p>
+        <div class="input-group">
+        <select class="custom-select" id="arrivalHour">
+          <% (6..18).each do |t| %>
+            <% if t == 8 %>
+              <option value="<%= t %>" selected><%= t %></option>
+            <% else %>
+              <option value="<%= t %>"><%= t %></option>
+            <% end %>
+          <% end %>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button">:</button>
+        </div>
+        <select class="custom-select" id="arrivalMinutes" aria-label="Example select with button addon">
+          <% [0,15,30,45].each do |t| %>
+            <option value="<%= t %>"><%= t %></option>
+          <% end %>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button">Uhr</button>
+        </div>
+      </div>
+      <br />
+        <p>
+          Ich gehe um diese Uhrzeit:
+        </p>
+        <div class="input-group">
+        <select class="custom-select" id="departHour">
+          <% (6..18).each do |t| %>
+            <% if t == 17 %>
+              <option value="<%= t %>" selected><%= t %></option>
+            <% else %>
+              <option value="<%= t %>"><%= t %></option>
+            <% end %>
+          <% end %>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button">:</button>
+        </div>
+        <select class="custom-select" id="departMinutes" aria-label="Example select with button addon">
+          <% [0,15,30,45].each do |t| %>
+            <option value="<%= t %>"><%= t %></option>
+          <% end %>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button">Uhr</button>
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="commentTextarea">Kommentar</label>
+        <textarea class="form-control" id="comment" rows="3"></textarea>
+      </div>
+      <br />
+        <p>
+          Essen:
+        </p>
+        <div class="input-group">
+          <select class="custom-select" id="food">
+            <option value="Ich esse nichts." selected>Ich esse nichts.</option>
+            <option value="Ich bringe Essen für mich selber mit.">Ich bringe Essen für mich selber mit.</option>
+            <option value="Ich möchte gerne etwas essen.">Ich möchte gerne etwas essen.</option>
+            <option value="Ich bringe Essen für alle mit.">Ich bringe Essen für alle mit.</option>
+          </select>
+        </div>
+      <br />
+      <button type="button" class="btn btn-primary create-work-button">Arbeitszeit eintragen</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $( document ).ready(function() {
+    var date = "<%= Date.today %>";
+    var start_time = "8:00";
+    var end_time = "17:00";
+    var food = "Ich esse nichts.";
+    var comment = "";
+
+    $( ".enter-work-button" ).click(function() {
+      date = $(this).val();
+      //console.log(date);
+      $("#date-for-modal").text(date);
+    });
+
+    $( ".create-work-button" ).click(function() {
+      arrival_hour = $("#arrivalHour").val();
+      arrival_minutes = $("#arrivalMinutes").val();
+      arrival = arrival_hour + ":" + arrival_minutes;
+
+      depart_hour = $("#departHour").val();
+      depart_minutes = $("#departMinutes").val();
+      depart = depart_hour + ":" + depart_minutes;
+
+      food = $("#food").val();
+      comment = $("#comment").val();
+
+      console.log("Arrival: " + date + " " + arrival);
+      console.log("Depart: " + date + " " + depart);
+      console.log(food);
+      console.log(comment);
+
+      $.ajax({
+        url: "/works/create_for_calendar",
+        method: 'POST',
+        data: {
+          work: { date: date, shift_start: date + " " + arrival , shift_end: date + " " + depart, comment: comment, food: food}
+        },
+        headers: {
+          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+        }
+      });
+
+    });
+
+    $( ".day-tdx" ).hover(
+      function() {
+        $(this).children(".enter-work").toggle();
+      }, function(){
+        $(this).children(".enter-work").toggle();
+      }
+    );
+
+  });
+</script>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :blogs
   resources :work_times
   resources :working_hours
   resources :groups
@@ -89,4 +90,7 @@ Rails.application.routes.draw do
 
   #task
   post '/normal_create_task', to: 'tasks#normal_create', as: 'normal_create_task'
+
+  #blog
+  get 'blog_calendar/(:date)', to: 'blogs#blog_calendar', as: "blog_calendar"
 end

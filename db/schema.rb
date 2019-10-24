@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_01_091539) do
+ActiveRecord::Schema.define(version: 2019_10_24_204248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,19 @@ ActiveRecord::Schema.define(version: 2019_05_01_091539) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "blogs", force: :cascade do |t|
+    t.date "planned_date"
+    t.string "language", default: "de"
+    t.string "working_title", default: ""
+    t.string "submitted", default: "false"
+    t.string "published", default: "false"
+    t.string "author_informed", default: "false"
+    t.bigint "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_blogs_on_person_id"
   end
 
   create_table "group_people", force: :cascade do |t|
