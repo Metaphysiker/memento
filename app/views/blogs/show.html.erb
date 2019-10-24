@@ -15,6 +15,13 @@
   <%= @blog.working_title %>
 </p>
 
+<% unless @blog.person.blank? %>
+<p>
+  <strong>Autor:</strong>
+  <%= @blog.person.name %>
+</p>
+<% end %>
+
 <p>
   <strong>Submitted:</strong>
   <%= @blog.submitted %>
