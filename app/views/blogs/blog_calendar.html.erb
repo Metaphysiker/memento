@@ -75,11 +75,16 @@
 
 <script>
   $( document ).ready(function() {
-    $( ".enter-blog-button" ).click(function() {
+    var date = "<%= Date.today %>";
 
+    $( ".enter-blog-button" ).click(function() {
+      date = $(this).val();
       $.ajax({
         url: "/blogs/new_for_calendar.js",
-        method: 'GET'
+        method: 'GET',
+        data: {
+          blog: { planned_date: date}
+        }
       }).done(function(response) {
       $("#blog-modal-body").empty().append(response);
     })

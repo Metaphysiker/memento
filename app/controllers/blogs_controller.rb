@@ -18,7 +18,7 @@ class BlogsController < ApplicationController
   end
 
   def new_for_calendar
-    @blog = Blog.new
+    @blog = Blog.new(blog_params)
   end
 
   # GET /blogs/1/edit
