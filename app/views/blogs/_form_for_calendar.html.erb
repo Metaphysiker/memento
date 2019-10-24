@@ -5,11 +5,11 @@
 
   <div class="form-inputs">
     <%= f.input :planned_date %>
-    <%= f.input :language %>
+    <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]} %>
     <%= f.input :working_title %>
-    <%= f.input :submitted %>
-    <%= f.input :published %>
-    <%= f.input :author_informed %>
+    <%= f.input :submitted, collection: [[t("true"), "true"],[t("false"), "false"]] %>
+    <%= f.input :published, collection: [[t("true"), "true"],[t("false"), "false"]] %>
+    <%= f.input :author_informed, collection: [[t("true"), "true"],[t("false"), "false"]] %>
   </div>
 
   <div class="form-actions">

@@ -28,6 +28,9 @@ de:
       group:
         one: "Gruppe"
         other: "Gruppen"
+      blog:
+        one: "Blog"
+        other: "Blogs"
     attributes:
       work_time:
         date: "Datum"
@@ -86,3 +89,10 @@ de:
       group:
         name: "Name"
         description: "Beschreibung"
+      blog:
+        planned_date: "Geplantes Veröffentlichungs-Datum"
+        language: "Sprache"
+        working_title: "Arbeitstitel"
+        submitted: "Wurde Artikel eingereicht?"
+        published: "Wurde Artikel veröffentlicht?"
+        author_informed: "Wurde Author informiert?"
