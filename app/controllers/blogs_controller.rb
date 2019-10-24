@@ -17,6 +17,10 @@ class BlogsController < ApplicationController
     @blog = Blog.new
   end
 
+  def new_for_calendar
+    @blog = Blog.new
+  end
+
   # GET /blogs/1/edit
   def edit
   end
@@ -33,6 +37,18 @@ class BlogsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @blog.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def create_for_calendar
+    @blog = Blog.new(blog_params)
+
+    respond_to do |format|
+      if @blog.save
+        format.html { redirect_to blog_calendar_path(@blog.planned_date), notice: 'Blog wurde eingetragen!' }
+      else
+        format.html { redirect_to blog_calendar_path, notice: 'Fehler!' }
       end
     end
   end
@@ -64,7 +80,7 @@ class BlogsController < ApplicationController
   def blog_calendar
 
     @blogs = Blog.all
-    
+
     date = params[:date]
     if date.nil? || date.empty?
       @date = Date.today

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'blogs/new_for_calendar', to: 'blogs#new_for_calendar', as: "new_for_calendar"
+
   resources :blogs
   resources :work_times
   resources :working_hours
@@ -93,4 +95,5 @@ Rails.application.routes.draw do
 
   #blog
   get 'blog_calendar/(:date)', to: 'blogs#blog_calendar', as: "blog_calendar"
+  post 'create_for_calendar', to: 'blogs#create_for_calendar', as: "create_for_calendar"
 end

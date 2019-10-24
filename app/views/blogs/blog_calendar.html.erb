@@ -78,7 +78,7 @@
     $( ".enter-blog-button" ).click(function() {
 
       $.ajax({
-        url: "/blogs/new.js",
+        url: "/blogs/new_for_calendar.js",
         method: 'GET'
       }).done(function(response) {
       $("#blog-modal-body").empty().append(response);
