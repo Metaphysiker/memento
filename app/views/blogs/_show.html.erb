@@ -49,19 +49,23 @@
           <h3 class="card-title"><%= link_to blog.working_title, blog_path(blog), class: "black_link" %></h3>
           <p class="card-text"><%= blog.description %></p>
           <hr />
-          <p class="card-text"><strong>Autor: </strong><%= blog.person.name %></p>
+          <% unless blog.person.blank? %>
+            <p class="card-text"><strong>Autor: </strong><%= blog.person.name %></p>
+          <% end %>
           <p class="card-text"><strong><%= Blog.human_attribute_name("planned_date") %>: </strong><%= blog.planned_date %></p>
           <p class="card-text"><strong><%= Blog.human_attribute_name("language") %>: </strong><%= t(blog.language) %></p>
           <p class="card-text"><strong><%= Blog.human_attribute_name("submitted") %> </strong><%= t(blog.submitted) %></p>
           <p class="card-text"><strong><%= Blog.human_attribute_name("published") %> </strong><%= t(blog.published) %></p>
           <p class="card-text"><strong><%= Blog.human_attribute_name("author_informed") %></strong> <%= t(blog.author_informed) %></p>
+
+          <%= link_to "Zur Kalenderansicht", blog_calendar_path(blog.planned_date) %>
+          <br />
+          <%= link_to "Zur Listen-Ansicht", blog_list_path(blog.planned_date) %>
           <hr />
             <%= render "shared/created_and_updated", parent: blog %>
         </div>
       </div>
   </div>
-
-
 
   <!-- Modal -->
   <div class="modal fade blog-<%= blog.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit blog" aria-hidden="true">

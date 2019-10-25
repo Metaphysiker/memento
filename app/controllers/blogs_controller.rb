@@ -95,6 +95,19 @@ class BlogsController < ApplicationController
     end
   end
 
+  def blog_list
+
+    date = params[:date]
+    if date.nil? || date.empty?
+      @date = Date.today
+    else
+      @date = Date.parse(date)
+    end
+
+    only_month_days = @date.beginning_of_month..@date.end_of_month
+    @blogs = Blog.where(planned_date: only_month_days).order(:planned_date)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_blog

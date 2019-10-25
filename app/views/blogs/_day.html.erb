@@ -1,12 +1,19 @@
-<div class="float-right small-text"><small><%= day.strftime("%d") %></small></div>
-<br />
 <% blogs = blogs.where(planned_date: day)%>
-
 <% blogs.each do |blog| %>
   <%= link_to blog_path(blog) do %>
+    <% border_color = "border-danger" %>
+    <% border_color = "border-primary" if blog.submitted == "true" %>
+    <% border_color = "border-success" if (blog.published == "true") && (blog.submitted == "true") && (blog.author_informed == "true") %>
+
     <div class="m-2">
-      <div class="border border-primary rounded p-1">
-        <%= blog.working_title %>
+      <div class="border <%= border_color %> rounded p-1 small-text">
+        <small>
+          <% unless blog.person.blank? %>
+            <b><%= blog.person.name %></b>
+            <br />
+          <% end %>
+          <%= blog.working_title %>
+        </small>
       </div>
     </div>
   <% end %>
