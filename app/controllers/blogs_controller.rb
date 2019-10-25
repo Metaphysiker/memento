@@ -4,7 +4,13 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
+    else
+      @search_inputs = OpenStruct.new(model: "Blog")
+    end
+    @records = Search.new(@search_inputs).search
+    @records = @records.page(params[:page]).per(20)
   end
 
   # GET /blogs/1
@@ -97,6 +103,6 @@ class BlogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
-      params.require(:blog).permit(:planned_date, :language, :working_title, :submitted, :published, :author_informed, :person_id)
+      params.require(:blog).permit(:planned_date, :language, :working_title, :description, :submitted, :published, :author_informed, :person_id)
     end
 end

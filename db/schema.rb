@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2019_10_24_204248) do
     t.date "planned_date"
     t.string "language", default: "de"
     t.string "working_title", default: ""
+    t.text "description", default: ""
     t.string "submitted", default: "false"
     t.string "published", default: "false"
     t.string "author_informed", default: "false"

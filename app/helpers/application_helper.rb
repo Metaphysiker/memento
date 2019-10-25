@@ -35,7 +35,7 @@ module ApplicationHelper
   end
 
   def class_for(name_of_model)
-    allowed_models = ["Person", "Institution", "Note", "Task", "Project", "Group"]
+    allowed_models = ["Person", "Institution", "Note", "Task", "Project", "Group", "Blog"]
     if allowed_models.include?(name_of_model)
       klass = allowed_models[allowed_models.index(name_of_model)]
       return klass.singularize.classify.constantize

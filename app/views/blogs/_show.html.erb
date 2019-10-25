@@ -1,0 +1,118 @@
+<% blog = blog || record %>
+
+<div class="blog-<%= blog.id %>">
+
+  <div class="collapse multi-collapse blog-list-view">
+      <div class="list">
+        <div class="row mt-3">
+          <div class="col-4">
+            <%= link_to blog.working_title, blog_path(blog), class: "black_link" %>
+          </div>
+          <div class="col-4">
+            <%= link_to truncate(blog.description), blog_path(blog), class: "black_link" %>
+          </div>
+          <div class="col-2">
+            <%= link_to blog.planned_date, blog_path(blog), class: "black_link" %>
+          </div>
+          <div class="col-2">
+            <div class="btn-group float-right" role="group" aria-label="Toolbar for blog">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-light blog-<%= blog.id %>-edit" data-toggle="modal" data-target=".blog-<%= blog.id %>-edit-modal">
+                <%= fa_icon "edit" %>
+              </button>
+              <%= link_to blog, method: :delete, data: { confirm: 'Bist du sicher?' }, remote: true do %>
+                <button type="button" class="btn btn-light blog-<%= blog.id %>-delete"><%= fa_icon "times" %></button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+  </div>
+
+  <div class="collapse multi-collapse blog-profile-view">
+      <div class="card my-3">
+        <div class="card-body">
+          <div class="float-right mb-3">
+
+            <div class="btn-group" role="group" aria-label="Toolbar for blog">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-light blog-<%= blog.id %>-edit" data-toggle="modal" data-target=".blog-<%= blog.id %>-edit-modal">
+                <%= fa_icon "edit" %>
+              </button>
+              <%= link_to blog, method: :delete, data: { confirm: 'Bist du sicher?' }, remote: true do %>
+                <button type="button" class="btn btn-light blog-<%= blog.id %>-delete"><%= fa_icon "times" %></button>
+              <% end %>
+            </div>
+          </div>
+
+          <h3 class="card-title"><%= link_to blog.working_title, blog_path(blog), class: "black_link" %></h3>
+          <p class="card-text"><%= blog.description %></p>
+          <hr />
+          <p class="card-text"><strong>Autor: </strong><%= blog.person.name %></p>
+          <p class="card-text"><strong><%= Blog.human_attribute_name("planned_date") %>: </strong><%= blog.planned_date %></p>
+          <p class="card-text"><strong><%= Blog.human_attribute_name("language") %>: </strong><%= t(blog.language) %></p>
+          <p class="card-text"><strong><%= Blog.human_attribute_name("submitted") %> </strong><%= t(blog.submitted) %></p>
+          <p class="card-text"><strong><%= Blog.human_attribute_name("published") %> </strong><%= t(blog.published) %></p>
+          <p class="card-text"><strong><%= Blog.human_attribute_name("author_informed") %></strong> <%= t(blog.author_informed) %></p>
+          <hr />
+            <%= render "shared/created_and_updated", parent: blog %>
+        </div>
+      </div>
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade blog-<%= blog.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit blog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t("helpers.submit.update", model: blog.model_name.human) %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="blog-<%= blog.id %>-edit-placeholder">
+          </div>
+          <%#= render "blogs/form", blog: blog %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var isExpanded = $("#blog-index-view-option").attr("aria-expanded");
+
+    if( isExpanded ) {
+        if(isExpanded == "true"){
+          $(".blog-profile-view").addClass("show");
+        } else {
+          $(".blog-list-view").addClass("show");
+        }
+    } else {
+      $(".blog-profile-view").addClass("show");
+    }
+
+    $( document ).ready(function() {
+
+    $( ".blog-<%= blog.id %>-edit" ).click(function() {
+        $.ajax({
+          url: "/blogs/<%= blog.id %>/edit.js",
+          method: 'GET'
+        }).done(function(response) {
+        $(".blog-<%= blog.id %>-edit-placeholder").replaceWith(response);
+      })
+    });
+
+    //  $( ".shared-blog-<%=blog.id%>-get-button" ).click();
+    });
+
+
+  </script>
+</div>

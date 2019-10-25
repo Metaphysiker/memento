@@ -47,6 +47,9 @@ class Search
     elsif klass == Group
       @records = GroupsSearch.new(search_term: @search_term).search
       @records = @records.order(:name)
+    elsif klass == Blog
+      @records = BlogsSearch.new(search_term: @search_term).search
+      @records = @records.order(:planned_date)
     end
     #@records.page(@page).per(20)
   end

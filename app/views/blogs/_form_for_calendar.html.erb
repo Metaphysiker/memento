@@ -7,6 +7,7 @@
     <%= f.input :planned_date %>
     <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]} %>
     <%= f.input :working_title %>
+    <%= f.input :description %>
     <%= f.input :person_id, as: :select, collection: Person.all, label: "Autor", label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Person auswählen"}, multiple: false} %>
     <%= f.input :submitted, collection: [[t("true"), "true"],[t("false"), "false"]] %>
     <%= f.input :published, collection: [[t("true"), "true"],[t("false"), "false"]] %>

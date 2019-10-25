@@ -1,16 +1,17 @@
 
-<%= simple_form_for(@blog) do |f| %>
+<%= simple_form_for(blog) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
     <%= f.input :planned_date %>
-    <%= f.input :language %>
+    <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]} %>
     <%= f.input :working_title %>
+    <%= f.input :description %>
     <%= f.input :person_id, as: :select, collection: Person.all, label: "Autor", label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Person auswählen"}, multiple: false} %>
-    <%= f.input :submitted %>
-    <%= f.input :published %>
-    <%= f.input :author_informed %>
+    <%= f.input :submitted, collection: [[t("true"), "true"],[t("false"), "false"]] %>
+    <%= f.input :published, collection: [[t("true"), "true"],[t("false"), "false"]] %>
+    <%= f.input :author_informed, collection: [[t("true"), "true"],[t("false"), "false"]] %>
   </div>
 
   <div class="form-actions">
