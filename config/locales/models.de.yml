@@ -92,7 +92,8 @@ de:
       blog:
         planned_date: "Geplantes Veröffentlichungs-Datum"
         language: "Sprache"
+        description: "Beschreibung"
         working_title: "Arbeitstitel"
-        submitted: "Wurde Artikel eingereicht?"
-        published: "Wurde Artikel veröffentlicht?"
-        author_informed: "Wurde Author informiert?"
+        submitted: "Wurde der Artikel eingereicht?"
+        published: "Wurde der Artikel veröffentlicht?"
+        author_informed: "Wurde der Autor informiert?"
