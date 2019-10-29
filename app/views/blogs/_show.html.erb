@@ -50,8 +50,12 @@
           <p class="card-text"><%= blog.description %></p>
           <hr />
           <% unless blog.person.blank? %>
-            <p class="card-text"><strong>Autor: </strong><%= blog.person.name %></p>
+            <p class="card-text"><strong>Autor: </strong><%= link_to blog.person.name, person_path(blog.person) %></p>
           <% end %>
+          <% unless blog.assigned_to_user_id.blank? %>
+            <p class="card-text"><strong><%= Blog.human_attribute_name("assigned_to_user_id") %>: </strong> <%= User.find(blog.assigned_to_user_id).username %></p>
+          <% end %>
+          <p class="card-text"><strong><%= Blog.human_attribute_name("submission_deadline") %>: </strong><%= blog.submission_deadline %></p>
           <p class="card-text"><strong><%= Blog.human_attribute_name("planned_date") %>: </strong><%= blog.planned_date %></p>
           <p class="card-text"><strong><%= Blog.human_attribute_name("language") %>: </strong><%= t(blog.language) %></p>
           <p class="card-text"><strong><%= Blog.human_attribute_name("submitted") %> </strong><%= t(blog.submitted) %></p>
