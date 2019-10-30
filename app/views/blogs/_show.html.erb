@@ -49,6 +49,16 @@
           <h3 class="card-title"><%= link_to blog.working_title, blog_path(blog), class: "black_link" %></h3>
           <p class="card-text"><%= blog.description %></p>
           <hr />
+          <div class="blog-<%=blog.id%>-topics">
+            <% unless blog.topics.empty? %>
+            <p class="card-text"><strong>Thementags: </strong></p>
+              <p class="mt-2">
+                <% blog.topics.each do |topic| %>
+                  <%= link_to topic.name, overview_path(params: {search_inputs: {model: "Person", topics: [topic]}}), class: "tag_button" %>
+                <% end %>
+              </p>
+          <% end %>
+          </div>
           <% unless blog.person.blank? %>
             <p class="card-text"><strong>Autor: </strong><%= link_to blog.person.name, person_path(blog.person) %></p>
           <% end %>

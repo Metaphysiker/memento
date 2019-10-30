@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_124311) do
+ActiveRecord::Schema.define(version: 2019_10_30_135056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -234,6 +234,15 @@ ActiveRecord::Schema.define(version: 2019_10_30_124311) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["taskable_type", "taskable_id"], name: "index_tasks_on_taskable_type_and_taskable_id"
+  end
+
+  create_table "topic_blogs", force: :cascade do |t|
+    t.bigint "topic_id"
+    t.bigint "blog_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_id"], name: "index_topic_blogs_on_blog_id"
+    t.index ["topic_id"], name: "index_topic_blogs_on_topic_id"
   end
 
   create_table "topic_relations", force: :cascade do |t|

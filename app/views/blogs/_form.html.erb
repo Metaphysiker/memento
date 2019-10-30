@@ -9,6 +9,7 @@
     <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]} %>
     <%= f.input :working_title %>
     <%= f.input :description %>
+    <%= f.association :topics, as: :select, collection: Topic.all, label_method: :name, value_method: :id, :data => {:placeholder => 'Thementag'}, input_html: {class: 'chosen-select', :data => {:placeholder => "Thementag auswählen"}, multiple: true} %>
     <%= f.input :assigned_to_user_id, collection: User.all, label_method: :username, value_method: :id, include_blank: true %>
     <%= f.input :person_id, as: :select, collection: Person.all, label: "Autor", label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Person auswählen"}, multiple: false} %>
     <%= f.input :submitted, collection: [[t("true"), "true"],[t("false"), "false"]] %>
