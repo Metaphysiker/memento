@@ -104,6 +104,17 @@
             <% end %>
           </div>
 
+          <div class="person-<%=person.id%>-topics">
+            <% unless person.topics.empty? %>
+            <p class="card-text"><strong>Zielgruppe: </strong></p>
+              <p class="mt-2">
+                <% person.topics.each do |topic| %>
+                  <%= link_to topic.name, overview_path(params: {search_inputs: {model: "Person", topic: [topic.name]}}), class: "tag_button" %>
+                <% end %>
+              </p>
+          <% end %>
+          </div>
+
           <p>
             <button type="button" class="btn btn-light person-<%= person.id %>-bill" data-toggle="modal" data-target=".person-<%= person.id %>-bill-modal">
               <%= fa_icon "money" %> Rechnung erstellen

@@ -89,4 +89,15 @@ institutions_target_groups_tags.each do |tag|
   )
 end
 
+topics = ["Angewandte Ethik", "Politische Philosophie", "Sozialphilosophie", "Theoretische Ethik", "Kulturphilosophie", "Religionsphilosophie",
+          "Rechtsphilosophie", "Metaphysik", "Erkenntnistheorie", "Feministische Philosophie", "Geschichtsphilosophie", "Logik", "Ideengeschichte", "Philosophie der Sozial- und Geisteswissenschaften", "Wissenschaftsphilosophie",
+          "Philosophie des Geistes", "Sprachphilosophie", "Hermeneutik", "Phänomenologie", "Existentialismus", "Philosophische Anthropologie",
+          "Ästhetik",
+          "Philosophie der Antike", "Philosophie des Mittelalters", "Philosophie der Moderne", "Kant", "Transzedentalphilosophie", "Wittgenstein"
+        ]
+
+topics.each do |topic|
+  Topic.create(name: topic)
+end
+
 #rails db:drop && rails db:create && rails db:migrate && rails db:seed && rake sync:totalsync

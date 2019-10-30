@@ -17,6 +17,9 @@ class Person < ApplicationRecord
   has_many :project_people
   has_many :projects, :through => :project_people
 
+  has_many :topic_relations
+  has_many :topics, :through => :topic_relations
+
   has_many :group_people
   has_many :groups, :through => :group_people
 
