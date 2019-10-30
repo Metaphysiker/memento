@@ -106,10 +106,10 @@
 
           <div class="person-<%=person.id%>-topics">
             <% unless person.topics.empty? %>
-            <p class="card-text"><strong>Zielgruppe: </strong></p>
+            <p class="card-text"><strong>Thementags: </strong></p>
               <p class="mt-2">
                 <% person.topics.each do |topic| %>
-                  <%= link_to topic.name, overview_path(params: {search_inputs: {model: "Person", topic: [topic.name]}}), class: "tag_button" %>
+                  <%= link_to topic.name, overview_path(params: {search_inputs: {model: "Person", topics: [topic]}}), class: "tag_button" %>
                 <% end %>
               </p>
           <% end %>
