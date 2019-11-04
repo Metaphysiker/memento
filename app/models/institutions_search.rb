@@ -1,10 +1,11 @@
 class InstitutionsSearch
-  def initialize(search_term: nil, tags: nil, functionalities: nil, target_groups: nil, institutions: nil)
+  def initialize(search_term: nil, tags: nil, functionalities: nil, target_groups: nil, institutions: nil, language: nil)
     @search_term = search_term
     @tags = tags
     @institutions = institutions
     @target_groups = target_groups
     @functionalities = functionalities
+    @language = language
   end
 
   def search
@@ -44,6 +45,10 @@ class InstitutionsSearch
     unless tags.empty?
       query = query.tagged_with(tags, :on => :target_groups)
     end
+  end
+
+  unless @language.nil? || @language.blank?
+    query = query.where(language: @language)
   end
 
     query.distinct

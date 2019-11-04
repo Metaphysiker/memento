@@ -1,7 +1,7 @@
 class Search
   include ApplicationHelper
 
-  def initializex(search_term: nil, model: "Person", tag_list: nil, institutions: nil, assigned_to_user_id: nil, page: 0)
+  def initializex(search_term: nil, model: "Person", tag_list: nil, institutions: nil, assigned_to_user_id: nil, page: 0, language: nil)
     @search_term = search_term
     @tags = tag_list
     @institutions = institutions
@@ -22,6 +22,7 @@ class Search
     @groups = search_inputs[:groups] || nil
     @model = search_inputs[:model] || "Person"
     @assigned_to_user_id = search_inputs[:assigned_to_user_id] || nil
+    @language = search_inputs[:language] || nil
     @page = search_inputs[:page] || 0
     @records = []
   end
@@ -31,10 +32,10 @@ class Search
     #klass = @model
 
     if klass == Person
-      @records = PeopleSearch.new(selection: @selection, groups: @groups, search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions, topics: @topics).search
+      @records = PeopleSearch.new(selection: @selection, groups: @groups, search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions, topics: @topics, language: @language).search
       @records = @records.order(:name)
     elsif klass == Institution
-      @records = InstitutionsSearch.new(search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions).search
+      @records = InstitutionsSearch.new(search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions, language: @language).search
       @records = @records.order(:name)
     elsif klass == Note
       @records = NotesSearch.new(search_term: @search_term, tags: @tags, institutions: @institutions).search

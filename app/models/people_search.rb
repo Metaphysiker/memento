@@ -1,5 +1,5 @@
 class PeopleSearch
-  def initialize(groups: nil, selection: nil, search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil, topics: nil)
+  def initialize(groups: nil, selection: nil, search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil, topics: nil, language: nil)
     @groups = groups
     @selection = selection
     @search_term = search_term
@@ -8,6 +8,7 @@ class PeopleSearch
     @target_groups = target_groups
     @functionalities = functionalities
     @topics = topics
+    @language = language
   end
 
   def search
@@ -91,6 +92,10 @@ class PeopleSearch
     unless tags.empty?
       query = query.tagged_with(tags, :on => :target_groups)
     end
+  end
+
+  unless @language.nil? || @language.blank?
+    query = query.where(language: @language)
   end
 
     query.distinct
