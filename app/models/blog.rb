@@ -8,6 +8,9 @@ class Blog < ApplicationRecord
   has_many :topic_blogs
   has_many :topics, :through => :topic_blogs
 
+  has_many :language_blogs
+  has_many :languages, :through => :language_blogs
+
   scope :search_records_ilike, ->(search_term) { where("working_title ILIKE ? OR description ILIKE ?", search_term, search_term) }
 
   def add_topics_to_author

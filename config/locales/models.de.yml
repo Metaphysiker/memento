@@ -31,6 +31,12 @@ de:
       blog:
         one: "Blog"
         other: "Blogs"
+      language:
+        one: "Sprache"
+        other: "Sprachen"
+      topic:
+        one: "Thementag"
+        other: "Thementags"
     attributes:
       work_time:
         date: "Datum"
@@ -99,3 +105,5 @@ de:
         author_informed: "Wurde der Autor informiert?"
         submission_deadline: "Abgemachtes Einreichungs-Datum"
         assigned_to_user_id: "Zuständig"
+      language:
+        language: "Sprachen"
