@@ -6,12 +6,9 @@
   <div class="form-inputs">
     <%= f.input :submission_deadline %>
     <%= f.input :planned_date %>
-    <%#= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]} %>
     <%= f.input :working_title %>
     <%= f.input :description %>
     <%= f.association :topics, as: :select, collection: Topic.all, label_method: :name, value_method: :id, :data => {:placeholder => 'Thementag'}, input_html: {class: 'chosen-select', :data => {:placeholder => "Thementag auswählen"}, multiple: true} %>
-    <%#= f.association :topics, as: :select, collection: Topic.all.map {|n| [n]}, :data => {:placeholder => 'Thementag'}, input_html: {class: 'chosen-select', :data => {:placeholder => "Thementag auswählen"}, multiple: true} %>
-    <%#= f.association :languages, as: :select, collection: Language.all, label_method: :language, value_method: :id, :data => {:placeholder => 'Sprache'}, input_html: {class: 'chosen-select', :data => {:placeholder => "Sprachen auswählen"}, multiple: true} %>
     <%= f.association :languages, as: :select, collection: Language.all.map{|n| [t(n.language), n.id]}, :data => {:placeholder => 'Sprache'}, input_html: {class: 'chosen-select', :data => {:placeholder => "Sprachen auswählen"}, multiple: true} %>
     <%= f.input :assigned_to_user_id, collection: User.all, label_method: :username, value_method: :id, include_blank: true %>
     <%= f.input :person_id, as: :select, collection: Person.all, label: "Autor", label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Person auswählen"}, multiple: false} %>

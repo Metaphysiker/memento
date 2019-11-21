@@ -146,12 +146,12 @@ ActiveRecord::Schema.define(version: 2019_11_20_231455) do
   end
 
   create_table "language_blogs", force: :cascade do |t|
-    t.bigint "topic_id"
+    t.bigint "blog_id"
     t.bigint "language_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["blog_id"], name: "index_language_blogs_on_blog_id"
     t.index ["language_id"], name: "index_language_blogs_on_language_id"
-    t.index ["topic_id"], name: "index_language_blogs_on_topic_id"
   end
 
   create_table "languages", force: :cascade do |t|

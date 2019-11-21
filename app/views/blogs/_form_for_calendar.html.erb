@@ -6,7 +6,6 @@
   <div class="form-inputs">
     <%= f.input :submission_deadline %>
     <%= f.input :planned_date %>
-    <%#= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]} %>
     <%= f.input :working_title %>
     <%= f.input :description %>
     <%= f.association :topics, as: :select, collection: Topic.all, label_method: :name, value_method: :id, :data => {:placeholder => 'Thementag'}, input_html: {class: 'chosen-select', :data => {:placeholder => "Thementag auswählen"}, multiple: true} %>
