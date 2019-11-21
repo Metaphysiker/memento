@@ -87,6 +87,11 @@ class BlogsController < ApplicationController
 
     @blogs = Blog.all
 
+    @language = params[:language]
+    unless @language.nil? || @language.empty?
+      @blogs = @blogs.joins(:languages).where(:languages => {:language => @language})
+    end
+
     date = params[:date]
     if date.nil? || date.empty?
       @date = Date.today
