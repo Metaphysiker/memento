@@ -100,7 +100,7 @@ de:
         language: "Sprache"
         description: "Beschreibung"
         working_title: "Arbeitstitel"
-        submitted: "Wurde der bisher Artikel eingereicht?"
+        submitted: "Wurde der Artikel bisher eingereicht?"
         published: "Wurde der Artikel veröffentlicht?"
         author_informed: "Wurde der Autor informiert?"
         submission_deadline: "Abgemachtes Einreichungs-Datum"
