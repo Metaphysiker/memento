@@ -11,10 +11,29 @@
       <div class="text-center m-2">
         <%= link_to "Neuer Eintrag", new_blog_path %>
         <br />
-        <%= link_to "Zur Listen-Ansicht", blog_list_path(@date) %>
+        <%= link_to "Zur Listen-Ansicht", blog_list_path(@date, @language) %>
+        <br />
+        <br />
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <% if @language.blank? %>
+              Alle Sprachen
+            <% else %>
+              <%= t(@language) %>
+            <% end %>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownLanguagen">
+            <%= link_to "Alles", blog_calendar_path(@date, ""), class: "dropdown-item" %>
+            <%= link_to t("de"), blog_calendar_path(@date, "de"), class: "dropdown-item" %>
+            <%= link_to t("fr"), blog_calendar_path(@date, "fr"), class: "dropdown-item" %>
+            <%= link_to t("it"), blog_calendar_path(@date, "it"), class: "dropdown-item" %>
+            <%= link_to t("en"), blog_calendar_path(@date, "en"), class: "dropdown-item" %>
+          </div>
+        </div>
+        <br />
       </div>
       <div class="text-center m-2">
-        <%= link_to blog_calendar_path(@date - 1.month) do %>
+        <%= link_to blog_calendar_path(@date - 1.month, @language) do %>
           <div class="btn btn-primary">
             &#8249; &#8249;
           </div>
@@ -22,7 +41,7 @@
         <span class="mx-3">
           <b><%= I18n.t("date.month_names")[month] %> <%= @date.year %></b>
         </span>
-        <%= link_to blog_calendar_path(@date + 1.month) do %>
+        <%= link_to blog_calendar_path(@date + 1.month, @language) do %>
           <div class="btn btn-primary">
             &#8250; &#8250;
           </div>

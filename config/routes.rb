@@ -96,7 +96,7 @@ Rails.application.routes.draw do
   post '/normal_create_task', to: 'tasks#normal_create', as: 'normal_create_task'
 
   #blog
-  get 'blog_calendar/(:date)', to: 'blogs#blog_calendar', as: "blog_calendar"
-  get 'blog_list/(:date)', to: 'blogs#blog_list', as: "blog_list"
+  get 'blog_calendar/(:date)/(:language)', to: 'blogs#blog_calendar', as: "blog_calendar"
+  get 'blog_list/(:date)/(:language)', to: 'blogs#blog_list', as: "blog_list"
   post 'create_for_calendar', to: 'blogs#create_for_calendar', as: "create_for_calendar"
 end
