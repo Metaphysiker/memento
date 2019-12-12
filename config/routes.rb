@@ -64,6 +64,8 @@ Rails.application.routes.draw do
   get '/basic_odf', to: 'basic#odf', as: 'basic_odf'
   get '/person_bill/:id', to: 'people#odf', as: 'person_bill'
 
+  get '/institutions_serienbrief/', to: 'institutions#serienbrief', as: 'institutions_serienbrief'
+
   #affiliations
   patch '/update_person_affiliation/:id', to: 'affiliations#update_person_affiliation', as: 'update_person_affiliation'
   patch '/update_institution_affiliation/:id', to: 'affiliations#update_institution_affiliation', as: 'update_institution_affiliation'

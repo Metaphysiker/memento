@@ -140,6 +140,37 @@ class InstitutionsController < ApplicationController
     end
   end
 
+  def serienbrief
+
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
+    else
+      @search_inputs = OpenStruct.new(model: "Institution")
+    end
+    @records = Search.new(@search_inputs).search
+
+    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/einladung_mai2020_ext.odt") do |r|
+
+      r.add_field :name, @records.first.name
+
+      #r.add_image :graphics1, "#{Rails.root}/app/views/odfs/logo1.jpg"
+    #  r.add_field :name, "#{record.institution.firstname_of_official} #{@ins}"
+    #  r.add_field :street, @person.address.street.to_s
+    #  r.add_field :location, "#{@person.address.plz} #{@person.address.location}"
+    #  r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+    #  r.add_field :amount, amount
+    #  r.add_field :membership, membership
+      #r.add_field :advantages, advantages
+      #r.add_section :advantages, advantages
+
+    end
+
+    send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
+                            disposition: 'attachment',
+                            filename: 'serienbrief.odt'
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_institution
