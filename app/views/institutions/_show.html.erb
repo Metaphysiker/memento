@@ -61,6 +61,9 @@
 
           <% unless institution.firstname_of_official.blank? && institution.lastname_of_official.blank?  %>
             <p class="card-text"><strong>Ansprechperson: </strong><%= institution.anrede_of_official %> <%= institution.firstname_of_official %> <%= institution.lastname_of_official %></p>
+            <p>
+              <%= link_to "Serienbrief erstellen", institution_serienbrief_path(institution) %>
+            </p>
           <% end %>
 
           <div class="institution-<%=institution.id%>-people">

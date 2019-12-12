@@ -1,5 +1,5 @@
 class InstitutionsController < ApplicationController
-  before_action :set_institution, only: [:show, :edit, :update, :destroy]
+  before_action :set_institution, only: [:show, :edit, :update, :destroy, :serienbrief]
 
   # GET /institutions
   # GET /institutions.json
@@ -142,16 +142,14 @@ class InstitutionsController < ApplicationController
 
   def serienbrief
 
-    if params[:search_inputs].present?
-      @search_inputs = OpenStruct.new(params[:search_inputs])
-    else
-      @search_inputs = OpenStruct.new(model: "Institution")
-    end
-    @records = Search.new(@search_inputs).search
-
     report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/einladung_mai2020_ext.odt") do |r|
 
-      r.add_field :name, @records.first.name
+      r.add_field :name, @institution.name.to_s
+      r.add_field :firstnamae, @institution.firstname_of_official.to_s
+      r.add_field :lastname, @institution.lastname_of_official.to_s
+      r.add_field :street, @institution.address.street.to_s
+      r.add_field :location, "#{@institution.address.plz} #{@institution.address.location}"
+      r.add_field :anrede, @institution.anrede_of_official.to_s
 
       #r.add_image :graphics1, "#{Rails.root}/app/views/odfs/logo1.jpg"
     #  r.add_field :name, "#{record.institution.firstname_of_official} #{@ins}"
