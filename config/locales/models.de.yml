@@ -75,6 +75,9 @@ de:
         website: "Webseite"
         phone: "Telefon"
         language: "Sprache"
+        firstname_of_official: "Vorname der Ansprechperson"
+        lastname_of_official: "Nachname der Ansprechperson"
+        anrede_of_official: "Ansprache: Sehr geehrter Herr oder Sehr geehrte Frau"
       note:
         description: "Beschreibung"
       task:

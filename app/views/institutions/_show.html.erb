@@ -59,6 +59,10 @@
             <p class="card-text"><strong>Sprache: </strong><%= t(institution.language) %></p>
           <% end %>
 
+          <% unless institution.firstname_of_official.blank? && institution.lastname_of_official.blank?  %>
+            <p class="card-text"><strong>Ansprechperson: </strong><%= institution.anrede_of_official %> <%= institution.firstname_of_official %> <%= institution.lastname_of_official %></p>
+          <% end %>
+
           <div class="institution-<%=institution.id%>-people">
             <% unless institution.affiliations.empty? %>
             <p> <b>Mitglieder: </b>

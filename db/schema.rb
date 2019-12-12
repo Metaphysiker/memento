@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_20_231455) do
+ActiveRecord::Schema.define(version: 2019_12_12_074240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,9 @@ ActiveRecord::Schema.define(version: 2019_11_20_231455) do
     t.datetime "updated_at", null: false
     t.string "website", default: ""
     t.string "phone"
+    t.string "firstname_of_official", default: ""
+    t.string "lastname_of_official", default: ""
+    t.string "anrede_of_official", default: ""
   end
 
   create_table "language_blogs", force: :cascade do |t|
