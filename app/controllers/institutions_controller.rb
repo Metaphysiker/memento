@@ -142,25 +142,10 @@ class InstitutionsController < ApplicationController
 
   def serienbrief
 
+    address = "Logik und Epicness"
+
     report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/einladung_mai2020_ext.odt") do |r|
-
-      r.add_field :name, @institution.name.to_s
-      r.add_field :firstnamae, @institution.firstname_of_official.to_s
-      r.add_field :lastname, @institution.lastname_of_official.to_s
-      r.add_field :street, @institution.address.street.to_s
-      r.add_field :location, "#{@institution.address.plz} #{@institution.address.location}"
-      r.add_field :anrede, @institution.anrede_of_official.to_s
-
-      #r.add_image :graphics1, "#{Rails.root}/app/views/odfs/logo1.jpg"
-    #  r.add_field :name, "#{record.institution.firstname_of_official} #{@ins}"
-    #  r.add_field :street, @person.address.street.to_s
-    #  r.add_field :location, "#{@person.address.plz} #{@person.address.location}"
-    #  r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
-    #  r.add_field :amount, amount
-    #  r.add_field :membership, membership
-      #r.add_field :advantages, advantages
-      #r.add_section :advantages, advantages
-
+       r.add_field :address, "My new address \n Hauptstrasse 5 \n Ethik"
     end
 
     send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
