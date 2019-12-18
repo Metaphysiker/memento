@@ -11,7 +11,14 @@ class Address < ApplicationRecord
   end
 
   def address_for_letter
-    address_text = addressable.name
+
+    address_text = ""
+
+    if addressable_type == "Person"
+      address_text = addressable.form_of_address + " " + addressable.name
+    elsif addressable_type == "Institution"
+      address_text = addressable.name
+    end
 
     address_text = address_text +  "\n" + line1 unless line1.blank?
     address_text = address_text +  "\n" + line2 unless line2.blank?

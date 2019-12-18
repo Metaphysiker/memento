@@ -16,39 +16,7 @@
 
       <h5 class="card-title">Adresse</h5>
       <p class="card-text">
-        <% if address.addressable_type == "Person" && !address.addressable.form_of_address.blank? %>
-          <%= address.addressable.form_of_address %>
-        <% end %>
-        <% if address.addressable_type == "Person" && !address.addressable.firstname.blank? && !address.addressable.lastname.blank? %>
-          <%= address.addressable.firstname %> <%= address.addressable.lastname %> <br />
-        <% end %>
-        <% if address.addressable_type == "Institution" && !address.addressable.name.blank? %>
-          <%= address.addressable.name %> <br />
-        <% end %>
-        <% unless address.line1.blank? %>
-          <%= address.line1 %> <br />
-        <% end %>
-        <% unless address.line2.blank? %>
-          <%= address.line2 %> <br />
-        <% end %>
-        <% unless address.line3.blank? %>
-          <%= address.line3 %> <br />
-        <% end %>
-        <% unless address.line4.blank? %>
-          <%= address.line4 %> <br />
-        <% end %>
-        <% unless address.line5.blank? %>
-          <%= address.line5 %> <br />
-        <% end %>
-        <% unless address.street.blank? %>
-          <%= address.street %> <br />
-        <% end %>
-        <% unless address.plz.blank? && address.location.blank? %>
-          <%= address.plz %>  <%= address.location %><br />
-        <% end %>
-        <% unless address.country.blank? || address.country_name == "Schweiz" %>
-          <%= address.country_name %> <br />
-        <% end %>
+        <%= simple_format(address.address_for_letter) %>
       </p>
       <hr />
         <%= render "shared/created_and_updated", parent: address %>
