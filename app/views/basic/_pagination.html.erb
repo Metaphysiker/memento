@@ -39,9 +39,11 @@
         <% if params[:search_inputs].present? %>
              <%= link_to "CSV", basic_csv_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm" %>
              <%= link_to "PDF", basic_pdf_path(search_inputs: params[:search_inputs].permit!, :format => :pdf, target: "_blank"), class: "btn btn-primary btn-sm" %>
+             <%= link_to "ODT", institutions_serienbrief_path(search_inputs: params[:search_inputs].permit!), class: "btn btn-primary btn-sm" %>
         <% else %>
             <%= link_to "CSV", basic_csv_path, class: "btn btn-primary btn-sm" %>
             <%= link_to "PDF", basic_pdf_path(:format => :pdf), class: "btn btn-primary btn-sm" %>
+            <%= link_to "ODT", institutions_serienbrief_path, class: "btn btn-primary btn-sm" %>
         <% end %>
       <% elsif records.klass.to_s == "Note" %>
 

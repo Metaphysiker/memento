@@ -1,5 +1,5 @@
 class InstitutionsController < ApplicationController
-  before_action :set_institution, only: [:show, :edit, :update, :destroy, :serienbrief]
+  before_action :set_institution, only: [:show, :edit, :update, :destroy]
 
   # GET /institutions
   # GET /institutions.json
@@ -142,14 +142,20 @@ class InstitutionsController < ApplicationController
 
   def serienbrief
 
-    @institutions = Institution.last(5)
+    #@institutions = Institution.last(5)
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
+    else
+      @search_inputs = OpenStruct.new(model: "Institution")
+    end
+    @records = Search.new(@search_inputs).search
 
     report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/serienbrief.odt") do |r|
        #r.add_field :address, @institution.address.address_for_letter
        #r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
 
-       r.add_section("page", @institutions) do |s|
-         s.add_field(:address) {|institution| institution.address.address_for_letter}
+       r.add_section("page", @records) do |s|
+         s.add_field(:address) {|record| record.address.address_for_letter}
          s.add_field(:date) {I18n.localize(Date.today, format: '%d.%B %Y').to_s}
        end
 
