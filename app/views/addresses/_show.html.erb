@@ -22,6 +22,9 @@
         <% if address.addressable_type == "Person" && !address.addressable.firstname.blank? && !address.addressable.lastname.blank? %>
           <%= address.addressable.firstname %> <%= address.addressable.lastname %> <br />
         <% end %>
+        <% if address.addressable_type == "Institution" && !address.addressable.name.blank? %>
+          <%= address.addressable.name %> <br />
+        <% end %>
         <% unless address.line1.blank? %>
           <%= address.line1 %> <br />
         <% end %>

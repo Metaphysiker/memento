@@ -146,6 +146,9 @@ class InstitutionsController < ApplicationController
 
     report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/einladung_mai2020_ext.odt") do |r|
        r.add_field :address, "My new address \n Hauptstrasse 5 \n Ethik"
+       r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+       r.add_field :street, @person.address.street.to_s
+       r.add_field :location, "#{@person.address.plz} #{@person.address.location}"
     end
 
     send_data report.generate, type: 'application/vnd.oasis.opendocument.text',

@@ -31,7 +31,7 @@ class Institution < ApplicationRecord
     Address.create(
       addressable_id: self.id,
       addressable_type: Institution,
-      line1: self.name,
+      #line1: self.name,
     )
   end
 
