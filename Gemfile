@@ -4,14 +4,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.1'
 
 gem 'ahoy_matey'
-gem 'bootstrap', '~> 4.1.3'
+gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'simple_form'
 gem 'country_select'
 gem 'rails-i18n', '~> 5.1'
 gem "font-awesome-rails"
-gem 'devise'
+gem "devise", ">= 4.7.1"
 gem 'chosen-rails'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'pg_search'
@@ -31,7 +31,7 @@ gem 'odf-report'
 gem 'rubyzip'
 gem 'guess'
 gem 'clipboard-rails'
-gem "chartkick"
+gem "chartkick", ">= 3.3.0"
 gem 'groupdate'
 
 
@@ -40,9 +40,12 @@ gem 'rails', '~> 5.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+#gem 'puma', '~> 3.11'
+gem "puma", ">= 3.12.2"
+gem "loofah", ">= 2.3.1"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem "nokogiri", ">= 1.10.4"
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
