@@ -20,8 +20,8 @@ RSpec.describe "bill", :type => :feature do
 
     person.address.update(
       line1: Faker::Address.community,
-      line2: Faker::HarryPotter.quote,
-      line3: Faker::HarryPotter.character,
+      line2: Faker::Address.community,
+      line3: Faker::Address.community,
       line4: Faker::GreekPhilosophers.name,
       line5: Faker::GreekPhilosophers.quote,
 

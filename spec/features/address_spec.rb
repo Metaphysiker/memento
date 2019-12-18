@@ -75,8 +75,8 @@ RSpec.describe "address", :type => :feature do
     find(".address-#{person.address.id}-edit").click
 
     line1 = Faker::Address.community
-    line2 = Faker::HarryPotter.quote
-    line3 = Faker::HarryPotter.character
+    line2 = Faker::Address.community
+    line3 = Faker::Address.community
     line4 = Faker::GreekPhilosophers.name
     line5 = Faker::GreekPhilosophers.quote
 

@@ -37,7 +37,7 @@ RSpec.describe "tasks", :type => :feature do
     task1 = Task.create(task1)
     task1.update(
       assigned_to_user_id: User.all.pluck(:id).sample,
-      deadline: Faker::Time.between(DateTime.now, DateTime.now + 3.month)
+      deadline: Faker::Time.between(from: DateTime.now, to: DateTime.now + 3.month)
     )
 
     person.tasks << task1
@@ -178,7 +178,7 @@ RSpec.describe "tasks", :type => :feature do
     task1 = Task.create(task1)
     task1.update(
       assigned_to_user_id: User.all.pluck(:id).sample,
-      deadline: Faker::Time.between(DateTime.now, DateTime.now + 3.month)
+      deadline: Faker::Time.between(from: DateTime.now, to: DateTime.now + 3.month)
     )
 
     institution.tasks << task1
