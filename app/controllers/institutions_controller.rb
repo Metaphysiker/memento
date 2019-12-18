@@ -142,9 +142,18 @@ class InstitutionsController < ApplicationController
 
   def serienbrief
 
+    @institutions = Institution.last(5)
+
     report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/serienbrief.odt") do |r|
-       r.add_field :address, @institution.address.address_for_letter
-       r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+       #r.add_field :address, @institution.address.address_for_letter
+       #r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+
+       r.add_section("page", @institutions) do |s|
+         s.add_field(:address) {|institution| institution.address.address_for_letter}
+         s.add_field(:date) {I18n.localize(Date.today, format: '%d.%B %Y').to_s}
+       end
+
+
     end
 
     send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
