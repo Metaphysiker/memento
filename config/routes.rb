@@ -64,6 +64,8 @@ Rails.application.routes.draw do
   get '/basic_odf', to: 'basic#odf', as: 'basic_odf'
   get '/person_bill/:id', to: 'people#odf', as: 'person_bill'
 
+  #Serienbrief
+  get '/people_serienbrief/', to: 'people#serienbrief', as: 'people_serienbrief'
   get '/institutions_serienbrief/', to: 'institutions#serienbrief', as: 'institutions_serienbrief'
 
   #affiliations
