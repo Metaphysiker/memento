@@ -28,3 +28,6 @@
 
 # Ignore spec/examples.txt
 /spec/examples.txt
+
+# ignore latest.dump
+latest.dump
