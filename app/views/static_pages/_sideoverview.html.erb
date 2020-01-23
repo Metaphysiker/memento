@@ -5,6 +5,16 @@
     <h3>Übersicht</h3>
   </a>
 
+  <%= link_to blog_calendar_path, class: "list-group-item list-group-item-action flex-column align-items-start" do %>
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "file" %> Blog</h5>
+      <hr>
+    </div>
+    <p>
+      Blogplanung
+    </p>
+  <% end %>
+
   <a class="list-group-item list-group-item-action flex-column align-items-start index-load <%= "active" if records.klass.to_s == "Person" %>" data-toggle="list" href="#list-people" target="Person" role="tab">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1"><%= fa_icon "user" %> Personen</h5>
@@ -159,16 +169,6 @@
     </div>
     <p>
       Das Team von Philosophie.ch
-    </p>
-  <% end %>
-
-  <%= link_to blog_calendar_path, class: "list-group-item list-group-item-action flex-column align-items-start" do %>
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1"><%= fa_icon "file" %> Blog</h5>
-      <hr>
-    </div>
-    <p>
-      Blogplanung
     </p>
   <% end %>
 
