@@ -8,6 +8,7 @@ class Person < ApplicationRecord
   has_one :address, as: :addressable, dependent: :destroy
   has_many :notes, as: :noteable
   has_many :tasks, as: :taskable
+  has_many :payments, as: :paymentable
 
   has_many :blogs
 
@@ -22,6 +23,8 @@ class Person < ApplicationRecord
 
   has_many :group_people
   has_many :groups, :through => :group_people
+
+
 
   validates :email, presence: :true, uniqueness: :true
 

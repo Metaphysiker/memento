@@ -6,6 +6,7 @@ class Institution < ApplicationRecord
   has_one :address, as: :addressable, dependent: :destroy
   has_many :notes, as: :noteable
   has_many :tasks, as: :taskable
+  has_many :payments, as: :paymentable
 
   has_many :affiliations, dependent: :destroy
   has_many :people, :through => :affiliations

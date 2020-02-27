@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_12_074240) do
+ActiveRecord::Schema.define(version: 2020_02_27_131753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,19 @@ ActiveRecord::Schema.define(version: 2019_12_12_074240) do
     t.index ["noteable_type", "noteable_id"], name: "index_notes_on_noteable_type_and_noteable_id"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.decimal "amount", precision: 8, scale: 2
+    t.decimal "decimal", precision: 8, scale: 2
+    t.date "date"
+    t.bigint "person_id"
+    t.string "paymentable_type"
+    t.bigint "paymentable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable_type_and_paymentable_id"
+    t.index ["person_id"], name: "index_payments_on_person_id"
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "form_of_address", default: ""
     t.string "firstname", default: ""
@@ -215,7 +228,7 @@ ActiveRecord::Schema.define(version: 2019_12_12_074240) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "taggings", id: :integer, default: nil, force: :cascade do |t|
+  create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"
@@ -234,7 +247,7 @@ ActiveRecord::Schema.define(version: 2019_12_12_074240) do
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
-  create_table "tags", id: :integer, default: nil, force: :cascade do |t|
+  create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true

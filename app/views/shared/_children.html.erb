@@ -13,6 +13,11 @@
     <a class="btn btn-link btn-sm" data-toggle="collapse" href=".<%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks-toggle" role="button" aria-expanded="false" aria-controls="collapseExample">
       <%= fa_icon "tasks" %>  Aufgaben anzeigen
     </a>
+
+    <a class="btn btn-link btn-sm" data-toggle="collapse" href=".<%= parent.class.to_s.downcase %>-<%= parent.id %>-payments-toggle" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "coins" %>  Zahlungen anzeigen
+    </a>
+
   </p>
 
   <div class="collapse mb-2 address-<%= parent.id %>-<%= parent.class.to_s.downcase %>" >
@@ -27,5 +32,10 @@
   <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-tasks-toggle" >
     <%= render "tasks/tasks_of_a_thing", parent: parent %>
   </div>
+
+    <div class="collapse mb-2 <%= parent.class.to_s.downcase %>-<%= parent.id %>-payments-toggle" >
+      <%= render "payments/payments_of_a_thing", parent: parent %>
+    </div>
+
 
 </div>

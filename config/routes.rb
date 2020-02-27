@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payments
   resources :languages
   resources :topics
   get 'blogs/new_for_calendar/(:planning_date)', to: 'blogs#new_for_calendar', as: "new_for_calendar"

@@ -1,0 +1,19 @@
+<% parent = parent || @record.paymentable %>
+<div class="<%= parent.class.to_s.downcase %>-<%= parent.id %>-payments">
+  <div class="card my-3">
+    <div class="card-body">
+      <% if parent.payments.empty? %>
+        Keine Aufgaben vorhanden.
+        <hr />
+      <% end %>
+
+      <div class="<%= parent.class.to_s.downcase%>-<%= parent.id%>-payments-new">
+        <%#= render "payments/form", payment: Payment.new, parent: parent  %>
+        <%= render "payments/form", payment: Payment.new, parent: parent  %>
+      </div>
+      <%#= render 'basic/records_as_children', records: parent.payments.order(:created_at).reverse_order unless parent.payments.empty? %>
+
+
+    </div>
+  </div>
+</div>
