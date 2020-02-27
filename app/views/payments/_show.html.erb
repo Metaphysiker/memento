@@ -46,7 +46,12 @@
             </div>
           </div>
 
-          <p class="card-text"><strong><%= number_to_currency(payment.amount, unit: "CHF") %></strong> am <%= l(payment.date) %></p>
+          <p class="card-text">
+            <strong><%= number_to_currency(payment.amount, unit: "CHF") %></strong> am <%= l(payment.date) %>
+          </p>
+          <p class="card-text">
+            <%= payment.info %>
+          </p>
 
           <hr />
             <%= render "shared/created_and_updated", parent: payment %>
