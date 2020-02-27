@@ -1,6 +1,12 @@
 <% parent = parent || payment.paymentable %>
-<% parent_id = parent.id %>
-<% parent_type = parent.class.to_s %>
+
+<% if parent.nil? %>
+  <% parent_id = "" %>
+  <% parent_type = "" %>
+<% else %>
+  <% parent_id = parent.id %>
+  <% parent_type = parent.class.to_s %>
+<% end %>
 
 <%= simple_form_for(payment) do |f| %>
   <%= f.error_notification %>
@@ -10,6 +16,9 @@
     <%= f.input :amount %>
     <%= f.input :date %>
   </div>
+
+  <%= f.hidden_field :paymentable_id, value: parent_id %>
+  <%= f.hidden_field :paymentable_type, value: parent_type %>
 
   <div class="form-actions">
     <%= f.button :submit %>

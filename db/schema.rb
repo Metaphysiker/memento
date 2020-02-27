@@ -176,13 +176,11 @@ ActiveRecord::Schema.define(version: 2020_02_27_131753) do
     t.decimal "amount", precision: 8, scale: 2
     t.decimal "decimal", precision: 8, scale: 2
     t.date "date"
-    t.bigint "person_id"
     t.string "paymentable_type"
     t.bigint "paymentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable_type_and_paymentable_id"
-    t.index ["person_id"], name: "index_payments_on_person_id"
   end
 
   create_table "people", force: :cascade do |t|

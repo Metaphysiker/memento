@@ -1,3 +1,4 @@
 class Payment < ApplicationRecord
-  belongs_to :paymentable, :polymorphic => true
+  audited
+  belongs_to :paymentable, :polymorphic => true, optional: true
 end

@@ -1,0 +1,111 @@
+<% payment = payment || record %>
+
+<div class="payment-<%= payment.id %>">
+
+  <div class="collapse multi-collapse payment-list-view">
+      <div class="list">
+        <div class="row mt-3">
+          <div class="col-10">
+            <%= link_to payment.amount, payment_path(payment), class: "black_link" %>
+          </div>
+          <div class="col-2">
+            <div class="btn-group float-right" role="group" aria-label="Toolbar for payment">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-light payment-<%= payment.id %>-edit" data-toggle="modal" data-target=".payment-<%= payment.id %>-edit-modal">
+                <%= fa_icon "edit" %>
+              </button>
+              <%= link_to payment, method: :delete, data: { confirm: 'Bist du sicher?' }, remote: true do %>
+                <button type="button" class="btn btn-light payment-<%= payment.id %>-delete"><%= fa_icon "times" %></button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+  </div>
+
+  <div class="collapse multi-collapse payment-profile-view">
+      <div class="card my-3">
+        <div class="card-body">
+          <% unless payment.paymentable.nil? %>
+          <p class="card-text">
+            <%= link_to payment.paymentable.name, polymorphic_path(payment) %>
+          </p>
+          <hr />
+          <% end %>
+          <div class="float-right mb-3">
+
+            <div class="btn-group" role="group" aria-label="Toolbar for payment">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-light payment-<%= payment.id %>-edit" data-toggle="modal" data-target=".payment-<%= payment.id %>-edit-modal">
+                <%= fa_icon "edit" %>
+              </button>
+              <%= link_to payment, method: :delete, data: { confirm: 'Bist du sicher?' }, remote: true do %>
+                <button type="button" class="btn btn-light payment-<%= payment.id %>-delete"><%= fa_icon "times" %></button>
+              <% end %>
+            </div>
+          </div>
+
+          <p class="card-text"><strong><%= number_to_currency(payment.amount, unit: "CHF") %></strong> am <%= l(payment.date) %></p>
+
+          <hr />
+            <%= render "shared/created_and_updated", parent: payment %>
+        </div>
+      </div>
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade payment-<%= payment.id %>-edit-modal" tabindex="-1" role="dialog" aria-labelledby="Edit payment" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= t("helpers.submit.update", model: Payment.model_name.human) %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="payment-<%= payment.id %>-edit-placeholder">
+          </div>
+          <%#= render "payments/form", payment: payment %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var isExpanded = $("#payment-index-view-option").attr("aria-expanded");
+
+    if( isExpanded ) {
+        if(isExpanded == "true"){
+          $(".payment-profile-view").addClass("show");
+        } else {
+          $(".payment-list-view").addClass("show");
+        }
+    } else {
+      $(".payment-profile-view").addClass("show");
+    }
+
+    $( document ).ready(function() {
+
+    $( ".payment-<%= payment.id %>-edit" ).click(function() {
+        $.ajax({
+          url: "/payments/<%= payment.id %>/edit.js",
+          method: 'GET'
+        }).done(function(response) {
+        $(".payment-<%= payment.id %>-edit-placeholder").replaceWith(response);
+      })
+    });
+
+    //  $( ".shared-payment-<%=payment.id%>-get-button" ).click();
+    });
+
+
+  </script>
+</div>

@@ -3,7 +3,7 @@
   <div class="card my-3">
     <div class="card-body">
       <% if parent.payments.empty? %>
-        Keine Aufgaben vorhanden.
+        Keine Zahlungen vorhanden.
         <hr />
       <% end %>
 
@@ -11,7 +11,8 @@
         <%#= render "payments/form", payment: Payment.new, parent: parent  %>
         <%= render "payments/form", payment: Payment.new, parent: parent  %>
       </div>
-      <%#= render 'basic/records_as_children', records: parent.payments.order(:created_at).reverse_order unless parent.payments.empty? %>
+
+      <%= render 'basic/records_as_children', records: parent.payments.order(:created_at).reverse_order unless parent.payments.empty? %>
 
 
     </div>
