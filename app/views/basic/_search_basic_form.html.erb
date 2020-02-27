@@ -23,6 +23,11 @@
       <%= f.input :topics, as: :select, collection: Topic.all, label: "Thementags", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Thementags auswählen"}, multiple: true} %>
       <br />
       <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]}, label: "Sprache", required: false %>
+      <br />
+      <%= f.input :paid, collection: Payment.paid_options.map {|p| [t("#{p}"), p]}, label: "Bezahlt?", required: false %>
+      <br />
+      <%= f.input :paid_year, collection: Date.today.year-5.years..Date.today.year, label: "Jahr (kann leer gelassen werden)", required: false %>
+
     <% elsif records.klass.to_s == "Institution" %>
       <%= f.input :institutions, as: :select, collection: Institution.all, label: "Institutionen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
       <br>

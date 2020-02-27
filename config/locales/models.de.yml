@@ -37,6 +37,9 @@ de:
       topic:
         one: "Thementag"
         other: "Thementags"
+      payment:
+        one: "Zahlung"
+        other: "Zahlungen"
     attributes:
       work_time:
         date: "Datum"
@@ -110,3 +113,6 @@ de:
         assigned_to_user_id: "Zuständig"
       language:
         language: "Sprachen"
+      payment:
+        amount: "Betrag"
+        date: "Datum"

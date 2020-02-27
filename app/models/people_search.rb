@@ -1,5 +1,5 @@
 class PeopleSearch
-  def initialize(groups: nil, selection: nil, search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil, topics: nil, language: nil)
+  def initialize(groups: nil, selection: nil, search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil, topics: nil, language: nil, paid: nil, paid_year: nil)
     @groups = groups
     @selection = selection
     @search_term = search_term
@@ -9,6 +9,8 @@ class PeopleSearch
     @functionalities = functionalities
     @topics = topics
     @language = language
+    @paid = paid
+    @paid_year = paid_year
   end
 
   def search
@@ -96,6 +98,24 @@ class PeopleSearch
 
   unless @language.nil? || @language.blank?
     query = query.where(language: @language)
+  end
+
+  unless @paid.nil? || @paid.blank?
+
+    if @paid_year.nil? || @paid_year.blank?
+      ids_of_people_who_have_paid = Payment.where(paymentable_type: "Person").pluck(:paymentable_id)
+    else
+      ids_of_people_who_have_paid = Payment.where(paymentable_type: "Person").where(date: Date.parse("#{@paid_year}-01-01").beginning_of_year..Date.parse("#{@paid_year}-01-01").end_of_year).pluck(:paymentable_id)
+    end
+
+    #byebug
+    if @paid == "yes"
+      ids = ids_of_people_who_have_paid
+    else
+      ids = Person.all.pluck(:id) - ids_of_people_who_have_paid
+    end
+    #byebug
+    query = query.where(id: ids)
   end
 
     query.distinct

@@ -25,6 +25,8 @@ class Search
     @language = search_inputs[:language] || nil
     @page = search_inputs[:page] || 0
     @records = []
+    @paid = search_inputs[:paid] || nil
+    @paid_year = search_inputs[:paid_year] || nil
   end
 
   def search
@@ -32,7 +34,10 @@ class Search
     #klass = @model
 
     if klass == Person
-      @records = PeopleSearch.new(selection: @selection, groups: @groups, search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions, topics: @topics, language: @language).search
+      @records = PeopleSearch.new(selection: @selection, groups: @groups, search_term: @search_term, tags: @tags, target_groups: @target_groups,
+        functionalities: @functionalities, institutions: @institutions, topics: @topics, language: @language,
+        paid: @paid, paid_year: @paid_year
+      ).search
       @records = @records.order(:name)
     elsif klass == Institution
       @records = InstitutionsSearch.new(search_term: @search_term, tags: @tags, target_groups: @target_groups, functionalities: @functionalities, institutions: @institutions, language: @language).search
