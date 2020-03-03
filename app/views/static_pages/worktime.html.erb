@@ -16,7 +16,7 @@
     <div class="card-body">
       <h4>Arbeitsstunden</h4>
 
-      <% User.where(id: [1,2,10,,13,14,8]).each do |user| %>
+      <% User.where(id: [1,2,10,13,14,8]).each do |user| %>
         <%= render "work_times/work_time_table", user: user %>
       <hr />
       <% end %>
