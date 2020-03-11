@@ -100,6 +100,12 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def members
+
+  end
+
   def manual
   end
+
+
 end
