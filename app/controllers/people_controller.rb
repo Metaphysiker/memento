@@ -176,6 +176,33 @@ class PeopleController < ApplicationController
 
   end
 
+  def brief_an_mitglieder
+
+    #@institutions = Institution.last(5)
+    if params[:search_inputs].present?
+      @search_inputs = OpenStruct.new(params[:search_inputs])
+    else
+      @search_inputs = OpenStruct.new(model: "Person")
+    end
+    @records = Search.new(@search_inputs).search
+
+    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/brief-an-mitglieder.odt") do |r|
+       #r.add_field :address, @institution.address.address_for_letter
+       #r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+
+       r.add_section("page", @records) do |s|
+         s.add_field(:address) {|record| record.address.address_for_letter}
+         s.add_field(:date) {I18n.localize(Date.today, format: '%d.%B %Y').to_s}
+       end
+
+    end
+
+    send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
+                            disposition: 'attachment',
+                            filename: 'brief-an-mitglieder.odt'
+
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

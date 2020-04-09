@@ -69,6 +69,9 @@ Rails.application.routes.draw do
   get '/people_serienbrief/', to: 'people#serienbrief', as: 'people_serienbrief'
   get '/institutions_serienbrief/', to: 'institutions#serienbrief', as: 'institutions_serienbrief'
 
+  #Brief an mitglieder
+  get '/people_brief_an_mitglieder/', to: 'people#brief_an_mitglieder', as: 'people_brief_an_mitglieder'
+
   #affiliations
   patch '/update_person_affiliation/:id', to: 'affiliations#update_person_affiliation', as: 'update_person_affiliation'
   patch '/update_institution_affiliation/:id', to: 'affiliations#update_institution_affiliation', as: 'update_institution_affiliation'
