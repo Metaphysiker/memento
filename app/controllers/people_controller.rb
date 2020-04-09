@@ -194,12 +194,50 @@ class PeopleController < ApplicationController
          s.add_field(:address) {|record| record.address.address_for_letter}
          s.add_field(:date) {I18n.localize(Date.today, format: '%d.%B %Y').to_s}
        end
+     end
+
+     send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
+                             disposition: 'attachment',
+                             filename: 'brief-an-mitglieder.odt'
+
+   end
+
+  def odf_of_list_of_members
+
+    year = params[:list][:year]
+    #year = 2019
+
+    platin_members = Person.tagged_with("Platinmitglied", :on => :functionalities)
+    twohundred_members = Person.tagged_with("200er-Mitglied", :on => :functionalities)
+    alumni_members = Person.tagged_with("Alumnimitglied", :on => :functionalities)
+
+    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/odf_of_list_of_members.odt") do |r|
+      r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+      r.add_field :year, year.to_s
+
+      r.add_table("TABLE_1", platin_members, :header=>true) do |t|
+        t.add_column(:member_name) { |item| "#{item.name}" }
+        t.add_column(:member_email) { |item| "#{item.email}" }
+        t.add_column(:member_paid) { |item| "#{item.payments.where(date: Date.parse("#{year}-01-01").beginning_of_year..Date.parse("#{year}-01-01").end_of_year).any? ? "Ja" : "Nein"}" }
+      end
+
+      r.add_table("TABLE_2", twohundred_members, :header=>true) do |t|
+        t.add_column(:member_name) { |item| "#{item.name}" }
+        t.add_column(:member_email) { |item| "#{item.email}" }
+        t.add_column(:member_paid) { |item| "#{item.payments.where(date: Date.parse("#{year}-01-01").beginning_of_year..Date.parse("#{year}-01-01").end_of_year).any? ? "Ja" : "Nein"}" }
+      end
+
+      r.add_table("TABLE_3", alumni_members, :header=>true) do |t|
+        t.add_column(:member_name) { |item| "#{item.name}" }
+        t.add_column(:member_email) { |item| "#{item.email}" }
+        t.add_column(:member_paid) { |item| "#{item.payments.where(date: Date.parse("#{year}-01-01").beginning_of_year..Date.parse("#{year}-01-01").end_of_year).any? ? "Ja" : "Nein"}" }
+      end
 
     end
 
     send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
                             disposition: 'attachment',
-                            filename: 'brief-an-mitglieder.odt'
+                            filename: "mitgliederverzeichnis-#{year}.odt"
 
   end
 

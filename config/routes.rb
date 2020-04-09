@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get '/merch_showcase', to: 'static_pages#merch_showcase', as: 'merch_showcase'
   get '/manual', to: 'static_pages#manual', as: 'manual'
   get '/worktime', to: 'static_pages#worktime', as: 'worktime'
+  get '/members', to: 'static_pages#members', as: 'members'
 
   #search
   get '/search_people_form', to: 'people#search_people', as: 'search_people_form'
@@ -64,6 +65,9 @@ Rails.application.routes.draw do
   #odf
   get '/basic_odf', to: 'basic#odf', as: 'basic_odf'
   get '/person_bill/:id', to: 'people#odf', as: 'person_bill'
+
+  #odf_of_list_of_members
+  get '/person_list_of_members/', to: 'people#odf_of_list_of_members', as: 'odf_of_list_of_members'
 
   #Serienbrief
   get '/people_serienbrief/', to: 'people#serienbrief', as: 'people_serienbrief'

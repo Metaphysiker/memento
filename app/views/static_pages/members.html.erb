@@ -1,0 +1,83 @@
+<div class="container">
+  <h1>Mitglieder</h1>
+  <p>
+    <%= simple_form_for :list, {url: odf_of_list_of_members_path, method: :get, remote: false} do |f| %>
+      <%= f.hidden_field :year, :value => 2019 %>
+      <%= f.submit "Mitgliederverzeichnis 2019 herunterladen", class: "btn btn-primary" %>
+    <% end %>
+  </p>
+
+  <% platin_members = Person.tagged_with("Platinmitglied", :on => :functionalities) %>
+  <% twohundred_members = Person.tagged_with("200er-Mitglied", :on => :functionalities) %>
+  <% alumni_members = Person.tagged_with("Alumnimitglied", :on => :functionalities) %>
+
+  <h2>2019</h2>
+  <% paid_year = 2019 %>
+
+  <h3>Platinmitglieder</h3>
+
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">e-Mail</th>
+      <th scope="col">Bezahlt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% platin_members.each do |member| %>
+      <tr>
+        <td><%= member.name %></td>
+        <td><%= member.email %></td>
+        <td><%= member.payments.where(date: Date.parse("#{paid_year}-01-01").beginning_of_year..Date.parse("#{paid_year}-01-01").end_of_year).any? ? "Ja" : "Nein" %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<h3>200er-Mitglieder</h3>
+
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">e-Mail</th>
+    <th scope="col">Bezahlt</th>
+  </tr>
+</thead>
+<tbody>
+  <% twohundred_members.each do |member| %>
+    <tr>
+      <td><%= member.name %></td>
+      <td><%= member.email %></td>
+      <td><%= member.payments.where(date: Date.parse("#{paid_year}-01-01").beginning_of_year..Date.parse("#{paid_year}-01-01").end_of_year).any? ? "Ja" : "Nein" %></td>
+    </tr>
+  <% end %>
+
+</tbody>
+</table>
+
+<h3>Alumni-Mitglieder</h3>
+
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">e-Mail</th>
+    <th scope="col">Bezahlt</th>
+  </tr>
+</thead>
+<tbody>
+  <% alumni_members.each do |member| %>
+    <tr>
+      <td><%= member.name %></td>
+      <td><%= member.email %></td>
+      <td><%= member.payments.where(date: Date.parse("#{paid_year}-01-01").beginning_of_year..Date.parse("#{paid_year}-01-01").end_of_year).any? ? "Ja" : "Nein" %></td>
+    </tr>
+  <% end %>
+
+</tbody>
+</table>
+
+</div>
