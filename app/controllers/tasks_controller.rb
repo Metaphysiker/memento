@@ -111,6 +111,18 @@ class TasksController < ApplicationController
     end
   end
 
+  def task_calendar
+
+    @tasks = Task.all
+
+    date = params[:date]
+    if date.nil? || date.empty?
+      @date = Date.today
+    else
+      @date = Date.parse(date)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
