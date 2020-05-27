@@ -9,11 +9,6 @@
   <div class="">
     <div class="jumbotron bg-white">
       <div class="text-center m-2">
-        <%#= link_to "Neuer Eintrag", new_task_path %>
-        <%= render "tasks/new_for_normal_create", record: Task.new %>
-        <br />
-      </div>
-      <div class="text-center m-2">
         <%= link_to task_calendar_path(@date - 1.month, @user_id) do %>
           <div class="btn btn-primary">
             &#8249; &#8249;
@@ -58,6 +53,11 @@
       </tbody>
     </table>
     </div>
+  </div>
+
+  <div class="text-center mb-3">
+    <%= render "tasks/new_for_normal_create", record: Task.new %>
+    <br />
   </div>
 
   <%= render "tasks/my_tasks", user: User.find(@user_id) unless @user_id.blank? %>
