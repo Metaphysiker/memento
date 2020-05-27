@@ -106,7 +106,7 @@ Rails.application.routes.draw do
 
   #task
   post '/normal_create_task', to: 'tasks#normal_create', as: 'normal_create_task'
-  get '/task_calendar/(:date)', to: 'tasks#task_calendar', as: 'task_calendar'
+  get '/task_calendar/(:date)/(:user_id)', to: 'tasks#task_calendar', as: 'task_calendar'
   #get '/task_calendar', to: 'tasks#task_calendar', as: 'task_calendar'
 
   #blog

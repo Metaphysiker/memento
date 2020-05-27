@@ -115,6 +115,12 @@ class TasksController < ApplicationController
 
     @tasks = Task.all
 
+    @user_id = params[:user_id]
+    unless @user_id.nil? || @user_id.empty?
+      @tasks = @tasks.where(assigned_to_user_id: @user_id)
+      #@blogs = @blogs.joins(:languages).where(:languages => {:language => @language})
+    end
+
     date = params[:date]
     if date.nil? || date.empty?
       @date = Date.today
