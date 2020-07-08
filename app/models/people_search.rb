@@ -1,5 +1,5 @@
 class PeopleSearch
-  def initialize(groups: nil, selection: nil, search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil, topics: nil, language: nil, paid: nil, paid_year: nil)
+  def initialize(groups: nil, selection: nil, search_term: nil, tags: nil, institutions: nil, functionalities: nil, target_groups: nil, topics: nil, language: nil, paid: nil, paid_year: nil, country: nil)
     @groups = groups
     @selection = selection
     @search_term = search_term
@@ -11,6 +11,7 @@ class PeopleSearch
     @language = language
     @paid = paid
     @paid_year = paid_year
+    @country = country
   end
 
   def search
@@ -116,6 +117,16 @@ class PeopleSearch
     end
     #byebug
     query = query.where(id: ids)
+  end
+
+  unless @country.nil? || @country.blank?
+
+    ids_of_people_in_country = Person.joins(:address).where(addresses: {country: @country}).pluck(:id)
+
+    query = query.where(id: ids_of_people_in_country)
+
+    #byebug
+
   end
 
     query.distinct

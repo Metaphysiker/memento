@@ -24,6 +24,8 @@
       <br />
       <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]}, label: "Sprache", required: false %>
       <br />
+      <%= f.input :country, collection: Address.all.pluck(:country).uniq.map {|p| [p, p]}, label: "Land", required: false %>
+      <br />
       <%= f.input :paid, collection: Payment.paid_options.map {|p| [t("#{p}"), p]}, label: "Bezahlt?", required: false %>
       <br />
       <% year_today = Date.today.year.to_i %>

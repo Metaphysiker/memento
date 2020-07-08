@@ -27,6 +27,7 @@ class Search
     @records = []
     @paid = search_inputs[:paid] || nil
     @paid_year = search_inputs[:paid_year] || nil
+    @country = search_inputs[:country] || nil
   end
 
   def search
@@ -36,7 +37,7 @@ class Search
     if klass == Person
       @records = PeopleSearch.new(selection: @selection, groups: @groups, search_term: @search_term, tags: @tags, target_groups: @target_groups,
         functionalities: @functionalities, institutions: @institutions, topics: @topics, language: @language,
-        paid: @paid, paid_year: @paid_year
+        paid: @paid, paid_year: @paid_year, country: @country
       ).search
       @records = @records.order(:name)
     elsif klass == Institution
