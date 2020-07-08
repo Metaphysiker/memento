@@ -1,0 +1,30 @@
+<%# tasks = tasks.where(deadline: day)%>
+<% tasks = tasks.where(deadline: day.to_datetime..day.to_datetime + 24.hours) %>
+
+<% tasks.each do |task| %>
+  <%= link_to task_path(task) do %>
+    <% border_color = "border-danger" %>
+    <% border_color = "border-success" if task.status == "abgeschlossen" %>
+
+    <div class="m-2">
+      <div class="border <%= border_color %> rounded p-1 small-text">
+        <small>
+          <% unless task.description.blank? %>
+            <b><%= task.description.truncate(100) %></b>
+            <br />
+          <% end %>
+        </small>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if false %>
+<div class="enter-task hidden">
+  <hr />
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-outline-primary btn-sm enter-task-button m-2" value=" <%= day.to_s %>" data-toggle="modal" data-target="#enter-task-modal">
+    Task eintragen
+  </button>
+</div>
+<% end %>

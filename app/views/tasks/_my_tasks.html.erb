@@ -1,0 +1,11 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h3 class="text-center"><%= user.username %></h3>
+    </p>
+    <h3 class="text-center">Offene Aufgaben</h3>
+    <%= render "basic/records", records: Task.unfinished.order(:deadline).where(assigned_to_user_id: user.id).page(params[:page]).per(20) %>
+    <hr />
+    <h3 class="text-center">Abgeschlossene Aufgaben</h3>
+    <%= render "basic/records", records: Task.finished.order(:deadline).where(assigned_to_user_id: user.id).page(params[:page]).per(20) %>
+  </div>
+</div>
