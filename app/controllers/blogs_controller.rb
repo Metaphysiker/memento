@@ -111,11 +111,29 @@ class BlogsController < ApplicationController
 
     only_month_days = @date.beginning_of_month..@date.end_of_month
     @blogs = Blog.where(planned_date: only_month_days).order(:planned_date)
-    
+
     @language = params[:language]
     unless @language.nil? || @language.empty?
       @blogs = @blogs.joins(:languages).where(:languages => {:language => @language})
     end
+  end
+
+  def blog_list_year
+    date = params[:date]
+    if date.nil? || date.empty?
+      @date = Date.today
+    else
+      @date = Date.parse(date)
+    end
+
+    only_year_days = @date.beginning_of_year..@date.end_of_year
+    @blogs = Blog.where(planned_date: only_year_days).order(:planned_date)
+
+    @language = params[:language]
+    unless @language.nil? || @language.empty?
+      @blogs = @blogs.joins(:languages).where(:languages => {:language => @language})
+    end
+
   end
 
   private

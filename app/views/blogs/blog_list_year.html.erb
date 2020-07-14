@@ -1,0 +1,78 @@
+<% month = @date.month %>
+<% first_day = @date.beginning_of_month.beginning_of_week %>
+<% last_day = @date.end_of_month.end_of_week %>
+<% all_month_days = first_day..last_day %>
+<% only_month_days = @date.beginning_of_month..@date.end_of_month %>
+
+<!-- Month -->
+<div class="container-fluid bg-white">
+  <div class="">
+    <div class="jumbotron bg-white">
+      <div class="text-center m-2">
+        <%= link_to "Neuer Eintrag", new_blog_path %>
+        <br />
+        <%= link_to "Zur Kalender-Ansicht", blog_calendar_path(@date, @language) %>
+        <br />
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <% if @language.blank? %>
+              Alle Sprachen
+            <% else %>
+              <%= t(@language) %>
+            <% end %>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownLanguagen">
+            <%= link_to "Alles", blog_list_path(@date, ""), class: "dropdown-item" %>
+            <%= link_to t("de"), blog_list_path(@date, "de"), class: "dropdown-item" %>
+            <%= link_to t("fr"), blog_list_path(@date, "fr"), class: "dropdown-item" %>
+            <%= link_to t("it"), blog_list_path(@date, "it"), class: "dropdown-item" %>
+            <%= link_to t("en"), blog_list_path(@date, "en"), class: "dropdown-item" %>
+          </div>
+        </div>
+        <br />
+      </div>
+      <div class="text-center m-2">
+        <%= link_to blog_list_path(@date - 1.month, @language) do %>
+          <div class="btn btn-primary">
+            &#8249; &#8249;
+          </div>
+        <% end %>
+        <span class="mx-3">
+          <b><%= I18n.t("date.month_names")[month] %> <%= @date.year %></b>
+        </span>
+        <%= link_to blog_list_path(@date + 1.month, @language) do %>
+          <div class="btn btn-primary">
+            &#8250; &#8250;
+          </div>
+        <% end %>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Datum</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Arbeitstitel</th>
+            <th>
+
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @blogs.each do |blog| %>
+          <% table_color = "table-danger" %>
+          <% table_color = "table-primary" if blog.submitted == "true" %>
+          <% table_color = "table-success" if (blog.published == "true") && (blog.submitted == "true") && (blog.author_informed == "true") %>
+            <tr class="<%= table_color%>">
+              <td><%= blog.planned_date unless blog.planned_date.blank? %></td>
+              <td><%= blog.person.name unless blog.person.blank? %></td>
+              <td><%= blog.working_title unless blog.working_title.blank? %></td>
+              <td>
+                <%= link_to "Bearbeiten", edit_blog_path(blog) %>
+                </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
