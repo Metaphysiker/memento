@@ -112,5 +112,6 @@ Rails.application.routes.draw do
   #blog
   get 'blog_calendar/(:date)/(:language)', to: 'blogs#blog_calendar', as: "blog_calendar"
   get 'blog_list/(:date)/(:language)', to: 'blogs#blog_list', as: "blog_list"
+  get 'blog_list_year/(:date)/(:language)', to: 'blogs#blog_list_year', as: "blog_list_year"
   post 'create_for_calendar', to: 'blogs#create_for_calendar', as: "create_for_calendar"
 end

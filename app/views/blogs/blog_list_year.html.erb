@@ -1,8 +1,4 @@
 <% month = @date.month %>
-<% first_day = @date.beginning_of_month.beginning_of_week %>
-<% last_day = @date.end_of_month.end_of_week %>
-<% all_month_days = first_day..last_day %>
-<% only_month_days = @date.beginning_of_month..@date.end_of_month %>
 
 <!-- Month -->
 <div class="container-fluid bg-white">
@@ -22,17 +18,17 @@
             <% end %>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownLanguagen">
-            <%= link_to "Alles", blog_list_path(@date, ""), class: "dropdown-item" %>
-            <%= link_to t("de"), blog_list_path(@date, "de"), class: "dropdown-item" %>
-            <%= link_to t("fr"), blog_list_path(@date, "fr"), class: "dropdown-item" %>
-            <%= link_to t("it"), blog_list_path(@date, "it"), class: "dropdown-item" %>
-            <%= link_to t("en"), blog_list_path(@date, "en"), class: "dropdown-item" %>
+            <%= link_to "Alles", blog_list_year_path(@date, ""), class: "dropdown-item" %>
+            <%= link_to t("de"), blog_list_year_path(@date, "de"), class: "dropdown-item" %>
+            <%= link_to t("fr"), blog_list_year_path(@date, "fr"), class: "dropdown-item" %>
+            <%= link_to t("it"), blog_list_year_path(@date, "it"), class: "dropdown-item" %>
+            <%= link_to t("en"), blog_list_year_path(@date, "en"), class: "dropdown-item" %>
           </div>
         </div>
         <br />
       </div>
       <div class="text-center m-2">
-        <%= link_to blog_list_path(@date - 1.month, @language) do %>
+        <%= link_to blog_list_year_path(@date - 1.month, @language) do %>
           <div class="btn btn-primary">
             &#8249; &#8249;
           </div>
@@ -40,7 +36,7 @@
         <span class="mx-3">
           <b><%= I18n.t("date.month_names")[month] %> <%= @date.year %></b>
         </span>
-        <%= link_to blog_list_path(@date + 1.month, @language) do %>
+        <%= link_to blog_list_year_path(@date + 1.month, @language) do %>
           <div class="btn btn-primary">
             &#8250; &#8250;
           </div>
@@ -73,6 +69,17 @@
           <% end %>
         </tbody>
       </table>
+
+      <br />
+      <%= @blogs.count %><br />
+      <%= @blogs.where(submitted: "true").count %><br />
+      <% @blogs.where(submitted: "true").each do |blog| %>
+        <%= blog.person.name unless blog.person.blank? %> - 
+        <%= blog.working_title unless blog.working_title.blank? %>
+        <br />
+      <% end %>
+
+
     </div>
   </div>
 </div>
