@@ -142,6 +142,45 @@ class BasicController < ApplicationController
 
   end
 
+  def odf_special
+
+    file = params[:file]
+
+    records_for_text = "test"
+
+    information_for_file = OpenStruct.new
+
+    CSV.foreach(file.path, headers: true) do |row|
+      person = row.to_hash
+      institutions = row["institutions"].split(' ') unless row["institutions"].nil?
+      groups = row["groups"].split(' ') unless row["groups"].nil?
+      functionality = row["functionality"].split(' ') unless row["functionality"].nil?
+      target_group = row["target_group"].split(' ') unless row["target_group"].nil?
+      address = row.to_hash
+
+      Person.create_or_update_person(person, institutions, groups, functionality, target_group, address)
+    end
+
+    compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+
+      @records.each do |person|
+        report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/rechnung.odt") do |r|
+          r.add_image :graphics1, "#{Rails.root}/app/views/odfs/logo1.jpg"
+          r.add_field :name, "#{person.firstname} #{person.lastname}"
+          r.add_field :street, person.address.street.to_s
+          r.add_field :location, "#{person.address.plz} #{person.address.location}"
+          r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
+        end
+        zos.put_next_entry "#{person.name}-#{person.id}".parameterize + ".odt"
+        zos.write report.generate
+      end
+    end
+
+    compressed_filestream.rewind
+    send_data compressed_filestream.read, filename: "odfs.zip"
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
