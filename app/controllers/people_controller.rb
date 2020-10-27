@@ -165,7 +165,7 @@ class PeopleController < ApplicationController
 
        r.add_section("page", @records) do |s|
          s.add_field(:address) {|record| record.address.address_for_letter}
-         s.add_field(:date) {I18n.localize(Date.today, format: '%d.%B %Y').to_s}
+         s.add_field(:date) {I18n.localize(Date.today, format: '%d. %B %Y').to_s}
        end
 
     end
@@ -192,7 +192,7 @@ class PeopleController < ApplicationController
 
        r.add_section("page", @records) do |s|
          s.add_field(:address) {|record| record.address.address_for_letter}
-         s.add_field(:date) {I18n.localize(Date.today, format: '%d.%B %Y').to_s}
+         s.add_field(:date) {I18n.localize(Date.today, format: '%d. %B %Y').to_s}
        end
      end
 
