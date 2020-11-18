@@ -159,7 +159,7 @@ class PeopleController < ApplicationController
     end
     @records = Search.new(@search_inputs).search
 
-    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/kalender-spender.odt") do |r|
+    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/versand-an-lehrpersonen-iteration.odt") do |r|
     #report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/serienbrief.odt") do |r|
        #r.add_field :address, @institution.address.address_for_letter
        #r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
