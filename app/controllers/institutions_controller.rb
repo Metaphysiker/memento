@@ -150,13 +150,13 @@ class InstitutionsController < ApplicationController
     end
     @records = Search.new(@search_inputs).search
 
-    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/serienbrief-networking-it.odt") do |r|
+    report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/versand-an-lehrpersonen-iteration-fr.odt") do |r|
        #r.add_field :address, @institution.address.address_for_letter
        #r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
 
        r.add_section("page", @records) do |s|
          s.add_field(:address) {|record| record.address.address_for_letter}
-         s.add_field(:date) {I18n.localize(Date.today, format: '%d.%B %Y').to_s}
+         s.add_field(:date) {I18n.localize(Date.today, format: '%d. %B %Y').to_s}
        end
 
 
