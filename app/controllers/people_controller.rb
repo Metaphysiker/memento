@@ -206,18 +206,6 @@ class PeopleController < ApplicationController
    def create_letters_with_template
 
      template = params[:template]
-     csv = params[:csv]
-
-     CSV.foreach(csv.path, headers: true) do |row|
-       person = row.to_hash
-       institutions = row["institutions"].split(' ') unless row["institutions"].nil?
-       groups = row["groups"].split(' ') unless row["groups"].nil?
-       functionality = row["functionality"].split(' ') unless row["functionality"].nil?
-       target_group = row["target_group"].split(' ') unless row["target_group"].nil?
-       address = row.to_hash
-
-       Person.create_or_update_person(person, institutions, groups, functionality, target_group, address)
-     end
 
      #@institutions = Institution.last(5)
      if params[:search_inputs].present?
@@ -227,7 +215,7 @@ class PeopleController < ApplicationController
      end
      @records = Search.new(@search_inputs).search
 
-     report = ODFReport::Report.new("#{Rails.root}/app/views/odfs/serienbrief-2020-mitglieder.odt") do |r|
+     report = ODFReport::Report.new(template) do |r|
         #r.add_field :address, @institution.address.address_for_letter
         #r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
 

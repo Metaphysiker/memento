@@ -75,6 +75,9 @@ Rails.application.routes.draw do
 
   #Brief an mitglieder
   get '/people_brief_an_mitglieder/', to: 'people#brief_an_mitglieder', as: 'people_brief_an_mitglieder'
+  get '/people_create_letters_with_template/', to: 'people#create_letters_with_template', as: 'create_letters_with_template'
+
+  #create_letters_with_template
 
   #affiliations
   patch '/update_person_affiliation/:id', to: 'affiliations#update_person_affiliation', as: 'update_person_affiliation'
