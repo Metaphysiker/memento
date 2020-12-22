@@ -206,7 +206,7 @@ class PeopleController < ApplicationController
    def create_letters_with_template
 
      template = params[:template]
-
+          byebug
      #@institutions = Institution.last(5)
      if params[:search_inputs].present?
        @search_inputs = OpenStruct.new(params[:search_inputs])

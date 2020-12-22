@@ -61,3 +61,38 @@
     </div>
   <% end %>
 </div>
+
+<button type="button" class="btn btn-light" data-toggle="modal" data-target=".create-letters-with-template-modal">
+  template
+</button>
+
+<!-- template-modal -->
+<div class="modal fade create-letters-with-template-modal" tabindex="-1" role="dialog" aria-labelledby="template" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">template</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <%= simple_form_for :bill, {url: create_letters_with_template_path, method: :get, remote: false} do |f| %>
+
+        <%= f.file_field :template %>
+        <% if params[:search_inputs].present? %>
+          <%= f.hidden_field :search_inputs, value: params[:search_inputs].permit! %>
+        <% else %>
+          <%= f.hidden_field :search_inputs, value: nil %>
+        <% end %>
+
+        <br>
+        <%= f.submit "template", class: "btn btn-primary" %>
+      <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+      </div>
+    </div>
+  </div>
+</div>
