@@ -205,7 +205,9 @@ class PeopleController < ApplicationController
 
    def create_letters_with_template
 
-     template = params[:input][:template]
+     template = params[:input][:template].tempfile
+
+     #template = params[:template]
           #byebug
      #@institutions = Institution.last(5)
      if params[:search_inputs].present?

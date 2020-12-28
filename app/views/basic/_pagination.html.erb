@@ -77,15 +77,10 @@
         </button>
       </div>
       <div class="modal-body">
-      <%= simple_form_for :input, {url: create_letters_with_template_path, method: :get, remote: false} do |f| %>
+      <% search_inputs = params[:search_inputs].present? ? params[:search_inputs].permit! : nil  %>
+      <%= simple_form_for :input, {url: create_letters_with_template_path(search_inputs: search_inputs), method: :post, remote: false, multipart: true} do |f| %>
 
         <%= f.file_field :template %>
-        <% if params[:search_inputs].present? %>
-          <%= f.hidden_field :search_inputs, value: params[:search_inputs].permit! %>
-        <% else %>
-          <%= f.hidden_field :search_inputs, value: nil %>
-        <% end %>
-
         <br>
         <%= f.submit "create letters with custom template", class: "btn btn-primary" %>
       <% end %>
