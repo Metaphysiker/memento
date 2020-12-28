@@ -205,8 +205,8 @@ class PeopleController < ApplicationController
 
    def create_letters_with_template
 
-     template = params[:template]
-          byebug
+     template = params[:input][:template]
+          #byebug
      #@institutions = Institution.last(5)
      if params[:search_inputs].present?
        @search_inputs = OpenStruct.new(params[:search_inputs])
@@ -215,6 +215,7 @@ class PeopleController < ApplicationController
      end
      @records = Search.new(@search_inputs).search
 
+     #report = ODFReport::Report.new(template) do |r|
      report = ODFReport::Report.new(template) do |r|
         #r.add_field :address, @institution.address.address_for_letter
         #r.add_field :date, I18n.localize(Date.today, format: '%d.%B %Y').to_s
@@ -227,7 +228,7 @@ class PeopleController < ApplicationController
 
       send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
                               disposition: 'attachment',
-                              filename: 'brief-an-mitglieder.odt'
+                              filename: 'custom-template.odt'
 
     end
 
