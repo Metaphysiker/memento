@@ -1,0 +1,188 @@
+<a name="top"/>
+
+<div class="list-group" id="list-tab" role="tablist">
+  <a class="list-group-item text-center">
+    <h3>Übersicht</h3>
+  </a>
+
+  <%= link_to blog_calendar_path, class: "list-group-item list-group-item-action flex-column align-items-start" do %>
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "file" %> Blog</h5>
+      <hr>
+    </div>
+    <p>
+      Blogplanung
+    </p>
+  <% end %>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load <%= "active" if records.klass.to_s == "Person" %>" data-toggle="list" href="#list-people" target="Person" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "user" %> Personen</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          Anna Goppel
+        </li>
+        <li>
+          Michael Schibler
+        </li>
+        <li>
+          Stefan Müller
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load <%= "active" if records.klass.to_s == "Institution" %>" data-toggle="list" href="#list-institutions" target="Institution" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "university" %> Institutionen</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          Universität Zürich
+        </li>
+        <li>
+          Philosophische Gesellschaft Basel
+        </li>
+        <li>
+          Neue Akropolis Zürich
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load <%= "active" if records.klass.to_s == "Notes" %>" data-toggle="list" href="#list-notes" target="Note" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "sticky-note" %> Notizen</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          "Herr Müller ist interessiert an eine Kooperation."
+        </li>
+        <li>
+          "Frau Schlatter hatte uns bezüglich des Newsletters angerufen."
+        </li>
+        <li>
+          "Die Stiftung ist grundsätzlich interessiert, möchte aber nicht alleine finanzieren."
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load <%= "active" if records.klass.to_s == "Task" %>" data-toggle="list" href="#list-tasks" target="Task" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "tasks" %> Aufgaben</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          "Stefan Müller anrufen."
+        </li>
+        <li>
+          "Susanna Schlatter eine Erinnerung schreiben."
+        </li>
+        <li>
+          "Antrag bei der Wagener Stiftung einreichen."
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load" data-toggle="list" target="Project" href="#list-projects" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "compass" %> Projekte</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          Projekt "Philosophie in der Schweiz"
+        </li>
+        <li>
+          Blog "Gesundheit"
+        </li>
+        <li>
+          Kooperation "Lange Nacht der Philosophie"
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load" data-toggle="list" target="Group" href="#list-groups" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "sitemap" %> Gruppen</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          Blogger für "Philosophie aktuell"
+        </li>
+        <li>
+          Kandidaten für Podiumsdiskussion "Liebe"
+        </li>
+        <li>
+          Metaphysik-Interessierte in Genf
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <a class="list-group-item list-group-item-action flex-column align-items-start index-load" data-toggle="list" target="Tags" href="#list-tags" role="tab">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "tags" %> Tags</h5>
+      <hr>
+    </div>
+    <p>
+      Zum Beispiel:
+      <ul>
+        <li>
+          Sponsor
+        </li>
+        <li>
+          Medienkontakt
+        </li>
+        <li>
+          Kooperationspartner
+        </li>
+      </ul>
+    </p>
+  </a>
+
+  <%= link_to team_path, class: "list-group-item list-group-item-action flex-column align-items-start" do %>
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1"><%= fa_icon "users" %> Team</h5>
+      <hr>
+    </div>
+    <p>
+      Das Team von Philosophie.ch
+    </p>
+  <% end %>
+
+</div>
+
+<script>
+$( document ).ready(function() {
+  function scrollToAnchor(aid){
+    var aTag = $("a[name='"+ aid +"']");
+    $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+  }
+
+  $(".list-group-item").click(function() {
+   scrollToAnchor('top');
+  });
+});
+</script>

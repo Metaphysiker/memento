@@ -16,6 +16,12 @@
       <br>
       <%= f.input :functionality_list, as: :select, collection: TagList.where(model: "Person", category: "functionality"), label: "Funktionalitäten", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
       <br>
+      <%= f.input :target_group_list, as: :select, collection: TagList.where(model: "Person", category: "target_group"), label: "Zielgruppe", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+      <br>
+      <%= f.input :groups, as: :select, collection: Group.all, label: "Gruppen", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Gruppen auswählen"}, multiple: true} %>
+      <br>
+      <%= f.input :topics, as: :select, collection: Topic.all, label: "Thementags", required: false, label_method: :name, value_method: :id, input_html: {class: 'chosen-select', :data => {:placeholder => "Thementags auswählen"}, multiple: true} %>
+      <br />
       <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]}, label: "Sprache", required: false %>
       <br />
       <%= f.input :country, collection: Address.all.pluck(:country).uniq.map {|p| [p, p]}, label: "Land", required: false %>
@@ -33,6 +39,8 @@
       <br>
       <%= f.input :functionality_list, as: :select, collection: TagList.where(model: "Institution", category: "functionality"), label: "Funktionalitäten", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
       <br>
+      <%= f.input :target_group_list, as: :select, collection: TagList.where(model: "Institution", category: "target_group"), label: "Zielgruppe", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+      <br />
       <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]}, label: "Sprache", required: false %>
     <% elsif records.klass.to_s == "Note" %>
 

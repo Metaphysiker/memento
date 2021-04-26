@@ -14,6 +14,15 @@
             </p>
             <hr>
             <% end %>
+            <br />
+          <h4>Zielgruppen</h4>
+          <% tag_lists.where(model: "Person", category: "target_group").each do |tag_list| %>
+            <p>
+              <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
+                - Anzahl: <%= class_for(tag_list.model).tagged_with(tag_list.name, :on => tag_list.category.pluralize.to_sym).count %>
+            </p>
+            <hr>
+            <% end %>
         </div>
       </div>
     <div class="col-sm-12 col-md-6">
@@ -28,6 +37,14 @@
           <hr>
           <% end %>
           <br />
+        <h4>Zielgruppen</h4>
+        <% tag_lists.where(model: "Institution", category: "target_group").each do |tag_list| %>
+          <p>
+            <%= link_to tag_list.name, overview_path(params: {search_inputs: {model: tag_list.model, "#{tag_list.category}_list" => [tag_list.name] }}), class: "btn btn-outline-dark" %>
+              - Anzahl: <%= class_for(tag_list.model).tagged_with(tag_list.name, :on => tag_list.category.pluralize.to_sym).count %>
+          </p>
+          <hr>
+          <% end %>
       </div>
     </div>
   </div>
