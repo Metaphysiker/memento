@@ -16,7 +16,7 @@
       <%= f.input :language, collection: Rails.configuration.language.map {|p| [t("#{p}"), p]} %>
       <%= f.association :institutions, as: :select, collection: Institution.all, label_method: :name, value_method: :id, :data => {:placeholder => 'User Name'}, input_html: {class: 'chosen-select', :data => {:placeholder => "Institutionen auswählen"}, multiple: true} %>
       <%= f.input :functionality_list, as: :select, collection: TagList.where(model: "Person", category: "functionality"), label: "Funktionalitäten", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
-      <%= f.input :target_group_list, as: :select, collection: TagList.where(model: "Person", category: "target_group"), label: "Zielgruppe", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
+      <%#= f.input :target_group_list, as: :select, collection: TagList.where(model: "Person", category: "target_group"), label: "Zielgruppe", label_method: :name, value_method: :name, input_html: {class: 'chosen-select', :data => {:placeholder => "Tags auswählen"}, multiple: true} %>
       <%= f.association :topics, as: :select, collection: Topic.all, label_method: :name, value_method: :id, :data => {:placeholder => 'Thementag'}, input_html: {class: 'chosen-select', :data => {:placeholder => "Thementag auswählen"}, multiple: true} %>
     </div>
 
