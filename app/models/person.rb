@@ -68,9 +68,9 @@ class Person < ApplicationRecord
   end
 
   PERSON_ATTRIBUTES = %w{form_of_address firstname lastname email phone phone2 gender language description website}
-  TAG_ATTRIBUTES = %w{functionality target_group}
-  OTHER_ATTRIBUTES = %w{institutions groups functionality target_group}
-  PERSON_ATTRIBUTES_WITH_TAGS = PERSON_ATTRIBUTES + %w{functionality_list target_group_list}
+  TAG_ATTRIBUTES = %w{functionality}
+  OTHER_ATTRIBUTES = %w{institutions functionality}
+  PERSON_ATTRIBUTES_WITH_TAGS = PERSON_ATTRIBUTES + %w{functionality_list}
 
   ALL_ATTRIBUTES = PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
 
@@ -103,10 +103,10 @@ class Person < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << ALL_ATTRIBUTES
       csv << ["Prof. Dr.", "Stefan", "Müller", "email@adresse.ch", "079123456789", "", "male", "de", "Experte in Metaphysik", "www.kant.ch",
-              "1 2 4 5 6 8", "5 6", "Blogger Patronatskomitee Lehrperson", "Sponsor(Zielgruppe) Uni-Mitarbeitende Mitglieder Verein",
+              "1 2 4 5 6 8", "Blogger Patronatskomitee Lehrperson",
               "Intersport AG", "Abteilung Philosophie", "", "", "", "Hagenstrasse 1", "8301", "Zürich", "CH"]
       csv << ["Dr.", "Lara", "Wagner", "email@adresse2.ch", "079123456787", "", "female", "fr", "", "www.meinewebseite.ch",
-              "4 7", "4", "Veranstalter Medienkontakt", "Private Beruffachleute",
+              "4 7", "Veranstalter Medienkontakt",
               "Kant-Zentrum", "3. Gebäude", "Sekretariat", "Wissenschaftsabteilung", "", "Rue de la gare 3", "6402", "Bern", "CH"]
     #  csv << ["", "Heinrich", "Keller", "email@adresse3.ch", "079123456784", "342118918", "male", "de", "", "",
     #          "2 3 12", "5 6", "Blogger Patronatskomitee Lehrperson", "Sponsor(Zielgruppe) Uni-Mitarbeitende Mitglieder Verein",
@@ -120,7 +120,7 @@ class Person < ApplicationRecord
     end
   end
 
-  def self.create_or_update_person(person, institutions, groups, functionality_tags, target_group_tags, address)
+  def self.create_or_update_person(person, institutions, groups, functionality_tags, address)
     person = person.select!{|x| Person.attribute_names.index(x)}
     person.delete_if {|key, value| value.blank?}
 
@@ -139,11 +139,6 @@ class Person < ApplicationRecord
 
     unless functionality_tags.blank?
       person.functionality_list.add(functionality_tags)
-      person.save
-    end
-
-    unless target_group_tags.blank?
-      person.target_group_list.add(target_group_tags)
       person.save
     end
 

@@ -25,8 +25,8 @@ class Institution < ApplicationRecord
 
   #INSTITUTION_ATTRIBUTES = %w{name description email phone website language}
   INSTITUTION_ATTRIBUTES = %w{id name description email phone website language}
-  TAG_ATTRIBUTES = %w{functionality target_group}
-  INSTITUTION_ATTRIBUTES_WITH_TAGS = INSTITUTION_ATTRIBUTES + %w{functionality_list target_group_list}
+  TAG_ATTRIBUTES = %w{functionality}
+  INSTITUTION_ATTRIBUTES_WITH_TAGS = INSTITUTION_ATTRIBUTES + %w{functionality_list}
 
   def create_address
     Address.create(
@@ -63,13 +63,12 @@ class Institution < ApplicationRecord
               "www.unibe.ch",
               "de",
               "Philosophische-Institution Öffentliche-Institution",
-              "Kooperationspartner(Zielgruppe) SBFI/swissuniversities",
               "Fachabteilung Philosophie", "Uni Tobler", "Bereich Geisteswissenschaften", "Sekretariat", "Lara Ullmer", "Lerchenweg 36", "3001", "Bern", "CH"]
 
     end
   end
 
-  def self.create_or_update_institution(institution, functionality_tags, target_group_tags, address)
+  def self.create_or_update_institution(institution, functionality_tags, address)
     puts institution.inspect
     puts functionality_tags.inspect
     institution = institution.select!{|x| Institution.attribute_names.index(x)}
@@ -93,11 +92,6 @@ class Institution < ApplicationRecord
 
     unless functionality_tags.blank?
       institution.functionality_list.add(functionality_tags)
-      institution.save
-    end
-
-    unless target_group_tags.blank?
-      institution.target_group_list.add(target_group_tags)
       institution.save
     end
 

@@ -93,17 +93,6 @@
             <% end %>
           </div>
 
-          <div class="person-<%= person.id %>-target-group-tags">
-            <% unless person.target_group_list.empty? %>
-            <p class="card-text"><strong>Zielgruppe: </strong></p>
-              <p class="mt-2">
-                <% person.target_group_list.each do |tag| %>
-                  <%= link_to tag, overview_path(params: {search_inputs: {model: "Person", target_group_list: [tag]}}), class: "tag_button" %>
-                <% end %>
-              </p>
-            <% end %>
-          </div>
-
           <div class="person-<%=person.id%>-topics">
             <% unless person.topics.empty? %>
             <p class="card-text"><strong>Thementags: </strong></p>

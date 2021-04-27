@@ -13,10 +13,9 @@ class ImportController < ApplicationController
       institutions = row["institutions"].split(' ') unless row["institutions"].nil?
       groups = row["groups"].split(' ') unless row["groups"].nil?
       functionality = row["functionality"].split(' ') unless row["functionality"].nil?
-      target_group = row["target_group"].split(' ') unless row["target_group"].nil?
       address = row.to_hash
 
-      Person.create_or_update_person(person, institutions, groups, functionality, target_group, address)
+      Person.create_or_update_person(person, institutions, groups, functionality, address)
     end
 
     redirect_to import_people_page_path, notice: "CSV importiert!"
@@ -33,10 +32,9 @@ class ImportController < ApplicationController
 
       institution = row.to_hash
       functionality = row["functionality"].split(' ') unless row["functionality"].nil?
-      target_group = row["target_group"].split(' ') unless row["target_group"].nil?
       address = row.to_hash
 
-      Institution.create_or_update_institution(institution, functionality, target_group, address)
+      Institution.create_or_update_institution(institution, functionality, address)
     end
 
     redirect_to import_institutions_page_path, notice: "CSV importiert!"
