@@ -26,6 +26,10 @@ class WorkTime < ApplicationRecord
       "Events",
       #{}"Kurse",
       "Produkte",
+      "Philexpo22",
+      "Team-Meeting",
+      "Networking",
+      "Akquise"
       #{}"webmastering"
     ]
   end
