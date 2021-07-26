@@ -1,4 +1,7 @@
 <h1><%= user.username %></h1>
+<p>
+  <%= link_to "CSV herunterladen", work_time_to_csv_path(user) %>
+</p>
 
 <% years = [2021, 2020, 2019] %>
 
