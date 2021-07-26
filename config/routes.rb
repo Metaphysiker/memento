@@ -107,6 +107,8 @@ Rails.application.routes.draw do
 
   post '/import_work_time', to: 'import#import_work_time', as: 'import_work_time'
 
+  get '/csv_work_time/:user_id', to: 'work_times#to_csv', as: 'work_time_to_csv'
+
   #task
   post '/normal_create_task', to: 'tasks#normal_create', as: 'normal_create_task'
   get '/task_calendar/(:date)/(:user_id)', to: 'tasks#task_calendar', as: 'task_calendar'
