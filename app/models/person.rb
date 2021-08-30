@@ -67,10 +67,18 @@ class Person < ApplicationRecord
     end
   end
 
+  def institution_list_string
+    result = ""
+    institutions.each do |institution|
+      result =+ "#{institution.name}, "
+    end
+    result
+  end
+
   PERSON_ATTRIBUTES = %w{form_of_address firstname lastname email phone phone2 gender language description website}
   TAG_ATTRIBUTES = %w{functionality}
   OTHER_ATTRIBUTES = %w{institutions functionality}
-  PERSON_ATTRIBUTES_WITH_TAGS = PERSON_ATTRIBUTES + %w{functionality_list}
+  PERSON_ATTRIBUTES_WITH_TAGS = PERSON_ATTRIBUTES + %w{institution_list_string functionality_list}
 
   ALL_ATTRIBUTES = PERSON_ATTRIBUTES + OTHER_ATTRIBUTES + Address::ADDRESS_ATTRIBUTES
 
