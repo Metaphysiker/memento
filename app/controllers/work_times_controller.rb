@@ -62,6 +62,13 @@ class WorkTimesController < ApplicationController
     end
   end
 
+  def to_csv
+
+    user = User.find(params[:user_id])
+
+    send_data WorkTime.to_csv(user), filename: "#{user.username}-arbeitsstunden-#{Date.today}.csv"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_work_time

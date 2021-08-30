@@ -3,6 +3,9 @@
   <div class="card mb-3">
     <div class="card-body">
       <h4>Arbeitsstunden</h4>
+      <p>
+        <%= link_to "CSV herunterladen", work_time_to_csv_path(current_user) %>
+      </p>
       <hr />
       <p class="card-text">
         <%= render 'work_times/form', work_time: WorkTime.new %>
